@@ -1,10 +1,12 @@
 """Encuentra la clave correcta en Yahoo de las emisoras del SIC que no traen datos.
 
 En el SIC muchas emisoras no usan el ticker de origen tal cual: las extranjeras suelen
-llevar una ``N`` (``TSM`` -> ``TSMN.MX``) y algunas series llevan ``C`` o ``1``
-(``DELL`` -> ``DELLC.MX``). Para cada ticker sin datos se prueban esas variantes y solo
-se acepta una si su precio en pesos coincide con ``precio de origen x USD/MXN``; asi no
-se confunde con otra emisora que casualmente tenga la clave.
+llevar una ``N`` (``TSM`` -> ``TSMN.MX``) y otras llevan ``C``, ``1``, ``1N``, ``I`` o ``W``
+(``DELL`` -> ``DELLC.MX``, ``ETN`` -> ``ETN1N.MX``, ``WM`` -> ``WMI.MX``, ``NOW`` -> ``NOWW.MX``).
+Para cada ticker sin datos se prueban esas variantes y solo se acepta una si su precio en
+pesos coincide con ``precio de origen x USD/MXN``; asi no se confunde con otra emisora
+que casualmente tenga la clave. Si no coincide (p.ej. ADRs que representan varias acciones,
+como Shell), queda en ``mismatch`` para revision manual.
 """
 from __future__ import annotations
 
@@ -19,7 +21,7 @@ from econ.sources import yahoo
 
 log = logging.getLogger(__name__)
 
-SUFFIXES = ("N", "C", "1", "N1")
+SUFFIXES = ("N", "C", "1", "N1", "1N", "I", "W")
 FX_TICKER = "MXN=X"
 MAX_PRICE_GAP = 0.15  # tolerancia contra precio_origen x tipo de cambio
 

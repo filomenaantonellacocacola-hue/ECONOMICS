@@ -96,7 +96,7 @@ def resolve_symbols() -> int:
     new = resolve.apply(report)
     if new:
         update_prices(history_start(), new)
-        prune_to_universe()
+    prune_to_universe()
     return len(new)
 
 
