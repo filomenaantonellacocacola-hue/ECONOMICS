@@ -8,16 +8,18 @@ Uso::
     python -m econ.pipeline macro
     python -m econ.pipeline fundamentals
     python -m econ.pipeline snapshots
+    python -m econ.pipeline resolve                     # corrige claves del SIC sin datos
 """
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 from datetime import date, timedelta
 
 import pandas as pd
 
-from econ import config, snapshots, storage
+from econ import config, resolve, snapshots, storage
 from econ.sources import banxico, fred, yahoo
 
 log = logging.getLogger("econ.pipeline")
@@ -73,6 +75,31 @@ def prune_to_universe() -> None:
         log.info("Limpieza de %s: %d particiones modificadas", root.name, len(changed))
 
 
+def resolve_symbols() -> int:
+    """Busca la clave correcta de las emisoras del SIC sin datos o desactualizadas."""
+    universe = config.load_universe()
+    # Primero se intenta cada ticker sin datos tal cual; solo los que sigan fallando se resuelven.
+    missing = tickers_without_data(universe["ticker"].tolist())
+    if missing:
+        try:
+            update_prices(history_start(), missing)
+        except RuntimeError:
+            log.info("Ningun ticker sin datos respondio con su clave actual")
+    prices = storage.read_dataset(config.PRICES_DIR)
+    health = snapshots.health(prices, pd.DataFrame(), universe, config.load_macro_series())
+    targets = health.get("tickers_missing", []) + health.get("tickers_stale", [])
+    report = resolve.resolve(targets, universe)
+    config.SNAPSHOTS_DIR.mkdir(parents=True, exist_ok=True)
+    (config.SNAPSHOTS_DIR / "symbol_resolution.json").write_text(json.dumps(report, indent=2))
+    log.info("Resolucion de claves: %d corregidas, %d con precio distinto, %d sin datos",
+             len(report["resolved"]), len(report["mismatch"]), len(report["not_found"]))
+    new = resolve.apply(report)
+    if new:
+        update_prices(history_start(), new)
+        prune_to_universe()
+    return len(new)
+
+
 def update_macro(start: str = config.DEFAULT_MACRO_START) -> int:
     series = config.load_macro_series()
     fred_ids = series.loc[series["source"] == "FRED", "series_id"].tolist()
@@ -106,7 +133,9 @@ def update_fundamentals() -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Pipeline de datos ECONOMICS")
-    parser.add_argument("task", choices=["daily", "backfill", "prices", "macro", "fundamentals", "snapshots"])
+    parser.add_argument(
+        "task", choices=["daily", "backfill", "prices", "macro", "fundamentals", "snapshots", "resolve"]
+    )
     parser.add_argument("--start", help="Fecha inicial YYYY-MM-DD (precios)")
     parser.add_argument("--days", type=int, default=10, help="Dias hacia atras para 'prices'/'daily'")
     parser.add_argument("--tickers", help="Lista separada por comas (por defecto, todo el universo)")
@@ -129,6 +158,8 @@ def main(argv: list[str] | None = None) -> int:
         steps.append(("prune", prune_to_universe))
     if args.task == "fundamentals":
         steps.append(("fundamentals", update_fundamentals))
+    if args.task == "resolve":
+        steps.append(("resolve", resolve_symbols))
 
     # Un paso que falla no impide guardar lo que los demas si obtuvieron.
     failed = []

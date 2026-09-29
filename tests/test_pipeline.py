@@ -146,7 +146,10 @@ def test_universe_is_well_formed():
     assert u.loc[u["market"].isin(["BMV", "SIC"]), "ticker"].str.endswith(".MX").all()
     sic = u[u["market"] == "SIC"]
     assert (sic["ref_ticker"] != "").all()
-    assert (sic["ticker"] == sic["ref_ticker"].str.replace(r"[-.]", "", regex=True) + ".MX").all()
+    from econ import resolve
+    for ticker, ref in zip(sic["ticker"], sic["ref_ticker"]):
+        base = ref.replace("-", "").replace(".", "")
+        assert ticker in {f"{base}{s}.MX" for s in ("", *resolve.SUFFIXES)}, (ticker, ref)
     s = config.load_macro_series()
     assert not s.duplicated(["source", "series_id"]).any()
     assert set(s["agg"]) <= {"avg", "last"}
@@ -308,3 +311,76 @@ def test_health_reports_missing_macro_when_empty():
     series = config.load_macro_series()
     h = snapshots.health(pd.DataFrame(), pd.DataFrame(), config.load_universe(), series)
     assert len(h["macro_missing"]) == len(series)
+
+
+def test_resolve_accepts_only_price_consistent_candidates(tmp_path, monkeypatch):
+    from econ import resolve
+
+    universe = pd.DataFrame({
+        "ticker": ["TSM.MX", "FOO.MX", "BAR.MX", "WALMEX.MX"],
+        "market": ["SIC", "SIC", "SIC", "BMV"],
+        "asset_type": "stock",
+        "name": "x",
+        "ref_ticker": ["TSM", "FOO", "BAR", ""],
+    })
+    dates = pd.bdate_range("2026-08-01", periods=20)
+
+    def frame(ticker, close):
+        return pd.DataFrame({"date": dates, "ticker": ticker, "open": close, "high": close, "low": close,
+                             "close": close, "adj_close": close, "volume": 1})
+
+    fx = np.full(len(dates), 18.0)
+    fake = pd.concat([
+        frame("MXN=X", fx),
+        frame("TSM", np.linspace(200, 220, 20)),
+        frame("TSMN.MX", np.linspace(200, 220, 20) * fx * 1.01),  # coincide (1% de diferencia)
+        frame("FOO", np.full(20, 50.0)),
+        frame("FOON.MX", np.full(20, 50.0 * 18 * 3)),  # existe pero es otra emisora
+        frame("BAR", np.full(20, 10.0)),
+    ])
+    requested = []
+    monkeypatch.setattr(yahoo, "download_prices", lambda tickers, start: requested.extend(tickers) or fake)
+
+    report = resolve.resolve(["TSM.MX", "FOO.MX", "BAR.MX", "WALMEX.MX"], universe)
+    assert report["resolved"] == {"TSM.MX": {"ticker": "TSMN.MX", "price_ratio": 1.01}}
+    assert report["mismatch"] == {"FOO.MX": {"FOON.MX": 3.0}}
+    assert report["not_found"] == ["BAR.MX"]
+    assert "TSM.MX" not in requested and "DELLC.MX" not in requested and "BARN.MX" in requested
+
+    csv_path = tmp_path / "universe.csv"
+    universe.to_csv(csv_path, index=False)
+    monkeypatch.setattr(config, "UNIVERSE_CSV", csv_path)
+    assert resolve.apply(report) == ["TSMN.MX"]
+    assert config.load_universe()["ticker"].tolist() == ["TSMN.MX", "FOO.MX", "BAR.MX", "WALMEX.MX"]
+    assert config.load_universe().loc[0, "ref_ticker"] == "TSM"
+
+
+def test_resolve_candidates():
+    from econ import resolve
+
+    assert resolve.candidates("BRK-B", "BRKB.MX") == ["BRKBN.MX", "BRKBC.MX", "BRKB1.MX", "BRKBN1.MX"]
+    assert resolve.candidates("DELL", "DELLC.MX")[0] == "DELL.MX"
+
+
+def test_resolve_symbols_tries_current_ticker_first(tmp_path, monkeypatch):
+    from econ import pipeline, resolve
+
+    _patch_dirs(monkeypatch, tmp_path / "data")
+    universe = pd.DataFrame({"ticker": ["OK.MX", "GOOD.MX", "BAD.MX"], "market": ["BMV", "SIC", "SIC"],
+                             "asset_type": "stock", "name": "x", "ref_ticker": ["", "GOOD", "BAD"]})
+    monkeypatch.setattr(config, "load_universe", lambda: universe)
+    storage.write_partitioned(_prices(tickers=("OK.MX",), days=30), config.PRICES_DIR,
+                              keys=["ticker", "date"], freq="M")
+    # GOOD.MX responde con su clave actual; BAD.MX no.
+    monkeypatch.setattr(yahoo, "download_prices",
+                        lambda tickers, start: _prices(tickers=tuple(t for t in tickers if t == "GOOD.MX"), days=30)
+                        if "GOOD.MX" in tickers else pd.DataFrame())
+    seen = {}
+    def fake_resolve(targets, u):
+        seen["targets"] = targets
+        return {"resolved": {}, "mismatch": {}, "not_found": targets}
+    monkeypatch.setattr(resolve, "resolve", fake_resolve)
+
+    assert pipeline.resolve_symbols() == 0
+    assert seen["targets"] == ["BAD.MX"]
+    assert json.loads((config.SNAPSHOTS_DIR / "symbol_resolution.json").read_text())["not_found"] == ["BAD.MX"]
