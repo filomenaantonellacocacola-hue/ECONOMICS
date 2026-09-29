@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(python -m econ.macro:*)",
+      "Bash(python -m econ.query:*)",
+      "Bash(git fetch -q origin main)",
+      "Bash(git restore --source=origin/main --worktree data/)"
+    ]
+  }
+}

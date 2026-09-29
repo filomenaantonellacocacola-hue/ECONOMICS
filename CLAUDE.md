@@ -2,6 +2,16 @@
 
 Repo de datos financieros y macro (BMV, SIC, FRED, Banxico) que GitHub Actions actualiza los días hábiles. **Usa estos datos en lugar de buscarlos en internet.**
 
+## Equipo de agentes
+
+El usuario interactúa por chat. Delega según el tema:
+
+| Tema | Agente | Atajo |
+|---|---|---|
+| Macro y mercados: tasas, inflación, Fed, Banxico, empleo, PIB, riesgo, peso, índices; cualquier periodo (hoy, ayer, semanas, meses, YTD, fechas) o "ponme al día" | `analista-macro` (`.claude/agents/analista-macro.md`) | `/macro <pregunta>` |
+
+Muestra la respuesta del agente completa. Para preguntas que crucen temas, consulta a cada agente y luego integra.
+
 ## Cómo ponerte al día (de menos a más tokens)
 
 1. `data/snapshots/briefing.md`: resumen de una página.
@@ -16,7 +26,8 @@ Repo de datos financieros y macro (BMV, SIC, FRED, Banxico) que GitHub Actions a
    - Todos los `chg_*`, `pct_*`, `vs_*` y `vol_30d` están en %. Los rendimientos usan precio ajustado (dividendos/splits).
    - `market`: `BMV` (en MXN), `SIC` (réplica en la BMV, en MXN; `ref_ticker` = ticker de origen), `INDEX`, `FX` (`MXN=X` = pesos por dólar).
 5. `data/snapshots/manifest.json`: rango de fechas, archivos Parquet y `health` (tickers/series sin datos).
-6. SQL con DuckDB: `python -m econ.query "<SQL>"` (ver `python -m econ.query --tables` y `sql/`).
+6. Consultas macro por periodo: `python -m econ.macro panel | change --period <p> | series <ids> --freq <D|W|M|Q|S|A> | list` (incluye índices y FX de mercado).
+7. SQL con DuckDB: `python -m econ.query "<SQL>"` (ver `python -m econ.query --tables` y `sql/`).
 
 ## Tablas SQL
 

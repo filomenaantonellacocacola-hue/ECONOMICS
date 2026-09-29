@@ -122,6 +122,27 @@ Ver [`CLAUDE.md`](CLAUDE.md) para el diccionario de datos pensado para agentes.
 
 > Si el repo es público, cualquier agente puede leer los snapshots vía `https://raw.githubusercontent.com/filomenaantonellacocacola-hue/ECONOMICS/main/data/snapshots/briefing.md`. Si es privado, necesitará un token de GitHub.
 
+## Equipo de agentes (por chat)
+
+Los agentes viven en el repo (`.claude/`), así que funcionan en cualquier sesión de Claude Code conectada a ECONOMICS. Se usan preguntando en el chat; no hay nada programado.
+
+| Agente | Qué responde | Cómo usarlo |
+|---|---|---|
+| `analista-macro` | Tasas (Fed, Banxico, Treasuries, CETES), inflación de EE.UU. y México, empleo, PIB, riesgo, peso, IPC y S&P 500, en cualquier ventana: hoy, ayer, esta semana, semanas anteriores, un mes, trimestre, semestre, YTD o una fecha exacta | `/macro ¿cómo va la inflación en lo que va del año?` o simplemente pregunta en el chat |
+
+Por debajo usa `python -m econ.macro`, que resuelve los periodos y devuelve tablas compactas:
+
+```bash
+python -m econ.macro panel                                   # último dato y cambios 1d/1s/1m/YTD/1a
+python -m econ.macro change --period last-week --category tasas
+python -m econ.macro change --period 2026-03 --series CPIAUCSL,SP1,MXN=X
+python -m econ.macro series SF61745,DFEDTARU --freq M --period ytd
+```
+
+Periodos: `today`, `yesterday`, `wtd`, `last-week`, `mtd`, `last-month`, `qtd`, `last-quarter`, `ytd`, `last-year`, `1w`/`1m`/`3m`/`6m`/`1y`, `2026`, `2026-03`, `2026-Q1`, `2026-S1`, `2026-W38`, `2026-03-17` o `2026-01-15:2026-02-15`.
+
+Al iniciar cada sesión en la web, `.claude/hooks/session-start.sh` instala las dependencias de Python.
+
 ## Hoja de ruta
 
 1. **Datos** (este paso): pipeline, base consultable y snapshots.
