@@ -1,6 +1,46 @@
 # Briefing de mercado
 
-Generado: 2026-09-29 06:14 (UTC)
+Generado: 2026-09-29 06:26 (UTC)
+
+## Macro
+
+| source | name | date | value | prev_value | chg_1y | pct_1y |
+|---|---|---|---|---|---|---|
+| FRED | PIB real | 2026-04-01 | 24,269.61 | 24,180.42 | 498.64 | 2.10 |
+| FRED | Produccion industrial | 2026-08-01 | 103.07 | 103.05 | 1.44 | 1.42 |
+| FRED | Ventas minoristas | 2026-08-01 | 773,947.00 | 764,462.00 | 43,910.00 | 6.01 |
+| FRED | Inicios de vivienda | 2026-08-01 | 1,275.00 | 1,309.00 | -16.00 | -1.24 |
+| FRED | Sentimiento del consumidor (U. Michigan) | 2026-08-01 | 51.70 | 55.20 | -6.50 | -11.17 |
+| BANXICO | Tipo de cambio FIX | 2026-09-28 | 17.84 | 17.71 | -0.54 | -2.94 |
+| FRED | Indice dolar amplio | 2026-09-25 | 120.33 | 120.55 | -0.21 | -0.18 |
+| FRED | Pesos por dolar (FRED) | 2026-09-25 | 17.69 | 17.67 | -0.75 | -4.05 |
+| FRED | Tasa de desempleo | 2026-08-01 | 4.10 | 4.10 | -0.20 |  |
+| FRED | Nomina no agricola | 2026-08-01 | 159,075.00 | 158,913.00 | 603.00 | 0.38 |
+| FRED | Solicitudes iniciales de desempleo | 2026-09-19 | 197,000.00 | 198,000.00 | -36,000.00 | -15.45 |
+| BANXICO | INPC (indice general) | 2026-08-01 | 145.46 | 145.17 | 4.59 | 3.26 |
+| FRED | Inflacion implicita 5a (breakeven) | 2026-09-28 | 2.33 | 2.34 | -0.09 |  |
+| FRED | CPI general | 2026-08-01 | 334.13 | 332.81 | 10.84 | 3.35 |
+| FRED | CPI subyacente | 2026-08-01 | 337.76 | 336.79 | 8.06 | 2.45 |
+| FRED | PCE subyacente | 2026-07-01 | 130.66 | 130.34 | 4.23 | 3.34 |
+| FRED | Petroleo WTI | 2026-09-22 | 96.41 | 96.97 | 33.42 | 53.06 |
+| FRED | S&P 500 (FRED) | 2026-09-28 | 7,683.69 | 7,743.41 | 1,039.99 | 15.65 |
+| BANXICO | Tasa objetivo Banxico | 2026-09-29 | 6.50 | 6.50 | -1.00 |  |
+| FRED | Fed funds target (limite superior) | 2026-09-28 | 4.00 | 4.00 | -0.25 |  |
+| FRED | Fed funds efectiva | 2026-09-25 | 3.88 | 3.88 | -0.21 |  |
+| FRED | Balance de la Fed (activos totales) | 2026-09-23 | 6,747,704.00 | 6,746,548.00 | 139,107.00 | 2.10 |
+| FRED | Oferta monetaria M2 | 2026-08-01 | 23,342.80 | 23,217.90 | 1,250.20 | 5.66 |
+| FRED | VIX | 2026-09-22 | 14.21 | 14.87 | -1.89 | -11.74 |
+| FRED | Spread high yield | 2026-09-25 | 2.93 | 2.80 | 0.17 |  |
+| FRED | Indice de condiciones financieras (Chicago Fed) | 2026-09-18 | -0.56 | -0.56 | -0.03 |  |
+| BANXICO | TIIE 28 dias | 2026-09-29 | 6.81 | 6.79 | -1.02 |  |
+| BANXICO | CETES 28 dias | 2026-09-24 | 6.15 | 6.25 | -1.10 |  |
+| FRED | Treasury 3 meses | 2026-09-25 | 4.24 | 4.24 | 0.20 |  |
+| FRED | Treasury 2 anios | 2026-09-25 | 4.81 | 4.87 | 1.17 |  |
+| FRED | Treasury 10 anios | 2026-09-25 | 5.17 | 5.18 | 0.99 |  |
+| FRED | Treasury 30 anios | 2026-09-25 | 5.49 | 5.47 | 0.74 |  |
+| FRED | Spread 10a-2a | 2026-09-28 | 0.32 | 0.36 | -0.25 |  |
+| FRED | Spread 10a-3m | 2026-09-28 | 0.96 | 0.93 | 0.78 |  |
+| FRED | Hipoteca 30 anios | 2026-09-24 | 7.03 | 6.95 | 0.77 |  |
 
 
 ## Indices y divisas
@@ -13,10 +53,10 @@ Generado: 2026-09-29 06:14 (UTC)
 | Dow Jones Industrial Average | 2026-09-28 | 51,481.51 | -0.67 | -3.90 | 7.11 | 12.04 |
 | CBOE Volatility Index | 2026-09-28 | 16.07 | 8.07 | 11.37 | 7.49 | -0.31 |
 | USD/MXN | 2026-09-28 | 17.75 | 0.06 | 4.63 | -1.28 | -3.21 |
-| EUR/MXN | 2026-09-29 | 20.44 | 1.22 | 3.55 | -3.28 | -4.62 |
+| EUR/MXN | 2026-09-29 | 20.44 | 1.21 | 3.54 | -3.29 | -4.63 |
 
 
-## BMV (62 emisoras, 40% sobre su media de 200 dias)
+## BMV (64 emisoras, 42% sobre su media de 200 dias)
 
 
 **Mayores alzas del dia**
@@ -41,26 +81,26 @@ Generado: 2026-09-29 06:14 (UTC)
 | ALPEKA.MX | Alpek | 14.90 | -1.00 | 22.23 | 61.26 | 69.40 |
 
 
-## SIC (120 emisoras, 59% sobre su media de 200 dias)
+## SIC (257 emisoras, 61% sobre su media de 200 dias)
 
 
 **Mayores alzas del dia**
 
 | ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
 |---|---|---|---|---|---|---|
-| ISRG | Intuitive Surgical | 414.79 | 2.37 | 13.00 | -26.76 | 69.59 |
-| PG | Procter & Gamble | 149.03 | 1.91 | 4.11 | 6.31 | 58.87 |
-| NKE | Nike | 36.39 | 1.79 | -4.33 | -41.37 | 41.64 |
-| PM | Philip Morris | 193.76 | 1.72 | 1.72 | 22.89 | 57.40 |
-| NVDA | NVIDIA | 228.86 | 1.68 | 0.50 | 23.00 | 58.78 |
+| DDOG.MX | Datadog | 4,764.57 | 7.07 | 26.01 | 90.51 | 73.80 |
+| UAL.MX | United Airlines | 2,028.00 | 6.18 | 3.36 | 1.09 | 59.07 |
+| CDNS.MX | Cadence Design | 5,768.00 | 6.02 | 3.47 | 1.02 | 67.96 |
+| DAL.MX | Delta Air Lines | 1,505.00 | 5.10 | 6.59 | 20.94 | 66.75 |
+| PYPL.MX | PayPal | 976.20 | 4.97 | -7.02 | -7.42 | 58.71 |
 
 
 **Mayores bajas del dia**
 
 | ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
 |---|---|---|---|---|---|---|
-| NU | Nu Holdings | 12.23 | -10.01 | -17.81 | -26.94 | 28.41 |
-| QCOM | Qualcomm | 187.48 | -7.17 | 14.40 | 11.32 | 54.55 |
-| BA | Boeing | 184.39 | -6.91 | -12.15 | -15.07 | 27.45 |
-| INTC | Intel | 116.03 | -5.67 | 26.00 | 214.44 | 58.52 |
-| SLV | iShares Silver Trust | 54.95 | -5.49 | -12.46 | -14.70 | 39.57 |
+| MDB.MX | MongoDB | 6,047.20 | -17.84 | -19.48 | -20.01 | 37.88 |
+| ZS.MX | Zscaler | 3,401.01 | -10.15 | 19.27 | -16.48 | 57.18 |
+| RBLX.MX | Roblox | 756.83 | -8.23 | 19.48 | -49.04 | 47.34 |
+| BA.MX | Boeing | 3,327.73 | -5.74 | -6.71 | -15.04 | 33.25 |
+| INTC.MX | Intel | 2,078.16 | -4.77 | 33.88 | 210.90 | 63.10 |

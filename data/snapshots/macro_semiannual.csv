@@ -1,0 +1,55 @@
+source,series_id,name,units,agg,metric,2022-S2,2023-S1,2023-S2,2024-S1,2024-S2,2025-S1,2025-S2,2026-S1,2026-S2,partial
+FRED,DFEDTARU,Fed funds target (limite superior),pct,last,value,,5.25,5.5,5.5,4.5,4.5,3.75,3.75,4.0,2026-S2
+FRED,DFF,Fed funds efectiva,pct,avg,value,,4.753,5.295,5.33,4.956,4.33,4.095,3.635,3.655,2026-S2
+FRED,WALCL,Balance de la Fed (activos totales),millones_usd,last,value,,8340914.0,7712781.0,7231163.0,6885963.0,6662200.0,6640618.0,6735645.0,6747704.0,2026-S2
+FRED,WALCL,Balance de la Fed (activos totales),millones_usd,last,pct_yoy,,-6.424,-9.804,-13.305,-10.72,-7.868,-3.563,1.102,1.613,2026-S2
+FRED,M2SL,Oferta monetaria M2,miles_millones_usd,last,value,,20798.9,20779.9,21070.7,21487.6,21942.6,22355.3,23114.9,23342.8,2026-S2
+FRED,M2SL,Oferta monetaria M2,miles_millones_usd,last,pct_yoy,,-3.918,-2.411,1.307,3.406,4.138,4.038,5.343,4.417,2026-S2
+FRED,DGS3MO,Treasury 3 meses,pct,avg,value,,5.028,5.53,5.46,4.907,4.352,4.065,3.712,3.93,2026-S2
+FRED,DGS2,Treasury 2 anios,pct,avg,value,,4.303,4.863,4.657,4.092,4.004,3.623,3.776,4.335,2026-S2
+FRED,DGS10,Treasury 10 anios,pct,avg,value,,3.621,4.297,4.305,4.113,4.407,4.182,4.312,4.73,2026-S2
+FRED,DGS30,Treasury 30 anios,pct,avg,value,,3.776,4.414,4.458,4.358,4.774,4.781,4.89,5.21,2026-S2
+FRED,T10Y2Y,Spread 10a-2a,pct,avg,value,,-0.682,-0.566,-0.352,0.02,0.403,0.559,0.535,0.394,2026-S2
+FRED,T10Y3M,Spread 10a-3m,pct,avg,value,,-1.407,-1.233,-1.156,-0.794,0.055,0.117,0.6,0.803,2026-S2
+FRED,T5YIE,Inflacion implicita 5a (breakeven),pct,avg,value,,2.275,2.232,2.323,2.182,2.446,2.383,2.5,2.294,2026-S2
+FRED,MORTGAGE30US,Hipoteca 30 anios,pct,avg,value,,6.442,7.172,6.872,6.57,6.808,6.39,6.268,6.679,2026-S2
+FRED,CPIAUCSL,CPI general,indice,avg,value,,302.314,307.092,312.042,315.354,320.13,324.16,330.549,333.472,2026-S2
+FRED,CPIAUCSL,CPI general,indice,avg,pct_yoy,,4.877,3.399,3.218,2.691,2.592,2.792,3.255,2.873,2026-S2
+FRED,CPILFESL,CPI subyacente,indice,avg,value,,305.737,311.02,316.802,321.178,326.135,330.331,334.68,337.277,2026-S2
+FRED,CPILFESL,CPI subyacente,indice,avg,pct_yoy,,5.383,4.196,3.619,3.266,2.946,2.85,2.62,2.103,2026-S2
+FRED,PCEPILFE,PCE subyacente,indice,avg,value,,118.493,120.085,122.021,123.582,125.402,127.116,129.487,130.658,2026-S2
+FRED,PCEPILFE,PCE subyacente,indice,avg,pct_yoy,,4.746,3.613,2.978,2.913,2.771,2.859,3.258,2.786,2026-S2
+FRED,UNRATE,Tasa de desempleo,pct,avg,value,,3.533,3.717,3.9,4.15,4.167,4.38,4.3,4.1,2026-S2
+FRED,PAYEMS,Nomina no agricola,miles,avg,value,,155314.333,156476.167,157428.167,157959.5,158402.667,158475.167,158704.833,158994.0,2026-S2
+FRED,PAYEMS,Nomina no agricola,miles,avg,pct_yoy,,2.625,1.769,1.361,0.948,0.619,0.326,0.191,0.327,2026-S2
+FRED,ICSA,Solicitudes iniciales de desempleo,personas,avg,value,,223280.0,222259.259,217884.615,228153.846,226653.846,225615.385,212807.692,203750.0,2026-S2
+FRED,ICSA,Solicitudes iniciales de desempleo,personas,avg,pct_yoy,,2.098,6.325,-2.416,2.652,4.025,-1.113,-6.109,-9.691,2026-S2
+FRED,GDPC1,PIB real,miles_millones_usd,avg,value,22201.985,22510.053,22937.384,23184.314,23532.556,23659.593,24041.292,24225.016,,
+FRED,GDPC1,PIB real,miles_millones_usd,avg,pct_yoy,1.829,2.552,3.312,2.995,2.595,2.05,2.162,2.39,,
+FRED,INDPRO,Produccion industrial,indice,avg,value,,100.745,100.784,100.328,99.884,100.963,101.489,102.123,103.057,2026-S2
+FRED,INDPRO,Produccion industrial,indice,avg,pct_yoy,,-0.281,-0.146,-0.414,-0.893,0.633,1.607,1.149,1.545,2026-S2
+FRED,RSAFS,Ventas minoristas,millones_usd,avg,value,,673164.833,685055.833,687700.333,706056.167,717102.167,731758.667,753945.0,769204.5,2026-S2
+FRED,RSAFS,Ventas minoristas,millones_usd,avg,pct_yoy,,3.384,3.669,2.159,3.065,4.275,3.64,5.138,5.117,2026-S2
+FRED,HOUST,Inicios de vivienda,miles,avg,value,,1415.167,1426.667,1376.0,1364.0,1376.333,1335.333,1381.333,1292.0,2026-S2
+FRED,HOUST,Inicios de vivienda,miles,avg,pct_yoy,,-15.361,-0.128,-2.768,-4.393,0.024,-2.102,0.363,-3.245,2026-S2
+FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),indice,avg,value,,63.45,67.25,74.967,70.117,59.75,55.417,51.733,53.45,2026-S2
+FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),indice,avg,pct_yoy,,4.876,17.058,18.151,4.263,-20.298,-20.965,-13.417,-3.549,2026-S2
+FRED,VIXCLS,VIX,indice,avg,value,,18.563,15.149,13.849,17.214,21.061,16.857,19.362,16.097,2026-S2
+FRED,VIXCLS,VIX,indice,avg,pct_yoy,,-29.692,-39.152,-25.396,13.632,52.082,-2.071,-8.066,-4.513,2026-S2
+FRED,BAMLH0A0HYM2,Spread high yield,pct,avg,value,,,3.98,3.271,3.03,3.189,2.912,2.879,2.718,2026-S2
+FRED,NFCI,Indice de condiciones financieras (Chicago Fed),desv_std,avg,value,,-0.225,-0.311,-0.41,-0.421,-0.457,-0.517,-0.511,-0.542,2026-S2
+FRED,DTWEXBGS,Indice dolar amplio,indice,avg,value,,119.849,120.687,121.587,124.188,124.988,120.489,119.187,119.506,2026-S2
+FRED,DTWEXBGS,Indice dolar amplio,indice,avg,pct_yoy,,2.225,-2.794,1.45,2.901,2.796,-2.979,-4.641,-0.816,2026-S2
+FRED,DEXMXUS,Pesos por dolar (FRED),mxn_por_usd,avg,value,,18.167,17.296,17.104,19.499,19.958,18.464,17.47,17.23,2026-S2
+FRED,DEXMXUS,Pesos por dolar (FRED),mxn_por_usd,avg,pct_yoy,,-10.408,-13.363,-5.853,12.736,16.688,-5.308,-12.465,-6.686,2026-S2
+FRED,DCOILWTICO,Petroleo WTI,usd_barril,avg,value,,74.735,80.419,79.69,73.623,68.116,62.747,84.286,86.348,2026-S2
+FRED,DCOILWTICO,Petroleo WTI,usd_barril,avg,pct_yoy,,-26.736,-8.58,6.63,-8.45,-14.523,-14.774,23.738,37.613,2026-S2
+FRED,SP500,S&P 500 (FRED),indice,last,value,,4450.38,4769.83,5460.48,5881.63,6204.95,6845.5,7499.36,7683.69,2026-S2
+FRED,SP500,S&P 500 (FRED),indice,last,pct_yoy,,17.568,24.23,22.697,23.309,13.634,16.388,20.861,12.244,2026-S2
+BANXICO,SF61745,Tasa objetivo Banxico,pct,last,value,,11.25,11.25,11.0,10.0,8.0,7.0,6.5,6.5,2026-S2
+BANXICO,SF43783,TIIE 28 dias,pct,avg,value,,11.295,11.503,11.359,10.845,9.494,7.885,7.064,6.761,2026-S2
+BANXICO,SF43936,CETES 28 dias,pct,avg,value,,11.097,11.099,11.046,10.385,8.967,7.327,6.665,6.243,2026-S2
+BANXICO,SF43718,Tipo de cambio FIX,mxn_por_usd,avg,value,,18.163,17.308,17.126,19.498,19.955,18.473,17.462,17.244,2026-S2
+BANXICO,SF43718,Tipo de cambio FIX,mxn_por_usd,avg,pct_yoy,,-10.42,-13.319,-5.711,12.656,16.522,-5.257,-12.497,-6.653,2026-S2
+BANXICO,SP1,INPC (indice general),indice,avg,value,,128.072,130.487,134.053,136.716,139.378,141.706,144.988,145.316,2026-S2
+BANXICO,SP1,INPC (indice general),indice,avg,pct_yoy,,6.576,4.519,4.67,4.774,3.972,3.65,4.025,2.547,2026-S2
