@@ -136,6 +136,12 @@ def connect(data_dir: Path | None = None, config_dir: Path | None = None) -> duc
             con.execute(f"CREATE VIEW {name} AS SELECT * FROM read_parquet('{pattern}', union_by_name=true)")
             available.add(name)
 
+    # Resumenes para agentes (una fila por ticker / serie), si ya se generaron.
+    for name in ("market_snapshot", "macro_snapshot"):
+        path = data_dir / "snapshots" / f"{name}.csv"
+        if path.exists():
+            con.execute(f"CREATE VIEW {name} AS SELECT * FROM read_csv('{path}', header=true)")
+
     for view, (base, sql) in DERIVED_VIEWS.items():
         if base in available:
             con.execute(f"CREATE VIEW {view} AS {sql}")

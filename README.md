@@ -141,7 +141,22 @@ python -m econ.macro series SF61745,DFEDTARU --freq M --period ytd
 
 Periodos: `today`, `yesterday`, `wtd`, `last-week`, `mtd`, `last-month`, `qtd`, `last-quarter`, `ytd`, `last-year`, `1w`/`1m`/`3m`/`6m`/`1y`, `2026`, `2026-03`, `2026-Q1`, `2026-S1`, `2026-W38`, `2026-03-17` o `2026-01-15:2026-02-15`.
 
+| `presentador` | Gráficas, tableros y reportes visuales como artifacts interactivos, siempre con el mismo estilo (TradingView oscuro / terminal Bloomberg) | `/presenta tablero de tasas Banxico vs Fed con la curva de Treasuries` |
+
 Al iniciar cada sesión en la web, `.claude/hooks/session-start.sh` instala las dependencias de Python.
+
+### Presentador: estilo fijo
+
+El presentador no escribe HTML. Arma una especificación JSON (qué datos mostrar y con qué tipo de bloque) y `python -m econ.present` la convierte en una página con el mismo diseño siempre:
+
+- **Series de tiempo** con [Lightweight Charts](https://www.tradingview.com/lightweight-charts/) de TradingView: cursor, zoom y arrastre, botones de rango (1M a MÁX), leyenda con lectura de valores y marcas de eventos.
+- **Categorías** (rankings, curva de rendimientos) con ECharts, con los mismos colores y tipografía.
+- **KPIs**, tablas ordenables y texto; cada gráfica tiene su vista de tabla.
+- **El tema** (`econ/present/assets/theme.css`) es la única fuente de estilo. La especificación rechaza cualquier clave de color o tamaño, así que el estilo no puede variar entre reportes.
+
+```bash
+python -m econ.present econ/present/examples/tablero-tasas.json   # genera out/ejemplo-tablero-tasas.html
+```
 
 ## Hoja de ruta
 

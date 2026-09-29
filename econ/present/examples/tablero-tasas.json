@@ -1,0 +1,227 @@
+{
+  "title": "Tasas México y EE.UU.",
+  "subtitle": "Política monetaria de Banxico y la Fed, curva de Treasuries, peso y bolsa mexicana.",
+  "description": "Tablero de tasas de Banxico y la Fed con curva de Treasuries, USD/MXN e IPC.",
+  "file": "ejemplo-tablero-tasas",
+  "blocks": [
+    {
+      "type": "kpis",
+      "items": [
+        {
+          "label": "Banxico objetivo",
+          "macro": "SF61745",
+          "delta": "ytd"
+        },
+        {
+          "label": "Fed (techo)",
+          "macro": "DFEDTARU",
+          "delta": "ytd"
+        },
+        {
+          "label": "Treasury 10A",
+          "macro": "DGS10",
+          "delta": "1m"
+        },
+        {
+          "label": "USD/MXN",
+          "ticker": "MXN=X",
+          "delta": "1d"
+        },
+        {
+          "label": "IPC",
+          "ticker": "^MXX",
+          "delta": "ytd"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "kind": "line",
+      "title": "Tasas objetivo",
+      "from": "2023-01-01",
+      "range": "3A",
+      "series": [
+        {
+          "label": "Banxico",
+          "macro": "SF61745"
+        },
+        {
+          "label": "Fed",
+          "macro": "DFEDTARU"
+        }
+      ],
+      "markers": [
+        {
+          "date": "2026-03-27",
+          "text": "Recorte a 6.75%",
+          "position": "above"
+        },
+        {
+          "date": "2026-05-08",
+          "text": "Recorte a 6.50%",
+          "position": "above"
+        }
+      ],
+      "note": "Tasa objetivo de Banxico y límite superior del rango de la Fed."
+    },
+    {
+      "type": "chart",
+      "kind": "baseline",
+      "title": "Diferencial Banxico − Fed",
+      "from": "2023-01-01",
+      "span": "half",
+      "series": [
+        {
+          "diff": [
+            {
+              "macro": "SF61745"
+            },
+            {
+              "macro": "DFEDTARU"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "kind": "curve",
+      "title": "Curva de Treasuries",
+      "span": "half",
+      "points": [
+        {
+          "category": "3M",
+          "macro": "DGS3MO"
+        },
+        {
+          "category": "2A",
+          "macro": "DGS2"
+        },
+        {
+          "category": "10A",
+          "macro": "DGS10"
+        },
+        {
+          "category": "30A",
+          "macro": "DGS30"
+        }
+      ],
+      "series": [
+        {
+          "label": "Hoy"
+        },
+        {
+          "label": "Hace 1 año",
+          "as_of": "-1y"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "kind": "candles",
+      "title": "S&P/BMV IPC",
+      "series": [
+        {
+          "ticker": "^MXX"
+        }
+      ],
+      "sma": [
+        50,
+        200
+      ],
+      "range": "1A"
+    },
+    {
+      "type": "chart",
+      "kind": "line",
+      "title": "Peso vs IPC",
+      "compare": true,
+      "from": "2025-01-01",
+      "range": "YTD",
+      "series": [
+        {
+          "label": "USD/MXN",
+          "ticker": "MXN=X"
+        },
+        {
+          "label": "IPC",
+          "ticker": "^MXX"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "kind": "hbar",
+      "title": "BMV: rendimiento en el año",
+      "polarity": true,
+      "unit": "pct",
+      "sort": "desc",
+      "span": "half",
+      "sql": "SELECT name AS emisora, chg_ytd AS \"YTD\" FROM market_snapshot WHERE market = 'BMV' AND asset_type = 'stock' ORDER BY chg_ytd DESC LIMIT 8"
+    },
+    {
+      "type": "chart",
+      "kind": "histogram",
+      "title": "Inflación mensual EE.UU.",
+      "polarity": true,
+      "span": "half",
+      "series": [
+        {
+          "label": "CPI m/m",
+          "macro": "CPIAUCSL",
+          "freq": "M",
+          "field": "pct_prev"
+        }
+      ],
+      "from": "2024-01-01"
+    },
+    {
+      "type": "table",
+      "title": "Emisoras BMV con mayor alza en el año",
+      "sql": "SELECT ticker, name, close, chg_1d, chg_1m, chg_ytd, rsi14 FROM market_snapshot WHERE market = 'BMV' ORDER BY chg_ytd DESC LIMIT 10",
+      "columns": [
+        {
+          "key": "ticker",
+          "label": "Ticker",
+          "format": "text"
+        },
+        {
+          "key": "name",
+          "label": "Emisora",
+          "format": "text"
+        },
+        {
+          "key": "close",
+          "label": "Precio",
+          "format": "mxn"
+        },
+        {
+          "key": "chg_1d",
+          "label": "1D",
+          "format": "chg"
+        },
+        {
+          "key": "chg_1m",
+          "label": "1M",
+          "format": "chg"
+        },
+        {
+          "key": "chg_ytd",
+          "label": "YTD",
+          "format": "chg"
+        },
+        {
+          "key": "rsi14",
+          "label": "RSI 14",
+          "format": "num",
+          "decimals": 0
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "Lectura",
+      "body": "Ejemplo de bloque de texto con **negritas** y lista:\n\n- Banxico mantiene un diferencial amplio contra la Fed.\n- La curva de Treasuries se empinó frente a hace un año."
+    }
+  ]
+}
