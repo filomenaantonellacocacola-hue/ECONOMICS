@@ -105,6 +105,7 @@ python -m econ.query "SELECT * FROM macro_annual WHERE series_id = 'CPIAUCSL'" -
 - **BMV**: tickers de Yahoo con sufijo `.MX` (p.ej. `WALMEX.MX`, `GFNORTEO.MX`). Incluye emisoras del IPC, otras líquidas, FIBRAs y el NAFTRAC.
 - **SIC**: réplica en pesos que cotiza en la BMV, con sufijo `.MX` y sin guiones (`AAPL.MX`, `BRKB.MX`, `VOO.MX`). La columna `ref_ticker` guarda el ticker de la bolsa de origen (`AAPL`, `BRK-B`); se usa para los fundamentales, porque en la réplica `.MX` los múltiplos mezclarían precio en pesos con utilidades en dólares.
 - El universo incluye ~230 acciones del SIC (S&P 100, tecnológicas grandes, ADRs relevantes) y ~70 ETFs. Para agregar más, añade filas a `config/universe.csv`: la actualización diaria detecta los tickers nuevos y descarga su histórico completo sola.
+- Las claves del SIC no siempre son el ticker de origen: las extranjeras suelen llevar `N` (`TSMN.MX`, `BABAN.MX`, `MELIN.MX`) y algunas series `C` (`DELLC.MX`). Si un ticker aparece en `health.tickers_missing`, corre la tarea `resolve`: prueba esas variantes, acepta solo la que tenga un precio consistente con `precio de origen × USD/MXN`, corrige `config/universe.csv` y baja el histórico. El detalle queda en `data/snapshots/symbol_resolution.json`.
 - Algunas réplicas del SIC operan poco: si un ticker no opera en México un día, ese día no tiene precio. Revisa `health.tickers_stale` en `data/snapshots/manifest.json`.
 
 ## Uso con agentes de IA

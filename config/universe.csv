@@ -121,7 +121,7 @@ KLAC.MX,SIC,stock,KLA,KLAC
 MRVL.MX,SIC,stock,Marvell Technology,MRVL
 ARM.MX,SIC,stock,Arm Holdings,ARM
 SMCI.MX,SIC,stock,Super Micro Computer,SMCI
-DELL.MX,SIC,stock,Dell Technologies,DELL
+DELLC.MX,SIC,stock,Dell Technologies,DELL
 HPQ.MX,SIC,stock,HP Inc,HPQ
 ANET.MX,SIC,stock,Arista Networks,ANET
 VRT.MX,SIC,stock,Vertiv,VRT
@@ -136,7 +136,7 @@ SNPS.MX,SIC,stock,Synopsys,SNPS
 CDNS.MX,SIC,stock,Cadence Design,CDNS
 CSCO.MX,SIC,stock,Cisco,CSCO
 IBM.MX,SIC,stock,IBM,IBM
-ACN.MX,SIC,stock,Accenture,ACN
+ACNN.MX,SIC,stock,Accenture,ACN
 PLTR.MX,SIC,stock,Palantir,PLTR
 PANW.MX,SIC,stock,Palo Alto Networks,PANW
 CRWD.MX,SIC,stock,CrowdStrike,CRWD
@@ -164,7 +164,7 @@ AAL.MX,SIC,stock,American Airlines,AAL
 PYPL.MX,SIC,stock,PayPal,PYPL
 XYZ.MX,SIC,stock,Block,XYZ
 SHOP.MX,SIC,stock,Shopify,SHOP
-SPOT.MX,SIC,stock,Spotify,SPOT
+SPOTN.MX,SIC,stock,Spotify,SPOT
 COIN.MX,SIC,stock,Coinbase,COIN
 HOOD.MX,SIC,stock,Robinhood,HOOD
 SOFI.MX,SIC,stock,SoFi Technologies,SOFI
@@ -201,7 +201,7 @@ CVX.MX,SIC,stock,Chevron,CVX
 COP.MX,SIC,stock,ConocoPhillips,COP
 OXY.MX,SIC,stock,Occidental Petroleum,OXY
 EOG.MX,SIC,stock,EOG Resources,EOG
-SLB.MX,SIC,stock,SLB (Schlumberger),SLB
+SLBN.MX,SIC,stock,SLB (Schlumberger),SLB
 HAL.MX,SIC,stock,Halliburton,HAL
 MPC.MX,SIC,stock,Marathon Petroleum,MPC
 PSX.MX,SIC,stock,Phillips 66,PSX
@@ -229,7 +229,7 @@ DHR.MX,SIC,stock,Danaher,DHR
 ISRG.MX,SIC,stock,Intuitive Surgical,ISRG
 SYK.MX,SIC,stock,Stryker,SYK
 BSX.MX,SIC,stock,Boston Scientific,BSX
-MDT.MX,SIC,stock,Medtronic,MDT
+MDTN.MX,SIC,stock,Medtronic,MDT
 CVS.MX,SIC,stock,CVS Health,CVS
 CI.MX,SIC,stock,Cigna,CI
 ELV.MX,SIC,stock,Elevance Health,ELV
@@ -279,13 +279,13 @@ PLD.MX,SIC,stock,Prologis,PLD
 EQIX.MX,SIC,stock,Equinix,EQIX
 O.MX,SIC,stock,Realty Income,O
 SPG.MX,SIC,stock,Simon Property,SPG
-BABA.MX,SIC,stock,Alibaba,BABA
+BABAN.MX,SIC,stock,Alibaba,BABA
 PDD.MX,SIC,stock,PDD Holdings,PDD
 JD.MX,SIC,stock,JD.com,JD
 BIDU.MX,SIC,stock,Baidu,BIDU
 NIO.MX,SIC,stock,NIO,NIO
-TSM.MX,SIC,stock,Taiwan Semiconductor,TSM
-ASML.MX,SIC,stock,ASML,ASML
+TSMN.MX,SIC,stock,Taiwan Semiconductor,TSM
+ASMLN.MX,SIC,stock,ASML,ASML
 SAP.MX,SIC,stock,SAP,SAP
 SONY.MX,SIC,stock,Sony,SONY
 TM.MX,SIC,stock,Toyota,TM
@@ -296,9 +296,9 @@ BP.MX,SIC,stock,BP,BP
 BHP.MX,SIC,stock,BHP,BHP
 RIO.MX,SIC,stock,Rio Tinto,RIO
 VALE.MX,SIC,stock,Vale,VALE
-PBR.MX,SIC,stock,Petrobras,PBR
+PBRN.MX,SIC,stock,Petrobras,PBR
 ITUB.MX,SIC,stock,Itau Unibanco,ITUB
-MELI.MX,SIC,stock,MercadoLibre,MELI
+MELIN.MX,SIC,stock,MercadoLibre,MELI
 NU.MX,SIC,stock,Nu Holdings,NU
 SE.MX,SIC,stock,Sea Limited,SE
 CPNG.MX,SIC,stock,Coupang,CPNG
