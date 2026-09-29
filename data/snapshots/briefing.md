@@ -1,0 +1,3 @@
+# Briefing de mercado
+
+Generado: 2026-09-29 06:08 (UTC)

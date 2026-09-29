@@ -1,0 +1,18 @@
+{
+  "generated_at_utc": "2026-09-29 06:08",
+  "datasets": {
+    "prices": {
+      "rows": 0
+    },
+    "macro": {
+      "rows": 0
+    },
+    "fundamentals": {
+      "rows": 0
+    }
+  },
+  "health": {},
+  "snapshots": [
+    "briefing.md"
+  ]
+}
