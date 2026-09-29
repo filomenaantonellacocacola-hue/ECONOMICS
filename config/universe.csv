@@ -10,7 +10,6 @@ AC.MX,BMV,stock,Arca Continental,
 AGUA.MX,BMV,stock,Grupo Rotoplas,
 SIGMAFA.MX,BMV,stock,Sigma Foods (antes Alfa),
 ALPEKA.MX,BMV,stock,Alpek,
-CTALPEKA.MX,BMV,stock,Controladora Alpek,
 ALSEA.MX,BMV,stock,Alsea,
 AMXB.MX,BMV,stock,America Movil,
 ARA.MX,BMV,stock,Consorcio ARA,
@@ -128,7 +127,7 @@ VRT.MX,SIC,stock,Vertiv,VRT
 ORCL.MX,SIC,stock,Oracle,ORCL
 CRM.MX,SIC,stock,Salesforce,CRM
 ADBE.MX,SIC,stock,Adobe,ADBE
-NOW.MX,SIC,stock,ServiceNow,NOW
+NOWW.MX,SIC,stock,ServiceNow,NOW
 INTU.MX,SIC,stock,Intuit,INTU
 WDAY.MX,SIC,stock,Workday,WDAY
 ADSK.MX,SIC,stock,Autodesk,ADSK
@@ -157,7 +156,7 @@ EXPE.MX,SIC,stock,Expedia,EXPE
 MAR.MX,SIC,stock,Marriott,MAR
 HLT.MX,SIC,stock,Hilton,HLT
 RCL.MX,SIC,stock,Royal Caribbean,RCL
-CCL.MX,SIC,stock,Carnival,CCL
+CCLN.MX,SIC,stock,Carnival,CCL
 DAL.MX,SIC,stock,Delta Air Lines,DAL
 UAL.MX,SIC,stock,United Airlines,UAL
 AAL.MX,SIC,stock,American Airlines,AAL
@@ -172,7 +171,6 @@ AFRM.MX,SIC,stock,Affirm,AFRM
 RBLX.MX,SIC,stock,Roblox,RBLX
 ROKU.MX,SIC,stock,Roku,ROKU
 ZM.MX,SIC,stock,Zoom Communications,ZM
-EA.MX,SIC,stock,Electronic Arts,EA
 TTWO.MX,SIC,stock,Take-Two Interactive,TTWO
 BAC.MX,SIC,stock,Bank of America,BAC
 WFC.MX,SIC,stock,Wells Fargo,WFC
@@ -184,7 +182,7 @@ USB.MX,SIC,stock,U.S. Bancorp,USB
 PNC.MX,SIC,stock,PNC Financial,PNC
 COF.MX,SIC,stock,Capital One,COF
 AXP.MX,SIC,stock,American Express,AXP
-BK.MX,SIC,stock,BNY Mellon,BK
+BNY.MX,SIC,stock,BNY Mellon,BNY
 BLK.MX,SIC,stock,BlackRock,BLK
 BX.MX,SIC,stock,Blackstone,BX
 KKRC.MX,SIC,stock,KKR,KKR
@@ -245,13 +243,13 @@ LMT.MX,SIC,stock,Lockheed Martin,LMT
 RTX.MX,SIC,stock,RTX,RTX
 NOC.MX,SIC,stock,Northrop Grumman,NOC
 GD.MX,SIC,stock,General Dynamics,GD
-ETN.MX,SIC,stock,Eaton,ETN
+ETN1N.MX,SIC,stock,Eaton,ETN
 EMR.MX,SIC,stock,Emerson Electric,EMR
 UPS.MX,SIC,stock,UPS,UPS
 FDX.MX,SIC,stock,FedEx,FDX
 UNP.MX,SIC,stock,Union Pacific,UNP
 CSX.MX,SIC,stock,CSX,CSX
-WM.MX,SIC,stock,Waste Management,WM
+WMI.MX,SIC,stock,Waste Management,WM
 F.MX,SIC,stock,Ford,F
 GM.MX,SIC,stock,General Motors,GM
 RIVN.MX,SIC,stock,Rivian,RIVN
@@ -267,7 +265,7 @@ STZ.MX,SIC,stock,Constellation Brands,STZ
 CL.MX,SIC,stock,Colgate-Palmolive,CL
 KMB.MX,SIC,stock,Kimberly-Clark,KMB
 EL.MX,SIC,stock,Estee Lauder,EL
-LIN.MX,SIC,stock,Linde,LIN
+LINN.MX,SIC,stock,Linde,LIN
 FCX.MX,SIC,stock,Freeport-McMoRan,FCX
 NEM.MX,SIC,stock,Newmont,NEM
 SCCO.MX,SIC,stock,Southern Copper,SCCO
@@ -291,7 +289,7 @@ SONYN.MX,SIC,stock,Sony,SONY
 TM.MX,SIC,stock,Toyota,TM
 NVON.MX,SIC,stock,Novo Nordisk,NVO
 AZN.MX,SIC,stock,AstraZeneca,AZN
-SHEL.MX,SIC,stock,Shell,SHEL
+SHELN.MX,SIC,stock,Shell,SHEL
 BPN.MX,SIC,stock,BP,BP
 BHPN.MX,SIC,stock,BHP,BHP
 RION.MX,SIC,stock,Rio Tinto,RIO
@@ -350,7 +348,6 @@ VGT.MX,SIC,etf,Vanguard Information Technology,VGT
 SMH.MX,SIC,etf,VanEck Semiconductor,SMH
 SOXX.MX,SIC,etf,iShares Semiconductor,SOXX
 IGV.MX,SIC,etf,iShares Expanded Tech-Software,IGV
-ARKK.MX,SIC,etf,ARK Innovation,ARKK
 ICLN.MX,SIC,etf,iShares Global Clean Energy,ICLN
 LIT.MX,SIC,etf,Global X Lithium & Battery Tech,LIT
 URA.MX,SIC,etf,Global X Uranium,URA
@@ -370,7 +367,4 @@ GLD.MX,SIC,etf,SPDR Gold Shares,GLD
 IAU.MX,SIC,etf,iShares Gold Trust,IAU
 SLV.MX,SIC,etf,iShares Silver Trust,SLV
 GDX.MX,SIC,etf,VanEck Gold Miners,GDX
-USO.MX,SIC,etf,United States Oil Fund,USO
 VNQ.MX,SIC,etf,Vanguard Real Estate,VNQ
-IBIT.MX,SIC,etf,iShares Bitcoin Trust,IBIT
-ETHA.MX,SIC,etf,iShares Ethereum Trust,ETHA

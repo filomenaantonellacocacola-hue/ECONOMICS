@@ -358,7 +358,8 @@ def test_resolve_accepts_only_price_consistent_candidates(tmp_path, monkeypatch)
 def test_resolve_candidates():
     from econ import resolve
 
-    assert resolve.candidates("BRK-B", "BRKB.MX") == ["BRKBN.MX", "BRKBC.MX", "BRKB1.MX", "BRKBN1.MX"]
+    assert resolve.candidates("BRK-B", "BRKB.MX") == [
+        "BRKBN.MX", "BRKBC.MX", "BRKB1.MX", "BRKBN1.MX", "BRKB1N.MX", "BRKBI.MX", "BRKBW.MX"]
     assert resolve.candidates("DELL", "DELLC.MX")[0] == "DELL.MX"
 
 
@@ -380,6 +381,7 @@ def test_resolve_symbols_tries_current_ticker_first(tmp_path, monkeypatch):
         seen["targets"] = targets
         return {"resolved": {}, "mismatch": {}, "not_found": targets}
     monkeypatch.setattr(resolve, "resolve", fake_resolve)
+    monkeypatch.setattr(pipeline, "prune_to_universe", lambda: None)
 
     assert pipeline.resolve_symbols() == 0
     assert seen["targets"] == ["BAD.MX"]
