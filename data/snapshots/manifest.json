@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-09-29 06:38",
+  "generated_at_utc": "2026-09-29 06:42",
   "datasets": {
     "prices": {
-      "rows": 577349,
-      "ids": 362,
+      "rows": 586684,
+      "ids": 368,
       "min_date": "2020-01-01",
       "max_date": "2026-09-29",
       "files": [
@@ -126,8 +126,8 @@
       ]
     },
     "fundamentals": {
-      "rows": 263,
-      "ids": 263,
+      "rows": 253,
+      "ids": 253,
       "min_date": "2026-09-29",
       "max_date": "2026-09-29",
       "files": [
@@ -137,23 +137,9 @@
   },
   "health": {
     "tickers_missing": [
-      "ARKK.MX",
-      "AZN.MX",
-      "BK.MX",
-      "CCL.MX",
-      "CTALPEKA.MX",
-      "EA.MX",
-      "ETHA.MX",
-      "ETN.MX",
-      "IBIT.MX",
-      "NOW.MX",
-      "SHEL.MX",
-      "USO.MX",
-      "WM.MX"
+      "LINN.MX"
     ],
-    "tickers_stale": [
-      "LIN.MX"
-    ],
+    "tickers_stale": [],
     "macro_missing": []
   },
   "snapshots": [

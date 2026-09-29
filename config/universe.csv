@@ -156,7 +156,7 @@ EXPE.MX,SIC,stock,Expedia,EXPE
 MAR.MX,SIC,stock,Marriott,MAR
 HLT.MX,SIC,stock,Hilton,HLT
 RCL.MX,SIC,stock,Royal Caribbean,RCL
-CCLN.MX,SIC,stock,Carnival,CCL
+CCL1N.MX,SIC,stock,Carnival,CCL
 DAL.MX,SIC,stock,Delta Air Lines,DAL
 UAL.MX,SIC,stock,United Airlines,UAL
 AAL.MX,SIC,stock,American Airlines,AAL
@@ -288,8 +288,8 @@ SAPN.MX,SIC,stock,SAP,SAP
 SONYN.MX,SIC,stock,Sony,SONY
 TM.MX,SIC,stock,Toyota,TM
 NVON.MX,SIC,stock,Novo Nordisk,NVO
-AZN.MX,SIC,stock,AstraZeneca,AZN
-SHELN.MX,SIC,stock,Shell,SHEL
+AZN1N.MX,SIC,stock,AstraZeneca,AZN
+SHEL1N.MX,SIC,stock,Shell,SHEL
 BPN.MX,SIC,stock,BP,BP
 BHPN.MX,SIC,stock,BHP,BHP
 RION.MX,SIC,stock,Rio Tinto,RIO

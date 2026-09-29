@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-09-29 06:38 (UTC)
+Generado: 2026-09-29 06:42 (UTC)
 
 ## Macro
 
@@ -81,7 +81,7 @@ Generado: 2026-09-29 06:38 (UTC)
 | ALPEKA.MX | Alpek | 14.90 | -1.00 | 22.23 | 61.26 | 69.40 |
 
 
-## SIC (289 emisoras, 60% sobre su media de 200 dias)
+## SIC (296 emisoras, 59% sobre su media de 200 dias)
 
 
 **Mayores alzas del dia**
