@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-29 06:10",
+  "generated_at_utc": "2026-09-29 06:14",
   "datasets": {
     "prices": {
       "rows": 317744,
@@ -94,7 +94,13 @@
       "rows": 0
     },
     "fundamentals": {
-      "rows": 0
+      "rows": 148,
+      "ids": 148,
+      "min_date": "2026-09-29",
+      "max_date": "2026-09-29",
+      "files": [
+        "data/fundamentals/2026-09/data.parquet"
+      ]
     }
   },
   "health": {

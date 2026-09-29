@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-09-29 06:10 (UTC)
+Generado: 2026-09-29 06:14 (UTC)
 
 
 ## Indices y divisas
