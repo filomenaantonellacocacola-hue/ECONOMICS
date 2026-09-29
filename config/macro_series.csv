@@ -1,36 +1,36 @@
-source,series_id,name,category,units,frequency
-FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D
-FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D
-FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W
-FRED,M2SL,Oferta monetaria M2,politica_monetaria,miles_millones_usd,M
-FRED,DGS3MO,Treasury 3 meses,tasas,pct,D
-FRED,DGS2,Treasury 2 anios,tasas,pct,D
-FRED,DGS10,Treasury 10 anios,tasas,pct,D
-FRED,DGS30,Treasury 30 anios,tasas,pct,D
-FRED,T10Y2Y,Spread 10a-2a,tasas,pct,D
-FRED,T10Y3M,Spread 10a-3m,tasas,pct,D
-FRED,T5YIE,Inflacion implicita 5a (breakeven),inflacion,pct,D
-FRED,MORTGAGE30US,Hipoteca 30 anios,tasas,pct,W
-FRED,CPIAUCSL,CPI general,inflacion,indice,M
-FRED,CPILFESL,CPI subyacente,inflacion,indice,M
-FRED,PCEPILFE,PCE subyacente,inflacion,indice,M
-FRED,UNRATE,Tasa de desempleo,empleo,pct,M
-FRED,PAYEMS,Nomina no agricola,empleo,miles,M
-FRED,ICSA,Solicitudes iniciales de desempleo,empleo,personas,W
-FRED,GDPC1,PIB real,actividad,miles_millones_usd,Q
-FRED,INDPRO,Produccion industrial,actividad,indice,M
-FRED,RSAFS,Ventas minoristas,actividad,millones_usd,M
-FRED,HOUST,Inicios de vivienda,actividad,miles,M
-FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),actividad,indice,M
-FRED,VIXCLS,VIX,riesgo,indice,D
-FRED,BAMLH0A0HYM2,Spread high yield,riesgo,pct,D
-FRED,NFCI,Indice de condiciones financieras (Chicago Fed),riesgo,indice,W
-FRED,DTWEXBGS,Indice dolar amplio,divisas,indice,D
-FRED,DEXMXUS,Pesos por dolar (FRED),divisas,mxn_por_usd,D
-FRED,DCOILWTICO,Petroleo WTI,materias_primas,usd_barril,D
-FRED,SP500,S&P 500 (FRED),mercado,indice,D
-BANXICO,SF61745,Tasa objetivo Banxico,politica_monetaria,pct,D
-BANXICO,SF43783,TIIE 28 dias,tasas,pct,D
-BANXICO,SF43936,CETES 28 dias,tasas,pct,W
-BANXICO,SF43718,Tipo de cambio FIX,divisas,mxn_por_usd,D
-BANXICO,SP1,INPC (indice general),inflacion,indice,M
+source,series_id,name,category,units,frequency,agg
+FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,last
+FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D,avg
+FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W,last
+FRED,M2SL,Oferta monetaria M2,politica_monetaria,miles_millones_usd,M,last
+FRED,DGS3MO,Treasury 3 meses,tasas,pct,D,avg
+FRED,DGS2,Treasury 2 anios,tasas,pct,D,avg
+FRED,DGS10,Treasury 10 anios,tasas,pct,D,avg
+FRED,DGS30,Treasury 30 anios,tasas,pct,D,avg
+FRED,T10Y2Y,Spread 10a-2a,tasas,pct,D,avg
+FRED,T10Y3M,Spread 10a-3m,tasas,pct,D,avg
+FRED,T5YIE,Inflacion implicita 5a (breakeven),inflacion,pct,D,avg
+FRED,MORTGAGE30US,Hipoteca 30 anios,tasas,pct,W,avg
+FRED,CPIAUCSL,CPI general,inflacion,indice,M,avg
+FRED,CPILFESL,CPI subyacente,inflacion,indice,M,avg
+FRED,PCEPILFE,PCE subyacente,inflacion,indice,M,avg
+FRED,UNRATE,Tasa de desempleo,empleo,pct,M,avg
+FRED,PAYEMS,Nomina no agricola,empleo,miles,M,avg
+FRED,ICSA,Solicitudes iniciales de desempleo,empleo,personas,W,avg
+FRED,GDPC1,PIB real,actividad,miles_millones_usd,Q,avg
+FRED,INDPRO,Produccion industrial,actividad,indice,M,avg
+FRED,RSAFS,Ventas minoristas,actividad,millones_usd,M,avg
+FRED,HOUST,Inicios de vivienda,actividad,miles,M,avg
+FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),actividad,indice,M,avg
+FRED,VIXCLS,VIX,riesgo,indice,D,avg
+FRED,BAMLH0A0HYM2,Spread high yield,riesgo,pct,D,avg
+FRED,NFCI,Indice de condiciones financieras (Chicago Fed),riesgo,desv_std,W,avg
+FRED,DTWEXBGS,Indice dolar amplio,divisas,indice,D,avg
+FRED,DEXMXUS,Pesos por dolar (FRED),divisas,mxn_por_usd,D,avg
+FRED,DCOILWTICO,Petroleo WTI,materias_primas,usd_barril,D,avg
+FRED,SP500,S&P 500 (FRED),mercado,indice,D,last
+BANXICO,SF61745,Tasa objetivo Banxico,politica_monetaria,pct,D,last
+BANXICO,SF43783,TIIE 28 dias,tasas,pct,D,avg
+BANXICO,SF43936,CETES 28 dias,tasas,pct,W,avg
+BANXICO,SF43718,Tipo de cambio FIX,divisas,mxn_por_usd,D,avg
+BANXICO,SP1,INPC (indice general),inflacion,indice,M,avg

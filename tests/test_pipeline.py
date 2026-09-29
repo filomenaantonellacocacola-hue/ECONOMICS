@@ -146,6 +146,8 @@ def test_universe_is_well_formed():
     assert u.loc[u["market"] == "BMV", "ticker"].str.endswith(".MX").all()
     s = config.load_macro_series()
     assert not s.duplicated(["source", "series_id"]).any()
+    assert set(s["agg"]) <= {"avg", "last"}
+    assert set(s["frequency"]) <= {"D", "W", "M", "Q"}
 
 
 def test_pipeline_daily_end_to_end(tmp_path, monkeypatch):
@@ -171,3 +173,62 @@ def test_pipeline_daily_end_to_end(tmp_path, monkeypatch):
     monkeypatch.setattr(fred, "fetch_many", lambda ids, start: (pd.DataFrame(), ids))
     assert pipeline.main(["daily"]) == 1
     assert (data / "snapshots" / "briefing.md").exists()
+
+
+def _macro_fixture(tmp_path):
+    cpi = pd.DataFrame({"source": "FRED", "series_id": "CPIAUCSL",
+                        "date": pd.date_range("2023-01-01", "2026-08-01", freq="MS")})
+    cpi["value"] = 300 * 1.0025 ** np.arange(len(cpi))
+    gdp = pd.DataFrame({"source": "FRED", "series_id": "GDPC1",
+                        "date": pd.date_range("2023-01-01", "2026-04-01", freq="QS")})
+    gdp["value"] = 100 * 1.005 ** np.arange(len(gdp))
+    days = pd.bdate_range("2023-01-02", "2026-09-28")
+    target = pd.DataFrame({"source": "FRED", "series_id": "DFEDTARU", "date": days,
+                           "value": np.where(days < "2026-09-15", 5.5, 5.25)})
+    data = tmp_path / "data"
+    storage.write_partitioned(pd.concat([cpi, gdp, target]), data / "macro",
+                              keys=["source", "series_id", "date"], freq="Y")
+    return data
+
+
+def test_macro_aggregated_views(tmp_path):
+    con = query.connect(data_dir=_macro_fixture(tmp_path))
+
+    monthly = query.run("SELECT * FROM macro_monthly", con)
+    assert "GDPC1" not in set(monthly["series_id"])  # PIB es trimestral: no se baja a mensual
+
+    q = query.run("SELECT * FROM macro_quarterly", con).set_index(["series_id", "period_label"])
+    assert q.loc[("CPIAUCSL", "2026-Q2"), "pct_yoy"] == pytest.approx(100 * (1.0025**12 - 1))
+    assert q.loc[("CPIAUCSL", "2026-Q2"), "n_obs"] == 3
+    assert not q.loc[("CPIAUCSL", "2026-Q2"), "is_partial"]
+    assert q.loc[("CPIAUCSL", "2026-Q3"), "is_partial"]  # falta el dato de septiembre
+    assert not q.loc[("GDPC1", "2026-Q2"), "is_partial"]
+    assert q.loc[("GDPC1", "2026-Q2"), "pct_prev"] == pytest.approx(0.5)
+    # Regla 'last' para la tasa objetivo; las tasas en % no tienen cambio porcentual.
+    assert q.loc[("DFEDTARU", "2026-Q3"), "value"] == 5.25
+    assert q.loc[("DFEDTARU", "2026-Q3"), "chg_prev"] == pytest.approx(-0.25)
+    assert pd.isna(q.loc[("DFEDTARU", "2026-Q3"), "pct_prev"])
+
+    s = query.run("SELECT period_label, is_partial FROM macro_semiannual WHERE series_id = 'GDPC1'", con)
+    assert s["period_label"].iloc[-1] == "2026-S1" and not s["is_partial"].iloc[-1]
+    a = query.run("SELECT period_label, n_obs FROM macro_annual WHERE series_id = 'CPIAUCSL' ORDER BY 1", con)
+    assert a["period_label"].tolist() == ["2023", "2024", "2025", "2026"]
+    assert a["n_obs"].tolist() == [12, 12, 12, 8]
+
+
+def test_macro_aggregated_snapshots(tmp_path):
+    data = _macro_fixture(tmp_path)
+    out = tmp_path / "snap"
+    manifest = snapshots.build(data_dir=data, out_dir=out)
+    assert {"macro_monthly.csv", "macro_quarterly.csv", "macro_semiannual.csv",
+            "macro_annual.csv"} <= set(manifest["snapshots"])
+
+    q = pd.read_csv(out / "macro_quarterly.csv")
+    assert len([c for c in q.columns if c.startswith("20")]) <= 13
+    cpi = q[q["series_id"] == "CPIAUCSL"].set_index("metric")
+    assert list(cpi.index) == ["value", "pct_yoy"]
+    assert cpi.loc["pct_yoy", "2026-Q2"] == pytest.approx(3.042, abs=0.001)
+    assert cpi.loc["value", "partial"] == "2026-Q3"
+    assert q.loc[q["series_id"] == "DFEDTARU", "metric"].tolist() == ["value"]
+    m = pd.read_csv(out / "macro_monthly.csv")
+    assert "GDPC1" not in set(m["series_id"])

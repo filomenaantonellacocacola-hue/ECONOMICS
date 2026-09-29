@@ -2,10 +2,11 @@
 
 Base de datos financiera y macroeconómica que se actualiza sola con GitHub Actions y se consulta con SQL, parecido a BigQuery pero gratis y dentro de este repo.
 
-- **Mercado**: precios diarios (OHLCV) de emisoras de la **BMV**, del **SIC** (acciones y ETFs extranjeros), índices y tipos de cambio, desde Yahoo Finance.
+- **Mercado**: precios **diarios** (OHLCV) de emisoras de la **BMV**, del **SIC** (acciones y ETFs extranjeros), índices y tipos de cambio, desde Yahoo Finance.
 - **Macro EE.UU.**: tasas de la Fed, curva de Treasuries, inflación, empleo, actividad, riesgo, desde **FRED**.
 - **Macro México**: tasa objetivo, TIIE, CETES, tipo de cambio FIX e INPC, desde **Banxico (SIE)**.
 - **Fundamentales**: corte semanal de valuación y rentabilidad (P/U, P/VL, EV/EBITDA, ROE, deuda…).
+- **Macro en 4 frecuencias**: además del dato original (diario, semanal, mensual o trimestral), vistas **mensual, trimestral, semestral y anual** con variación contra el periodo anterior y contra el año anterior.
 - **Snapshots para agentes**: resúmenes compactos (`data/snapshots/`) para que un agente de IA se ponga al día leyendo unos pocos KB en lugar de descargar todo.
 
 ## Arquitectura
@@ -21,12 +22,12 @@ Banxico SIE ───┘        │                                   │
 | Carpeta | Contenido |
 |---|---|
 | `config/universe.csv` | Universo de tickers (BMV, SIC, índices, FX). **Aquí agregas o quitas emisoras.** |
-| `config/macro_series.csv` | Series macro de FRED y Banxico. **Aquí agregas indicadores.** |
+| `config/macro_series.csv` | Series macro de FRED y Banxico y su regla de agregación (`agg`). **Aquí agregas indicadores.** |
 | `econ/` | Código: fuentes (`sources/`), almacenamiento, pipeline, snapshots y consultas. |
 | `data/prices/AAAA-MM/` | Precios diarios, un Parquet por mes. |
 | `data/macro/AAAA/` | Observaciones macro en formato largo, un Parquet por año. |
 | `data/fundamentals/AAAA-MM/` | Cortes semanales de fundamentales. |
-| `data/snapshots/` | `briefing.md`, `market_snapshot.csv`, `macro_snapshot.csv`, `manifest.json`. |
+| `data/snapshots/` | `briefing.md`, `market_snapshot.csv`, `macro_snapshot.csv`, `macro_{monthly,quarterly,semiannual,annual}.csv`, `manifest.json`. |
 | `sql/` | Consultas de ejemplo. |
 
 Los datos se particionan por mes/año y solo se reescriben las particiones que cambian, así el repo crece poco con cada actualización diaria.
@@ -71,9 +72,33 @@ python -m pytest -q
 | `prices_latest` | Último precio por ticker con mercado, nombre y cambio diario (`chg_1d`, %) |
 | `macro` | `source, series_id, date, value` |
 | `macro_latest` | Último dato por serie con nombre, categoría y unidades |
+| `macro_monthly`, `macro_quarterly`, `macro_semiannual`, `macro_annual` | Macro agregada por periodo (ver abajo) |
 | `macro_series` | Catálogo de series (`config/macro_series.csv`) |
 | `fundamentals` / `fundamentals_latest` | Cortes semanales de fundamentales / el más reciente por ticker |
 | `universe` | Catálogo de tickers (`config/universe.csv`) |
+
+## Macro mensual, trimestral, semestral y anual
+
+Las vistas `macro_monthly`, `macro_quarterly`, `macro_semiannual` y `macro_annual` se calculan al vuelo a partir de los datos originales, así que siempre coinciden con ellos y no ocupan espacio extra en el repo.
+
+| Columna | Significado |
+|---|---|
+| `period`, `period_label` | Inicio del periodo y etiqueta (`2026-09`, `2026-Q3`, `2026-S2`, `2026`) |
+| `value` | Valor del periodo según la regla `agg` de la serie: `avg` (promedio del periodo) o `last` (último dato) |
+| `last`, `avg`, `min`, `max`, `n_obs` | Estadísticos del periodo |
+| `chg_prev`, `pct_prev` | Cambio absoluto y % contra el periodo anterior |
+| `chg_yoy`, `pct_yoy` | Cambio absoluto y % contra el mismo periodo del año anterior (p.ej. inflación anual) |
+| `is_partial` | `true` si el periodo aún no tiene todos sus datos publicados |
+
+Reglas:
+- Los cambios % (`pct_*`) solo se calculan para niveles e índices; para tasas en % usa `chg_*` (puntos porcentuales).
+- Una serie no se baja a una frecuencia más fina que la original: el PIB (trimestral) no aparece en `macro_monthly`.
+- `agg = last` se usa para tasas objetivo, saldos (balance de la Fed, M2) y el S&P 500; el resto usa promedio. Puedes cambiarlo en `config/macro_series.csv`.
+
+```bash
+python -m econ.query -f sql/macro_trimestral.sql
+python -m econ.query "SELECT * FROM macro_annual WHERE series_id = 'CPIAUCSL'" --format csv > cpi_anual.csv
+```
 
 ## Notas sobre el universo
 
@@ -87,8 +112,9 @@ La idea es que los agentes **no** descarguen datos de internet: leen este repo. 
 
 1. `data/snapshots/briefing.md`: resumen de una página (macro, índices, movers).
 2. `data/snapshots/macro_snapshot.csv` y `market_snapshot.csv`: una fila por serie/emisora con rendimientos, volatilidad, RSI, distancia a máximos y a medias móviles.
-3. `data/snapshots/manifest.json`: qué archivos Parquet existen y sus fechas.
-4. Consultas SQL (`python -m econ.query ...`) para análisis a detalle.
+3. `data/snapshots/macro_quarterly.csv` (y `_monthly`, `_semiannual`, `_annual`): una fila por serie y una columna por periodo (24 meses, 12 trimestres, 8 semestres, 10 años), con el valor y su variación anual.
+4. `data/snapshots/manifest.json`: qué archivos Parquet existen y sus fechas.
+5. Consultas SQL (`python -m econ.query ...`) para análisis a detalle.
 
 Ver [`CLAUDE.md`](CLAUDE.md) para el diccionario de datos pensado para agentes.
 
