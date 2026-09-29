@@ -1,0 +1,80 @@
+name: Actualizar datos
+
+on:
+  schedule:
+    - cron: "30 23 * * 1-5" # lun-vie 23:30 UTC (17:30 CDMX), despues del cierre de BMV y NYSE
+    - cron: "0 12 * * 6"    # sabados: corte semanal de fundamentales
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Tarea a ejecutar
+        type: choice
+        options: [daily, backfill, prices, macro, fundamentals, snapshots]
+        default: daily
+      start:
+        description: Fecha inicial YYYY-MM-DD (solo backfill/prices; vacio = por defecto)
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Elegir tarea
+        id: task
+        env:
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_TASK: ${{ inputs.task }}
+        run: |
+          if [ "$EVENT" = "workflow_dispatch" ]; then TASK="$INPUT_TASK"
+          elif [ "$SCHEDULE" = "0 12 * * 6" ]; then TASK="fundamentals"
+          else TASK="daily"; fi
+          echo "task=$TASK" >> "$GITHUB_OUTPUT"
+
+      - name: Ejecutar pipeline
+        env:
+          TASK: ${{ steps.task.outputs.task }}
+          START: ${{ inputs.start }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BANXICO_TOKEN: ${{ secrets.BANXICO_TOKEN }}
+        run: |
+          if [ -n "$START" ]; then
+            python -m econ.pipeline "$TASK" --start "$START"
+          else
+            python -m econ.pipeline "$TASK"
+          fi
+
+      - name: Guardar datos en el repo
+        # Aunque un paso falle, se guarda lo que si se descargo (el job queda en rojo para avisar).
+        if: ${{ !cancelled() }}
+        env:
+          TASK: ${{ steps.task.outputs.task }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "Sin cambios en los datos"
+            exit 0
+          fi
+          git commit -m "data: $TASK $(date -u +%Y-%m-%d)"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
