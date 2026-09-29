@@ -9,8 +9,11 @@ El usuario interactúa por chat. Delega según el tema:
 | Tema | Agente | Atajo |
 |---|---|---|
 | Macro y mercados: tasas, inflación, Fed, Banxico, empleo, PIB, riesgo, peso, índices; cualquier periodo (hoy, ayer, semanas, meses, YTD, fechas) o "ponme al día" | `analista-macro` (`.claude/agents/analista-macro.md`) | `/macro <pregunta>` |
+| Gráficas, tableros, reportes visuales o artifacts para mostrar resultados | `presentador` (`.claude/agents/presentador.md`) | `/presenta <qué ver>` |
 
 Muestra la respuesta del agente completa. Para preguntas que crucen temas, consulta a cada agente y luego integra.
+
+Cuando pidan gráficas o un artifact: si también piden análisis, obtenlo primero del analista; luego pásalo al `presentador`, que devuelve `out/<nombre>.html`. Publícalo con la herramienta Artifact (`icon: "chart"` la primera vez; la misma ruta para actualizar el mismo enlace). Nunca escribas HTML/CSS de reportes a mano: el estilo es fijo y vive en `econ/present/assets/` (TradingView oscuro / terminal Bloomberg).
 
 ## Cómo ponerte al día (de menos a más tokens)
 
@@ -28,6 +31,7 @@ Muestra la respuesta del agente completa. Para preguntas que crucen temas, consu
 5. `data/snapshots/manifest.json`: rango de fechas, archivos Parquet y `health` (tickers/series sin datos).
 6. Consultas macro por periodo: `python -m econ.macro panel | change --period <p> | series <ids> --freq <D|W|M|Q|S|A> | list` (incluye índices y FX de mercado).
 7. SQL con DuckDB: `python -m econ.query "<SQL>"` (ver `python -m econ.query --tables` y `sql/`).
+8. Visualizaciones: `python -m econ.present <spec.json>` genera un artifact HTML interactivo (ver `.claude/agents/presentador.md`).
 
 ## Tablas SQL
 
@@ -37,6 +41,7 @@ Muestra la respuesta del agente completa. Para preguntas que crucen temas, consu
 - `macro_monthly`, `macro_quarterly`, `macro_semiannual`, `macro_annual(source, series_id, name, category, units, frequency, agg, period, period_label, is_partial, n_obs, value, last, avg, min, max, chg_prev, pct_prev, chg_yoy, pct_yoy)`
 - `fundamentals(date, ticker, shortName, sector, industry, marketCap, trailingPE, forwardPE, priceToBook, enterpriseToEbitda, dividendYield, returnOnEquity, profitMargins, debtToEquity, revenueGrowth, earningsGrowth, freeCashflow, ...)`; `fundamentals_latest`
 - `universe(ticker, market, asset_type, name, ref_ticker)`
+- `market_snapshot`, `macro_snapshot`: los CSV de `data/snapshots/` como tablas (una fila por ticker / serie)
 
 ## Reglas
 
@@ -47,4 +52,5 @@ Muestra la respuesta del agente completa. Para preguntas que crucen temas, consu
 ## Desarrollo
 
 - `python -m pytest -q` antes de hacer commit.
-- Código en `econ/`: `sources/` (descarga), `storage.py` (Parquet particionado con upsert), `pipeline.py` (CLI), `snapshots.py`, `query.py`.
+- Código en `econ/`: `sources/` (descarga), `storage.py` (Parquet particionado con upsert), `pipeline.py` (CLI), `snapshots.py`, `query.py`, `macro.py` (consultas por periodo), `present/` (artifacts).
+- El estilo visual solo se cambia en `econ/present/assets/` y aplica a todos los reportes; la paleta de series está validada para daltonismo y contraste sobre el panel `#131722`.

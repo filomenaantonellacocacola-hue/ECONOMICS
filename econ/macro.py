@@ -184,7 +184,7 @@ def _value_at(g: pd.DataFrame, when: pd.Timestamp, strict: bool = False) -> tupl
     return row["date"], row["value"]
 
 
-def panel(obs: pd.DataFrame, meta: pd.DataFrame, as_of: date) -> pd.DataFrame:
+def panel(obs: pd.DataFrame, meta: pd.DataFrame, as_of: date, decimals: int | None = 3) -> pd.DataFrame:
     """Ultimo dato a ``as_of`` y cambios contra dato previo, 1 semana, 1 mes, YTD y 1 anio."""
     t = pd.Timestamp(as_of)
     rows = []
@@ -205,10 +205,10 @@ def panel(obs: pd.DataFrame, meta: pd.DataFrame, as_of: date) -> pd.DataFrame:
             "date": d.date().isoformat(), "value": v, "d_prev": _delta(v, prev, m.units),
             **{k: _delta(v, ref, m.units) for k, ref in refs.items()}, "tipo": _kind(m.units),
         })
-    return _round(pd.DataFrame(rows))
+    return _round(pd.DataFrame(rows), decimals)
 
 
-def change(obs: pd.DataFrame, meta: pd.DataFrame, start: date, end: date) -> pd.DataFrame:
+def change(obs: pd.DataFrame, meta: pd.DataFrame, start: date, end: date, decimals: int | None = 3) -> pd.DataFrame:
     """Cambio de cada serie en [start, end]: ultimo dato antes del periodo vs ultimo dato del periodo."""
     t0, t1 = pd.Timestamp(start), pd.Timestamp(end)
     rows = []
@@ -230,10 +230,11 @@ def change(obs: pd.DataFrame, meta: pd.DataFrame, start: date, end: date) -> pd.
             # Sin observaciones dentro del periodo: el "fin" es el ultimo dato previo publicado.
             "sin_datos_en_periodo": len(within) == 0,
         })
-    return _round(pd.DataFrame(rows))
+    return _round(pd.DataFrame(rows), decimals)
 
 
-def series(obs: pd.DataFrame, meta: pd.DataFrame, start: date, end: date, freq: str) -> pd.DataFrame:
+def series(obs: pd.DataFrame, meta: pd.DataFrame, start: date, end: date, freq: str,
+           decimals: int | None = 3) -> pd.DataFrame:
     """Evolucion de una o varias series en frecuencia D, W (cierre semanal), M, Q, S o A."""
     t0, t1 = pd.Timestamp(start), pd.Timestamp(end)
     keys = set(zip(meta["source"], meta["series_id"]))
@@ -251,7 +252,7 @@ def series(obs: pd.DataFrame, meta: pd.DataFrame, start: date, end: date, freq: 
               AND period + INTERVAL {query.MACRO_AGG_VIEWS[AGG_VIEWS[freq]][0]} MONTH > DATE '{t0.date()}'
             ORDER BY series_id, period
         """).df()
-        return _round(df)
+        return _round(df, decimals)
 
     rows = []
     for m in meta.itertuples():
@@ -265,14 +266,15 @@ def series(obs: pd.DataFrame, meta: pd.DataFrame, start: date, end: date, freq: 
             rows.append({"series_id": m.series_id, "name": m.name, "units": m.units,
                          "date": d.date().isoformat(), "value": v,
                          "cambio": _delta(v, prev[d], m.units), "tipo": _kind(m.units)})
-    return _round(pd.DataFrame(rows))
+    return _round(pd.DataFrame(rows), decimals)
 
 
-def _round(df: pd.DataFrame) -> pd.DataFrame:
-    if df.empty:
+def _round(df: pd.DataFrame, decimals: int | None = 3) -> pd.DataFrame:
+    """Redondea para mostrar en terminal; ``decimals=None`` conserva la precision (graficas)."""
+    if df.empty or decimals is None:
         return df
     num = df.select_dtypes("number").columns.drop("n_obs", errors="ignore")
-    df[num] = df[num].round(3)
+    df[num] = df[num].round(decimals)
     return df
 
 
