@@ -4,6 +4,8 @@ Genera en ``data/snapshots/``:
 
 - ``market_snapshot.csv``: una fila por emisora con rendimientos, volatilidad y tendencia.
 - ``macro_snapshot.csv``: ultimo dato de cada serie macro y su cambio.
+- ``macro_monthly.csv``, ``macro_quarterly.csv``, ``macro_semiannual.csv``, ``macro_annual.csv``:
+  tablas anchas (una fila por serie, una columna por periodo) con el valor y el cambio % anual.
 - ``briefing.md``: resumen de una pagina (macro + mercado + movers).
 - ``manifest.json``: que datos hay, fechas, archivos y salud del pipeline.
 """
@@ -16,10 +18,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from econ import config, storage
+from econ import config, query, storage
 
 WINDOWS = {"chg_1d": 1, "chg_1w": 5, "chg_1m": 21, "chg_3m": 63, "chg_6m": 126, "chg_1y": 252}
-LEVEL_UNITS_PREFIXES = ("indice", "miles", "millones", "personas")
+# Periodos recientes que se incluyen en cada tabla macro agregada.
+MACRO_AGG_PERIODS = {"macro_monthly": 24, "macro_quarterly": 12, "macro_semiannual": 8, "macro_annual": 10}
 
 
 def _rsi(series: pd.Series, period: int = 14) -> float:
@@ -98,11 +101,44 @@ def macro_snapshot(macro: pd.DataFrame, series: pd.DataFrame) -> pd.DataFrame:
     meta = series[["source", "series_id", "name", "category", "units", "frequency"]]
     snap = meta.merge(snap, on=["source", "series_id"], how="inner")
     # El % anual solo tiene sentido para niveles/indices, no para tasas en %.
-    is_level = snap["units"].str.startswith(LEVEL_UNITS_PREFIXES)
-    snap.loc[~is_level, "pct_1y"] = np.nan
+    snap.loc[snap["units"].isin(query.NO_PCT_UNITS), "pct_1y"] = np.nan
     num = snap.select_dtypes("number").columns
     snap[num] = snap[num].round(3)
     return snap
+
+
+def macro_agg_snapshot(con, view: str, periods: int, series: pd.DataFrame) -> pd.DataFrame:
+    """Tabla ancha de los ultimos ``periods`` periodos de una vista macro agregada.
+
+    Cada serie tiene una fila ``metric = value``; las series de niveles/indices tienen ademas
+    ``metric = pct_yoy`` (cambio % contra el mismo periodo del anio anterior, p.ej. inflacion).
+    La columna ``partial`` lista los periodos que aun no estan completos.
+    """
+    df = con.execute(f"""
+        SELECT source, series_id, name, units, agg, period, period_label, is_partial, value, pct_yoy
+        FROM {view}
+        QUALIFY row_number() OVER (PARTITION BY source, series_id ORDER BY period DESC) <= {periods}
+    """).df()
+    if df.empty:
+        return pd.DataFrame()
+    keys = ["source", "series_id", "name", "units", "agg"]
+    levels = df[~df["units"].isin(query.NO_PCT_UNITS)]
+    long = pd.concat([
+        df.assign(metric="value", x=df["value"]),
+        levels.assign(metric="pct_yoy", x=levels["pct_yoy"]),
+    ])
+    wide = long.pivot(index=[*keys, "metric"], columns="period_label", values="x").round(3)
+    wide = wide[sorted(wide.columns)].reset_index()
+    wide.columns.name = None
+    partial = (
+        df[df["is_partial"]].sort_values("period").groupby(["source", "series_id"])["period_label"]
+        .agg(" ".join).rename("partial").reset_index()
+    )
+    wide = wide.merge(partial, on=["source", "series_id"], how="left")
+    # Mismo orden que config/macro_series.csv, con value antes de pct_yoy.
+    order = {(r.source, r.series_id): i for i, r in enumerate(series.itertuples())}
+    wide["_o"] = [order.get(k, len(order)) for k in zip(wide["source"], wide["series_id"])]
+    return wide.sort_values(["_o", "metric"], ascending=[True, False]).drop(columns="_o").reset_index(drop=True)
 
 
 def _md_table(df: pd.DataFrame) -> str:
@@ -187,6 +223,12 @@ def build(data_dir: Path | None = None, out_dir: Path | None = None) -> dict:
         market.to_csv(out_dir / "market_snapshot.csv", index=False)
     if not macro_snap.empty:
         macro_snap.to_csv(out_dir / "macro_snapshot.csv", index=False)
+    if not macro.empty:
+        con = query.connect(data_dir=data_dir)
+        for view, periods in MACRO_AGG_PERIODS.items():
+            agg = macro_agg_snapshot(con, view, periods, series)
+            if not agg.empty:
+                agg.to_csv(out_dir / f"{view}.csv", index=False)
     (out_dir / "briefing.md").write_text(briefing(market, macro_snap, generated_at))
 
     manifest = {
@@ -197,6 +239,7 @@ def build(data_dir: Path | None = None, out_dir: Path | None = None) -> dict:
             "fundamentals": _dataset_summary(fundamentals, data_dir / "fundamentals", "ticker"),
         },
         "health": health(prices, macro, universe, series),
+        "snapshots": sorted(p.name for p in out_dir.iterdir() if p.name != "manifest.json"),
     }
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
     return manifest

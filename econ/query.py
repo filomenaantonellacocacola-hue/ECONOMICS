@@ -42,6 +42,80 @@ DERIVED_VIEWS = {
     """),
 }
 
+# Unidades en las que un cambio % no tiene sentido (se reporta el cambio absoluto).
+NO_PCT_UNITS = ("pct", "desv_std")
+
+# Vistas macro agregadas: nombre -> (meses por periodo, inicio de periodo, etiqueta).
+MACRO_AGG_VIEWS = {
+    "macro_monthly": (1, "date_trunc('month', m.date)", "strftime(v.period, '%Y-%m')"),
+    "macro_quarterly": (3, "date_trunc('quarter', m.date)", "year(v.period) || '-Q' || quarter(v.period)"),
+    "macro_semiannual": (
+        6,
+        "make_date(year(m.date), CASE WHEN month(m.date) <= 6 THEN 1 ELSE 7 END, 1)",
+        "year(v.period) || '-S' || CASE WHEN month(v.period) = 1 THEN 1 ELSE 2 END",
+    ),
+    "macro_annual": (12, "date_trunc('year', m.date)", "CAST(year(v.period) AS VARCHAR)"),
+}
+
+
+def macro_agg_sql(months: int, period_expr: str, label_expr: str) -> str:
+    """SQL que agrega ``macro`` a periodos de ``months`` meses.
+
+    - ``value`` usa la regla ``agg`` de ``config/macro_series.csv`` (``avg`` o ``last``).
+    - Se omiten series cuya frecuencia nativa es mas gruesa que el periodo (p.ej. PIB en mensual).
+    - ``is_partial`` marca periodos que aun no tienen todos sus datos publicados.
+    - ``chg_*`` son cambios absolutos; ``pct_*`` son cambios % (solo para niveles e indices).
+    """
+    no_pct = ", ".join(f"'{u}'" for u in NO_PCT_UNITS)
+    return f"""
+        WITH s AS (
+            SELECT source, series_id, name, category, units, frequency,
+                   coalesce(nullif(agg, ''), 'avg') AS agg,
+                   CASE frequency WHEN 'Q' THEN 3 WHEN 'M' THEN 1 ELSE 0 END AS native_months
+            FROM macro_series
+        ),
+        cov AS (
+            SELECT source, series_id, CAST(max(date) AS DATE) AS last_date FROM macro GROUP BY ALL
+        ),
+        g AS (
+            SELECT m.source, m.series_id, CAST({period_expr} AS DATE) AS period,
+                   arg_max(m.value, m.date) AS last, avg(m.value) AS avg,
+                   min(m.value) AS min, max(m.value) AS max, count(*) AS n_obs
+            FROM macro m
+            GROUP BY ALL
+        ),
+        v AS (
+            SELECT g.*, s.name, s.category, s.units, s.frequency, s.agg,
+                   CASE WHEN s.agg = 'last' THEN g.last ELSE g.avg END AS value,
+                   CAST(g.period + INTERVAL {months} MONTH - INTERVAL 1 DAY AS DATE) > CASE s.frequency
+                       WHEN 'Q' THEN CAST(date_trunc('quarter', c.last_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY AS DATE)
+                       WHEN 'M' THEN last_day(c.last_date)
+                       WHEN 'W' THEN CAST(c.last_date + INTERVAL 6 DAY AS DATE)
+                       ELSE c.last_date
+                   END AS is_partial
+            FROM g
+            JOIN s USING (source, series_id)
+            JOIN cov c USING (source, series_id)
+            WHERE s.native_months <= {months}
+        )
+        SELECT v.source, v.series_id, v.name, v.category, v.units, v.frequency, v.agg,
+               v.period, {label_expr} AS period_label, v.is_partial, v.n_obs,
+               v.value, v.last, v.avg, v.min, v.max,
+               v.value - lag(v.value) OVER w AS chg_prev,
+               CASE WHEN v.units NOT IN ({no_pct}) THEN 100 * (v.value / lag(v.value) OVER w - 1) END AS pct_prev,
+               v.value - y.value AS chg_yoy,
+               CASE WHEN v.units NOT IN ({no_pct}) THEN 100 * (v.value / y.value - 1) END AS pct_yoy
+        FROM v
+        LEFT JOIN v y
+          ON y.source = v.source AND y.series_id = v.series_id
+         AND y.period = CAST(v.period - INTERVAL 1 YEAR AS DATE)
+        WINDOW w AS (PARTITION BY v.source, v.series_id ORDER BY v.period)
+    """
+
+
+for _name, _spec in MACRO_AGG_VIEWS.items():
+    DERIVED_VIEWS[_name] = ("macro", macro_agg_sql(*_spec))
+
 
 def connect(data_dir: Path | None = None, config_dir: Path | None = None) -> duckdb.DuckDBPyConnection:
     data_dir = Path(data_dir or config.DATA_DIR)
