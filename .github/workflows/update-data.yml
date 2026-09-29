@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       task:
-        description: Tarea a ejecutar
+        description: Tarea a ejecutar (backfill = historico + macro + limpieza de tickers fuera del universo)
         type: choice
         options: [daily, backfill, prices, macro, fundamentals, snapshots]
         default: daily

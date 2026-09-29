@@ -106,17 +106,22 @@ def download_prices(
     return pd.concat(frames, ignore_index=True)
 
 
-def download_fundamentals(tickers: list[str], pause: float = 0.5) -> pd.DataFrame:
-    """Descarga un corte de fundamentales (``Ticker.info``) por emisora."""
+def download_fundamentals(symbols: dict[str, str], pause: float = 0.5) -> pd.DataFrame:
+    """Descarga un corte de fundamentales (``Ticker.info``) por emisora.
+
+    ``symbols`` mapea el ticker con el que se guarda -> el simbolo que se consulta en Yahoo.
+    Para el SIC se consulta el ticker de origen (p.ej. ``AAPL`` para ``AAPL.MX``), porque
+    en la replica ``.MX`` los multiplos mezclan precio en pesos con utilidades en dolares.
+    """
     import yfinance as yf
 
     today = datetime.now(timezone.utc).date()
     rows = []
-    for ticker in tickers:
+    for ticker, symbol in symbols.items():
         try:
-            info = yf.Ticker(ticker).info or {}
+            info = yf.Ticker(symbol).info or {}
         except Exception as exc:  # noqa: BLE001
-            log.warning("Fundamentales de %s fallaron: %s", ticker, exc)
+            log.warning("Fundamentales de %s (%s) fallaron: %s", ticker, symbol, exc)
             continue
         row = {"date": pd.Timestamp(today), "ticker": ticker}
         row.update({field: info.get(field) for field in FUNDAMENTAL_FIELDS})

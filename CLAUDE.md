@@ -14,7 +14,7 @@ Repo de datos financieros y macro (BMV, SIC, FRED, Banxico) que GitHub Actions a
    - `partial` lista los periodos incompletos; no los compares como si fueran definitivos.
 4. `data/snapshots/market_snapshot.csv`: una fila por ticker: `ticker, market, asset_type, name, date, close, chg_1d, chg_1w, chg_1m, chg_3m, chg_6m, chg_1y, chg_ytd, pct_from_52w_high, pct_from_52w_low, vol_30d, vs_sma50, vs_sma200, rsi14, avg_vol_20d`.
    - Todos los `chg_*`, `pct_*`, `vs_*` y `vol_30d` están en %. Los rendimientos usan precio ajustado (dividendos/splits).
-   - `market`: `BMV` (en MXN), `SIC` (ticker de origen, normalmente en USD), `INDEX`, `FX` (`MXN=X` = pesos por dólar).
+   - `market`: `BMV` (en MXN), `SIC` (réplica en la BMV, en MXN; `ref_ticker` = ticker de origen), `INDEX`, `FX` (`MXN=X` = pesos por dólar).
 5. `data/snapshots/manifest.json`: rango de fechas, archivos Parquet y `health` (tickers/series sin datos).
 6. SQL con DuckDB: `python -m econ.query "<SQL>"` (ver `python -m econ.query --tables` y `sql/`).
 
@@ -25,7 +25,7 @@ Repo de datos financieros y macro (BMV, SIC, FRED, Banxico) que GitHub Actions a
 - `macro(source, series_id, date, value)`; `macro_latest(...)`; catálogo `macro_series(source, series_id, name, category, units, frequency)`
 - `macro_monthly`, `macro_quarterly`, `macro_semiannual`, `macro_annual(source, series_id, name, category, units, frequency, agg, period, period_label, is_partial, n_obs, value, last, avg, min, max, chg_prev, pct_prev, chg_yoy, pct_yoy)`
 - `fundamentals(date, ticker, shortName, sector, industry, marketCap, trailingPE, forwardPE, priceToBook, enterpriseToEbitda, dividendYield, returnOnEquity, profitMargins, debtToEquity, revenueGrowth, earningsGrowth, freeCashflow, ...)`; `fundamentals_latest`
-- `universe(ticker, market, asset_type, name, mx_ticker)`
+- `universe(ticker, market, asset_type, name, ref_ticker)`
 
 ## Reglas
 

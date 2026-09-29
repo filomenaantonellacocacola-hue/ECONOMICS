@@ -116,7 +116,7 @@ def test_macro_snapshot_pct_only_for_levels():
 def test_query_views_and_build(tmp_path):
     data = tmp_path / "data"
     universe = config.load_universe()
-    prices = _prices(tickers=("WALMEX.MX", "AAPL"))
+    prices = _prices(tickers=("WALMEX.MX", "AAPL.MX"))
     storage.write_partitioned(prices, data / "prices", keys=["ticker", "date"], freq="M")
     macro = pd.DataFrame({"source": "FRED", "series_id": "DGS10",
                           "date": pd.bdate_range("2025-01-01", periods=10), "value": 4.0})
@@ -124,7 +124,7 @@ def test_query_views_and_build(tmp_path):
 
     con = query.connect(data_dir=data)
     latest = query.run("SELECT ticker, market, chg_1d FROM prices_latest ORDER BY ticker", con)
-    assert latest["ticker"].tolist() == ["AAPL", "WALMEX.MX"]
+    assert latest["ticker"].tolist() == ["AAPL.MX", "WALMEX.MX"]
     assert latest["market"].tolist() == ["SIC", "BMV"]
     m = query.run("SELECT name, value FROM macro_latest", con)
     assert m.iloc[0]["name"] == "Treasury 10 anios"
@@ -143,7 +143,10 @@ def test_universe_is_well_formed():
     u = config.load_universe()
     assert u["ticker"].is_unique
     assert set(u["market"]) <= {"BMV", "SIC", "INDEX", "FX"}
-    assert u.loc[u["market"] == "BMV", "ticker"].str.endswith(".MX").all()
+    assert u.loc[u["market"].isin(["BMV", "SIC"]), "ticker"].str.endswith(".MX").all()
+    sic = u[u["market"] == "SIC"]
+    assert (sic["ref_ticker"] != "").all()
+    assert (sic["ticker"] == sic["ref_ticker"].str.replace(r"[-.]", "", regex=True) + ".MX").all()
     s = config.load_macro_series()
     assert not s.duplicated(["source", "series_id"]).any()
     assert set(s["agg"]) <= {"avg", "last"}
@@ -159,6 +162,7 @@ def test_pipeline_daily_end_to_end(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "MACRO_DIR", data / "macro")
     monkeypatch.setattr(config, "SNAPSHOTS_DIR", data / "snapshots")
     monkeypatch.setattr(yahoo, "download_prices", lambda tickers, start: _prices(tickers=("WALMEX.MX",), days=30))
+    monkeypatch.setattr(pipeline, "tickers_without_data", lambda tickers: [])
     macro = pd.DataFrame({"source": "FRED", "series_id": "DGS10",
                           "date": pd.bdate_range("2026-01-01", periods=5), "value": 4.0})
     monkeypatch.setattr(fred, "fetch_many", lambda ids, start: (macro, []))
@@ -232,3 +236,75 @@ def test_macro_aggregated_snapshots(tmp_path):
     assert q.loc[q["series_id"] == "DFEDTARU", "metric"].tolist() == ["value"]
     m = pd.read_csv(out / "macro_monthly.csv")
     assert "GDPC1" not in set(m["series_id"])
+
+
+def test_prune_removes_tickers_and_empty_partitions(tmp_path):
+    df = _prices(tickers=("AAA.MX", "BBB"), days=40)
+    df.loc[(df["ticker"] == "BBB") & (df["date"] < "2025-02-01"), "ticker"] = "OLD"
+    storage.write_partitioned(df[df["ticker"] != "BBB"], tmp_path, keys=["ticker", "date"], freq="M")
+    storage.write_partitioned(df[df["ticker"] == "BBB"], tmp_path, keys=["ticker", "date"], freq="M")
+    changed = storage.prune(tmp_path, "ticker", {"AAA.MX", "BBB"})
+    assert [p.parent.name for p in changed] == ["2025-01"]
+    assert set(storage.read_dataset(tmp_path)["ticker"]) == {"AAA.MX", "BBB"}
+    storage.prune(tmp_path, "ticker", {"BBB"})
+    assert not (tmp_path / "2025-01").exists()  # solo tenia AAA.MX
+    assert set(storage.read_dataset(tmp_path)["ticker"]) == {"BBB"}
+
+
+def _patch_dirs(monkeypatch, data):
+    for attr, sub in [("DATA_DIR", ""), ("PRICES_DIR", "prices"), ("MACRO_DIR", "macro"),
+                      ("FUNDAMENTALS_DIR", "fundamentals"), ("SNAPSHOTS_DIR", "snapshots")]:
+        monkeypatch.setattr(config, attr, data / sub if sub else data)
+
+
+def test_daily_backfills_new_tickers_from_existing_history_start(tmp_path, monkeypatch):
+    from econ import pipeline
+
+    _patch_dirs(monkeypatch, tmp_path / "data")
+    universe = pd.DataFrame({"ticker": ["OLD.MX", "NEW.MX"], "market": "BMV", "asset_type": "stock",
+                             "name": ["Old", "New"], "ref_ticker": ""})
+    monkeypatch.setattr(config, "load_universe", lambda: universe)
+    history = _prices(tickers=("OLD.MX",), days=60)  # arranca 2025-01-01
+    storage.write_partitioned(history, config.PRICES_DIR, keys=["ticker", "date"], freq="M")
+
+    calls = []
+    def fake_download(tickers, start):
+        calls.append((sorted(tickers), start))
+        return _prices(tickers=tuple(tickers), days=5)
+    monkeypatch.setattr(yahoo, "download_prices", fake_download)
+
+    pipeline.update_daily_prices("2026-09-20")
+    assert calls == [(["NEW.MX", "OLD.MX"], "2026-09-20"), (["NEW.MX"], "2025-01-01")]
+    assert pipeline.tickers_without_data(["OLD.MX", "NEW.MX"]) == []
+
+
+def test_backfill_prunes_and_fundamentals_use_ref_ticker(tmp_path, monkeypatch):
+    from econ import pipeline
+
+    _patch_dirs(monkeypatch, tmp_path / "data")
+    universe = pd.DataFrame({
+        "ticker": [f"T{i}.MX" for i in range(10)] + ["AAPL.MX", "SPY.MX"],
+        "market": ["BMV"] * 10 + ["SIC", "SIC"],
+        "asset_type": ["stock"] * 11 + ["etf"],
+        "name": "x",
+        "ref_ticker": [""] * 10 + ["AAPL", "SPY"],
+    })
+    monkeypatch.setattr(config, "load_universe", lambda: universe)
+    storage.write_partitioned(_prices(tickers=("T0.MX", "AAPL")), config.PRICES_DIR,
+                              keys=["ticker", "date"], freq="M")
+    pipeline.prune_to_universe()
+    assert set(storage.read_dataset(config.PRICES_DIR)["ticker"]) == {"T0.MX"}
+
+    seen = {}
+    def fake_fundamentals(symbols):
+        seen.update(symbols)
+        return yahoo.fundamentals_frame([{"date": "2026-09-26", "ticker": t} for t in symbols])
+    monkeypatch.setattr(yahoo, "download_fundamentals", fake_fundamentals)
+    pipeline.update_fundamentals()
+    assert seen["AAPL.MX"] == "AAPL" and seen["T3.MX"] == "T3.MX" and "SPY.MX" not in seen
+
+
+def test_health_reports_missing_macro_when_empty():
+    series = config.load_macro_series()
+    h = snapshots.health(pd.DataFrame(), pd.DataFrame(), config.load_universe(), series)
+    assert len(h["macro_missing"]) == len(series)
