@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-09-29 06:31 (UTC)
+Generado: 2026-09-29 06:38 (UTC)
 
 ## Macro
 
@@ -81,7 +81,7 @@ Generado: 2026-09-29 06:31 (UTC)
 | ALPEKA.MX | Alpek | 14.90 | -1.00 | 22.23 | 61.26 | 69.40 |
 
 
-## SIC (257 emisoras, 61% sobre su media de 200 dias)
+## SIC (289 emisoras, 60% sobre su media de 200 dias)
 
 
 **Mayores alzas del dia**
@@ -101,6 +101,6 @@ Generado: 2026-09-29 06:31 (UTC)
 |---|---|---|---|---|---|---|
 | MDB.MX | MongoDB | 6,047.20 | -17.84 | -19.48 | -20.01 | 37.88 |
 | ZS.MX | Zscaler | 3,401.01 | -10.15 | 19.27 | -16.48 | 57.18 |
+| ARMN.MX | Arm Holdings | 5,092.38 | -8.97 | 17.07 | 155.19 | 54.82 |
+| NUN.MX | Nu Holdings | 220.21 | -8.59 | -12.80 | -27.03 | 32.03 |
 | RBLX.MX | Roblox | 756.83 | -8.23 | 19.48 | -49.04 | 47.34 |
-| BA.MX | Boeing | 3,327.73 | -5.74 | -6.71 | -15.04 | 33.25 |
-| INTC.MX | Intel | 2,078.16 | -4.77 | 33.88 | 210.90 | 63.10 |

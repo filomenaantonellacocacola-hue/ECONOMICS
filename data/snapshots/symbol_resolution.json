@@ -1,0 +1,111 @@
+{
+  "resolved": {
+    "MRVL.MX": {
+      "ticker": "MRVL1.MX",
+      "price_ratio": 0.999
+    },
+    "ARM.MX": {
+      "ticker": "ARMN.MX",
+      "price_ratio": 1.004
+    },
+    "SHOP.MX": {
+      "ticker": "SHOPN.MX",
+      "price_ratio": 1.002
+    },
+    "KKR.MX": {
+      "ticker": "KKRC.MX",
+      "price_ratio": 1.013
+    },
+    "OXY.MX": {
+      "ticker": "OXY1.MX",
+      "price_ratio": 1.002
+    },
+    "STLA.MX": {
+      "ticker": "STLAN.MX",
+      "price_ratio": 1.007
+    },
+    "AA.MX": {
+      "ticker": "AA1.MX",
+      "price_ratio": 1.009
+    },
+    "DOW.MX": {
+      "ticker": "DOW1.MX",
+      "price_ratio": 0.992
+    },
+    "PDD.MX": {
+      "ticker": "PDDN.MX",
+      "price_ratio": 1.0
+    },
+    "JD.MX": {
+      "ticker": "JDN.MX",
+      "price_ratio": 0.999
+    },
+    "BIDU.MX": {
+      "ticker": "BIDUN.MX",
+      "price_ratio": 1.003
+    },
+    "NIO.MX": {
+      "ticker": "NION.MX",
+      "price_ratio": 1.003
+    },
+    "SAP.MX": {
+      "ticker": "SAPN.MX",
+      "price_ratio": 0.993
+    },
+    "SONY.MX": {
+      "ticker": "SONYN.MX",
+      "price_ratio": 1.0
+    },
+    "NVO.MX": {
+      "ticker": "NVON.MX",
+      "price_ratio": 1.001
+    },
+    "BP.MX": {
+      "ticker": "BPN.MX",
+      "price_ratio": 0.981
+    },
+    "BHP.MX": {
+      "ticker": "BHPN.MX",
+      "price_ratio": 1.005
+    },
+    "RIO.MX": {
+      "ticker": "RION.MX",
+      "price_ratio": 1.008
+    },
+    "VALE.MX": {
+      "ticker": "VALEN.MX",
+      "price_ratio": 1.002
+    },
+    "ITUB.MX": {
+      "ticker": "ITUBN.MX",
+      "price_ratio": 0.905
+    },
+    "NU.MX": {
+      "ticker": "NUN.MX",
+      "price_ratio": 1.001
+    },
+    "SE.MX": {
+      "ticker": "SEN.MX",
+      "price_ratio": 1.003
+    }
+  },
+  "mismatch": {
+    "SHEL.MX": {
+      "SHELN.MX": 0.482
+    }
+  },
+  "not_found": [
+    "NOW.MX",
+    "CCL.MX",
+    "EA.MX",
+    "BK.MX",
+    "ETN.MX",
+    "WM.MX",
+    "LIN.MX",
+    "AZN.MX",
+    "ARKK.MX",
+    "USO.MX",
+    "IBIT.MX",
+    "ETHA.MX"
+  ]
+}

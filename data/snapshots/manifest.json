@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-09-29 06:31",
+  "generated_at_utc": "2026-09-29 06:38",
   "datasets": {
     "prices": {
-      "rows": 525540,
-      "ids": 330,
+      "rows": 577349,
+      "ids": 362,
       "min_date": "2020-01-01",
       "max_date": "2026-09-29",
       "files": [
@@ -126,8 +126,8 @@
       ]
     },
     "fundamentals": {
-      "rows": 295,
-      "ids": 295,
+      "rows": 263,
+      "ids": 263,
       "min_date": "2026-09-29",
       "max_date": "2026-09-29",
       "files": [
@@ -137,50 +137,18 @@
   },
   "health": {
     "tickers_missing": [
-      "AA.MX",
-      "ACN.MX",
       "ARKK.MX",
-      "ARM.MX",
-      "ASML.MX",
       "AZN.MX",
-      "BABA.MX",
-      "BHP.MX",
-      "BIDU.MX",
       "BK.MX",
-      "BP.MX",
       "CCL.MX",
       "CTALPEKA.MX",
-      "DELL.MX",
-      "DOW.MX",
       "EA.MX",
       "ETHA.MX",
       "ETN.MX",
       "IBIT.MX",
-      "ITUB.MX",
-      "JD.MX",
-      "KKR.MX",
-      "MDT.MX",
-      "MELI.MX",
-      "MRVL.MX",
-      "NIO.MX",
       "NOW.MX",
-      "NU.MX",
-      "NVO.MX",
-      "OXY.MX",
-      "PBR.MX",
-      "PDD.MX",
-      "RIO.MX",
-      "SAP.MX",
-      "SE.MX",
       "SHEL.MX",
-      "SHOP.MX",
-      "SLB.MX",
-      "SONY.MX",
-      "SPOT.MX",
-      "STLA.MX",
-      "TSM.MX",
       "USO.MX",
-      "VALE.MX",
       "WM.MX"
     ],
     "tickers_stale": [
@@ -195,6 +163,7 @@
     "macro_quarterly.csv",
     "macro_semiannual.csv",
     "macro_snapshot.csv",
-    "market_snapshot.csv"
+    "market_snapshot.csv",
+    "symbol_resolution.json"
   ]
 }
