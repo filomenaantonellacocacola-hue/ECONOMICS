@@ -71,6 +71,26 @@ def _same(existing: pd.DataFrame, merged: pd.DataFrame, keys: list[str]) -> bool
     return True
 
 
+def prune(root: Path, column: str, keep: set[str]) -> list[Path]:
+    """Elimina de todas las particiones las filas cuyo ``column`` no este en ``keep``.
+
+    Borra las particiones que queden vacias. Devuelve los archivos modificados.
+    """
+    changed = []
+    for path in sorted(Path(root).glob(f"*/{FILE_NAME}")):
+        df = pd.read_parquet(path)
+        kept = df[df[column].isin(keep)]
+        if len(kept) == len(df):
+            continue
+        if kept.empty:
+            path.unlink()
+            path.parent.rmdir()
+        else:
+            kept.reset_index(drop=True).to_parquet(path, index=False)
+        changed.append(path)
+    return changed
+
+
 def read_dataset(root: Path) -> pd.DataFrame:
     files = sorted(Path(root).glob(f"*/{FILE_NAME}"))
     if not files:

@@ -2,7 +2,7 @@
 
 Base de datos financiera y macroeconómica que se actualiza sola con GitHub Actions y se consulta con SQL, parecido a BigQuery pero gratis y dentro de este repo.
 
-- **Mercado**: precios **diarios** (OHLCV) de emisoras de la **BMV**, del **SIC** (acciones y ETFs extranjeros), índices y tipos de cambio, desde Yahoo Finance.
+- **Mercado**: precios **diarios** (OHLCV) de emisoras de la **BMV** y del **SIC** (acciones y ETFs extranjeros), todo en pesos (`.MX`), más índices y tipos de cambio, desde Yahoo Finance.
 - **Macro EE.UU.**: tasas de la Fed, curva de Treasuries, inflación, empleo, actividad, riesgo, desde **FRED**.
 - **Macro México**: tasa objetivo, TIIE, CETES, tipo de cambio FIX e INPC, desde **Banxico (SIE)**.
 - **Fundamentales**: corte semanal de valuación y rentabilidad (P/U, P/VL, EV/EBITDA, ROE, deuda…).
@@ -38,7 +38,7 @@ Los datos se particionan por mes/año y solo se reescriben las particiones que c
    - `FRED_API_KEY`: https://fred.stlouisfed.org/docs/api/api_key.html (sin ella se usa el CSV público de FRED, menos estable).
    - `BANXICO_TOKEN`: https://www.banxico.org.mx/SieAPIRest/service/v1/token (sin él se omiten las series de Banxico).
 2. **Fusiona esta rama a `main`**: los workflows programados solo corren desde la rama por defecto.
-3. **Carga el histórico**: *Actions → Actualizar datos → Run workflow* con `task = backfill` (por defecto desde 2015-01-01), y después una vez con `task = fundamentals`.
+3. **Carga el histórico**: *Actions → Actualizar datos → Run workflow* con `task = backfill` (por defecto desde 2015-01-01), y después una vez con `task = fundamentals`. `backfill` descarga precios y macro, y además borra de `data/` los tickers que ya no estén en `config/universe.csv`.
 4. Desde ese momento corre solo:
    - Lunes a viernes 23:30 UTC: precios de los últimos 10 días + macro + snapshots.
    - Sábados: fundamentales.
@@ -103,8 +103,9 @@ python -m econ.query "SELECT * FROM macro_annual WHERE series_id = 'CPIAUCSL'" -
 ## Notas sobre el universo
 
 - **BMV**: tickers de Yahoo con sufijo `.MX` (p.ej. `WALMEX.MX`, `GFNORTEO.MX`). Incluye emisoras del IPC, otras líquidas, FIBRAs y el NAFTRAC.
-- **SIC**: se descarga el ticker de la bolsa de origen (p.ej. `AAPL`, en USD), que tiene mejor calidad de datos que la réplica en `.MX`. El precio aproximado en pesos es `precio_usd × MXN=X`. La columna `mx_ticker` guarda la clave con la que cotiza en el SIC.
-- El SIC tiene miles de valores; el archivo arranca con ~150 de los más operados. Para agregar más, añade filas a `config/universe.csv`.
+- **SIC**: réplica en pesos que cotiza en la BMV, con sufijo `.MX` y sin guiones (`AAPL.MX`, `BRKB.MX`, `VOO.MX`). La columna `ref_ticker` guarda el ticker de la bolsa de origen (`AAPL`, `BRK-B`); se usa para los fundamentales, porque en la réplica `.MX` los múltiplos mezclarían precio en pesos con utilidades en dólares.
+- El universo incluye ~230 acciones del SIC (S&P 100, tecnológicas grandes, ADRs relevantes) y ~70 ETFs. Para agregar más, añade filas a `config/universe.csv`: la actualización diaria detecta los tickers nuevos y descarga su histórico completo sola.
+- Algunas réplicas del SIC operan poco: si un ticker no opera en México un día, ese día no tiene precio. Revisa `health.tickers_stale` en `data/snapshots/manifest.json`.
 
 ## Uso con agentes de IA
 

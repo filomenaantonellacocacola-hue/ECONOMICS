@@ -1,4 +1,4 @@
-ticker,market,asset_type,name,mx_ticker
+ticker,market,asset_type,name,ref_ticker
 ^MXX,INDEX,index,S&P/BMV IPC,
 ^GSPC,INDEX,index,S&P 500,
 ^IXIC,INDEX,index,Nasdaq Composite,
@@ -6,189 +6,371 @@ ticker,market,asset_type,name,mx_ticker
 ^VIX,INDEX,index,CBOE Volatility Index,
 MXN=X,FX,fx,USD/MXN,
 EURMXN=X,FX,fx,EUR/MXN,
-AC.MX,BMV,stock,Arca Continental,AC
-AGUA.MX,BMV,stock,Grupo Rotoplas,AGUA
-ALFAA.MX,BMV,stock,Alfa,ALFAA
-ALPEKA.MX,BMV,stock,Alpek,ALPEKA
-ALSEA.MX,BMV,stock,Alsea,ALSEA
-AMXB.MX,BMV,stock,America Movil,AMXB
-ARA.MX,BMV,stock,Consorcio ARA,ARA
-ASURB.MX,BMV,stock,Grupo Aeroportuario del Sureste,ASURB
-AUTLANB.MX,BMV,stock,Compania Minera Autlan,AUTLANB
-AXTELCPO.MX,BMV,stock,Axtel,AXTELCPO
-BACHOCOB.MX,BMV,stock,Industrias Bachoco,BACHOCOB
-BBAJIOO.MX,BMV,stock,Banco del Bajio,BBAJIOO
-BIMBOA.MX,BMV,stock,Grupo Bimbo,BIMBOA
-BOLSAA.MX,BMV,stock,Bolsa Mexicana de Valores,BOLSAA
-CEMEXCPO.MX,BMV,stock,Cemex,CEMEXCPO
-CHDRAUIB.MX,BMV,stock,Grupo Comercial Chedraui,CHDRAUIB
-CMOCTEZ.MX,BMV,stock,Corporacion Moctezuma,CMOCTEZ
-CUERVO.MX,BMV,stock,Becle (Jose Cuervo),CUERVO
-ELEKTRA.MX,BMV,stock,Grupo Elektra,ELEKTRA
-FEMSAUBD.MX,BMV,stock,FEMSA,FEMSAUBD
-FRAGUAB.MX,BMV,stock,Corporativo Fragua,FRAGUAB
-GAPB.MX,BMV,stock,Grupo Aeroportuario del Pacifico,GAPB
-GCARSOA1.MX,BMV,stock,Grupo Carso,GCARSOA1
-GCC.MX,BMV,stock,Grupo Cementos de Chihuahua,GCC
-GENTERA.MX,BMV,stock,Gentera,GENTERA
-GFINBURO.MX,BMV,stock,Grupo Financiero Inbursa,GFINBURO
-GFNORTEO.MX,BMV,stock,Grupo Financiero Banorte,GFNORTEO
-GISSAA.MX,BMV,stock,Grupo Industrial Saltillo,GISSAA
-GMEXICOB.MX,BMV,stock,Grupo Mexico,GMEXICOB
-GRUMAB.MX,BMV,stock,Gruma,GRUMAB
-HERDEZ.MX,BMV,stock,Grupo Herdez,HERDEZ
-HOTEL.MX,BMV,stock,Grupo Hotelero Santa Fe,HOTEL
-ICHB.MX,BMV,stock,Industrias CH,ICHB
-KIMBERA.MX,BMV,stock,Kimberly-Clark de Mexico,KIMBERA
-KOFUBL.MX,BMV,stock,Coca-Cola FEMSA,KOFUBL
-KUOB.MX,BMV,stock,Grupo KUO,KUOB
-LABB.MX,BMV,stock,Genomma Lab,LABB
-LACOMERUBC.MX,BMV,stock,La Comer,LACOMERUBC
-LIVEPOLC-1.MX,BMV,stock,El Puerto de Liverpool,LIVEPOLC-1
-MEGACPO.MX,BMV,stock,Megacable,MEGACPO
-MFRISCOA-1.MX,BMV,stock,Minera Frisco,MFRISCOA-1
-NEMAKA.MX,BMV,stock,Nemak,NEMAKA
-OMAB.MX,BMV,stock,Grupo Aeroportuario Centro Norte,OMAB
-ORBIA.MX,BMV,stock,Orbia Advance,ORBIA
-PE&OLES.MX,BMV,stock,Industrias Penoles,PE&OLES
-PINFRA.MX,BMV,stock,Promotora y Operadora de Infraestructura,PINFRA
-POCHTECB.MX,BMV,stock,Grupo Pochteca,POCHTECB
-POSADASA.MX,BMV,stock,Grupo Posadas,POSADASA
-Q.MX,BMV,stock,Qualitas Controladora,Q
-RA.MX,BMV,stock,Regional,RA
-SIMECB.MX,BMV,stock,Grupo Simec,SIMECB
-SITESB-1.MX,BMV,stock,Operadora de Sites Mexicanos,SITESB-1
-SORIANAB.MX,BMV,stock,Organizacion Soriana,SORIANAB
-TLEVISACPO.MX,BMV,stock,Grupo Televisa,TLEVISACPO
-VESTA.MX,BMV,stock,Corporacion Inmobiliaria Vesta,VESTA
-VOLARA.MX,BMV,stock,Volaris,VOLARA
-WALMEX.MX,BMV,stock,Walmart de Mexico,WALMEX
-FUNO11.MX,BMV,fibra,Fibra Uno,FUNO11
-FIBRAMQ12.MX,BMV,fibra,Fibra Macquarie,FIBRAMQ12
-FIBRAPL14.MX,BMV,fibra,Fibra Prologis,FIBRAPL14
-DANHOS13.MX,BMV,fibra,Fibra Danhos,DANHOS13
-FMTY14.MX,BMV,fibra,Fibra Monterrey,FMTY14
-FIHO12.MX,BMV,fibra,Fibra Hotel,FIHO12
-FINN13.MX,BMV,fibra,Fibra Inn,FINN13
-FNOVA17.MX,BMV,fibra,Fibra Nova,FNOVA17
-NAFTRACISHRS.MX,BMV,etf,iShares NAFTRAC (replica IPC),NAFTRACISHRS
-AAPL,SIC,stock,Apple,AAPL
-MSFT,SIC,stock,Microsoft,MSFT
-NVDA,SIC,stock,NVIDIA,NVDA
-AMZN,SIC,stock,Amazon,AMZN
-GOOGL,SIC,stock,Alphabet A,GOOGL
-META,SIC,stock,Meta Platforms,META
-TSLA,SIC,stock,Tesla,TSLA
-AVGO,SIC,stock,Broadcom,AVGO
-BRK-B,SIC,stock,Berkshire Hathaway B,BRKB
-JPM,SIC,stock,JPMorgan Chase,JPM
-V,SIC,stock,Visa,V
-MA,SIC,stock,Mastercard,MA
-LLY,SIC,stock,Eli Lilly,LLY
-UNH,SIC,stock,UnitedHealth,UNH
-JNJ,SIC,stock,Johnson & Johnson,JNJ
-PG,SIC,stock,Procter & Gamble,PG
-KO,SIC,stock,Coca-Cola,KO
-PEP,SIC,stock,PepsiCo,PEP
-WMT,SIC,stock,Walmart,WMT
-COST,SIC,stock,Costco,COST
-HD,SIC,stock,Home Depot,HD
-MCD,SIC,stock,McDonald's,MCD
-SBUX,SIC,stock,Starbucks,SBUX
-NKE,SIC,stock,Nike,NKE
-DIS,SIC,stock,Walt Disney,DIS
-NFLX,SIC,stock,Netflix,NFLX
-AMD,SIC,stock,Advanced Micro Devices,AMD
-INTC,SIC,stock,Intel,INTC
-QCOM,SIC,stock,Qualcomm,QCOM
-MU,SIC,stock,Micron,MU
-TXN,SIC,stock,Texas Instruments,TXN
-ORCL,SIC,stock,Oracle,ORCL
-CRM,SIC,stock,Salesforce,CRM
-ADBE,SIC,stock,Adobe,ADBE
-CSCO,SIC,stock,Cisco,CSCO
-IBM,SIC,stock,IBM,IBM
-PLTR,SIC,stock,Palantir,PLTR
-UBER,SIC,stock,Uber,UBER
-ABNB,SIC,stock,Airbnb,ABNB
-PYPL,SIC,stock,PayPal,PYPL
-SHOP,SIC,stock,Shopify,SHOP
-COIN,SIC,stock,Coinbase,COIN
-SNOW,SIC,stock,Snowflake,SNOW
-SPOT,SIC,stock,Spotify,SPOT
-BAC,SIC,stock,Bank of America,BAC
-WFC,SIC,stock,Wells Fargo,WFC
-C,SIC,stock,Citigroup,C
-GS,SIC,stock,Goldman Sachs,GS
-MS,SIC,stock,Morgan Stanley,MS
-AXP,SIC,stock,American Express,AXP
-BLK,SIC,stock,BlackRock,BLK
-SPGI,SIC,stock,S&P Global,SPGI
-XOM,SIC,stock,Exxon Mobil,XOM
-CVX,SIC,stock,Chevron,CVX
-ABBV,SIC,stock,AbbVie,ABBV
-MRK,SIC,stock,Merck,MRK
-PFE,SIC,stock,Pfizer,PFE
-BMY,SIC,stock,Bristol-Myers Squibb,BMY
-AMGN,SIC,stock,Amgen,AMGN
-TMO,SIC,stock,Thermo Fisher,TMO
-ISRG,SIC,stock,Intuitive Surgical,ISRG
-BA,SIC,stock,Boeing,BA
-CAT,SIC,stock,Caterpillar,CAT
-DE,SIC,stock,Deere,DE
-GE,SIC,stock,GE Aerospace,GE
-HON,SIC,stock,Honeywell,HON
-LMT,SIC,stock,Lockheed Martin,LMT
-RTX,SIC,stock,RTX,RTX
-UPS,SIC,stock,UPS,UPS
-F,SIC,stock,Ford,F
-GM,SIC,stock,General Motors,GM
-T,SIC,stock,AT&T,T
-VZ,SIC,stock,Verizon,VZ
-PM,SIC,stock,Philip Morris,PM
-NEE,SIC,stock,NextEra Energy,NEE
-LIN,SIC,stock,Linde,LIN
-BKNG,SIC,stock,Booking Holdings,BKNG
-BABA,SIC,stock,Alibaba,BABA
-TSM,SIC,stock,Taiwan Semiconductor,TSM
-ASML,SIC,stock,ASML,ASML
-NVO,SIC,stock,Novo Nordisk,NVO
-MELI,SIC,stock,MercadoLibre,MELI
-NU,SIC,stock,Nu Holdings,NU
-SPY,SIC,etf,SPDR S&P 500,SPY
-VOO,SIC,etf,Vanguard S&P 500,VOO
-IVV,SIC,etf,iShares Core S&P 500,IVV
-QQQ,SIC,etf,Invesco QQQ,QQQ
-VTI,SIC,etf,Vanguard Total Stock Market,VTI
-VT,SIC,etf,Vanguard Total World Stock,VT
-VEA,SIC,etf,Vanguard Developed Markets,VEA
-EEM,SIC,etf,iShares MSCI Emerging Markets,EEM
-IEMG,SIC,etf,iShares Core MSCI EM,IEMG
-EWW,SIC,etf,iShares MSCI Mexico,EWW
-DIA,SIC,etf,SPDR Dow Jones,DIA
-IWM,SIC,etf,iShares Russell 2000,IWM
-SCHD,SIC,etf,Schwab US Dividend Equity,SCHD
-VIG,SIC,etf,Vanguard Dividend Appreciation,VIG
-XLK,SIC,etf,Technology Select Sector SPDR,XLK
-XLF,SIC,etf,Financial Select Sector SPDR,XLF
-XLE,SIC,etf,Energy Select Sector SPDR,XLE
-XLV,SIC,etf,Health Care Select Sector SPDR,XLV
-XLI,SIC,etf,Industrial Select Sector SPDR,XLI
-XLP,SIC,etf,Consumer Staples Select Sector SPDR,XLP
-XLY,SIC,etf,Consumer Discretionary Select Sector SPDR,XLY
-XLU,SIC,etf,Utilities Select Sector SPDR,XLU
-SMH,SIC,etf,VanEck Semiconductor,SMH
-SOXX,SIC,etf,iShares Semiconductor,SOXX
-ARKK,SIC,etf,ARK Innovation,ARKK
-TLT,SIC,etf,iShares 20+ Year Treasury,TLT
-IEF,SIC,etf,iShares 7-10 Year Treasury,IEF
-SHY,SIC,etf,iShares 1-3 Year Treasury,SHY
-BND,SIC,etf,Vanguard Total Bond Market,BND
-LQD,SIC,etf,iShares Investment Grade Corporate,LQD
-HYG,SIC,etf,iShares High Yield Corporate,HYG
-GLD,SIC,etf,SPDR Gold Shares,GLD
-IAU,SIC,etf,iShares Gold Trust,IAU
-SLV,SIC,etf,iShares Silver Trust,SLV
-USO,SIC,etf,United States Oil Fund,USO
-VNQ,SIC,etf,Vanguard Real Estate,VNQ
-IBIT,SIC,etf,iShares Bitcoin Trust,IBIT
+AC.MX,BMV,stock,Arca Continental,
+AGUA.MX,BMV,stock,Grupo Rotoplas,
+SIGMAFA.MX,BMV,stock,Sigma Foods (antes Alfa),
+ALPEKA.MX,BMV,stock,Alpek,
+CTALPEKA.MX,BMV,stock,Controladora Alpek,
+ALSEA.MX,BMV,stock,Alsea,
+AMXB.MX,BMV,stock,America Movil,
+ARA.MX,BMV,stock,Consorcio ARA,
+ASURB.MX,BMV,stock,Grupo Aeroportuario del Sureste,
+AUTLANB.MX,BMV,stock,Compania Minera Autlan,
+AXTELCPO.MX,BMV,stock,Axtel,
+BBAJIOO.MX,BMV,stock,Banco del Bajio,
+BIMBOA.MX,BMV,stock,Grupo Bimbo,
+BOLSAA.MX,BMV,stock,Bolsa Mexicana de Valores,
+CEMEXCPO.MX,BMV,stock,Cemex,
+CHDRAUIB.MX,BMV,stock,Grupo Comercial Chedraui,
+CMOCTEZ.MX,BMV,stock,Corporacion Moctezuma,
+CUERVO.MX,BMV,stock,Becle (Jose Cuervo),
+FEMSAUBD.MX,BMV,stock,FEMSA,
+FRAGUAB.MX,BMV,stock,Corporativo Fragua,
+GAPB.MX,BMV,stock,Grupo Aeroportuario del Pacifico,
+GCARSOA1.MX,BMV,stock,Grupo Carso,
+GCC.MX,BMV,stock,Grupo Cementos de Chihuahua,
+GENTERA.MX,BMV,stock,Gentera,
+GFINBURO.MX,BMV,stock,Grupo Financiero Inbursa,
+GFNORTEO.MX,BMV,stock,Grupo Financiero Banorte,
+GISSAA.MX,BMV,stock,Grupo Industrial Saltillo,
+GMEXICOB.MX,BMV,stock,Grupo Mexico,
+GRUMAB.MX,BMV,stock,Gruma,
+HERDEZ.MX,BMV,stock,Grupo Herdez,
+HOTEL.MX,BMV,stock,Grupo Hotelero Santa Fe,
+ICHB.MX,BMV,stock,Industrias CH,
+KIMBERA.MX,BMV,stock,Kimberly-Clark de Mexico,
+KOFUBL.MX,BMV,stock,Coca-Cola FEMSA,
+KUOB.MX,BMV,stock,Grupo KUO,
+LABB.MX,BMV,stock,Genomma Lab,
+LACOMERUBC.MX,BMV,stock,La Comer,
+LIVEPOLC-1.MX,BMV,stock,El Puerto de Liverpool,
+MEGACPO.MX,BMV,stock,Megacable,
+MFRISCOA-1.MX,BMV,stock,Minera Frisco,
+NEMAKA.MX,BMV,stock,Nemak,
+OMAB.MX,BMV,stock,Grupo Aeroportuario Centro Norte,
+ORBIA.MX,BMV,stock,Orbia Advance,
+PE&OLES.MX,BMV,stock,Industrias Penoles,
+PINFRA.MX,BMV,stock,Promotora y Operadora de Infraestructura,
+POCHTECB.MX,BMV,stock,Grupo Pochteca,
+POSADASA.MX,BMV,stock,Grupo Posadas,
+Q.MX,BMV,stock,Qualitas Controladora,
+RA.MX,BMV,stock,Regional,
+SIMECB.MX,BMV,stock,Grupo Simec,
+SITES1A-1.MX,BMV,stock,Operadora de Sites Mexicanos,
+SORIANAB.MX,BMV,stock,Organizacion Soriana,
+TLEVISACPO.MX,BMV,stock,Grupo Televisa,
+VESTA.MX,BMV,stock,Corporacion Inmobiliaria Vesta,
+VOLARA.MX,BMV,stock,Volaris,
+WALMEX.MX,BMV,stock,Walmart de Mexico,
+FUNO11.MX,BMV,fibra,Fibra Uno,
+FIBRAMQ12.MX,BMV,fibra,Fibra Macquarie,
+FIBRAPL14.MX,BMV,fibra,Fibra Prologis,
+DANHOS13.MX,BMV,fibra,Fibra Danhos,
+FMTY14.MX,BMV,fibra,Fibra Monterrey,
+FIHO12.MX,BMV,fibra,Fibra Hotel,
+FINN13.MX,BMV,fibra,Fibra Inn,
+FNOVA17.MX,BMV,fibra,Fibra Nova,
+NAFTRACISHRS.MX,BMV,etf,iShares NAFTRAC (replica IPC),
+AAPL.MX,SIC,stock,Apple,AAPL
+MSFT.MX,SIC,stock,Microsoft,MSFT
+NVDA.MX,SIC,stock,NVIDIA,NVDA
+AMZN.MX,SIC,stock,Amazon,AMZN
+GOOGL.MX,SIC,stock,Alphabet A,GOOGL
+META.MX,SIC,stock,Meta Platforms,META
+TSLA.MX,SIC,stock,Tesla,TSLA
+AVGO.MX,SIC,stock,Broadcom,AVGO
+BRKB.MX,SIC,stock,Berkshire Hathaway B,BRK-B
+JPM.MX,SIC,stock,JPMorgan Chase,JPM
+V.MX,SIC,stock,Visa,V
+MA.MX,SIC,stock,Mastercard,MA
+LLY.MX,SIC,stock,Eli Lilly,LLY
+UNH.MX,SIC,stock,UnitedHealth,UNH
+JNJ.MX,SIC,stock,Johnson & Johnson,JNJ
+PG.MX,SIC,stock,Procter & Gamble,PG
+KO.MX,SIC,stock,Coca-Cola,KO
+PEP.MX,SIC,stock,PepsiCo,PEP
+WMT.MX,SIC,stock,Walmart,WMT
+COST.MX,SIC,stock,Costco,COST
+HD.MX,SIC,stock,Home Depot,HD
+LOW.MX,SIC,stock,Lowe's,LOW
+MCD.MX,SIC,stock,McDonald's,MCD
+SBUX.MX,SIC,stock,Starbucks,SBUX
+CMG.MX,SIC,stock,Chipotle,CMG
+YUM.MX,SIC,stock,Yum! Brands,YUM
+NKE.MX,SIC,stock,Nike,NKE
+LULU.MX,SIC,stock,Lululemon,LULU
+TJX.MX,SIC,stock,TJX Companies,TJX
+TGT.MX,SIC,stock,Target,TGT
+DIS.MX,SIC,stock,Walt Disney,DIS
+NFLX.MX,SIC,stock,Netflix,NFLX
+WBD.MX,SIC,stock,Warner Bros. Discovery,WBD
+CMCSA.MX,SIC,stock,Comcast,CMCSA
+CHTR.MX,SIC,stock,Charter Communications,CHTR
+T.MX,SIC,stock,AT&T,T
+VZ.MX,SIC,stock,Verizon,VZ
+TMUS.MX,SIC,stock,T-Mobile US,TMUS
+AMD.MX,SIC,stock,Advanced Micro Devices,AMD
+INTC.MX,SIC,stock,Intel,INTC
+QCOM.MX,SIC,stock,Qualcomm,QCOM
+MU.MX,SIC,stock,Micron,MU
+TXN.MX,SIC,stock,Texas Instruments,TXN
+ADI.MX,SIC,stock,Analog Devices,ADI
+AMAT.MX,SIC,stock,Applied Materials,AMAT
+LRCX.MX,SIC,stock,Lam Research,LRCX
+KLAC.MX,SIC,stock,KLA,KLAC
+MRVL.MX,SIC,stock,Marvell Technology,MRVL
+ARM.MX,SIC,stock,Arm Holdings,ARM
+SMCI.MX,SIC,stock,Super Micro Computer,SMCI
+DELL.MX,SIC,stock,Dell Technologies,DELL
+HPQ.MX,SIC,stock,HP Inc,HPQ
+ANET.MX,SIC,stock,Arista Networks,ANET
+VRT.MX,SIC,stock,Vertiv,VRT
+ORCL.MX,SIC,stock,Oracle,ORCL
+CRM.MX,SIC,stock,Salesforce,CRM
+ADBE.MX,SIC,stock,Adobe,ADBE
+NOW.MX,SIC,stock,ServiceNow,NOW
+INTU.MX,SIC,stock,Intuit,INTU
+WDAY.MX,SIC,stock,Workday,WDAY
+ADSK.MX,SIC,stock,Autodesk,ADSK
+SNPS.MX,SIC,stock,Synopsys,SNPS
+CDNS.MX,SIC,stock,Cadence Design,CDNS
+CSCO.MX,SIC,stock,Cisco,CSCO
+IBM.MX,SIC,stock,IBM,IBM
+ACN.MX,SIC,stock,Accenture,ACN
+PLTR.MX,SIC,stock,Palantir,PLTR
+PANW.MX,SIC,stock,Palo Alto Networks,PANW
+CRWD.MX,SIC,stock,CrowdStrike,CRWD
+FTNT.MX,SIC,stock,Fortinet,FTNT
+ZS.MX,SIC,stock,Zscaler,ZS
+NET.MX,SIC,stock,Cloudflare,NET
+DDOG.MX,SIC,stock,Datadog,DDOG
+SNOW.MX,SIC,stock,Snowflake,SNOW
+MDB.MX,SIC,stock,MongoDB,MDB
+TEAM.MX,SIC,stock,Atlassian,TEAM
+APP.MX,SIC,stock,AppLovin,APP
+MSTR.MX,SIC,stock,Strategy (MicroStrategy),MSTR
+UBER.MX,SIC,stock,Uber,UBER
+ABNB.MX,SIC,stock,Airbnb,ABNB
+DASH.MX,SIC,stock,DoorDash,DASH
+BKNG.MX,SIC,stock,Booking Holdings,BKNG
+EXPE.MX,SIC,stock,Expedia,EXPE
+MAR.MX,SIC,stock,Marriott,MAR
+HLT.MX,SIC,stock,Hilton,HLT
+RCL.MX,SIC,stock,Royal Caribbean,RCL
+CCL.MX,SIC,stock,Carnival,CCL
+DAL.MX,SIC,stock,Delta Air Lines,DAL
+UAL.MX,SIC,stock,United Airlines,UAL
+AAL.MX,SIC,stock,American Airlines,AAL
+PYPL.MX,SIC,stock,PayPal,PYPL
+XYZ.MX,SIC,stock,Block,XYZ
+SHOP.MX,SIC,stock,Shopify,SHOP
+SPOT.MX,SIC,stock,Spotify,SPOT
+COIN.MX,SIC,stock,Coinbase,COIN
+HOOD.MX,SIC,stock,Robinhood,HOOD
+SOFI.MX,SIC,stock,SoFi Technologies,SOFI
+AFRM.MX,SIC,stock,Affirm,AFRM
+RBLX.MX,SIC,stock,Roblox,RBLX
+ROKU.MX,SIC,stock,Roku,ROKU
+ZM.MX,SIC,stock,Zoom Communications,ZM
+EA.MX,SIC,stock,Electronic Arts,EA
+TTWO.MX,SIC,stock,Take-Two Interactive,TTWO
+BAC.MX,SIC,stock,Bank of America,BAC
+WFC.MX,SIC,stock,Wells Fargo,WFC
+C.MX,SIC,stock,Citigroup,C
+GS.MX,SIC,stock,Goldman Sachs,GS
+MS.MX,SIC,stock,Morgan Stanley,MS
+SCHW.MX,SIC,stock,Charles Schwab,SCHW
+USB.MX,SIC,stock,U.S. Bancorp,USB
+PNC.MX,SIC,stock,PNC Financial,PNC
+COF.MX,SIC,stock,Capital One,COF
+AXP.MX,SIC,stock,American Express,AXP
+BK.MX,SIC,stock,BNY Mellon,BK
+BLK.MX,SIC,stock,BlackRock,BLK
+BX.MX,SIC,stock,Blackstone,BX
+KKR.MX,SIC,stock,KKR,KKR
+SPGI.MX,SIC,stock,S&P Global,SPGI
+MCO.MX,SIC,stock,Moody's,MCO
+CME.MX,SIC,stock,CME Group,CME
+ICE.MX,SIC,stock,Intercontinental Exchange,ICE
+MET.MX,SIC,stock,MetLife,MET
+AIG.MX,SIC,stock,AIG,AIG
+PGR.MX,SIC,stock,Progressive,PGR
+CB.MX,SIC,stock,Chubb,CB
+XOM.MX,SIC,stock,Exxon Mobil,XOM
+CVX.MX,SIC,stock,Chevron,CVX
+COP.MX,SIC,stock,ConocoPhillips,COP
+OXY.MX,SIC,stock,Occidental Petroleum,OXY
+EOG.MX,SIC,stock,EOG Resources,EOG
+SLB.MX,SIC,stock,SLB (Schlumberger),SLB
+HAL.MX,SIC,stock,Halliburton,HAL
+MPC.MX,SIC,stock,Marathon Petroleum,MPC
+PSX.MX,SIC,stock,Phillips 66,PSX
+VLO.MX,SIC,stock,Valero,VLO
+KMI.MX,SIC,stock,Kinder Morgan,KMI
+ENPH.MX,SIC,stock,Enphase Energy,ENPH
+FSLR.MX,SIC,stock,First Solar,FSLR
+NEE.MX,SIC,stock,NextEra Energy,NEE
+DUK.MX,SIC,stock,Duke Energy,DUK
+SO.MX,SIC,stock,Southern Company,SO
+ABBV.MX,SIC,stock,AbbVie,ABBV
+ABT.MX,SIC,stock,Abbott Laboratories,ABT
+MRK.MX,SIC,stock,Merck,MRK
+PFE.MX,SIC,stock,Pfizer,PFE
+BMY.MX,SIC,stock,Bristol-Myers Squibb,BMY
+AMGN.MX,SIC,stock,Amgen,AMGN
+GILD.MX,SIC,stock,Gilead Sciences,GILD
+REGN.MX,SIC,stock,Regeneron,REGN
+VRTX.MX,SIC,stock,Vertex Pharmaceuticals,VRTX
+BIIB.MX,SIC,stock,Biogen,BIIB
+MRNA.MX,SIC,stock,Moderna,MRNA
+ZTS.MX,SIC,stock,Zoetis,ZTS
+TMO.MX,SIC,stock,Thermo Fisher,TMO
+DHR.MX,SIC,stock,Danaher,DHR
+ISRG.MX,SIC,stock,Intuitive Surgical,ISRG
+SYK.MX,SIC,stock,Stryker,SYK
+BSX.MX,SIC,stock,Boston Scientific,BSX
+MDT.MX,SIC,stock,Medtronic,MDT
+CVS.MX,SIC,stock,CVS Health,CVS
+CI.MX,SIC,stock,Cigna,CI
+ELV.MX,SIC,stock,Elevance Health,ELV
+HCA.MX,SIC,stock,HCA Healthcare,HCA
+BA.MX,SIC,stock,Boeing,BA
+CAT.MX,SIC,stock,Caterpillar,CAT
+DE.MX,SIC,stock,Deere,DE
+GE.MX,SIC,stock,GE Aerospace,GE
+GEV.MX,SIC,stock,GE Vernova,GEV
+HON.MX,SIC,stock,Honeywell,HON
+MMM.MX,SIC,stock,3M,MMM
+LMT.MX,SIC,stock,Lockheed Martin,LMT
+RTX.MX,SIC,stock,RTX,RTX
+NOC.MX,SIC,stock,Northrop Grumman,NOC
+GD.MX,SIC,stock,General Dynamics,GD
+ETN.MX,SIC,stock,Eaton,ETN
+EMR.MX,SIC,stock,Emerson Electric,EMR
+UPS.MX,SIC,stock,UPS,UPS
+FDX.MX,SIC,stock,FedEx,FDX
+UNP.MX,SIC,stock,Union Pacific,UNP
+CSX.MX,SIC,stock,CSX,CSX
+WM.MX,SIC,stock,Waste Management,WM
+F.MX,SIC,stock,Ford,F
+GM.MX,SIC,stock,General Motors,GM
+RIVN.MX,SIC,stock,Rivian,RIVN
+LCID.MX,SIC,stock,Lucid,LCID
+STLA.MX,SIC,stock,Stellantis,STLA
+PM.MX,SIC,stock,Philip Morris,PM
+MO.MX,SIC,stock,Altria,MO
+MDLZ.MX,SIC,stock,Mondelez,MDLZ
+KHC.MX,SIC,stock,Kraft Heinz,KHC
+HSY.MX,SIC,stock,Hershey,HSY
+MNST.MX,SIC,stock,Monster Beverage,MNST
+STZ.MX,SIC,stock,Constellation Brands,STZ
+CL.MX,SIC,stock,Colgate-Palmolive,CL
+KMB.MX,SIC,stock,Kimberly-Clark,KMB
+EL.MX,SIC,stock,Estee Lauder,EL
+LIN.MX,SIC,stock,Linde,LIN
+FCX.MX,SIC,stock,Freeport-McMoRan,FCX
+NEM.MX,SIC,stock,Newmont,NEM
+SCCO.MX,SIC,stock,Southern Copper,SCCO
+AA.MX,SIC,stock,Alcoa,AA
+NUE.MX,SIC,stock,Nucor,NUE
+DOW.MX,SIC,stock,Dow,DOW
+AMT.MX,SIC,stock,American Tower,AMT
+PLD.MX,SIC,stock,Prologis,PLD
+EQIX.MX,SIC,stock,Equinix,EQIX
+O.MX,SIC,stock,Realty Income,O
+SPG.MX,SIC,stock,Simon Property,SPG
+BABA.MX,SIC,stock,Alibaba,BABA
+PDD.MX,SIC,stock,PDD Holdings,PDD
+JD.MX,SIC,stock,JD.com,JD
+BIDU.MX,SIC,stock,Baidu,BIDU
+NIO.MX,SIC,stock,NIO,NIO
+TSM.MX,SIC,stock,Taiwan Semiconductor,TSM
+ASML.MX,SIC,stock,ASML,ASML
+SAP.MX,SIC,stock,SAP,SAP
+SONY.MX,SIC,stock,Sony,SONY
+TM.MX,SIC,stock,Toyota,TM
+NVO.MX,SIC,stock,Novo Nordisk,NVO
+AZN.MX,SIC,stock,AstraZeneca,AZN
+SHEL.MX,SIC,stock,Shell,SHEL
+BP.MX,SIC,stock,BP,BP
+BHP.MX,SIC,stock,BHP,BHP
+RIO.MX,SIC,stock,Rio Tinto,RIO
+VALE.MX,SIC,stock,Vale,VALE
+PBR.MX,SIC,stock,Petrobras,PBR
+ITUB.MX,SIC,stock,Itau Unibanco,ITUB
+MELI.MX,SIC,stock,MercadoLibre,MELI
+NU.MX,SIC,stock,Nu Holdings,NU
+SE.MX,SIC,stock,Sea Limited,SE
+CPNG.MX,SIC,stock,Coupang,CPNG
+SPY.MX,SIC,etf,SPDR S&P 500,SPY
+VOO.MX,SIC,etf,Vanguard S&P 500,VOO
+IVV.MX,SIC,etf,iShares Core S&P 500,IVV
+RSP.MX,SIC,etf,Invesco S&P 500 Equal Weight,RSP
+QQQ.MX,SIC,etf,Invesco QQQ,QQQ
+QQQM.MX,SIC,etf,Invesco Nasdaq 100,QQQM
+DIA.MX,SIC,etf,SPDR Dow Jones,DIA
+IWM.MX,SIC,etf,iShares Russell 2000,IWM
+IJH.MX,SIC,etf,iShares Core S&P Mid-Cap,IJH
+VTI.MX,SIC,etf,Vanguard Total Stock Market,VTI
+VUG.MX,SIC,etf,Vanguard Growth,VUG
+VTV.MX,SIC,etf,Vanguard Value,VTV
+VT.MX,SIC,etf,Vanguard Total World Stock,VT
+ACWI.MX,SIC,etf,iShares MSCI ACWI,ACWI
+VEA.MX,SIC,etf,Vanguard Developed Markets,VEA
+EFA.MX,SIC,etf,iShares MSCI EAFE,EFA
+IEFA.MX,SIC,etf,iShares Core MSCI EAFE,IEFA
+VWO.MX,SIC,etf,Vanguard Emerging Markets,VWO
+EEM.MX,SIC,etf,iShares MSCI Emerging Markets,EEM
+IEMG.MX,SIC,etf,iShares Core MSCI EM,IEMG
+EWW.MX,SIC,etf,iShares MSCI Mexico,EWW
+EWZ.MX,SIC,etf,iShares MSCI Brazil,EWZ
+EWJ.MX,SIC,etf,iShares MSCI Japan,EWJ
+FXI.MX,SIC,etf,iShares China Large-Cap,FXI
+MCHI.MX,SIC,etf,iShares MSCI China,MCHI
+INDA.MX,SIC,etf,iShares MSCI India,INDA
+SCHD.MX,SIC,etf,Schwab US Dividend Equity,SCHD
+VIG.MX,SIC,etf,Vanguard Dividend Appreciation,VIG
+VYM.MX,SIC,etf,Vanguard High Dividend Yield,VYM
+DVY.MX,SIC,etf,iShares Select Dividend,DVY
+QUAL.MX,SIC,etf,iShares MSCI USA Quality,QUAL
+MTUM.MX,SIC,etf,iShares MSCI USA Momentum,MTUM
+USMV.MX,SIC,etf,iShares MSCI USA Min Vol,USMV
+XLK.MX,SIC,etf,Technology Select Sector SPDR,XLK
+XLF.MX,SIC,etf,Financial Select Sector SPDR,XLF
+XLE.MX,SIC,etf,Energy Select Sector SPDR,XLE
+XLV.MX,SIC,etf,Health Care Select Sector SPDR,XLV
+XLI.MX,SIC,etf,Industrial Select Sector SPDR,XLI
+XLP.MX,SIC,etf,Consumer Staples Select Sector SPDR,XLP
+XLY.MX,SIC,etf,Consumer Discretionary Select Sector SPDR,XLY
+XLU.MX,SIC,etf,Utilities Select Sector SPDR,XLU
+XLB.MX,SIC,etf,Materials Select Sector SPDR,XLB
+XLRE.MX,SIC,etf,Real Estate Select Sector SPDR,XLRE
+XLC.MX,SIC,etf,Communication Services Select Sector SPDR,XLC
+VGT.MX,SIC,etf,Vanguard Information Technology,VGT
+SMH.MX,SIC,etf,VanEck Semiconductor,SMH
+SOXX.MX,SIC,etf,iShares Semiconductor,SOXX
+IGV.MX,SIC,etf,iShares Expanded Tech-Software,IGV
+ARKK.MX,SIC,etf,ARK Innovation,ARKK
+ICLN.MX,SIC,etf,iShares Global Clean Energy,ICLN
+LIT.MX,SIC,etf,Global X Lithium & Battery Tech,LIT
+URA.MX,SIC,etf,Global X Uranium,URA
+BOTZ.MX,SIC,etf,Global X Robotics & AI,BOTZ
+TLT.MX,SIC,etf,iShares 20+ Year Treasury,TLT
+IEF.MX,SIC,etf,iShares 7-10 Year Treasury,IEF
+SHY.MX,SIC,etf,iShares 1-3 Year Treasury,SHY
+SHV.MX,SIC,etf,iShares Short Treasury,SHV
+BIL.MX,SIC,etf,SPDR 1-3 Month T-Bill,BIL
+TIP.MX,SIC,etf,iShares TIPS Bond,TIP
+BND.MX,SIC,etf,Vanguard Total Bond Market,BND
+AGG.MX,SIC,etf,iShares Core US Aggregate Bond,AGG
+LQD.MX,SIC,etf,iShares Investment Grade Corporate,LQD
+HYG.MX,SIC,etf,iShares High Yield Corporate,HYG
+EMB.MX,SIC,etf,iShares JP Morgan USD EM Bond,EMB
+GLD.MX,SIC,etf,SPDR Gold Shares,GLD
+IAU.MX,SIC,etf,iShares Gold Trust,IAU
+SLV.MX,SIC,etf,iShares Silver Trust,SLV
+GDX.MX,SIC,etf,VanEck Gold Miners,GDX
+USO.MX,SIC,etf,United States Oil Fund,USO
+VNQ.MX,SIC,etf,Vanguard Real Estate,VNQ
+IBIT.MX,SIC,etf,iShares Bitcoin Trust,IBIT
+ETHA.MX,SIC,etf,iShares Ethereum Trust,ETHA

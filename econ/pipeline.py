@@ -3,7 +3,7 @@
 Uso::
 
     python -m econ.pipeline daily                       # precios recientes + macro + snapshots
-    python -m econ.pipeline backfill --start 2015-01-01 # historico completo de precios
+    python -m econ.pipeline backfill --start 2015-01-01 # historico completo + macro + limpieza
     python -m econ.pipeline prices --days 10
     python -m econ.pipeline macro
     python -m econ.pipeline fundamentals
@@ -34,6 +34,45 @@ def update_prices(start: str, tickers: list[str] | None = None) -> int:
     return len(df)
 
 
+def history_start() -> str:
+    """Fecha inicial del historico ya guardado (o la de por defecto si no hay datos)."""
+    files = sorted(config.PRICES_DIR.glob(f"*/{storage.FILE_NAME}"))
+    if not files:
+        return config.DEFAULT_HISTORY_START
+    return pd.read_parquet(files[0], columns=["date"])["date"].min().date().isoformat()
+
+
+def tickers_without_data(tickers: list[str]) -> list[str]:
+    have: set[str] = set()
+    for path in config.PRICES_DIR.glob(f"*/{storage.FILE_NAME}"):
+        have.update(pd.read_parquet(path, columns=["ticker"])["ticker"].unique())
+    return [t for t in tickers if t not in have]
+
+
+def update_daily_prices(start: str) -> int:
+    """Precios recientes de todo el universo, mas el historico completo de los tickers nuevos."""
+    tickers = config.load_universe()["ticker"].tolist()
+    new = tickers_without_data(tickers)
+    rows = update_prices(start, tickers)
+    if new:
+        log.info("Tickers nuevos (o sin datos): %s", new)
+        try:
+            rows += update_prices(history_start(), new)
+        except RuntimeError:
+            log.warning("Sin historico para los tickers nuevos; revisa health.tickers_missing")
+    return rows
+
+
+def prune_to_universe() -> None:
+    """Quita de precios y fundamentales los tickers que ya no estan en config/universe.csv."""
+    keep = set(config.load_universe()["ticker"])
+    if len(keep) < 10:
+        raise RuntimeError(f"Universo sospechosamente chico ({len(keep)} tickers); no se limpia nada")
+    for root in (config.PRICES_DIR, config.FUNDAMENTALS_DIR):
+        changed = storage.prune(root, "ticker", keep)
+        log.info("Limpieza de %s: %d particiones modificadas", root.name, len(changed))
+
+
 def update_macro(start: str = config.DEFAULT_MACRO_START) -> int:
     series = config.load_macro_series()
     fred_ids = series.loc[series["source"] == "FRED", "series_id"].tolist()
@@ -57,8 +96,9 @@ def update_macro(start: str = config.DEFAULT_MACRO_START) -> int:
 
 def update_fundamentals() -> int:
     universe = config.load_universe()
-    tickers = universe.loc[universe["asset_type"].isin(["stock", "fibra"]), "ticker"].tolist()
-    df = yahoo.download_fundamentals(tickers)
+    stocks = universe[universe["asset_type"].isin(["stock", "fibra"])]
+    symbols = dict(zip(stocks["ticker"], stocks["ref_ticker"].where(stocks["ref_ticker"] != "", stocks["ticker"])))
+    df = yahoo.download_fundamentals(symbols)
     written = storage.write_partitioned(df, config.FUNDAMENTALS_DIR, keys=["ticker", "date"], freq="M")
     log.info("Fundamentales: %d emisoras, %d particiones escritas", len(df), len(written))
     return len(df)
@@ -77,12 +117,16 @@ def main(argv: list[str] | None = None) -> int:
     recent = (date.today() - timedelta(days=args.days)).isoformat()
 
     steps = []
-    if args.task in ("daily", "prices"):
+    if args.task == "daily":
+        steps.append(("prices", lambda: update_daily_prices(args.start or recent)))
+    if args.task == "prices":
         steps.append(("prices", lambda: update_prices(args.start or recent, tickers)))
     if args.task == "backfill":
         steps.append(("prices", lambda: update_prices(args.start or config.DEFAULT_HISTORY_START, tickers)))
-    if args.task in ("daily", "macro"):
+    if args.task in ("daily", "backfill", "macro"):
         steps.append(("macro", update_macro))
+    if args.task == "backfill" and not tickers:
+        steps.append(("prune", prune_to_universe))
     if args.task == "fundamentals":
         steps.append(("fundamentals", update_fundamentals))
 

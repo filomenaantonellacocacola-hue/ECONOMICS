@@ -199,10 +199,9 @@ def health(prices: pd.DataFrame, macro: pd.DataFrame, universe: pd.DataFrame, se
         cutoff = last.max() - pd.Timedelta(days=7)
         result["tickers_missing"] = sorted(set(universe["ticker"]) - set(last.index))
         result["tickers_stale"] = sorted(last[last < cutoff].index)
-    if not macro.empty:
-        have = set(zip(macro["source"], macro["series_id"]))
-        want = set(zip(series["source"], series["series_id"]))
-        result["macro_missing"] = sorted(f"{s}:{i}" for s, i in want - have)
+    have = set(zip(macro["source"], macro["series_id"])) if not macro.empty else set()
+    want = set(zip(series["source"], series["series_id"]))
+    result["macro_missing"] = sorted(f"{s}:{i}" for s, i in want - have)
     return result
 
 
