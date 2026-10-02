@@ -1,36 +1,36 @@
 source,series_id,name,category,units,frequency,date,value,prev_value,chg_1y,pct_1y
-FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,2026-09-30,4.0,4.0,-0.25,
-FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D,2026-09-29,3.88,3.88,-0.21,
-FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W,2026-09-23,6747704.0,6746548.0,139107.0,2.105
+FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,2026-10-01,4.0,4.0,-0.25,
+FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D,2026-09-30,3.88,3.88,-0.21,
+FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W,2026-09-30,6743031.0,6747704.0,134636.0,2.037
 FRED,M2SL,Oferta monetaria M2,politica_monetaria,miles_millones_usd,M,2026-08-01,23342.8,23217.9,1250.2,5.659
-FRED,DGS3MO,Treasury 3 meses,tasas,pct,D,2026-09-29,4.25,4.28,0.21,
-FRED,DGS2,Treasury 2 anios,tasas,pct,D,2026-09-29,4.89,4.92,1.26,
-FRED,DGS10,Treasury 10 anios,tasas,pct,D,2026-09-29,5.26,5.24,1.11,
-FRED,DGS30,Treasury 30 anios,tasas,pct,D,2026-09-29,5.59,5.56,0.88,
-FRED,T10Y2Y,Spread 10a-2a,tasas,pct,D,2026-09-30,0.41,0.37,-0.15,
-FRED,T10Y3M,Spread 10a-3m,tasas,pct,D,2026-09-30,1.09,1.01,0.95,
-FRED,T5YIE,Inflacion implicita 5a (breakeven),inflacion,pct,D,2026-09-30,2.36,2.34,-0.06,
-FRED,MORTGAGE30US,Hipoteca 30 anios,tasas,pct,W,2026-09-24,7.03,6.95,0.77,
+FRED,DGS3MO,Treasury 3 meses,tasas,pct,D,2026-09-30,4.2,4.25,0.18,
+FRED,DGS2,Treasury 2 anios,tasas,pct,D,2026-09-30,4.88,4.89,1.28,
+FRED,DGS10,Treasury 10 anios,tasas,pct,D,2026-09-30,5.29,5.26,1.13,
+FRED,DGS30,Treasury 30 anios,tasas,pct,D,2026-09-30,5.64,5.59,0.91,
+FRED,T10Y2Y,Spread 10a-2a,tasas,pct,D,2026-10-01,0.46,0.41,-0.11,
+FRED,T10Y3M,Spread 10a-3m,tasas,pct,D,2026-10-01,1.07,1.09,0.96,
+FRED,T5YIE,Inflacion implicita 5a (breakeven),inflacion,pct,D,2026-10-01,2.36,2.36,-0.03,
+FRED,MORTGAGE30US,Hipoteca 30 anios,tasas,pct,W,2026-10-01,7.28,7.03,0.98,
 FRED,CPIAUCSL,CPI general,inflacion,indice,M,2026-08-01,334.131,332.813,10.84,3.353
 FRED,CPILFESL,CPI subyacente,inflacion,indice,M,2026-08-01,337.765,336.789,8.065,2.446
 FRED,PCEPILFE,PCE subyacente,inflacion,indice,M,2026-08-01,130.455,130.133,3.809,3.008
 FRED,UNRATE,Tasa de desempleo,empleo,pct,M,2026-08-01,4.1,4.1,-0.2,
 FRED,PAYEMS,Nomina no agricola,empleo,miles,M,2026-08-01,159075.0,158913.0,603.0,0.381
-FRED,ICSA,Solicitudes iniciales de desempleo,empleo,personas,W,2026-09-19,197000.0,198000.0,-36000.0,-15.451
+FRED,ICSA,Solicitudes iniciales de desempleo,empleo,personas,W,2026-09-26,197000.0,198000.0,-22000.0,-10.046
 FRED,GDPC1,PIB real,actividad,miles_millones_usd,Q,2026-04-01,24408.011,24274.383,523.448,2.192
 FRED,INDPRO,Produccion industrial,actividad,indice,M,2026-08-01,103.068,103.045,1.444,1.42
 FRED,RSAFS,Ventas minoristas,actividad,millones_usd,M,2026-08-01,737763.0,729538.0,37545.0,5.362
 FRED,HOUST,Inicios de vivienda,actividad,miles,M,2026-08-01,1275.0,1309.0,-16.0,-1.239
 FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),actividad,indice,M,2026-08-01,51.7,55.2,-6.5,-11.168
-FRED,VIXCLS,VIX,riesgo,indice,D,2026-09-29,16.04,16.07,-0.08,-0.496
-FRED,BAMLH0A0HYM2,Spread high yield,riesgo,pct,D,2026-09-29,3.08,3.02,0.34,
+FRED,VIXCLS,VIX,riesgo,indice,D,2026-09-30,16.34,16.04,0.06,0.369
+FRED,BAMLH0A0HYM2,Spread high yield,riesgo,pct,D,2026-09-30,3.12,3.08,0.32,
 FRED,NFCI,Indice de condiciones financieras (Chicago Fed),riesgo,desv_std,W,2026-09-25,-0.548,-0.553,-0.021,
 FRED,DTWEXBGS,Indice dolar amplio,divisas,indice,D,2026-09-25,120.33,120.552,-0.212,-0.176
 FRED,DEXMXUS,Pesos por dolar (FRED),divisas,mxn_por_usd,D,2026-09-25,17.693,17.67,-0.748,-4.055
 FRED,DCOILWTICO,Petroleo WTI,materias_primas,usd_barril,D,2026-09-29,96.16,99.37,31.89,49.619
-FRED,SP500,S&P 500 (FRED),mercado,indice,D,2026-09-30,7651.54,7670.84,963.08,14.399
-BANXICO,SF61745,Tasa objetivo Banxico,politica_monetaria,pct,D,2026-10-01,6.5,6.5,-1.0,
-BANXICO,SF43783,TIIE 28 dias,tasas,pct,D,2026-10-01,6.776,6.816,-1.086,
+FRED,SP500,S&P 500 (FRED),mercado,indice,D,2026-10-01,7666.45,7651.54,955.25,14.234
+BANXICO,SF61745,Tasa objetivo Banxico,politica_monetaria,pct,D,2026-10-02,6.5,6.5,-1.0,
+BANXICO,SF43783,TIIE 28 dias,tasas,pct,D,2026-10-02,6.886,6.776,-1.227,
 BANXICO,SF43936,CETES 28 dias,tasas,pct,W,2026-10-01,6.01,6.15,-1.19,
-BANXICO,SF43718,Tipo de cambio FIX,divisas,mxn_por_usd,D,2026-09-30,18.069,18.071,-0.265,-1.445
+BANXICO,SF43718,Tipo de cambio FIX,divisas,mxn_por_usd,D,2026-10-01,18.369,18.069,0.021,0.115
 BANXICO,SP1,INPC (indice general),inflacion,indice,M,2026-08-01,145.462,145.169,4.595,3.262
