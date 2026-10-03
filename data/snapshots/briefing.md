@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-10-02 02:30 (UTC)
+Generado: 2026-10-03 02:15 (UTC)
 
 ## Macro
 
@@ -11,35 +11,35 @@ Generado: 2026-10-02 02:30 (UTC)
 | FRED | Ventas minoristas | 2026-08-01 | 737,763.00 | 729,538.00 | 37,545.00 | 5.36 |
 | FRED | Inicios de vivienda | 2026-08-01 | 1,275.00 | 1,309.00 | -16.00 | -1.24 |
 | FRED | Sentimiento del consumidor (U. Michigan) | 2026-08-01 | 51.70 | 55.20 | -6.50 | -11.17 |
-| BANXICO | Tipo de cambio FIX | 2026-10-01 | 18.37 | 18.07 | 0.02 | 0.12 |
+| BANXICO | Tipo de cambio FIX | 2026-10-02 | 18.19 | 18.37 | -0.29 | -1.59 |
 | FRED | Indice dolar amplio | 2026-09-25 | 120.33 | 120.55 | -0.21 | -0.18 |
 | FRED | Pesos por dolar (FRED) | 2026-09-25 | 17.69 | 17.67 | -0.75 | -4.05 |
-| FRED | Tasa de desempleo | 2026-08-01 | 4.10 | 4.10 | -0.20 |  |
-| FRED | Nomina no agricola | 2026-08-01 | 159,075.00 | 158,913.00 | 603.00 | 0.38 |
+| FRED | Tasa de desempleo | 2026-09-01 | 4.20 | 4.10 | -0.20 |  |
+| FRED | Nomina no agricola | 2026-09-01 | 159,044.00 | 159,015.00 | 496.00 | 0.31 |
 | FRED | Solicitudes iniciales de desempleo | 2026-09-26 | 197,000.00 | 198,000.00 | -22,000.00 | -10.05 |
 | BANXICO | INPC (indice general) | 2026-08-01 | 145.46 | 145.17 | 4.59 | 3.26 |
-| FRED | Inflacion implicita 5a (breakeven) | 2026-10-01 | 2.36 | 2.36 | -0.03 |  |
+| FRED | Inflacion implicita 5a (breakeven) | 2026-10-02 | 2.37 | 2.36 | 0.00 |  |
 | FRED | CPI general | 2026-08-01 | 334.13 | 332.81 | 10.84 | 3.35 |
 | FRED | CPI subyacente | 2026-08-01 | 337.76 | 336.79 | 8.06 | 2.45 |
 | FRED | PCE subyacente | 2026-08-01 | 130.46 | 130.13 | 3.81 | 3.01 |
 | FRED | Petroleo WTI | 2026-09-29 | 96.16 | 99.37 | 31.89 | 49.62 |
-| FRED | S&P 500 (FRED) | 2026-10-01 | 7,666.45 | 7,651.54 | 955.25 | 14.23 |
-| BANXICO | Tasa objetivo Banxico | 2026-10-02 | 6.50 | 6.50 | -1.00 |  |
-| FRED | Fed funds target (limite superior) | 2026-10-01 | 4.00 | 4.00 | -0.25 |  |
-| FRED | Fed funds efectiva | 2026-09-30 | 3.88 | 3.88 | -0.21 |  |
+| FRED | S&P 500 (FRED) | 2026-10-02 | 7,722.72 | 7,666.45 | 1,007.37 | 15.00 |
+| BANXICO | Tasa objetivo Banxico | 2026-10-03 | 6.50 | 6.50 | -1.00 |  |
+| FRED | Fed funds target (limite superior) | 2026-10-02 | 4.00 | 4.00 | -0.25 |  |
+| FRED | Fed funds efectiva | 2026-10-01 | 3.88 | 3.88 | -0.21 |  |
 | FRED | Balance de la Fed (activos totales) | 2026-09-30 | 6,743,031.00 | 6,747,704.00 | 134,636.00 | 2.04 |
 | FRED | Oferta monetaria M2 | 2026-08-01 | 23,342.80 | 23,217.90 | 1,250.20 | 5.66 |
-| FRED | VIX | 2026-09-30 | 16.34 | 16.04 | 0.06 | 0.37 |
-| FRED | Spread high yield | 2026-09-30 | 3.12 | 3.08 | 0.32 |  |
+| FRED | VIX | 2026-10-01 | 16.39 | 16.34 | 0.10 | 0.61 |
+| FRED | Spread high yield | 2026-10-01 | 3.24 | 3.12 | 0.43 |  |
 | FRED | Indice de condiciones financieras (Chicago Fed) | 2026-09-25 | -0.55 | -0.55 | -0.02 |  |
 | BANXICO | TIIE 28 dias | 2026-10-02 | 6.89 | 6.78 | -1.23 |  |
 | BANXICO | CETES 28 dias | 2026-10-01 | 6.01 | 6.15 | -1.19 |  |
-| FRED | Treasury 3 meses | 2026-09-30 | 4.20 | 4.25 | 0.18 |  |
-| FRED | Treasury 2 anios | 2026-09-30 | 4.88 | 4.89 | 1.28 |  |
-| FRED | Treasury 10 anios | 2026-09-30 | 5.29 | 5.26 | 1.13 |  |
-| FRED | Treasury 30 anios | 2026-09-30 | 5.64 | 5.59 | 0.91 |  |
-| FRED | Spread 10a-2a | 2026-10-01 | 0.46 | 0.41 | -0.11 |  |
-| FRED | Spread 10a-3m | 2026-10-01 | 1.07 | 1.09 | 0.96 |  |
+| FRED | Treasury 3 meses | 2026-10-01 | 4.17 | 4.20 | 0.16 |  |
+| FRED | Treasury 2 anios | 2026-10-01 | 4.78 | 4.88 | 1.23 |  |
+| FRED | Treasury 10 anios | 2026-10-01 | 5.24 | 5.29 | 1.12 |  |
+| FRED | Treasury 30 anios | 2026-10-01 | 5.61 | 5.64 | 0.89 |  |
+| FRED | Spread 10a-2a | 2026-10-02 | 0.45 | 0.46 | -0.10 |  |
+| FRED | Spread 10a-3m | 2026-10-02 | 1.09 | 1.07 | 1.01 |  |
 | FRED | Hipoteca 30 anios | 2026-10-01 | 7.28 | 7.03 | 0.98 |  |
 
 
@@ -47,13 +47,13 @@ Generado: 2026-10-02 02:30 (UTC)
 
 | name | date | close | chg_1d | chg_1m | chg_ytd | chg_1y |
 |---|---|---|---|---|---|---|
-| S&P/BMV IPC | 2026-10-01 | 63,828.60 | -0.60 | -1.06 | -0.75 | 1.45 |
-| S&P 500 | 2026-10-01 | 7,666.45 | 0.19 | 0.46 | 11.99 | 14.62 |
-| Nasdaq Composite | 2026-10-01 | 26,871.60 | 0.04 | 2.96 | 15.62 | 18.59 |
-| Dow Jones Industrial Average | 2026-10-01 | 50,926.56 | 0.04 | -3.49 | 5.96 | 9.76 |
-| CBOE Volatility Index | 2026-10-01 | 16.39 | 0.31 | 7.83 | 9.63 | -1.44 |
-| USD/MXN | 2026-10-02 | 18.29 | 1.17 | 7.66 | 1.72 | -1.26 |
-| EUR/MXN | 2026-10-02 | 20.56 | 0.42 | 4.49 | -2.70 | -4.31 |
+| S&P/BMV IPC | 2026-10-02 | 64,531.68 | 1.10 | -0.54 | 0.35 | 4.20 |
+| S&P 500 | 2026-10-02 | 7,722.72 | 0.73 | 0.73 | 12.81 | 15.07 |
+| Nasdaq Composite | 2026-10-02 | 27,190.86 | 1.19 | 3.71 | 16.99 | 19.49 |
+| Dow Jones Industrial Average | 2026-10-02 | 51,176.96 | 0.49 | -3.55 | 6.48 | 10.20 |
+| CBOE Volatility Index | 2026-10-02 | 15.31 | -6.59 | 6.91 | 2.41 | -8.05 |
+| USD/MXN | 2026-10-02 | 18.15 | 0.38 | 6.82 | 0.92 | -2.04 |
+| EUR/MXN | 2026-10-02 | 20.43 | -0.21 | 3.84 | -3.30 | -4.91 |
 
 
 ## BMV (64 emisoras, 41% sobre su media de 200 dias)
@@ -63,22 +63,22 @@ Generado: 2026-10-02 02:30 (UTC)
 
 | ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
 |---|---|---|---|---|---|---|
-| FNOVA17.MX | Fibra Nova | 41.85 | 48.67 | 48.67 | 58.92 | 100.00 |
-| MFRISCOA-1.MX | Minera Frisco | 19.49 | 2.26 | -8.54 | 119.98 | 48.18 |
-| FUNO11.MX | Fibra Uno | 29.65 | 1.58 | 1.44 | 16.95 | 51.01 |
-| GENTERA.MX | Gentera | 36.75 | 1.41 | -8.85 | -18.23 | 40.96 |
-| PE&OLES.MX | Industrias Penoles | 880.47 | 1.32 | -1.62 | -6.89 | 47.61 |
+| FNOVA17.MX | Fibra Nova | 42.00 | 49.20 | 49.20 | 59.49 | 100.00 |
+| GMEXICOB.MX | Grupo Mexico | 232.79 | 3.84 | 4.45 | 39.99 | 63.06 |
+| RA.MX | Regional | 138.38 | 3.05 | -2.43 | 0.53 | 48.84 |
+| ORBIA.MX | Orbia Advance | 20.23 | 2.74 | -4.35 | 29.85 | 50.29 |
+| LABB.MX | Genomma Lab | 12.82 | 2.07 | -0.54 | -26.61 | 48.85 |
 
 
 **Mayores bajas del dia**
 
 | ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
 |---|---|---|---|---|---|---|
-| HERDEZ.MX | Grupo Herdez | 54.05 | -3.48 | 6.23 | -21.43 | 56.13 |
-| GAPB.MX | Grupo Aeroportuario del Pacifico | 359.15 | -3.25 | 4.28 | -23.75 | 47.50 |
-| SORIANAB.MX | Organizacion Soriana | 34.00 | -2.86 | 26.30 | -16.93 | 74.46 |
-| GFNORTEO.MX | Grupo Financiero Banorte | 187.01 | -1.96 | -2.71 | 18.27 | 38.25 |
-| RA.MX | Regional | 134.26 | -1.93 | -2.79 | -2.47 | 39.61 |
+| LIVEPOLC-1.MX | El Puerto de Liverpool | 101.88 | -2.51 | 0.15 | 3.62 | 45.64 |
+| MFRISCOA-1.MX | Minera Frisco | 19.21 | -1.99 | -15.37 | 116.82 | 46.44 |
+| ICHB.MX | Industrias CH | 175.00 | -1.41 | 3.74 | -2.75 | 51.58 |
+| WALMEX.MX | Walmart de Mexico | 46.17 | -0.86 | -1.37 | -17.57 | 46.23 |
+| SIMECB.MX | Grupo Simec | 175.00 | -0.84 | -0.52 | -3.85 | 42.47 |
 
 
 ## SIC (297 emisoras, 63% sobre su media de 200 dias)
@@ -88,19 +88,19 @@ Generado: 2026-10-02 02:30 (UTC)
 
 | ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
 |---|---|---|---|---|---|---|
-| SNPS.MX | Synopsys | 9,000.00 | 20.51 | 20.81 | 6.07 | 81.98 |
-| ACNN.MX | Accenture | 3,940.00 | 19.65 | 23.16 | -19.20 | 76.83 |
-| ITUBN.MX | Itau Unibanco | 147.00 | 14.84 | 14.85 | 16.61 | 83.09 |
-| BPN.MX | BP | 809.00 | 11.13 | 11.13 | 34.00 | 90.36 |
+| ITUBN.MX | Itau Unibanco | 147.00 | 14.84 | 14.84 | 16.61 | 83.08 |
 | CDNS.MX | Cadence Design | 6,404.15 | 8.05 | 20.03 | 12.16 | 79.59 |
+| AIG.MX | AIG | 1,383.14 | 6.63 | 13.05 | -10.95 | 99.68 |
+| HON.MX | Honeywell | 3,926.00 | 6.63 | 10.75 | 8.40 | 73.09 |
+| ADI.MX | Analog Devices | 7,571.88 | 5.27 | 25.96 | 53.06 | 88.98 |
 
 
 **Mayores bajas del dia**
 
 | ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
 |---|---|---|---|---|---|---|
-| GM.MX | General Motors | 1,401.66 | -4.00 | -4.31 | -4.61 | 38.58 |
-| EL.MX | Estee Lauder | 1,670.00 | -2.91 | -5.01 | -12.83 | 49.46 |
-| EWW.MX | iShares MSCI Mexico | 1,280.00 | -2.29 | -0.47 | 2.35 | 46.56 |
-| C.MX | Citigroup | 2,345.75 | -2.26 | 4.67 | 11.56 | 52.91 |
-| DIS.MX | Walt Disney | 1,855.00 | -2.11 | 2.45 | -9.74 | 54.53 |
+| ACNN.MX | Accenture | 3,659.00 | -7.13 | 15.78 | -24.96 | 63.79 |
+| APP.MX | AppLovin | 4,901.90 | -5.07 | -9.57 | -60.37 | 33.04 |
+| NKE.MX | Nike | 614.09 | -4.94 | -5.52 | -46.70 | 37.11 |
+| COIN.MX | Coinbase | 3,310.05 | -4.88 | 10.89 | -18.87 | 53.23 |
+| NOWW.MX | ServiceNow | 2,434.99 | -4.26 | 4.68 | -11.78 | 55.46 |
