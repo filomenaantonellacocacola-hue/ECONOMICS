@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-10 02:37",
+  "generated_at_utc": "2026-10-10 16:36",
   "datasets": {
     "prices": {
       "rows": 590215,
@@ -127,10 +127,10 @@
       ]
     },
     "fundamentals": {
-      "rows": 543,
-      "ids": 290,
+      "rows": 835,
+      "ids": 292,
       "min_date": "2026-09-29",
-      "max_date": "2026-10-03",
+      "max_date": "2026-10-10",
       "files": [
         "data/fundamentals/2026-09/data.parquet",
         "data/fundamentals/2026-10/data.parquet"
