@@ -8,7 +8,7 @@
   var C = {
     panel: tok("panel"), raised: tok("raised"), border: tok("border"), grid: tok("grid"),
     fg: tok("fg"), fg2: tok("fg-2"), muted: tok("muted"), amber: tok("amber"),
-    up: tok("up"), down: tok("down"), mono: tok("font-mono"),
+    up: tok("up"), down: tok("down"), mono: tok("font-mono"), ui: tok("font-ui"),
     series: [1, 2, 3, 4, 5, 6].map(function (i) { return tok("s" + i); }),
   };
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -165,14 +165,14 @@
     var single = cfg.series.length === 1 && !(cfg.overlays && cfg.overlays.length);
     var chart = LW.createChart(box, {
       autoSize: true,
-      layout: { background: { type: "solid", color: C.panel }, textColor: C.muted, fontFamily: C.mono, fontSize: 11 },
-      grid: { vertLines: { color: C.grid }, horzLines: { color: C.grid } },
+      layout: { background: { type: "solid", color: C.panel }, textColor: C.fg2, fontFamily: C.mono, fontSize: 11 },
+      grid: { vertLines: { color: C.grid, style: 1 }, horzLines: { color: C.grid, style: 1 } },
       rightPriceScale: { borderColor: C.border, mode: cfg.compare ? 2 : 0 },
       timeScale: { borderColor: C.border, rightOffset: 3, minBarSpacing: 0.3, tickMarkFormatter: tickFmt },
       crosshair: {
         mode: 0,
-        vertLine: { color: C.muted, width: 1, style: 3, labelBackgroundColor: C.raised },
-        horzLine: { color: C.muted, width: 1, style: 3, labelBackgroundColor: C.raised },
+        vertLine: { color: C.muted, width: 1, style: 3, labelBackgroundColor: C.amber },
+        horzLine: { color: C.muted, width: 1, style: 3, labelBackgroundColor: C.amber },
       },
       localization: {
         locale: "es-MX",
@@ -404,7 +404,7 @@
     var narrow = box.clientWidth < 560;
     var valueAxis = {
       type: "value", scale: curve, splitNumber: narrow ? 3 : 5, axisLine: { show: false }, axisTick: { show: false },
-      splitLine: { lineStyle: { color: C.grid, width: 1, type: "solid" } },
+      splitLine: { lineStyle: { color: C.grid, width: 1, type: "dotted" } },
       axisLabel: { color: C.muted, fontFamily: C.mono, fontSize: 11, formatter: function (v) { return fmt(v, cfg.unit, cfg.axis_decimals); } },
     };
     var catAxis = {

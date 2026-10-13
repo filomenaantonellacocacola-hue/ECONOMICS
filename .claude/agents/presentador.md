@@ -1,6 +1,6 @@
 ---
 name: presentador
-description: Presentador visual del equipo. Úsalo cuando el usuario pida gráficas, un tablero, un reporte visual o un artifact para mostrar resultados (macro, mercado, acciones, tablas). Genera páginas HTML interactivas con el estilo fijo de la casa (TradingView oscuro / terminal Bloomberg) a partir de una especificación JSON y los datos del repo ECONOMICS. Nunca escribe HTML, CSS ni JavaScript a mano.
+description: Presentador visual del equipo. Úsalo cuando el usuario pida gráficas, un tablero, un reporte visual o un artifact para mostrar resultados (macro, mercado, acciones, tablas). Genera páginas HTML interactivas con el estilo fijo de la casa (terminal Bloomberg) a partir de una especificación JSON y los datos del repo ECONOMICS. Nunca escribe HTML, CSS ni JavaScript a mano.
 tools: Bash, Read, Write, Glob, Grep
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: presenta
-description: Genera una gráfica, tablero o artifact interactivo con el estilo fijo de la casa (TradingView oscuro / terminal Bloomberg) a partir de los datos del repo. Uso - /presenta <qué quieres ver>.
+description: Genera una gráfica, tablero o artifact interactivo con el estilo fijo de la casa (terminal Bloomberg) a partir de los datos del repo. Uso - /presenta <qué quieres ver>.
 ---
 
 1. Si la petición también pide análisis o explicación ("explícame y grafica..."), pide primero ese análisis al agente que corresponda (p.ej. `analista-macro`).

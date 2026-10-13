@@ -13,7 +13,7 @@ El usuario interactúa por chat. Delega según el tema:
 
 Muestra la respuesta del agente completa. Para preguntas que crucen temas, consulta a cada agente y luego integra.
 
-Cuando pidan gráficas o un artifact: si también piden análisis, obtenlo primero del analista; luego pásalo al `presentador`, que devuelve `out/<nombre>.html`. Publícalo con la herramienta Artifact (`icon: "chart"` la primera vez; la misma ruta para actualizar el mismo enlace). Nunca escribas HTML/CSS de reportes a mano: el estilo es fijo y vive en `econ/present/assets/` (TradingView oscuro / terminal Bloomberg).
+Cuando pidan gráficas o un artifact: si también piden análisis, obtenlo primero del analista; luego pásalo al `presentador`, que devuelve `out/<nombre>.html`. Publícalo con la herramienta Artifact (`icon: "chart"` la primera vez; la misma ruta para actualizar el mismo enlace). Nunca escribas HTML/CSS de reportes a mano: el estilo es fijo y vive en `econ/present/assets/` (terminal Bloomberg).
 
 ## Cómo ponerte al día (de menos a más tokens)
 
@@ -53,4 +53,4 @@ Cuando pidan gráficas o un artifact: si también piden análisis, obtenlo prime
 
 - `python -m pytest -q` antes de hacer commit.
 - Código en `econ/`: `sources/` (descarga), `storage.py` (Parquet particionado con upsert), `pipeline.py` (CLI), `snapshots.py`, `query.py`, `macro.py` (consultas por periodo), `present/` (artifacts).
-- El estilo visual solo se cambia en `econ/present/assets/` y aplica a todos los reportes; la paleta de series está validada para daltonismo y contraste sobre el panel `#131722`.
+- El estilo visual solo se cambia en `econ/present/assets/` y aplica a todos los reportes; la paleta de series está validada para daltonismo y contraste sobre el panel negro `#000000`.

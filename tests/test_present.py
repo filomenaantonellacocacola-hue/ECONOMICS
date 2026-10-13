@@ -58,7 +58,8 @@ def test_example_spec_builds(data_dir, tmp_path):
     assert {c["kind"] for c in charts.values()} == {"line", "baseline", "curve", "candles", "hbar", "histogram"}
     assert info["as_of"] == "2026-09-29"
     assert info["sources"] == ["Banxico", "FRED", "Yahoo Finance"]
-    assert "--panel: #131722" in page  # el tema siempre se incrusta completo
+    assert "--panel: #000000" in page and "--amber: #ffa028" in page  # el tema siempre se incrusta completo
+    assert '<h2><span class="fn">1)</span>Tasas objetivo</h2>' in page  # barras de funcion numeradas
 
 
 def test_kpis_resolve_values_and_deltas(data_dir, tmp_path):
