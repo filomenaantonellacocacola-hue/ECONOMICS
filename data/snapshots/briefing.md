@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-10-13 02:52 (UTC)
+Generado: 2026-10-13 03:46 (UTC)
 
 ## Macro
 
@@ -74,60 +74,60 @@ Generado: 2026-10-13 02:52 (UTC)
 
 | name | date | close | chg_1d | chg_1m | chg_ytd | chg_1y |
 |---|---|---|---|---|---|---|
-| S&P/BMV IPC | 2026-10-09 | 66,048.57 | 1.63 | 1.90 | 2.71 | 8.47 |
-| S&P 500 | 2026-10-09 | 7,811.54 | 0.59 | 2.90 | 14.11 | 15.66 |
-| Nasdaq Composite | 2026-10-09 | 27,366.17 | 0.64 | 4.92 | 17.74 | 18.76 |
-| Dow Jones Industrial Average | 2026-10-09 | 51,654.95 | 0.83 | -0.79 | 7.47 | 10.84 |
-| CBOE Volatility Index | 2026-10-09 | 14.84 | -3.70 | -16.82 | -0.74 | -31.49 |
-| USD/MXN | 2026-10-09 | 18.36 | 2.14 | 8.70 | 2.12 | -0.03 |
-| EUR/MXN | 2026-10-09 | 20.57 | 2.19 | 4.71 | -2.64 | -3.90 |
+| S&P/BMV IPC | 2026-10-12 | 66,746.78 | 1.06 | 4.12 | 3.79 | 9.75 |
+| S&P 500 | 2026-10-12 | 7,807.24 | -0.06 | 1.96 | 14.05 | 15.92 |
+| Nasdaq Composite | 2026-10-12 | 27,245.90 | -0.44 | 3.47 | 17.23 | 18.33 |
+| Dow Jones Industrial Average | 2026-10-12 | 51,850.55 | 0.38 | -1.37 | 7.88 | 11.85 |
+| CBOE Volatility Index | 2026-10-12 | 15.21 | 2.49 | -3.98 | 1.74 | -20.07 |
+| USD/MXN | 2026-10-13 | 18.25 | 0.34 | 7.44 | 1.51 | -0.82 |
+| EUR/MXN | 2026-10-13 | 20.39 | -0.02 | 3.40 | -3.51 | -4.82 |
 
 
-## BMV (64 emisoras, 47% sobre su media de 200 dias)
-
-
-**Mayores alzas del dia**
-
-| ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
-|---|---|---|---|---|---|---|
-| FNOVA17.MX | Fibra Nova | 41.72 | 48.21 | 48.21 | 58.43 | 100.00 |
-| GMEXICOB.MX | Grupo Mexico | 242.48 | 5.19 | 6.12 | 45.81 | 68.47 |
-| GAPB.MX | Grupo Aeroportuario del Pacifico | 371.74 | 4.11 | 5.73 | -21.08 | 53.83 |
-| PE&OLES.MX | Industrias Penoles | 910.52 | 3.59 | -0.62 | -3.71 | 56.46 |
-| PINFRA.MX | Promotora y Operadora de Infraestructura | 284.78 | 3.59 | 6.11 | 6.62 | 72.16 |
-
-
-**Mayores bajas del dia**
-
-| ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
-|---|---|---|---|---|---|---|
-| AMXB.MX | America Movil | 19.67 | -2.62 | 0.61 | 7.07 | 48.41 |
-| MFRISCOA-1.MX | Minera Frisco | 18.11 | -2.11 | -19.87 | 104.40 | 39.26 |
-| BBAJIOO.MX | Banco del Bajio | 56.71 | -2.06 | -1.68 | 33.25 | 46.90 |
-| ARA.MX | Consorcio ARA | 5.31 | -0.75 | 14.19 | 46.06 | 65.55 |
-| LIVEPOLC-1.MX | El Puerto de Liverpool | 102.61 | -0.24 | 2.42 | 4.36 | 49.11 |
-
-
-## SIC (297 emisoras, 68% sobre su media de 200 dias)
+## BMV (64 emisoras, 52% sobre su media de 200 dias)
 
 
 **Mayores alzas del dia**
 
 | ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
 |---|---|---|---|---|---|---|
-| MRNA.MX | Moderna | 4,117.05 | 14.37 | 79.24 | 675.34 | 74.35 |
-| AMT.MX | American Tower | 3,306.00 | 9.84 | 9.83 | 7.14 | 85.97 |
-| SNOW.MX | Snowflake | 6,772.00 | 9.27 | 20.22 | 70.30 | 74.21 |
-| PGR.MX | Progressive | 3,989.92 | 8.73 | 9.46 | -2.71 | 86.96 |
-| AFRM.MX | Affirm | 1,377.00 | 8.43 | 13.80 | 2.00 | 68.08 |
+| FNOVA17.MX | Fibra Nova | 41.66 | 47.99 | 47.99 | 58.20 | 100.00 |
+| GCARSOA1.MX | Grupo Carso | 156.36 | 4.25 | 16.32 | 32.89 | 72.16 |
+| ALPEKA.MX | Alpek | 16.10 | 4.07 | 17.52 | 74.24 | 78.44 |
+| GFINBURO.MX | Grupo Financiero Inbursa | 43.82 | 3.69 | 2.79 | 3.55 | 65.37 |
+| PINFRA.MX | Promotora y Operadora de Infraestructura | 293.66 | 3.42 | 10.04 | 9.94 | 77.65 |
 
 
 **Mayores bajas del dia**
 
 | ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
 |---|---|---|---|---|---|---|
-| TMUS.MX | T-Mobile US | 2,737.16 | -9.93 | -10.32 | -25.31 | 31.48 |
-| T.MX | AT&T | 408.72 | -9.32 | -5.61 | -8.74 | 33.78 |
-| VZ.MX | Verizon | 770.00 | -7.37 | -9.94 | 4.77 | 31.22 |
-| VALEN.MX | Vale | 244.52 | -5.22 | -8.08 | 6.48 | 44.79 |
-| DE.MX | Deere | 11,692.00 | -4.71 | -0.76 | 37.92 | 39.45 |
+| MFRISCOA-1.MX | Minera Frisco | 17.79 | -1.60 | -17.83 | 100.79 | 37.31 |
+| AGUA.MX | Grupo Rotoplas | 14.68 | -1.01 | 4.56 | 27.50 | 58.42 |
+| CHDRAUIB.MX | Grupo Comercial Chedraui | 87.00 | -0.90 | 0.01 | -28.70 | 49.04 |
+| ARA.MX | Consorcio ARA | 5.26 | -0.75 | 10.04 | 44.69 | 62.40 |
+| MEGACPO.MX | Megacable | 52.57 | -0.66 | 1.90 | 8.15 | 49.57 |
+
+
+## SIC (297 emisoras, 69% sobre su media de 200 dias)
+
+
+**Mayores alzas del dia**
+
+| ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
+|---|---|---|---|---|---|---|
+| MAR.MX | Marriott | 6,732.00 | 18.21 | 18.21 | 18.67 | 93.27 |
+| COP.MX | ConocoPhillips | 2,502.00 | 9.78 | 7.98 | 48.76 | 81.57 |
+| MPC.MX | Marathon Petroleum | 8,400.00 | 8.39 | 25.11 | 137.18 | 89.68 |
+| PM.MX | Philip Morris | 3,693.00 | 8.15 | 15.41 | 27.64 | 87.55 |
+| NEM.MX | Newmont | 2,187.82 | 7.77 | 0.59 | 21.59 | 58.60 |
+
+
+**Mayores bajas del dia**
+
+| ticker | name | close | chg_1d | chg_1m | chg_ytd | rsi14 |
+|---|---|---|---|---|---|---|
+| LCID.MX | Lucid | 68.50 | -6.16 | -5.84 | -63.74 | 38.14 |
+| MRNA.MX | Moderna | 3,905.50 | -5.14 | 67.26 | 635.50 | 67.53 |
+| ARMN.MX | Arm Holdings | 4,650.00 | -5.11 | 7.71 | 133.02 | 43.41 |
+| SMCI.MX | Super Micro Computer | 729.99 | -5.06 | 13.57 | 39.19 | 51.42 |
+| SOFI.MX | SoFi Technologies | 277.35 | -4.80 | -5.34 | -40.99 | 40.50 |

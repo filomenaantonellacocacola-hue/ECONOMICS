@@ -1,0 +1,30 @@
+{
+  "task": "daily",
+  "args": {
+    "start": null,
+    "days": 10,
+    "tickers": null,
+    "query": null
+  },
+  "started_utc": "2026-10-13 03:45:44",
+  "finished_utc": "2026-10-13 03:46:32",
+  "exit_code": 0,
+  "steps": [
+    {
+      "name": "prices",
+      "status": "ok",
+      "seconds": 35.9
+    },
+    {
+      "name": "macro",
+      "status": "ok",
+      "seconds": 9.8
+    },
+    {
+      "name": "snapshots",
+      "status": "ok",
+      "seconds": 2.0
+    }
+  ],
+  "warnings": []
+}

@@ -1,11 +1,11 @@
 {
-  "generated_at_utc": "2026-10-13 02:52",
+  "generated_at_utc": "2026-10-13 03:46",
   "datasets": {
     "prices": {
-      "rows": 590215,
+      "rows": 590571,
       "ids": 368,
       "min_date": "2020-01-01",
-      "max_date": "2026-10-09",
+      "max_date": "2026-10-13",
       "files": [
         "data/prices/2020-01/data.parquet",
         "data/prices/2020-02/data.parquet",
@@ -139,7 +139,9 @@
   },
   "health": {
     "tickers_missing": [],
-    "tickers_stale": [],
+    "tickers_stale": [
+      "WBD.MX"
+    ],
     "macro_missing": []
   },
   "snapshots": [
