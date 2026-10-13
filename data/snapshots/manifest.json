@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-13 06:58",
+  "generated_at_utc": "2026-10-13 18:19",
   "datasets": {
     "prices": {
       "rows": 922696,
@@ -55,7 +55,7 @@
       ]
     },
     "financials": {
-      "rows": 420314,
+      "rows": 420483,
       "ids": 292,
       "min_date": "2021-10-31",
       "max_date": "2026-08-31",

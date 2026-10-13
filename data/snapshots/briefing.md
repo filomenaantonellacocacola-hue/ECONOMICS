@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-10-13 06:58 (UTC)
+Generado: 2026-10-13 18:19 (UTC)
 
 ## Macro
 
@@ -142,7 +142,7 @@ Generado: 2026-10-13 06:58 (UTC)
 | JPM.MX | JPMorgan Chase | 2026-10-13 | 5.41 | 14.27 | 5.86 |
 | GS.MX | Goldman Sachs | 2026-10-13 | 0.27 | 13.83 | 44.27 |
 | WFC.MX | Wells Fargo | 2026-10-13 | -10.19 | 12.14 | 16.38 |
-| C.MX | Citigroup | 2026-10-13 | 14.38 | 14.00 | 15.62 |
+| C.MX | Citigroup | 2026-10-13 | 14.38 | 14.00 | 7.94 |
 | ASMLN.MX | ASML | 2026-10-14 | 68.54 | 57.45 | 9.09 |
 | BLK.MX | BlackRock | 2026-10-14 | 3.34 | 25.91 | 9.62 |
 | BAC.MX | Bank of America | 2026-10-14 | 0.75 | 12.54 | 7.74 |

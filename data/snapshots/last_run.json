@@ -7,19 +7,19 @@
     "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-13 06:53:23",
-  "finished_utc": "2026-10-13 06:58:33",
+  "started_utc": "2026-10-13 18:14:36",
+  "finished_utc": "2026-10-13 18:20:00",
   "exit_code": 0,
   "steps": [
     {
       "name": "company",
       "status": "ok",
-      "seconds": 295.2
+      "seconds": 317.7
     },
     {
       "name": "snapshots",
       "status": "ok",
-      "seconds": 14.1
+      "seconds": 6.5
     }
   ],
   "warnings": []
