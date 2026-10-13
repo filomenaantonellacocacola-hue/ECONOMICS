@@ -2,6 +2,7 @@ source,series_id,name,category,units,frequency,agg
 FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,last
 FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D,avg
 FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W,last
+FRED,M1SL,Oferta monetaria M1 (desde may-2020 incluye depositos de ahorro),politica_monetaria,miles_millones_usd,M,last
 FRED,M2SL,Oferta monetaria M2,politica_monetaria,miles_millones_usd,M,last
 FRED,DGS3MO,Treasury 3 meses,tasas,pct,D,avg
 FRED,DGS2,Treasury 2 anios,tasas,pct,D,avg

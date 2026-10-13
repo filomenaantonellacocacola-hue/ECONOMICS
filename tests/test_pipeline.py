@@ -386,3 +386,56 @@ def test_resolve_symbols_tries_current_ticker_first(tmp_path, monkeypatch):
     assert pipeline.resolve_symbols() == 0
     assert seen["targets"] == ["BAD.MX"]
     assert json.loads((config.SNAPSHOTS_DIR / "symbol_resolution.json").read_text())["not_found"] == ["BAD.MX"]
+
+
+class _FakeResp:
+    def __init__(self, payload):
+        self.payload = payload
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return self.payload
+
+
+class _FakeSession:
+    def __init__(self):
+        self.calls = []
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+    def get(self, url, params=None, timeout=None):
+        self.calls.append((url, params))
+        if url.endswith("/cat/series"):
+            return _FakeResp({"bmx": {"resultados": [
+                {"idSerie": "SF1", "texto": "Agregados monetarios  M1"},
+                {"idSerie": "SF1", "texto": "duplicada"},
+                {"idSerie": "SF4", "texto": "M4 moneda extranjera"},
+            ]}})
+        sid = url.rsplit("/", 1)[-1]
+        return _FakeResp({"bmx": {"series": [{"idSerie": sid, "titulo": f"Titulo  {sid}", "unidad": "Miles de pesos"}]}})
+
+
+def test_banxico_catalog_search_without_token(monkeypatch, tmp_path):
+    from econ import pipeline
+
+    fake = _FakeSession()
+    monkeypatch.setattr(banxico.requests, "Session", lambda: fake)
+    monkeypatch.delenv("BANXICO_TOKEN", raising=False)
+    result = banxico.search_catalog(["agregado monetario"])
+    hits = result["agregado monetario"]
+    assert [h["id"] for h in hits] == ["SF1", "SF4"]
+    assert hits[0]["descripcion"] == "Agregados monetarios M1"
+    assert hits[1]["ficha"] == {"idSerie": "SF4", "titulo": "Titulo SF4", "unidad": "Miles de pesos"}
+    assert fake.calls[0] == (banxico.API_URL + "/cat/series", {"q": "agregado monetario"})
+
+    _patch_dirs(monkeypatch, tmp_path / "data")
+    monkeypatch.setattr(banxico, "search_catalog", lambda qs: {q: [{"id": "SF1"}] for q in qs})
+    assert pipeline.main(["banxico-search", "--query", "M1; M4"]) == 0
+    saved = json.loads((tmp_path / "data" / "snapshots" / "banxico_search.json").read_text())
+    assert list(saved) == ["M1", "M4"]
