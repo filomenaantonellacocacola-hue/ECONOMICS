@@ -33,7 +33,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
+      # La punta actual de la rama (no el commit con que se lanzo): si otra corrida termino mientras
+      # esta esperaba en fila, se parte de sus datos y no se repite su lote ni choca al guardar.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:
