@@ -1,29 +1,35 @@
 {
-  "task": "daily",
+  "task": "backfill",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-10-13 03:45:44",
-  "finished_utc": "2026-10-13 03:46:32",
+  "started_utc": "2026-10-13 04:30:26",
+  "finished_utc": "2026-10-13 04:31:53",
   "exit_code": 0,
   "steps": [
     {
       "name": "prices",
       "status": "ok",
-      "seconds": 35.9
+      "seconds": 61.0
     },
     {
       "name": "macro",
       "status": "ok",
-      "seconds": 9.8
+      "seconds": 11.3
+    },
+    {
+      "name": "prune",
+      "status": "ok",
+      "seconds": 0.7
     },
     {
       "name": "snapshots",
       "status": "ok",
-      "seconds": 2.0
+      "seconds": 13.9
     }
   ],
   "warnings": []
