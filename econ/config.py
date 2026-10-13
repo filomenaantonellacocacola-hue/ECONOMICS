@@ -13,6 +13,10 @@ DATA_DIR = ROOT / "data"
 PRICES_DIR = DATA_DIR / "prices"
 MACRO_DIR = DATA_DIR / "macro"
 FUNDAMENTALS_DIR = DATA_DIR / "fundamentals"
+FINANCIALS_DIR = DATA_DIR / "financials"          # estados financieros (anual y trimestral)
+EARNINGS_DIR = DATA_DIR / "earnings"              # fechas de reporte y sorpresas de UPA
+RECOMMENDATIONS_DIR = DATA_DIR / "recommendations"  # conteo de recomendaciones de analistas
+COMPANY_LOG_DIR = DATA_DIR / "company_log"        # bitacora de descargas por emisora
 SNAPSHOTS_DIR = DATA_DIR / "snapshots"
 
 UNIVERSE_CSV = CONFIG_DIR / "universe.csv"

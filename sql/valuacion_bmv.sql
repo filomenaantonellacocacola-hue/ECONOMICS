@@ -1,13 +1,14 @@
--- Emisoras de la BMV ordenadas por P/U, con rentabilidad y dividendos (requiere fundamentales).
-SELECT f.ticker, u.name, f.sector,
-       round(f.marketCap / 1e9, 1) AS mkt_cap_miles_mill,
-       round(f.trailingPE, 1) AS pe,
-       round(f.priceToBook, 2) AS p_vl,
-       round(f.enterpriseToEbitda, 1) AS ev_ebitda,
-       round(100 * f.returnOnEquity, 1) AS roe_pct,
-       round(f.dividendYield, 2) AS div_yield,
-       f.date AS corte
-FROM fundamentals_latest f
-JOIN universe u USING (ticker)
-WHERE u.market = 'BMV' AND f.trailingPE > 0
+-- Acciones de la BMV ordenadas por P/U, con rentabilidad, dividendos y puntajes (unidades normalizadas).
+SELECT ticker, name, sector,
+       round(mkt_cap_mxn_bn, 1) AS mkt_cap_mmm_mxn,
+       round(pe, 1) AS pe,
+       round(pb, 2) AS p_vl,
+       round(ev_ebitda, 1) AS ev_ebitda,
+       round(roe_pct, 1) AS roe_pct,
+       round(div_yield_pct, 2) AS div_yield_pct,
+       round(target_upside_pct, 1) AS potencial_pct,
+       score_value, score_quality,
+       fund_date AS corte
+FROM equity_snapshot
+WHERE market = 'BMV' AND asset_type = 'stock' AND pe > 0
 ORDER BY pe ASC;

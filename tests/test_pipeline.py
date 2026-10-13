@@ -35,7 +35,9 @@ def _prices(tickers=("AAA.MX", "BBB"), days=300):
 def test_normalize_download_multiindex(fields_first, tz):
     raw = _raw_download(["AAA.MX", "BBB"], tz=tz, fields_first=fields_first)
     df = yahoo.normalize_download(raw, ["AAA.MX", "BBB"])
-    assert list(df.columns) == ["date", "ticker", "open", "high", "low", "close", "adj_close", "volume"]
+    assert list(df.columns) == ["date", "ticker", "open", "high", "low", "close", "adj_close", "volume",
+                                "dividend", "split"]
+    assert (df[["dividend", "split"]] == 0).all().all()
     assert sorted(df["ticker"].unique()) == ["AAA.MX", "BBB"]
     assert len(df) == 10
     assert df["date"].dt.tz is None

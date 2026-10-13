@@ -9,6 +9,16 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/anchor_set.py\""
+          }
+        ]
+      }
     ]
   },
   "permissions": {
@@ -16,6 +26,7 @@
       "Bash(python -m econ.macro:*)",
       "Bash(python -m econ.query:*)",
       "Bash(python -m econ.present:*)",
+      "Bash(python -m econ.equity:*)",
       "Bash(python -m pytest:*)",
       "Bash(git fetch -q origin main)",
       "Bash(git restore --source=origin/main --worktree data/)"

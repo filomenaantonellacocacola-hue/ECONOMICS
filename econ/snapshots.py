@@ -3,6 +3,8 @@
 Genera en ``data/snapshots/``:
 
 - ``market_snapshot.csv``: una fila por emisora con rendimientos, volatilidad y tendencia.
+- ``equity_snapshot.csv``: una fila por accion/FIBRA/ETF con riesgo, fundamentales normalizados,
+  analistas, reportes y puntajes (ver ``econ/equity.py`` y ``python -m econ.equity columnas``).
 - ``macro_snapshot.csv``: ultimo dato de cada serie macro y su cambio.
 - ``macro_monthly.csv``, ``macro_quarterly.csv``, ``macro_semiannual.csv``, ``macro_annual.csv``:
   tablas anchas (una fila por serie, una columna por periodo) con el valor y el cambio % anual.
@@ -18,11 +20,13 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from econ import config, query, storage
+from econ import config, equity, query, storage
 
 WINDOWS = {"chg_1d": 1, "chg_1w": 5, "chg_1m": 21, "chg_3m": 63, "chg_6m": 126, "chg_1y": 252}
 # Periodos recientes que se incluyen en cada tabla macro agregada.
 MACRO_AGG_PERIODS = {"macro_monthly": 24, "macro_quarterly": 12, "macro_semiannual": 8, "macro_annual": 10}
+# Datasets con mas archivos que esto se resumen en el manifest con un glob.
+MAX_LISTED_FILES = 120
 
 
 def _rsi(series: pd.Series, period: int = 14) -> float:
@@ -37,14 +41,16 @@ def _rsi(series: pd.Series, period: int = 14) -> float:
 
 
 def _ticker_metrics(g: pd.DataFrame) -> dict:
-    g = g.sort_values("date")
-    px = g["adj_close"].fillna(g["close"])
+    g = g.sort_values("date").set_index("date")
+    raw = g["adj_close"].fillna(g["close"])
+    # Las emisoras .MX corrigen splits que Yahoo no ajusto (ver econ/equity.py).
+    px = equity.clean_prices(raw)[0] if str(g["ticker"].iloc[0]).endswith(".MX") else raw.dropna()
     last = px.iloc[-1]
-    last_date = g["date"].iloc[-1]
+    last_date = px.index[-1]
     row = {"date": last_date.date().isoformat(), "close": g["close"].iloc[-1]}
     for name, n in WINDOWS.items():
         row[name] = 100 * (last / px.iloc[-1 - n] - 1) if len(px) > n else np.nan
-    prev_year = px[g["date"].dt.year < last_date.year]
+    prev_year = px[px.index.year < last_date.year]
     row["chg_ytd"] = 100 * (last / prev_year.iloc[-1] - 1) if len(prev_year) else np.nan
     last_252 = px.iloc[-252:]
     row["pct_from_52w_high"] = 100 * (last / last_252.max() - 1)
@@ -152,7 +158,8 @@ def _md_table(df: pd.DataFrame) -> str:
     return "\n".join(lines) + "\n"
 
 
-def briefing(market: pd.DataFrame, macro: pd.DataFrame, generated_at: str) -> str:
+def briefing(market: pd.DataFrame, macro: pd.DataFrame, generated_at: str,
+             equities: pd.DataFrame | None = None) -> str:
     out = [f"# Briefing de mercado\n\nGenerado: {generated_at} (UTC)\n"]
 
     if not macro.empty:
@@ -174,26 +181,41 @@ def briefing(market: pd.DataFrame, macro: pd.DataFrame, generated_at: str) -> st
             cols = ["ticker", "name", "close", "chg_1d", "chg_1m", "chg_ytd", "rsi14"]
             out.append("\n**Mayores alzas del dia**\n\n" + _md_table(m.nlargest(5, "chg_1d")[cols]))
             out.append("\n**Mayores bajas del dia**\n\n" + _md_table(m.nsmallest(5, "chg_1d")[cols]))
+
+    if equities is not None and not equities.empty and "next_earnings" in equities.columns:
+        nxt = pd.to_datetime(equities["next_earnings"], errors="coerce")
+        start = pd.Timestamp(generated_at[:10])
+        soon = equities[(nxt >= start) & (nxt <= start + pd.Timedelta(days=14))].assign(_d=nxt)
+        if not soon.empty:
+            out.append("\n## Reportes trimestrales en las proximas 2 semanas\n")
+            cols = ["ticker", "name", "next_earnings", "chg_ytd", "pe", "last_surprise_pct"]
+            out.append(_md_table(soon.sort_values("_d")[cols]))
     return "\n".join(out)
 
 
-def _dataset_summary(df: pd.DataFrame, root: Path, id_col: str) -> dict:
+def _dataset_summary(df: pd.DataFrame, root: Path, id_col: str, date_col: str = "date") -> dict:
     if df.empty:
         return {"rows": 0}
     # Rutas relativas a la raiz del repo (p.ej. data/prices/2026-09/data.parquet).
     files = sorted(p.relative_to(root.parent.parent).as_posix() for p in root.glob("*/data.parquet"))
-    return {
+    summary = {
         "rows": int(len(df)),
         "ids": int(df[id_col].nunique()),
-        "min_date": pd.to_datetime(df["date"]).min().date().isoformat(),
-        "max_date": pd.to_datetime(df["date"]).max().date().isoformat(),
-        "files": files,
+        "min_date": pd.to_datetime(df[date_col]).min().date().isoformat(),
+        "max_date": pd.to_datetime(df[date_col]).max().date().isoformat(),
     }
+    if len(files) <= MAX_LISTED_FILES:
+        summary["files"] = files
+    else:  # p.ej. estados financieros, un archivo por emisora
+        summary.update(n_files=len(files), files_glob=f"{root.relative_to(root.parent.parent).as_posix()}/*/data.parquet")
+    return summary
 
 
-def health(prices: pd.DataFrame, macro: pd.DataFrame, universe: pd.DataFrame, series: pd.DataFrame) -> dict:
+def health(prices: pd.DataFrame, macro: pd.DataFrame, universe: pd.DataFrame, series: pd.DataFrame,
+           company_log: pd.DataFrame | None = None) -> dict:
     """Detecta emisoras/series sin datos o desactualizadas (para depurar el universo)."""
     result: dict = {}
+    companies = set(universe.loc[universe["asset_type"].isin(["stock", "fibra"]), "ticker"])
     if not prices.empty:
         last = pd.to_datetime(prices.groupby("ticker")["date"].max())
         cutoff = last.max() - pd.Timedelta(days=7)
@@ -202,6 +224,10 @@ def health(prices: pd.DataFrame, macro: pd.DataFrame, universe: pd.DataFrame, se
     have = set(zip(macro["source"], macro["series_id"])) if not macro.empty else set()
     want = set(zip(series["source"], series["series_id"]))
     result["macro_missing"] = sorted(f"{s}:{i}" for s, i in want - have)
+    # Cobertura de reportes (tarea company): emisoras con al menos una descarga con estados financieros.
+    ok = set() if company_log is None or company_log.empty else set(
+        company_log.loc[company_log["status"] == "ok", "ticker"])
+    result["company_coverage"] = f"{len(companies & ok)}/{len(companies)}"
     return result
 
 
@@ -214,12 +240,20 @@ def build(data_dir: Path | None = None, out_dir: Path | None = None) -> dict:
     prices = storage.read_dataset(data_dir / "prices")
     macro = storage.read_dataset(data_dir / "macro")
     fundamentals = storage.read_dataset(data_dir / "fundamentals")
+    financials = storage.read_dataset(data_dir / "financials")
+    earnings = storage.read_dataset(data_dir / "earnings")
+    recommendations = storage.read_dataset(data_dir / "recommendations")
+    company_log = storage.read_dataset(data_dir / "company_log")
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
 
     market = market_snapshot(prices, universe)
     macro_snap = macro_snapshot(macro, series)
+    equities = equity.equity_snapshot(prices, universe, fundamentals, macro, market, earnings,
+                                      recommendations, financials)
     if not market.empty:
         market.to_csv(out_dir / "market_snapshot.csv", index=False)
+    if not equities.empty:
+        equities.to_csv(out_dir / "equity_snapshot.csv", index=False)
     if not macro_snap.empty:
         macro_snap.to_csv(out_dir / "macro_snapshot.csv", index=False)
     if not macro.empty:
@@ -228,7 +262,7 @@ def build(data_dir: Path | None = None, out_dir: Path | None = None) -> dict:
             agg = macro_agg_snapshot(con, view, periods, series)
             if not agg.empty:
                 agg.to_csv(out_dir / f"{view}.csv", index=False)
-    (out_dir / "briefing.md").write_text(briefing(market, macro_snap, generated_at))
+    (out_dir / "briefing.md").write_text(briefing(market, macro_snap, generated_at, equities))
 
     manifest = {
         "generated_at_utc": generated_at,
@@ -236,8 +270,12 @@ def build(data_dir: Path | None = None, out_dir: Path | None = None) -> dict:
             "prices": _dataset_summary(prices, data_dir / "prices", "ticker"),
             "macro": _dataset_summary(macro, data_dir / "macro", "series_id"),
             "fundamentals": _dataset_summary(fundamentals, data_dir / "fundamentals", "ticker"),
+            "financials": _dataset_summary(financials, data_dir / "financials", "ticker", "period_end"),
+            "earnings": _dataset_summary(earnings, data_dir / "earnings", "ticker"),
+            "recommendations": _dataset_summary(recommendations, data_dir / "recommendations", "ticker"),
+            "company_log": _dataset_summary(company_log, data_dir / "company_log", "ticker"),
         },
-        "health": health(prices, macro, universe, series),
+        "health": health(prices, macro, universe, series, company_log),
         "snapshots": sorted(p.name for p in out_dir.iterdir() if p.name != "manifest.json"),
     }
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
