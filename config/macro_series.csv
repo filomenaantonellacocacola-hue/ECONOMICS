@@ -46,5 +46,18 @@ BANXICO,SF311415,M1 Mexico: cuenta corriente en moneda nacional,agregados_moneta
 BANXICO,SF311416,M1 Mexico: cuenta corriente en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
 BANXICO,SF311422,M2 Mexico: captacion a plazo en bancos en moneda nacional,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
 BANXICO,SF311423,M2 Mexico: captacion a plazo en bancos en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
-CALC,MX_M1_ME,M1 Mexico en moneda extranjera (cheques + cuenta corriente),agregados_monetarios,miles_millones_mxn,M,last,1,SF311413 + SF311416
-CALC,MX_M1_MN,M1 Mexico en moneda nacional (M1 - moneda extranjera),agregados_monetarios,miles_millones_mxn,M,last,1,SF311408 - SF311413 - SF311416
+BANXICO,SF311417,M1 Mexico: depositos a la vista en entidades de ahorro y credito popular,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311427,M2 Mexico: captacion a plazo en uniones de credito en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311432,M2 Mexico: reportos de residentes en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311434,M3 Mexico: valores publicos en poder de residentes,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311439,M4 Mexico: instrumentos monetarios en poder de no residentes,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311442,M4 Mexico: depositos a la vista de no residentes en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311445,M4 Mexico: captacion a plazo de no residentes en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+CALC,MX_M1_ME,M1 Mexico en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,1,SF311413 + SF311416
+CALC,MX_M1_MN,M1 Mexico en moneda nacional,agregados_monetarios,miles_millones_mxn,M,last,1,SF311408 - SF311413 - SF311416
+CALC,MX_M2_ME,M2 Mexico en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,1,SF311413 + SF311416 + SF311423 + SF311427 + SF311432
+CALC,MX_M2_MN,M2 Mexico en moneda nacional,agregados_monetarios,miles_millones_mxn,M,last,1,SF311418 - SF311413 - SF311416 - SF311423 - SF311427 - SF311432
+CALC,MX_M3_ME,M3 Mexico en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,1,SF311413 + SF311416 + SF311423 + SF311427 + SF311432
+CALC,MX_M3_MN,M3 Mexico en moneda nacional,agregados_monetarios,miles_millones_mxn,M,last,1,SF311433 - SF311413 - SF311416 - SF311423 - SF311427 - SF311432
+CALC,MX_M4_ME,M4 Mexico en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,1,SF311413 + SF311416 + SF311423 + SF311427 + SF311432 + SF311442 + SF311445
+CALC,MX_M4_MN,M4 Mexico en moneda nacional,agregados_monetarios,miles_millones_mxn,M,last,1,SF311438 - SF311413 - SF311416 - SF311423 - SF311427 - SF311432 - SF311442 - SF311445
