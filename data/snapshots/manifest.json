@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-10 16:36",
+  "generated_at_utc": "2026-10-13 02:39",
   "datasets": {
     "prices": {
       "rows": 590215,
@@ -140,9 +140,12 @@
   "health": {
     "tickers_missing": [],
     "tickers_stale": [],
-    "macro_missing": []
+    "macro_missing": [
+      "FRED:M1SL"
+    ]
   },
   "snapshots": [
+    "banxico_search.json",
     "briefing.md",
     "macro_annual.csv",
     "macro_monthly.csv",

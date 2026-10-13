@@ -1,0 +1,710 @@
+{
+  "agregado monetario": [
+    {
+      "id": "SF311408",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/",
+      "ficha": {
+        "idSerie": "SF311408",
+        "titulo": "Agregados Monetarios M1",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311418",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes",
+      "ficha": {
+        "idSerie": "SF311418",
+        "titulo": "Agregados Monetarios M2",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311419",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/",
+      "ficha": {
+        "idSerie": "SF311419",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes (M2-M1) 4/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335866",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Empresas privadas no financieras",
+      "ficha": {
+        "idSerie": "SF335866",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Empresas privadas no financieras",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335863",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Hogares",
+      "ficha": {
+        "idSerie": "SF335863",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Hogares",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335881",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Hogares",
+      "ficha": {
+        "idSerie": "SF335881",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Hogares",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335880",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Otros intermediarios financieros no bancarios En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335880",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Otros intermediarios financieros no bancarios Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335884",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Empresas privadas no financieras",
+      "ficha": {
+        "idSerie": "SF335884",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Empresas privadas no financieras",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335870",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Otros intermediarios financieros no bancarios En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335870",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Otros intermediarios financieros no bancarios Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335879",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Otros intermediarios financieros no bancarios En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335879",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Otros intermediarios financieros no bancarios Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335887",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Otros intermediarios financieros no bancarios",
+      "ficha": {
+        "idSerie": "SF335887",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Otros intermediarios financieros no bancarios",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335882",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Hogares En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335882",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Hogares Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335873",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Hogares En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335873",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Hogares Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335886",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Empresas privadas no financieras En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335886",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Empresas privadas no financieras Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335874",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Hogares En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335874",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Hogares Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335864",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Hogares En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335864",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Hogares Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335885",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Empresas privadas no financieras En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335885",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Empresas privadas no financieras Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335872",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Hogares",
+      "ficha": {
+        "idSerie": "SF335872",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Hogares",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335876",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Empresas privadas no financieras En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335876",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Empresas privadas no financieras Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335878",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Otros intermediarios financieros no bancarios",
+      "ficha": {
+        "idSerie": "SF335878",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Otros intermediarios financieros no bancarios",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335869",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Otros intermediarios financieros no bancarios",
+      "ficha": {
+        "idSerie": "SF335869",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Otros intermediarios financieros no bancarios",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335889",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Otros intermediarios financieros no bancarios En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335889",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Otros intermediarios financieros no bancarios Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335865",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Hogares En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335865",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Hogares Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335888",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Otros intermediarios financieros no bancarios En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335888",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Otros intermediarios financieros no bancarios Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335868",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Empresas privadas no financieras En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335868",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Empresas privadas no financieras Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335871",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Otros intermediarios financieros no bancarios En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335871",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Otros intermediarios financieros no bancarios Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335867",
+      "descripcion": "Agregado Monetario M2 por Tenedor M1 1/ Empresas privadas no financieras En moneda nacional",
+      "ficha": {
+        "idSerie": "SF335867",
+        "titulo": "Agregado Monetario M2 por Tenedor M1 1/ Empresas privadas no financieras Moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335875",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Empresas privadas no financieras",
+      "ficha": {
+        "idSerie": "SF335875",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Empresas privadas no financieras",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335877",
+      "descripcion": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Empresas privadas no financieras En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335877",
+        "titulo": "Agregado Monetario M2 por Tenedor Instrumentos a plazo en poder de residentes (M2-M1) 2/ Empresas privadas no financieras Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF335883",
+      "descripcion": "Agregado Monetario M2 por Tenedor M2 = M1 + instrumentos monetarios a plazo en poder de residentes Hogares En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF335883",
+        "titulo": "Agregado Monetario M2 por Tenedor M2 Hogares Moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    }
+  ],
+  "agregados monetarios": [
+    {
+      "id": "SF311408",
+      "descripcion": "Agregados Monetarios M1",
+      "ficha": {
+        "idSerie": "SF311408",
+        "titulo": "Agregados Monetarios M1",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311418",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes",
+      "ficha": {
+        "idSerie": "SF311418",
+        "titulo": "Agregados Monetarios M2",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311433",
+      "descripcion": "Agregados Monetarios M3 = M2 + valores públicos en poder de residentes",
+      "ficha": {
+        "idSerie": "SF311433",
+        "titulo": "Agregados Monetarios M3",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311438",
+      "descripcion": "Agregados Monetarios M4 = M3 + instrumentos monetarios en poder de no residentes",
+      "ficha": {
+        "idSerie": "SF311438",
+        "titulo": "Agregados Monetarios M4",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311409",
+      "descripcion": "Agregados Monetarios M1 Billetes y monedas en poder del público 1/",
+      "ficha": {
+        "idSerie": "SF311409",
+        "titulo": "Agregados Monetarios M1 Billetes y monedas en poder del público 1/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311419",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes Instrumentos monetarios a plazo en poder de residentes 4/",
+      "ficha": {
+        "idSerie": "SF311419",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes (M2-M1) 4/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311420",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo",
+      "ficha": {
+        "idSerie": "SF311420",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311440",
+      "descripcion": "Agregados Monetarios M4 = M3 + instrumentos monetarios en poder de no residentes Instrumentos monetarios en poder de no residentes Depósitos de exigibilidad inmediata en bancos 2/",
+      "ficha": {
+        "idSerie": "SF311440",
+        "titulo": "Agregados Monetarios M4 Instrumentos monetarios en poder de no residentes Depósitos de exigibilidad inmediata en bancos 2/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311451",
+      "descripcion": "Agregados Monetarios M4 = M3 + instrumentos monetarios en poder de no residentes Instrumentos monetarios en poder de no residentes Acreedores por reportos 6/",
+      "ficha": {
+        "idSerie": "SF311451",
+        "titulo": "Agregados Monetarios M4 Instrumentos monetarios en poder de no residentes Acreedores por reportos 6/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311447",
+      "descripcion": "Agregados Monetarios M4 = M3 + instrumentos monetarios en poder de no residentes Instrumentos monetarios en poder de no residentes Valores públicos en poder de no residentes",
+      "ficha": {
+        "idSerie": "SF311447",
+        "titulo": "Agregados Monetarios M4 Instrumentos monetarios en poder de no residentes Valores públicos en poder de no residentes",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311443",
+      "descripcion": "Agregados Monetarios M4 = M3 + instrumentos monetarios en poder de no residentes Instrumentos monetarios en poder de no residentes Captación a plazo en bancos 5/",
+      "ficha": {
+        "idSerie": "SF311443",
+        "titulo": "Agregados Monetarios M4 Instrumentos monetarios en poder de no residentes Captación a plazo en bancos 5/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311446",
+      "descripcion": "Agregados Monetarios M4 = M3 + instrumentos monetarios en poder de no residentes Instrumentos monetarios en poder de no residentes Acciones de los fondos de inversión de deuda",
+      "ficha": {
+        "idSerie": "SF311446",
+        "titulo": "Agregados Monetarios M4 Instrumentos monetarios en poder de no residentes Acciones de los fondos de inversión de deuda",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311436",
+      "descripcion": "Agregados Monetarios M3 = M2 + valores públicos en poder de residentes Valores públicos en poder de residentes Emitidos por el Banco de México (BREMS) 7/",
+      "ficha": {
+        "idSerie": "SF311436",
+        "titulo": "Agregados Monetarios M3 Valores públicos en poder de residentes Emitidos por el Banco de México (BREMS) 7/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311439",
+      "descripcion": "Agregados Monetarios M4 = M3 + instrumentos monetarios en poder de no residentes Instrumentos monetarios en poder de no residentes",
+      "ficha": {
+        "idSerie": "SF311439",
+        "titulo": "Agregados Monetarios M4 Instrumentos monetarios en poder de no residentes",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311421",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo En bancos 5/",
+      "ficha": {
+        "idSerie": "SF311421",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo En bancos 5/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311424",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo En otras instituciones no bancarias",
+      "ficha": {
+        "idSerie": "SF311424",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo En otras instituciones no bancarias",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311435",
+      "descripcion": "Agregados Monetarios M3 = M2 + valores públicos en poder de residentes Valores públicos en poder de residentes Emitidos por el Gobierno Federal",
+      "ficha": {
+        "idSerie": "SF311435",
+        "titulo": "Agregados Monetarios M3 Valores públicos en poder de residentes Emitidos por el Gobierno Federal",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311430",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes Instrumentos monetarios a plazo en poder de residentes 4/ Acreedores por reporto de valores 6/",
+      "ficha": {
+        "idSerie": "SF311430",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes 4/ Acreedores por reporto de valores 6/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311422",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo En bancos 5/ En moneda nacional",
+      "ficha": {
+        "idSerie": "SF311422",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo En bancos 5/ En moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311437",
+      "descripcion": "Agregados Monetarios M3 = M2 + valores públicos en poder de residentes Valores públicos en poder de residentes Emitidos por el IPAB 8/",
+      "ficha": {
+        "idSerie": "SF311437",
+        "titulo": "Agregados Monetarios M3 Valores públicos en poder de residentes Emitidos por el IPAB 8/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311434",
+      "descripcion": "Agregados Monetarios M3 = M2 + valores públicos en poder de residentes Valores públicos en poder de residentes",
+      "ficha": {
+        "idSerie": "SF311434",
+        "titulo": "Agregados Monetarios M3 Valores públicos en poder de residentes",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311429",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes Instrumentos monetarios a plazo en poder de residentes 4/ Acciones de los fondos de inversión de deuda",
+      "ficha": {
+        "idSerie": "SF311429",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes 4/ Acciones de los fondos de inversión de deuda",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311423",
+      "descripcion": "Agregados Monetarios M2 = M1 + instrumentos monetarios a plazo en poder de residentes Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo En bancos 5/ En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF311423",
+        "titulo": "Agregados Monetarios M2 Instrumentos monetarios a plazo en poder de residentes 4/ Captación a plazo En bancos 5/ En moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF4",
+      "descripcion": "Agregados monetarios incluyendo al sector público 1/ M1a Billetes y monedas en poder del público 2/",
+      "ficha": {
+        "idSerie": "SF4",
+        "titulo": "Fuentes y usos de la base monetaria Usos Billetes y monedas en circulación En el público",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos Nominales",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311416",
+      "descripcion": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en bancos 2/ Depósitos en cuenta corriente En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF311416",
+        "titulo": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en bancos 2/ Depósitos en cuenta corriente En moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311415",
+      "descripcion": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en bancos 2/ Depósitos en cuenta corriente En moneda nacional",
+      "ficha": {
+        "idSerie": "SF311415",
+        "titulo": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en bancos 2/ Depósitos en cuenta corriente En moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311412",
+      "descripcion": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en bancos 2/ Cuentas de cheques En moneda nacional",
+      "ficha": {
+        "idSerie": "SF311412",
+        "titulo": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en bancos 2/ Cuentas de cheques En moneda nacional",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311413",
+      "descripcion": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en bancos 2/ Cuentas de cheques En moneda extranjera",
+      "ficha": {
+        "idSerie": "SF311413",
+        "titulo": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en bancos 2/ Cuentas de cheques En moneda extranjera",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF311417",
+      "descripcion": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en entidades de ahorro y crédito popular 3/",
+      "ficha": {
+        "idSerie": "SF311417",
+        "titulo": "Agregados Monetarios M1 Depósitos de exigibilidad inmediata en entidades de ahorro y crédito popular 3/",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF40899",
+      "descripcion": "Agregados Monetarios 1/ M2 = M1 + activos financieros internos en poder de residentes Activos financieros internos en poder de residentes Valores públicos en poder de residentes Valores IPAB 6/ 7/ En poder de las Siefores 4/",
+      "ficha": {
+        "idSerie": "SF40899",
+        "titulo": "Cartera de valores de las Siefores Inversión en instrumentos monetarios Valores IPAB (BPAS'S y BPAT'S)",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF40898",
+      "descripcion": "Agregados monetarios incluyendo al sector público 1/ M2a = M1a + activos financieros internos en poder de residentes Activos financieros internos en poder de residentes Valores públicos en poder de residentes Valores emitidos por el Banco de México (BREMS) 5/ En poder de las Siefores 4/",
+      "ficha": {
+        "idSerie": "SF40898",
+        "titulo": "Cartera de valores de las Siefores Inversión en instrumentos monetarios Valores del Banco de México (BREM'S)",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF40897",
+      "descripcion": "Agregados Monetarios 1/ M2 = M1 + activos financieros internos en poder de residentes Activos financieros internos en poder de residentes Valores públicos en poder de residentes Otros valores públicos 9/ En poder de las Siefores 4/",
+      "ficha": {
+        "idSerie": "SF40897",
+        "titulo": "Cartera de valores de las Siefores Inversión en instrumentos monetarios Otros valores públicos",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF40907",
+      "descripcion": "Agregados Monetarios 1/ Fondos de ahorro para el retiro Fondos para el retiro En las Siefores 4/ Inversión en valores Internos 15/ Bancarios",
+      "ficha": {
+        "idSerie": "SF40907",
+        "titulo": "Cartera de valores de las Siefores Inversión en instrumentos monetarios Valores bancarios",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    },
+    {
+      "id": "SF40904",
+      "descripcion": "Agregados Monetarios 1/ M2 = M1 + activos financieros internos en poder de residentes Activos financieros internos en poder de residentes Valores privados 10/ En poder de las Siefores 4/",
+      "ficha": {
+        "idSerie": "SF40904",
+        "titulo": "Cartera de valores de las Siefores Inversión en instrumentos monetarios Valores privados",
+        "periodicidad": "Mensual",
+        "cifra": "Saldos",
+        "unidad": "Miles de Pesos"
+      }
+    }
+  ]
+}
