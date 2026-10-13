@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-13 06:44",
+  "generated_at_utc": "2026-10-13 06:50",
   "datasets": {
     "prices": {
       "rows": 922696,
@@ -55,18 +55,18 @@
       ]
     },
     "financials": {
-      "rows": 257039,
-      "ids": 180,
+      "rows": 343352,
+      "ids": 240,
       "min_date": "2021-10-31",
       "max_date": "2026-08-31",
-      "n_files": 180,
+      "n_files": 240,
       "files_glob": "data/financials/*/data.parquet"
     },
     "earnings": {
-      "rows": 4305,
-      "ids": 179,
+      "rows": 5703,
+      "ids": 237,
       "min_date": "2001-10-26",
-      "max_date": "2027-02-15",
+      "max_date": "2027-02-18",
       "files": [
         "data/earnings/2001/data.parquet",
         "data/earnings/2002/data.parquet",
@@ -96,8 +96,8 @@
       ]
     },
     "recommendations": {
-      "rows": 178,
-      "ids": 178,
+      "rows": 235,
+      "ids": 235,
       "min_date": "2026-10-13",
       "max_date": "2026-10-13",
       "files": [
@@ -105,8 +105,8 @@
       ]
     },
     "company_log": {
-      "rows": 180,
-      "ids": 180,
+      "rows": 240,
+      "ids": 240,
       "min_date": "2026-10-13",
       "max_date": "2026-10-13",
       "files": [
@@ -120,7 +120,7 @@
       "WBD.MX"
     ],
     "macro_missing": [],
-    "company_coverage": "180/292"
+    "company_coverage": "240/292"
   },
   "snapshots": [
     "banxico_search.json",
