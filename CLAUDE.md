@@ -10,6 +10,7 @@ El usuario interactúa por chat. Delega según el tema:
 |---|---|---|
 | Macro y mercados: tasas, inflación, Fed, Banxico, empleo, PIB, riesgo, peso, índices; cualquier periodo (hoy, ayer, semanas, meses, YTD, fechas) o "ponme al día" | `analista-macro` (`.claude/agents/analista-macro.md`) | `/macro <pregunta>` |
 | Gráficas, tableros, reportes visuales o artifacts para mostrar resultados | `presentador` (`.claude/agents/presentador.md`) | `/presenta <qué ver>` |
+| Cambios al repositorio o diagnóstico: agregar o quitar datos, emisoras, series o fuentes; ajustar pipeline, workflows, presentador, agentes o permisos; investigar fallas | `forge` (`.claude/agents/forge.md`) | `/forge <petición>` |
 
 Muestra la respuesta del agente completa. Para preguntas que crucen temas, consulta a cada agente y luego integra.
 
@@ -28,7 +29,7 @@ Cuando pidan gráficas o un artifact: si también piden análisis, obtenlo prime
 4. `data/snapshots/market_snapshot.csv`: una fila por ticker: `ticker, market, asset_type, name, date, close, chg_1d, chg_1w, chg_1m, chg_3m, chg_6m, chg_1y, chg_ytd, pct_from_52w_high, pct_from_52w_low, vol_30d, vs_sma50, vs_sma200, rsi14, avg_vol_20d`.
    - Todos los `chg_*`, `pct_*`, `vs_*` y `vol_30d` están en %. Los rendimientos usan precio ajustado (dividendos/splits).
    - `market`: `BMV` (en MXN), `SIC` (réplica en la BMV, en MXN; `ref_ticker` = ticker de origen), `INDEX`, `FX` (`MXN=X` = pesos por dólar).
-5. `data/snapshots/manifest.json`: rango de fechas, archivos Parquet y `health` (tickers/series sin datos).
+5. `data/snapshots/manifest.json`: rango de fechas, archivos Parquet y `health` (tickers/series sin datos). `data/snapshots/last_run.json`: última corrida del pipeline (tarea, pasos, errores y advertencias).
 6. Consultas macro por periodo: `python -m econ.macro panel | change --period <p> | series <ids> --freq <D|W|M|Q|S|A> | list` (incluye índices y FX de mercado).
 7. SQL con DuckDB: `python -m econ.query "<SQL>"` (ver `python -m econ.query --tables` y `sql/`).
 8. Visualizaciones: `python -m econ.present <spec.json>` genera un artifact HTML interactivo (ver `.claude/agents/presentador.md`).
@@ -51,6 +52,6 @@ Cuando pidan gráficas o un artifact: si también piden análisis, obtenlo prime
 
 ## Desarrollo
 
-- `python -m pytest -q` antes de hacer commit.
+- `python -m pytest -q` antes de hacer commit. `tests/test_forge.py` exige que `.claude/agents/forge.md` (el mapa del repo) y este archivo describan cada módulo, tarea, columna, vista, agente y skill.
 - Código en `econ/`: `sources/` (descarga), `storage.py` (Parquet particionado con upsert), `pipeline.py` (CLI), `snapshots.py`, `query.py`, `macro.py` (consultas por periodo), `present/` (artifacts).
 - El estilo visual solo se cambia en `econ/present/assets/` y aplica a todos los reportes; la paleta de series está validada para daltonismo y contraste sobre el panel negro `#000000`.
