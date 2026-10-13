@@ -7,31 +7,20 @@
     "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-13 06:45:19",
-  "finished_utc": "2026-10-13 06:50:31",
+  "started_utc": "2026-10-13 06:53:23",
+  "finished_utc": "2026-10-13 06:58:33",
   "exit_code": 0,
   "steps": [
     {
       "name": "company",
       "status": "ok",
-      "seconds": 298.9
+      "seconds": 295.2
     },
     {
       "name": "snapshots",
       "status": "ok",
-      "seconds": 12.3
+      "seconds": 14.1
     }
   ],
-  "warnings": [
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "PE&OLES.MX: No earnings dates found, symbol may be delisted"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "POSADASA.MX: No earnings dates found, symbol may be delisted"
-    }
-  ]
+  "warnings": []
 }
