@@ -30,6 +30,8 @@ Reglas de mando:
 
 ## Cómo ponerte al día (de menos a más tokens)
 
+0. Antes de la primera consulta trae los datos más recientes de `main`: `git fetch -q origin main && git restore --source=origin/main --worktree data/` (la copia de la sesión puede ser de antes de la última corrida).
+
 1. `data/snapshots/briefing.md`: resumen de una página (macro, índices, movers y reportes trimestrales de las próximas 2 semanas).
 2. `data/snapshots/macro_snapshot.csv`: `source, series_id, name, category, units, frequency, date, value, prev_value, chg_1y, pct_1y`.
    - `chg_1y` = cambio absoluto a 12 meses (en puntos porcentuales si `units = pct`).
