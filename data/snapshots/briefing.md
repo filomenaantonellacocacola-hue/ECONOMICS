@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-10-13 02:39 (UTC)
+Generado: 2026-10-13 02:47 (UTC)
 
 ## Macro
 
@@ -11,6 +11,7 @@ Generado: 2026-10-13 02:39 (UTC)
 | FRED | Ventas minoristas | 2026-08-01 | 737,763.00 | 729,538.00 | 37,545.00 | 5.36 |
 | FRED | Inicios de vivienda | 2026-08-01 | 1,275.00 | 1,309.00 | -16.00 | -1.24 |
 | FRED | Sentimiento del consumidor (U. Michigan) | 2026-08-01 | 51.70 | 55.20 | -6.50 | -11.17 |
+| FRED | Oferta monetaria M2 | 2026-08-01 | 23,342.80 | 23,217.90 | 1,250.20 | 5.66 |
 | BANXICO | Tipo de cambio FIX | 2026-10-09 | 18.42 | 18.11 | 0.03 | 0.18 |
 | FRED | Indice dolar amplio | 2026-10-02 | 121.39 | 121.79 | 0.95 | 0.79 |
 | FRED | Pesos por dolar (FRED) | 2026-10-02 | 18.19 | 18.40 | -0.29 | -1.57 |
@@ -28,7 +29,6 @@ Generado: 2026-10-13 02:39 (UTC)
 | FRED | Fed funds target (limite superior) | 2026-10-09 | 4.00 | 4.00 | -0.25 |  |
 | FRED | Fed funds efectiva | 2026-10-08 | 3.88 | 3.88 | -0.22 |  |
 | FRED | Balance de la Fed (activos totales) | 2026-10-07 | 6,747,560.00 | 6,743,031.00 | 160,441.00 | 2.44 |
-| FRED | Oferta monetaria M2 | 2026-08-01 | 23,342.80 | 23,217.90 | 1,250.20 | 5.66 |
 | FRED | VIX | 2026-10-08 | 15.41 | 15.08 | -0.89 | -5.46 |
 | FRED | Spread high yield | 2026-10-08 | 3.15 | 3.09 | 0.31 |  |
 | FRED | Indice de condiciones financieras (Chicago Fed) | 2026-10-02 | -0.49 | -0.51 | 0.03 |  |

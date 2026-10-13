@@ -2,7 +2,7 @@ source,series_id,name,category,units,frequency,date,value,prev_value,chg_1y,pct_
 FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,2026-10-09,4.0,4.0,-0.25,
 FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D,2026-10-08,3.88,3.88,-0.22,
 FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W,2026-10-07,6747560.0,6743031.0,160441.0,2.436
-FRED,M2SL,Oferta monetaria M2,politica_monetaria,miles_millones_usd,M,2026-08-01,23342.8,23217.9,1250.2,5.659
+FRED,M2SL,Oferta monetaria M2,agregados_monetarios,miles_millones_usd,M,2026-08-01,23342.8,23217.9,1250.2,5.659
 FRED,DGS3MO,Treasury 3 meses,tasas,pct,D,2026-10-08,4.23,4.22,0.22,
 FRED,DGS2,Treasury 2 anios,tasas,pct,D,2026-10-08,4.75,4.77,1.17,
 FRED,DGS10,Treasury 10 anios,tasas,pct,D,2026-10-08,5.22,5.28,1.09,

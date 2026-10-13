@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-13 02:39",
+  "generated_at_utc": "2026-10-13 02:47",
   "datasets": {
     "prices": {
       "rows": 590215,
@@ -141,6 +141,19 @@
     "tickers_missing": [],
     "tickers_stale": [],
     "macro_missing": [
+      "BANXICO:SF311408",
+      "BANXICO:SF311409",
+      "BANXICO:SF311412",
+      "BANXICO:SF311413",
+      "BANXICO:SF311415",
+      "BANXICO:SF311416",
+      "BANXICO:SF311418",
+      "BANXICO:SF311422",
+      "BANXICO:SF311423",
+      "BANXICO:SF311433",
+      "BANXICO:SF311438",
+      "CALC:MX_M1_ME",
+      "CALC:MX_M1_MN",
       "FRED:M1SL"
     ]
   },
