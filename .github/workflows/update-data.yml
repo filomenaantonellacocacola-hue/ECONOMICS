@@ -7,14 +7,18 @@ on:
   workflow_dispatch:
     inputs:
       task:
-        description: Tarea a ejecutar (backfill = historico + macro + limpieza; resolve = corrige claves del SIC sin datos)
+        description: Tarea a ejecutar (backfill = historico + macro + limpieza; resolve = corrige claves del SIC sin datos; banxico-search = busca claves en el catalogo de Banxico)
         type: choice
-        options: [daily, backfill, prices, macro, fundamentals, snapshots, resolve]
+        options: [daily, backfill, prices, macro, fundamentals, snapshots, resolve, banxico-search]
         default: daily
       start:
         description: Fecha inicial YYYY-MM-DD (solo backfill/prices; vacio = por defecto)
         required: false
         default: ""
+      query:
+        description: "Solo banxico-search: texto a buscar en el catalogo de Banxico (varias consultas separadas por ;)"
+        required: false
+        default: "agregado monetario"
 
 permissions:
   contents: write
@@ -53,10 +57,13 @@ jobs:
         env:
           TASK: ${{ steps.task.outputs.task }}
           START: ${{ inputs.start }}
+          QUERY: ${{ inputs.query }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           BANXICO_TOKEN: ${{ secrets.BANXICO_TOKEN }}
         run: |
-          if [ -n "$START" ]; then
+          if [ "$TASK" = "banxico-search" ]; then
+            python -m econ.pipeline banxico-search --query "${QUERY:-agregado monetario}"
+          elif [ -n "$START" ]; then
             python -m econ.pipeline "$TASK" --start "$START"
           else
             python -m econ.pipeline "$TASK"

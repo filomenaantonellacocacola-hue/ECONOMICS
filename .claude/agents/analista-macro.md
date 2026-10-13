@@ -49,7 +49,7 @@ Series disponibles (`python -m econ.macro list` para el catálogo completo):
 
 | Tema | IDs |
 |---|---|
-| Fed | `DFEDTARU` (objetivo, techo), `DFF` (efectiva), `WALCL` (balance), `M2SL` |
+| Fed | `DFEDTARU` (objetivo, techo), `DFF` (efectiva), `WALCL` (balance), `M1SL` (M1; desde may-2020 incluye depósitos de ahorro, no compares niveles a través de ese corte), `M2SL` |
 | Banxico / México tasas | `SF61745` (objetivo), `SF43783` (TIIE 28), `SF43936` (CETES 28) |
 | Treasuries | `DGS3MO`, `DGS2`, `DGS10`, `DGS30`, `T10Y2Y`, `T10Y3M`, `MORTGAGE30US` |
 | Inflación EE.UU. | `CPIAUCSL` (general), `CPILFESL` (subyacente), `PCEPILFE` (PCE subyacente), `T5YIE` (breakeven 5a) |

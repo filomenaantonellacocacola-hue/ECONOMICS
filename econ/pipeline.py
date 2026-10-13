@@ -9,6 +9,7 @@ Uso::
     python -m econ.pipeline fundamentals
     python -m econ.pipeline snapshots
     python -m econ.pipeline resolve                     # corrige claves del SIC sin datos
+    python -m econ.pipeline banxico-search --query "agregado monetario;M4"  # busca claves en el SIE
 """
 from __future__ import annotations
 
@@ -100,6 +101,16 @@ def resolve_symbols() -> int:
     return len(new)
 
 
+def banxico_search(queries: list[str]) -> int:
+    """Busca claves de series en el catalogo de Banxico y deja el resultado en snapshots."""
+    result = banxico.search_catalog(queries)
+    config.SNAPSHOTS_DIR.mkdir(parents=True, exist_ok=True)
+    path = config.SNAPSHOTS_DIR / "banxico_search.json"
+    path.write_text(json.dumps(result, indent=2, ensure_ascii=False))
+    log.info("Busqueda en Banxico: %s -> %s", {q: len(v) for q, v in result.items()}, path)
+    return sum(len(v) for v in result.values())
+
+
 def update_macro(start: str = config.DEFAULT_MACRO_START) -> int:
     series = config.load_macro_series()
     fred_ids = series.loc[series["source"] == "FRED", "series_id"].tolist()
@@ -134,11 +145,14 @@ def update_fundamentals() -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Pipeline de datos ECONOMICS")
     parser.add_argument(
-        "task", choices=["daily", "backfill", "prices", "macro", "fundamentals", "snapshots", "resolve"]
+        "task",
+        choices=["daily", "backfill", "prices", "macro", "fundamentals", "snapshots", "resolve", "banxico-search"],
     )
     parser.add_argument("--start", help="Fecha inicial YYYY-MM-DD (precios)")
     parser.add_argument("--days", type=int, default=10, help="Dias hacia atras para 'prices'/'daily'")
     parser.add_argument("--tickers", help="Lista separada por comas (por defecto, todo el universo)")
+    parser.add_argument("--query", default="agregado monetario",
+                        help="banxico-search: texto a buscar; varias consultas separadas por ';'")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
@@ -160,6 +174,9 @@ def main(argv: list[str] | None = None) -> int:
         steps.append(("fundamentals", update_fundamentals))
     if args.task == "resolve":
         steps.append(("resolve", resolve_symbols))
+    if args.task == "banxico-search":
+        queries = [q.strip() for q in args.query.split(";") if q.strip()]
+        steps.append(("banxico-search", lambda: banxico_search(queries)))
 
     # Un paso que falla no impide guardar lo que los demas si obtuvieron.
     failed = []
