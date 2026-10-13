@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-13 04:40",
+  "generated_at_utc": "2026-10-13 06:33",
   "datasets": {
     "prices": {
       "rows": 922696,
@@ -55,8 +55,8 @@
       ]
     },
     "financials": {
-      "rows": 85918,
-      "ids": 60,
+      "rows": 168609,
+      "ids": 120,
       "min_date": "2021-10-31",
       "max_date": "2026-08-31",
       "files": [
@@ -119,12 +119,72 @@
         "data/financials/CHDRAUIB.MX/data.parquet",
         "data/financials/CHTR.MX/data.parquet",
         "data/financials/CI.MX/data.parquet",
-        "data/financials/CL.MX/data.parquet"
+        "data/financials/CL.MX/data.parquet",
+        "data/financials/CMCSA.MX/data.parquet",
+        "data/financials/CME.MX/data.parquet",
+        "data/financials/CMG.MX/data.parquet",
+        "data/financials/CMOCTEZ.MX/data.parquet",
+        "data/financials/COF.MX/data.parquet",
+        "data/financials/COIN.MX/data.parquet",
+        "data/financials/COP.MX/data.parquet",
+        "data/financials/COST.MX/data.parquet",
+        "data/financials/CPNG.MX/data.parquet",
+        "data/financials/CRM.MX/data.parquet",
+        "data/financials/CRWD.MX/data.parquet",
+        "data/financials/CSCO.MX/data.parquet",
+        "data/financials/CSX.MX/data.parquet",
+        "data/financials/CUERVO.MX/data.parquet",
+        "data/financials/CVS.MX/data.parquet",
+        "data/financials/CVX.MX/data.parquet",
+        "data/financials/DAL.MX/data.parquet",
+        "data/financials/DANHOS13.MX/data.parquet",
+        "data/financials/DASH.MX/data.parquet",
+        "data/financials/DDOG.MX/data.parquet",
+        "data/financials/DE.MX/data.parquet",
+        "data/financials/DELLC.MX/data.parquet",
+        "data/financials/DHR.MX/data.parquet",
+        "data/financials/DIS.MX/data.parquet",
+        "data/financials/DOW1.MX/data.parquet",
+        "data/financials/DUK.MX/data.parquet",
+        "data/financials/EL.MX/data.parquet",
+        "data/financials/ELV.MX/data.parquet",
+        "data/financials/EMR.MX/data.parquet",
+        "data/financials/ENPH.MX/data.parquet",
+        "data/financials/EOG.MX/data.parquet",
+        "data/financials/EQIX.MX/data.parquet",
+        "data/financials/ETN1N.MX/data.parquet",
+        "data/financials/EXPE.MX/data.parquet",
+        "data/financials/F.MX/data.parquet",
+        "data/financials/FCX.MX/data.parquet",
+        "data/financials/FDX.MX/data.parquet",
+        "data/financials/FEMSAUBD.MX/data.parquet",
+        "data/financials/FIBRAMQ12.MX/data.parquet",
+        "data/financials/FIBRAPL14.MX/data.parquet",
+        "data/financials/FIHO12.MX/data.parquet",
+        "data/financials/FINN13.MX/data.parquet",
+        "data/financials/FMTY14.MX/data.parquet",
+        "data/financials/FNOVA17.MX/data.parquet",
+        "data/financials/FRAGUAB.MX/data.parquet",
+        "data/financials/FSLR.MX/data.parquet",
+        "data/financials/FTNT.MX/data.parquet",
+        "data/financials/FUNO11.MX/data.parquet",
+        "data/financials/GAPB.MX/data.parquet",
+        "data/financials/GCARSOA1.MX/data.parquet",
+        "data/financials/GCC.MX/data.parquet",
+        "data/financials/GD.MX/data.parquet",
+        "data/financials/GE.MX/data.parquet",
+        "data/financials/GENTERA.MX/data.parquet",
+        "data/financials/GEV.MX/data.parquet",
+        "data/financials/GFINBURO.MX/data.parquet",
+        "data/financials/GFNORTEO.MX/data.parquet",
+        "data/financials/GILD.MX/data.parquet",
+        "data/financials/GISSAA.MX/data.parquet",
+        "data/financials/GM.MX/data.parquet"
       ]
     },
     "earnings": {
-      "rows": 1437,
-      "ids": 60,
+      "rows": 2828,
+      "ids": 119,
       "min_date": "2001-10-26",
       "max_date": "2027-02-15",
       "files": [
@@ -132,6 +192,9 @@
         "data/earnings/2002/data.parquet",
         "data/earnings/2003/data.parquet",
         "data/earnings/2004/data.parquet",
+        "data/earnings/2005/data.parquet",
+        "data/earnings/2006/data.parquet",
+        "data/earnings/2007/data.parquet",
         "data/earnings/2008/data.parquet",
         "data/earnings/2009/data.parquet",
         "data/earnings/2010/data.parquet",
@@ -153,8 +216,8 @@
       ]
     },
     "recommendations": {
-      "rows": 60,
-      "ids": 60,
+      "rows": 120,
+      "ids": 120,
       "min_date": "2026-10-13",
       "max_date": "2026-10-13",
       "files": [
@@ -162,8 +225,8 @@
       ]
     },
     "company_log": {
-      "rows": 60,
-      "ids": 60,
+      "rows": 120,
+      "ids": 120,
       "min_date": "2026-10-13",
       "max_date": "2026-10-13",
       "files": [
@@ -177,7 +240,7 @@
       "WBD.MX"
     ],
     "macro_missing": [],
-    "company_coverage": "60/292"
+    "company_coverage": "120/292"
   },
   "snapshots": [
     "banxico_search.json",

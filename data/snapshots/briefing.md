@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-10-13 04:40 (UTC)
+Generado: 2026-10-13 06:33 (UTC)
 
 ## Macro
 
@@ -138,26 +138,43 @@ Generado: 2026-10-13 04:40 (UTC)
 | ticker | name | next_earnings | chg_ytd | pe | last_surprise_pct |
 |---|---|---|---|---|---|
 | C.MX | Citigroup | 2026-10-13 | 14.38 | 14.00 | 15.62 |
-| ASMLN.MX | ASML | 2026-10-14 | 68.54 | 57.45 | 9.09 |
 | BLK.MX | BlackRock | 2026-10-14 | 3.34 | 25.91 | 9.62 |
 | BAC.MX | Bank of America | 2026-10-14 | 0.75 | 12.54 | 7.74 |
+| ASMLN.MX | ASML | 2026-10-14 | 68.54 | 57.45 | 9.09 |
 | AA1.MX | Alcoa | 2026-10-15 | -20.78 | 8.77 | -3.21 |
 | BNY.MX | BNY Mellon | 2026-10-15 |  | 16.65 | 10.70 |
+| GAPB.MX | Grupo Aeroportuario del Pacifico | 2026-10-19 | -21.25 | 18.31 | 8.82 |
+| BOLSAA.MX | Bolsa Mexicana de Valores | 2026-10-20 | 1.91 | 12.18 | 7.76 |
+| GM.MX | General Motors | 2026-10-20 | 3.75 | 37.10 | 12.00 |
+| CHDRAUIB.MX | Grupo Comercial Chedraui | 2026-10-20 | -28.70 | 13.34 | -0.53 |
+| COF.MX | Capital One | 2026-10-20 | -19.75 | 12.80 | 23.79 |
+| GE.MX | GE Aerospace | 2026-10-20 | 1.22 | 36.34 | 8.62 |
 | AMXB.MX | America Movil | 2026-10-20 | 6.75 | 13.20 | -15.04 |
 | CB.MX | Chubb | 2026-10-20 | 10.63 | 12.18 | 7.63 |
-| BOLSAA.MX | Bolsa Mexicana de Valores | 2026-10-20 | 1.91 | 12.18 | 7.76 |
-| CHDRAUIB.MX | Grupo Comercial Chedraui | 2026-10-20 | -28.70 | 13.34 | -0.53 |
-| ABT.MX | Abbott Laboratories | 2026-10-21 | -21.28 | 32.13 | 2.61 |
 | ALPEKA.MX | Alpek | 2026-10-21 | 74.24 | 47.97 | 185.82 |
 | ARA.MX | Consorcio ARA | 2026-10-21 | 44.69 | 4.39 | 114.29 |
+| CME.MX | CME Group | 2026-10-21 | 2.08 | 23.80 | 2.75 |
+| FIBRAPL14.MX | Fibra Prologis | 2026-10-21 | 3.68 | 17.07 | -164.67 |
+| DHR.MX | Danaher | 2026-10-21 | -1.12 | 39.18 | 5.28 |
+| ELV.MX | Elevance Health | 2026-10-21 | 19.66 | 18.27 | 19.99 |
+| GENTERA.MX | Gentera | 2026-10-21 | -15.34 | 6.99 | 1.20 |
+| CSX.MX | CSX | 2026-10-21 | 46.26 | 27.48 | 4.19 |
+| ABT.MX | Abbott Laboratories | 2026-10-21 | -21.28 | 32.13 | 2.61 |
 | ALSEA.MX | Alsea | 2026-10-21 | -8.50 | 22.55 | -24.58 |
-| BIMBOA.MX | Grupo Bimbo | 2026-10-22 | -1.16 | 20.41 | -9.67 |
-| BX.MX | Blackstone | 2026-10-22 | -24.73 | 25.57 | 13.71 |
+| DOW1.MX | Dow | 2026-10-22 | 24.50 |  | 12.62 |
 | ASURB.MX | Grupo Aeroportuario del Sureste | 2026-10-22 | -23.92 | 12.91 | -13.60 |
 | AAL.MX | American Airlines | 2026-10-22 | -16.20 |  | 227.58 |
+| CMCSA.MX | Comcast | 2026-10-22 | -25.32 | 6.67 | 7.62 |
+| DANHOS13.MX | Fibra Danhos | 2026-10-22 | 8.39 | 8.02 | 8.15 |
+| FIBRAMQ12.MX | Fibra Macquarie | 2026-10-22 | 42.42 | 89.14 | -31.36 |
+| BIMBOA.MX | Grupo Bimbo | 2026-10-22 | -1.16 | 20.41 | -9.67 |
+| BX.MX | Blackstone | 2026-10-22 | -24.73 | 25.57 | 13.71 |
 | AXP.MX | American Express | 2026-10-23 | -15.00 | 18.70 | 2.88 |
 | CDNS.MX | Cadence Design | 2026-10-26 | 13.70 | 70.15 | 2.66 |
 | CEMEXCPO.MX | Cemex | 2026-10-26 | -14.26 | 27.97 | -10.76 |
 | BBAJIOO.MX | Banco del Bajio | 2026-10-26 | 33.02 | 7.28 | -0.25 |
-| BA.MX | Boeing | 2026-10-27 | -11.64 | 67.99 | -141.48 |
 | AMT.MX | American Tower | 2026-10-27 | 7.97 | 25.07 | 20.65 |
+| ENPH.MX | Enphase Energy | 2026-10-27 | 1.34 | 32.81 | -0.76 |
+| BA.MX | Boeing | 2026-10-27 | -11.64 | 67.99 | -141.48 |
+| GCC.MX | Grupo Cementos de Chihuahua | 2026-10-27 | -1.47 | 10.52 | -1.84 |
+| FCX.MX | Freeport-McMoRan | 2026-10-27 | 48.15 | 36.30 | 18.50 |

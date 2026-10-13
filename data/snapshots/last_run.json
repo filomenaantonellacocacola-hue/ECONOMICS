@@ -7,20 +7,26 @@
     "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-13 04:35:44",
-  "finished_utc": "2026-10-13 04:40:52",
+  "started_utc": "2026-10-13 06:28:29",
+  "finished_utc": "2026-10-13 06:33:32",
   "exit_code": 0,
   "steps": [
     {
       "name": "company",
       "status": "ok",
-      "seconds": 293.3
+      "seconds": 294.2
     },
     {
       "name": "snapshots",
       "status": "ok",
-      "seconds": 14.1
+      "seconds": 8.3
     }
   ],
-  "warnings": []
+  "warnings": [
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "FNOVA17.MX: No earnings dates found, symbol may be delisted"
+    }
+  ]
 }
