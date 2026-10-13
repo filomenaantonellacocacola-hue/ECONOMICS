@@ -50,6 +50,8 @@ Series disponibles (`python -m econ.macro list` para el catálogo completo):
 | Tema | IDs |
 |---|---|
 | Fed | `DFEDTARU` (objetivo, techo), `DFF` (efectiva), `WALCL` (balance), `M1SL` (M1; desde may-2020 incluye depósitos de ahorro, no compares niveles a través de ese corte), `M2SL` |
+| Agregados monetarios México (miles de millones de pesos, mensual, metodología 2018) | `SF311408` M1, `SF311418` M2, `SF311433` M3, `SF311438` M4; M1 por moneda: `MX_M1_MN`, `MX_M1_ME` (calculadas); componentes: `SF311409` billetes y monedas, `SF311412`/`SF311413` cheques MN/ME, `SF311415`/`SF311416` cuenta corriente MN/ME, `SF311422`/`SF311423` captación a plazo en bancos MN/ME |
+| Agregados monetarios EE.UU. (miles de millones de USD) | `M1SL`, `M2SL`. La Fed dejó de publicar M3 en 2006 y nunca publicó M4 |
 | Banxico / México tasas | `SF61745` (objetivo), `SF43783` (TIIE 28), `SF43936` (CETES 28) |
 | Treasuries | `DGS3MO`, `DGS2`, `DGS10`, `DGS30`, `T10Y2Y`, `T10Y3M`, `MORTGAGE30US` |
 | Inflación EE.UU. | `CPIAUCSL` (general), `CPILFESL` (subyacente), `PCEPILFE` (PCE subyacente), `T5YIE` (breakeven 5a) |

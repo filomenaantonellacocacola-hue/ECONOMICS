@@ -439,3 +439,59 @@ def test_banxico_catalog_search_without_token(monkeypatch, tmp_path):
     assert pipeline.main(["banxico-search", "--query", "M1; M4"]) == 0
     saved = json.loads((tmp_path / "data" / "snapshots" / "banxico_search.json").read_text())
     assert list(saved) == ["M1", "M4"]
+
+
+def test_scale_and_derived_series():
+    from econ import pipeline
+
+    dates = pd.date_range("2026-01-01", periods=3, freq="MS")
+    df = pd.DataFrame({"source": "BANXICO", "series_id": np.repeat(["T", "A", "B"], 3),
+                       "date": np.tile(dates, 3), "value": [100e6] * 3 + [10e6] * 3 + [5e6] * 3})
+    df = df[~((df["series_id"] == "B") & (df["date"] == dates[0]))]  # B sin enero
+    series = pd.DataFrame([
+        {"source": "BANXICO", "series_id": s, "scale": "0.000001", "formula": ""} for s in ("T", "A", "B")
+    ] + [
+        {"source": "CALC", "series_id": "ME", "scale": "1", "formula": "A + B"},
+        {"source": "CALC", "series_id": "MN", "scale": "1", "formula": "T - A - B"},
+        {"source": "CALC", "series_id": "BAD", "scale": "1", "formula": "T * 2"},
+        {"source": "CALC", "series_id": "NOPE", "scale": "1", "formula": "T - X"},
+    ])
+    scaled = pipeline.apply_scale(df, series)
+    assert scaled.loc[scaled["series_id"] == "T", "value"].tolist() == [100.0] * 3
+    out = pipeline.derived_series(scaled, series)
+    assert set(out["series_id"]) == {"ME", "MN"}  # BAD y NOPE se omiten con aviso
+    mn = out[out["series_id"] == "MN"].set_index("date")["value"]
+    assert mn.tolist() == [85.0, 85.0] and mn.index.min() == dates[1]  # solo fechas con todos los terminos
+
+
+def test_banxico_fetch_chunks_of_20(monkeypatch):
+    calls = []
+
+    def fake_get(url, headers=None, timeout=None):
+        ids = url.split("/series/")[1].split("/")[0].split(",")
+        calls.append(ids)
+        return _FakeResp({"bmx": {"series": [{"idSerie": i, "datos": [{"fecha": "01/01/2026", "dato": "1"}]} for i in ids]}})
+
+    monkeypatch.setenv("BANXICO_TOKEN", "x")
+    monkeypatch.setattr(banxico.requests, "get", fake_get)
+    ids = [f"SF{i}" for i in range(45)]
+    df, failed = banxico.fetch_many(ids, "2026-01-01")
+    assert [len(c) for c in calls] == [20, 20, 5] and failed == [] and len(df) == 45
+
+
+def test_banxico_expand_ids():
+    assert banxico.expand_ids("SF311408-SF311410, sf43718") == ["SF311408", "SF311409", "SF311410", "SF43718"]
+    assert banxico.expand_ids("SF1-3") == ["SF1", "SF2", "SF3"]
+    with pytest.raises(ValueError):
+        banxico.expand_ids("SF1-SF500")
+
+
+def test_macro_catalog_scale_and_formulas():
+    s = config.load_macro_series()
+    assert all(float(v) > 0 for v in s["scale"])
+    calc = s[s["source"] == "CALC"]
+    assert (calc["formula"] != "").all() and (s.loc[s["source"] != "CALC", "formula"] == "").all()
+    ids = set(s["series_id"])
+    import re as _re
+    for f in calc["formula"]:
+        assert set(_re.findall(r"[A-Za-z0-9_.=^]+", f)) <= ids

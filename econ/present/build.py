@@ -48,11 +48,12 @@ MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "
 RAW_UNITS = {
     "pct": ("pct", "%"), "pp": ("pp", "puntos porcentuales"), "indice": ("num", "índice"),
     "fx": ("fx", "MXN por unidad"), "mxn_por_usd": ("fx", "MXN por USD"), "usd_barril": ("usd", "USD por barril"),
-    "millones_usd": ("compact", "millones de USD"), "miles_millones_usd": ("compact", "miles de millones de USD"),
+    "millones_usd": ("compact", "millones de USD"), "miles_millones_usd": ("num", "miles de millones de USD"),
+    "miles_millones_mxn": ("num", "miles de millones de pesos"),
     "miles": ("compact", "miles"), "personas": ("compact", "personas"), "desv_std": ("num", "desviaciones estándar"),
     "mxn": ("mxn", "MXN"), "pts": ("num", "puntos"), "num": ("num", ""), "usd": ("usd", "USD"), "compact": ("compact", ""),
 }
-SOURCE_NAMES = {"FRED": "FRED", "BANXICO": "Banxico", "MERCADO": "Yahoo Finance"}
+SOURCE_NAMES = {"FRED": "FRED", "BANXICO": "Banxico", "MERCADO": "Yahoo Finance", "CALC": "Cálculo propio"}
 
 ALLOWED = {
     "doc": {"title", "subtitle", "description", "sources", "blocks", "file"},

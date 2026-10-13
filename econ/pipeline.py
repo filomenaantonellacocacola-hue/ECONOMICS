@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 from datetime import date, timedelta
 
 import pandas as pd
@@ -111,6 +112,42 @@ def banxico_search(queries: list[str]) -> int:
     return sum(len(v) for v in result.values())
 
 
+def apply_scale(df: pd.DataFrame, series: pd.DataFrame) -> pd.DataFrame:
+    """Multiplica cada serie por su ``scale`` del catalogo (p.ej. miles de pesos -> miles de millones)."""
+    scale = {(r.source, r.series_id): float(r.scale) for r in series.itertuples() if r.scale not in ("", "1")}
+    if not scale:
+        return df
+    df = df.copy()
+    factor = [scale.get(k, 1.0) for k in zip(df["source"], df["series_id"])]
+    df["value"] = df["value"] * factor
+    return df
+
+
+FORMULA_TERM = re.compile(r"([+-])\s*([A-Za-z0-9_.=^]+)")
+
+
+def derived_series(df: pd.DataFrame, series: pd.DataFrame) -> pd.DataFrame:
+    """Calcula las series con source=CALC a partir de su ``formula`` (sumas y restas de otras series)."""
+    out = []
+    wide = df.pivot_table(index="date", columns="series_id", values="value", aggfunc="last")
+    for r in series[series["source"] == "CALC"].itertuples():
+        formula = r.formula.replace(" ", "")
+        if formula and formula[0] not in "+-":
+            formula = "+" + formula
+        terms = FORMULA_TERM.findall(formula)
+        if "".join(s + t for s, t in terms) != formula:
+            log.warning("Formula invalida para %s: %r", r.series_id, r.formula)
+            continue
+        missing = [sid for _, sid in terms if sid not in wide.columns]
+        if not terms or missing:
+            log.warning("No se pudo calcular %s: faltan %s", r.series_id, missing or "terminos")
+            continue
+        parts = [wide[sid] * (1 if sign == "+" else -1) for sign, sid in terms]
+        value = pd.concat(parts, axis=1).dropna().sum(axis=1)
+        out.append(pd.DataFrame({"source": "CALC", "series_id": r.series_id, "date": value.index, "value": value.values}))
+    return pd.concat(out, ignore_index=True) if out else pd.DataFrame(columns=["source", "series_id", "date", "value"])
+
+
 def update_macro(start: str = config.DEFAULT_MACRO_START) -> int:
     series = config.load_macro_series()
     fred_ids = series.loc[series["source"] == "FRED", "series_id"].tolist()
@@ -126,7 +163,8 @@ def update_macro(start: str = config.DEFAULT_MACRO_START) -> int:
     frames = [f for f in (fred_df, bmx_df) if not f.empty]
     if not frames:
         raise RuntimeError("No se obtuvo ninguna serie macro")
-    df = pd.concat(frames, ignore_index=True)
+    df = apply_scale(pd.concat(frames, ignore_index=True), series)
+    df = pd.concat([df, derived_series(df, series)], ignore_index=True)
     written = storage.write_partitioned(df, config.MACRO_DIR, keys=["source", "series_id", "date"], freq="Y")
     log.info("Macro: %d observaciones, %d particiones escritas", len(df), len(written))
     return len(df)
