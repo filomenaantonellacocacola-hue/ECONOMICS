@@ -3,6 +3,8 @@ FRED,DFEDTARU,Fed funds target (limite superior),pct,last,value,1.5,2.5,1.75,0.2
 FRED,DFF,Fed funds efectiva,pct,avg,value,1.003,1.835,2.157,0.372,0.079,1.692,5.026,5.142,4.212,3.653,2026
 FRED,WALCL,Balance de la Fed (activos totales),millones_usd,last,value,4448680.0,4075636.0,4165591.0,7363351.0,8757460.0,8551169.0,7712781.0,6885963.0,6640618.0,6747560.0,2026
 FRED,WALCL,Balance de la Fed (activos totales),millones_usd,last,pct_yoy,-0.062,-8.385,2.207,76.766,18.933,-2.356,-9.804,-10.72,-3.563,1.61,2026
+FRED,M1SL,Oferta monetaria M1 (desde may-2020 incluye depositos de ahorro),miles_millones_usd,last,value,3637.1,3780.7,4020.3,17809.3,20425.6,19737.9,17979.3,18392.9,19092.7,19991.1,2026
+FRED,M1SL,Oferta monetaria M1 (desde may-2020 incluye depositos de ahorro),miles_millones_usd,last,pct_yoy,7.907,3.948,6.337,342.984,14.691,-3.367,-8.91,2.3,3.805,4.705,2026
 FRED,M2SL,Oferta monetaria M2,miles_millones_usd,last,value,13887.3,14392.0,15351.5,19119.4,21502.8,21293.2,20779.9,21487.6,22355.3,23342.8,2026
 FRED,M2SL,Oferta monetaria M2,miles_millones_usd,last,pct_yoy,4.884,3.634,6.667,24.544,12.466,-0.975,-2.411,3.406,4.038,4.417,2026
 FRED,DGS3MO,Treasury 3 meses,pct,avg,value,0.949,1.972,2.106,0.36,0.045,2.085,5.279,5.181,4.207,3.804,2026
@@ -34,8 +36,8 @@ FRED,HOUST,Inicios de vivienda,miles,avg,value,1204.667,1246.833,1291.5,1394.333
 FRED,HOUST,Inicios de vivienda,miles,avg,pct_yoy,2.343,3.5,3.582,7.962,14.989,-3.311,-8.343,-3.583,-1.034,0.234,2026
 FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),indice,avg,value,96.767,98.367,95.983,81.542,77.617,58.975,65.35,72.542,57.583,52.162,2026
 FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),indice,avg,pct_yoy,5.362,1.653,-2.423,-15.046,-4.813,-24.018,10.81,11.005,-20.62,-9.414,2026
-FRED,VIXCLS,VIX,indice,avg,value,11.09,16.64,15.388,29.251,19.656,25.637,16.849,15.551,18.927,18.149,2026
-FRED,VIXCLS,VIX,indice,avg,pct_yoy,-29.922,50.04,-7.524,90.093,-32.802,30.428,-34.279,-7.706,21.71,-4.108,2026
+FRED,VIXCLS,VIX,indice,avg,value,11.09,16.64,15.388,29.251,19.656,25.637,16.849,15.551,18.927,18.133,2026
+FRED,VIXCLS,VIX,indice,avg,pct_yoy,-29.922,50.04,-7.524,90.093,-32.802,30.428,-34.279,-7.706,21.71,-4.195,2026
 FRED,BAMLH0A0HYM2,Spread high yield,pct,avg,value,,,,,,,3.98,3.149,3.047,2.839,2026
 FRED,NFCI,Indice de condiciones financieras (Chicago Fed),desv_std,avg,value,-0.544,-0.544,-0.559,-0.36,-0.637,-0.273,-0.268,-0.415,-0.487,-0.518,2026
 FRED,DTWEXBGS,Indice dolar amplio,indice,avg,value,112.81,112.004,115.733,117.774,113.105,120.698,120.266,122.893,122.72,119.342,2026
@@ -44,12 +46,64 @@ FRED,DEXMXUS,Pesos por dolar (FRED),mxn_por_usd,avg,value,18.884,19.218,19.247,2
 FRED,DEXMXUS,Pesos por dolar (FRED),mxn_por_usd,avg,pct_yoy,1.161,1.768,0.151,11.946,-5.856,-0.806,-11.865,3.23,4.911,-9.348,2026
 FRED,DCOILWTICO,Petroleo WTI,usd_barril,avg,value,50.8,65.227,56.988,39.16,68.135,94.903,77.577,76.632,65.388,85.511,2026
 FRED,DCOILWTICO,Petroleo WTI,usd_barril,avg,pct_yoy,17.339,28.4,-12.631,-31.283,73.99,39.286,-18.257,-1.217,-14.673,30.774,2026
-FRED,SP500,S&P 500 (FRED),indice,last,value,2673.61,2506.85,3230.78,3756.07,4766.18,3839.5,4769.83,5881.63,6845.5,7811.54,2026
-FRED,SP500,S&P 500 (FRED),indice,last,pct_yoy,19.42,-6.237,28.878,16.259,26.893,-19.443,24.23,23.309,16.388,14.112,2026
+FRED,SP500,S&P 500 (FRED),indice,last,value,2673.61,2506.85,3230.78,3756.07,4766.18,3839.5,4769.83,5881.63,6845.5,7807.24,2026
+FRED,SP500,S&P 500 (FRED),indice,last,pct_yoy,19.42,-6.237,28.878,16.259,26.893,-19.443,24.23,23.309,16.388,14.049,2026
 BANXICO,SF61745,Tasa objetivo Banxico,pct,last,value,7.25,8.25,7.25,4.25,5.5,10.5,11.25,10.0,7.0,6.5,2026
-BANXICO,SF43783,TIIE 28 dias,pct,avg,value,7.054,7.996,8.318,5.705,4.627,7.906,11.399,11.099,8.673,6.953,2026
+BANXICO,SF43783,TIIE 28 dias,pct,avg,value,7.054,7.996,8.318,5.705,4.627,7.906,11.399,11.099,8.673,6.951,2026
 BANXICO,SF43936,CETES 28 dias,pct,avg,value,6.691,7.618,7.849,5.323,4.43,7.658,11.098,10.716,8.132,6.497,2026
-BANXICO,SF43718,Tipo de cambio FIX,mxn_por_usd,avg,value,18.907,19.237,19.257,21.498,20.282,20.12,17.734,18.326,19.2,17.423,2026
-BANXICO,SF43718,Tipo de cambio FIX,mxn_por_usd,avg,pct_yoy,1.166,1.749,0.105,11.633,-5.654,-0.798,-11.862,3.341,4.765,-9.253,2026
+BANXICO,SF43718,Tipo de cambio FIX,mxn_por_usd,avg,value,18.907,19.237,19.257,21.498,20.282,20.12,17.734,18.326,19.2,17.427,2026
+BANXICO,SF43718,Tipo de cambio FIX,mxn_por_usd,avg,pct_yoy,1.166,1.749,0.105,11.633,-5.654,-0.798,-11.862,3.341,4.765,-9.231,2026
 BANXICO,SP1,INPC (indice general),indice,avg,value,95.573,100.255,103.901,107.43,113.542,122.508,129.28,135.385,140.542,145.182,2026
 BANXICO,SP1,INPC (indice general),indice,avg,pct_yoy,6.041,4.899,3.636,3.397,5.689,7.896,5.528,4.722,3.81,3.301,2026
+BANXICO,SF311408,M1 Mexico,miles_millones_mxn,last,value,4264.018,4492.216,4702.035,5645.705,6377.134,6926.065,7442.319,8304.519,8827.048,8715.96,2026
+BANXICO,SF311408,M1 Mexico,miles_millones_mxn,last,pct_yoy,10.229,5.352,4.671,20.069,12.955,8.608,7.454,11.585,6.292,-1.258,2026
+BANXICO,SF311418,M2 Mexico,miles_millones_mxn,last,value,8394.065,8815.667,9326.244,10375.726,11409.793,12515.612,13656.138,15570.861,16633.57,16846.832,2026
+BANXICO,SF311418,M2 Mexico,miles_millones_mxn,last,pct_yoy,9.54,5.023,5.792,11.253,9.966,9.692,9.113,14.021,6.825,1.282,2026
+BANXICO,SF311433,M3 Mexico,miles_millones_mxn,last,value,9494.959,10077.853,10761.957,12090.423,13466.066,14671.115,16195.742,18251.773,19972.423,20318.999,2026
+BANXICO,SF311433,M3 Mexico,miles_millones_mxn,last,pct_yoy,10.645,6.139,6.788,12.344,11.378,8.949,10.392,12.695,9.427,1.735,2026
+BANXICO,SF311438,M4 Mexico,miles_millones_mxn,last,value,11709.315,12242.885,13168.287,14384.788,15300.183,16442.012,18023.063,20110.101,21792.006,22195.425,2026
+BANXICO,SF311438,M4 Mexico,miles_millones_mxn,last,pct_yoy,8.307,4.557,7.559,9.238,6.364,7.463,9.616,11.58,8.363,1.851,2026
+BANXICO,SF311409,M1 Mexico: billetes y monedas en poder del publico,miles_millones_mxn,last,value,1372.884,1494.949,1548.852,1905.67,2226.644,2474.604,2708.848,3026.289,3263.47,3267.561,2026
+BANXICO,SF311409,M1 Mexico: billetes y monedas en poder del publico,miles_millones_mxn,last,pct_yoy,8.812,8.891,3.606,23.038,16.843,11.136,9.466,11.719,7.837,0.125,2026
+BANXICO,SF311412,M1 Mexico: cuentas de cheques en moneda nacional,miles_millones_mxn,last,value,1630.929,1710.671,1734.707,1970.337,2145.483,2361.986,2591.382,2846.971,2988.118,2860.327,2026
+BANXICO,SF311412,M1 Mexico: cuentas de cheques en moneda nacional,miles_millones_mxn,last,pct_yoy,10.745,4.889,1.405,13.583,8.889,10.091,9.712,9.863,4.958,-4.277,2026
+BANXICO,SF311413,M1 Mexico: cuentas de cheques en moneda extranjera,miles_millones_mxn,last,value,537.826,505.663,468.212,578.654,658.895,664.302,579.191,685.484,670.768,599.506,2026
+BANXICO,SF311413,M1 Mexico: cuentas de cheques en moneda extranjera,miles_millones_mxn,last,pct_yoy,14.63,-5.98,-7.406,23.588,13.867,0.821,-12.812,18.352,-2.147,-10.624,2026
+BANXICO,SF311415,M1 Mexico: cuenta corriente en moneda nacional,miles_millones_mxn,last,value,682.764,743.325,915.081,1146.686,1283.219,1358.781,1479.101,1602.404,1717.073,1862.089,2026
+BANXICO,SF311415,M1 Mexico: cuenta corriente en moneda nacional,miles_millones_mxn,last,pct_yoy,7.327,8.87,23.106,25.31,11.907,5.889,8.855,8.336,7.156,8.446,2026
+BANXICO,SF311416,M1 Mexico: cuenta corriente en moneda extranjera,miles_millones_mxn,last,value,19.98,13.811,10.709,16.522,33.127,35.964,33.749,47.111,46.36,72.369,2026
+BANXICO,SF311416,M1 Mexico: cuenta corriente en moneda extranjera,miles_millones_mxn,last,pct_yoy,77.424,-30.876,-22.459,54.279,100.501,8.566,-6.16,39.592,-1.594,56.103,2026
+BANXICO,SF311422,M2 Mexico: captacion a plazo en bancos en moneda nacional,miles_millones_mxn,last,value,1481.522,1680.074,1771.704,1853.438,1923.229,2135.987,2370.351,2539.166,2649.803,2725.309,2026
+BANXICO,SF311422,M2 Mexico: captacion a plazo en bancos en moneda nacional,miles_millones_mxn,last,pct_yoy,6.614,13.402,5.454,4.613,3.766,11.063,10.972,7.122,4.357,2.849,2026
+BANXICO,SF311423,M2 Mexico: captacion a plazo en bancos en moneda extranjera,miles_millones_mxn,last,value,217.793,176.211,141.817,123.315,118.669,150.549,168.629,216.804,201.82,183.389,2026
+BANXICO,SF311423,M2 Mexico: captacion a plazo en bancos en moneda extranjera,miles_millones_mxn,last,pct_yoy,55.594,-19.093,-19.519,-13.046,-3.767,26.865,12.01,28.568,-6.911,-9.132,2026
+BANXICO,SF311417,M1 Mexico: depositos a la vista en entidades de ahorro y credito popular,miles_millones_mxn,last,value,19.635,23.797,24.473,27.836,29.767,30.429,50.048,96.26,141.259,54.109,2026
+BANXICO,SF311417,M1 Mexico: depositos a la vista en entidades de ahorro y credito popular,miles_millones_mxn,last,pct_yoy,13.287,21.197,2.84,13.741,6.937,2.224,64.476,92.335,46.747,-61.695,2026
+BANXICO,SF311427,M2 Mexico: captacion a plazo en uniones de credito en moneda extranjera,miles_millones_mxn,last,value,2.419,2.326,2.034,2.702,2.536,2.296,2.673,3.08,2.494,2.629,2026
+BANXICO,SF311427,M2 Mexico: captacion a plazo en uniones de credito en moneda extranjera,miles_millones_mxn,last,pct_yoy,-8.634,-3.847,-12.532,32.814,-6.144,-9.457,16.404,15.246,-19.048,5.425,2026
+BANXICO,SF311432,M2 Mexico: reportos de residentes en moneda extranjera,miles_millones_mxn,last,value,6.226,3.959,21.324,20.516,25.416,30.366,29.708,32.977,28.413,20.196,2026
+BANXICO,SF311432,M2 Mexico: reportos de residentes en moneda extranjera,miles_millones_mxn,last,pct_yoy,106.089,-36.408,438.604,-3.789,23.883,19.478,-2.169,11.005,-13.84,-28.921,2026
+BANXICO,SF311434,M3 Mexico: valores publicos en poder de residentes,miles_millones_mxn,last,value,1100.894,1262.186,1435.713,1714.697,2056.272,2155.502,2539.604,2680.912,3338.853,3472.167,2026
+BANXICO,SF311434,M3 Mexico: valores publicos en poder de residentes,miles_millones_mxn,last,pct_yoy,19.86,14.651,13.748,19.432,19.92,4.826,17.82,5.564,24.542,3.993,2026
+BANXICO,SF311439,M4 Mexico: instrumentos monetarios en poder de no residentes,miles_millones_mxn,last,value,2214.356,2165.032,2406.33,2294.364,1834.117,1770.897,1827.321,1858.328,1819.583,1876.426,2026
+BANXICO,SF311439,M4 Mexico: instrumentos monetarios en poder de no residentes,miles_millones_mxn,last,pct_yoy,-0.69,-2.227,11.145,-4.653,-20.06,-3.447,3.186,1.697,-2.085,3.124,2026
+BANXICO,SF311442,M4 Mexico: depositos a la vista de no residentes en moneda extranjera,miles_millones_mxn,last,value,0.734,0.86,0.781,0.884,0.773,0.806,0.936,0.853,1.138,1.106,2026
+BANXICO,SF311442,M4 Mexico: depositos a la vista de no residentes en moneda extranjera,miles_millones_mxn,last,pct_yoy,-15.982,17.027,-9.121,13.219,-12.615,4.233,16.219,-8.853,33.315,-2.789,2026
+BANXICO,SF311445,M4 Mexico: captacion a plazo de no residentes en moneda extranjera,miles_millones_mxn,last,value,48.454,43.546,60.617,102.537,106.066,82.672,67.995,86.094,37.721,37.815,2026
+BANXICO,SF311445,M4 Mexico: captacion a plazo de no residentes en moneda extranjera,miles_millones_mxn,last,pct_yoy,3.01,-10.129,39.203,69.155,3.442,-22.056,-17.753,26.618,-56.187,0.25,2026
+CALC,MX_M1_ME,M1 Mexico en moneda extranjera,miles_millones_mxn,last,value,557.806,519.474,478.921,595.176,692.022,700.266,612.94,732.594,717.128,671.875,2026
+CALC,MX_M1_ME,M1 Mexico en moneda extranjera,miles_millones_mxn,last,pct_yoy,16.102,-6.872,-7.807,24.274,16.272,1.191,-12.47,19.521,-2.111,-6.31,2026
+CALC,MX_M1_MN,M1 Mexico en moneda nacional,miles_millones_mxn,last,value,3706.212,3972.742,4223.114,5050.529,5685.112,6225.799,6829.379,7571.925,8109.92,8044.085,2026
+CALC,MX_M1_MN,M1 Mexico en moneda nacional,miles_millones_mxn,last,pct_yoy,9.397,7.191,6.302,19.593,12.565,9.511,9.695,10.873,7.105,-0.812,2026
+CALC,MX_M2_ME,M2 Mexico en moneda extranjera,miles_millones_mxn,last,value,784.244,701.969,644.096,741.709,838.643,883.477,813.95,985.456,949.855,878.088,2026
+CALC,MX_M2_ME,M2 Mexico en moneda extranjera,miles_millones_mxn,last,pct_yoy,25.261,-10.491,-8.244,15.155,13.069,5.346,-7.87,21.071,-3.613,-7.555,2026
+CALC,MX_M2_MN,M2 Mexico en moneda nacional,miles_millones_mxn,last,value,7609.821,8113.698,8682.148,9634.017,10571.151,11632.135,12842.188,14585.405,15683.716,15968.744,2026
+CALC,MX_M2_MN,M2 Mexico en moneda nacional,miles_millones_mxn,last,pct_yoy,8.142,6.621,7.006,10.964,9.727,10.037,10.403,13.574,7.53,1.817,2026
+CALC,MX_M3_ME,M3 Mexico en moneda extranjera,miles_millones_mxn,last,value,784.244,701.969,644.096,741.709,838.643,883.477,813.95,985.456,949.855,878.088,2026
+CALC,MX_M3_ME,M3 Mexico en moneda extranjera,miles_millones_mxn,last,pct_yoy,25.261,-10.491,-8.244,15.155,13.069,5.346,-7.87,21.071,-3.613,-7.555,2026
+CALC,MX_M3_MN,M3 Mexico en moneda nacional,miles_millones_mxn,last,value,8710.715,9375.884,10117.861,11348.714,12627.423,13787.637,15381.792,17266.318,19022.568,19440.91,2026
+CALC,MX_M3_MN,M3 Mexico en moneda nacional,miles_millones_mxn,last,pct_yoy,9.494,7.636,7.914,12.165,11.267,9.188,11.562,12.252,10.172,2.199,2026
+CALC,MX_M4_ME,M4 Mexico en moneda extranjera,miles_millones_mxn,last,value,833.432,746.375,705.494,845.13,945.481,966.955,882.882,1072.403,988.713,917.009,2026
+CALC,MX_M4_ME,M4 Mexico en moneda extranjera,miles_millones_mxn,last,pct_yoy,23.654,-10.446,-5.477,19.793,11.874,2.271,-8.695,21.466,-7.804,-7.252,2026
+CALC,MX_M4_MN,M4 Mexico en moneda nacional,miles_millones_mxn,last,value,10875.882,11496.51,12462.793,13539.657,14354.702,15475.057,17140.181,19037.698,20803.293,21278.416,2026
+CALC,MX_M4_MN,M4 Mexico en moneda nacional,miles_millones_mxn,last,pct_yoy,7.287,5.706,8.405,8.641,6.02,7.805,10.76,11.071,9.274,2.284,2026

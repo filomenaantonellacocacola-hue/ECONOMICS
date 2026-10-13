@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-13 02:47",
+  "generated_at_utc": "2026-10-13 02:52",
   "datasets": {
     "prices": {
       "rows": 590215,
@@ -92,10 +92,10 @@
       ]
     },
     "macro": {
-      "rows": 121411,
-      "ids": 35,
+      "rows": 128684,
+      "ids": 62,
       "min_date": "2000-01-01",
-      "max_date": "2026-10-10",
+      "max_date": "2026-10-13",
       "files": [
         "data/macro/2000/data.parquet",
         "data/macro/2001/data.parquet",
@@ -140,22 +140,7 @@
   "health": {
     "tickers_missing": [],
     "tickers_stale": [],
-    "macro_missing": [
-      "BANXICO:SF311408",
-      "BANXICO:SF311409",
-      "BANXICO:SF311412",
-      "BANXICO:SF311413",
-      "BANXICO:SF311415",
-      "BANXICO:SF311416",
-      "BANXICO:SF311418",
-      "BANXICO:SF311422",
-      "BANXICO:SF311423",
-      "BANXICO:SF311433",
-      "BANXICO:SF311438",
-      "CALC:MX_M1_ME",
-      "CALC:MX_M1_MN",
-      "FRED:M1SL"
-    ]
+    "macro_missing": []
   },
   "snapshots": [
     "banxico_search.json",

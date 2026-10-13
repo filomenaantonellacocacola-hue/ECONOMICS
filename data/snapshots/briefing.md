@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-10-13 02:47 (UTC)
+Generado: 2026-10-13 02:52 (UTC)
 
 ## Macro
 
@@ -11,8 +11,35 @@ Generado: 2026-10-13 02:47 (UTC)
 | FRED | Ventas minoristas | 2026-08-01 | 737,763.00 | 729,538.00 | 37,545.00 | 5.36 |
 | FRED | Inicios de vivienda | 2026-08-01 | 1,275.00 | 1,309.00 | -16.00 | -1.24 |
 | FRED | Sentimiento del consumidor (U. Michigan) | 2026-08-01 | 51.70 | 55.20 | -6.50 | -11.17 |
+| BANXICO | M1 Mexico | 2026-08-01 | 8,715.96 | 8,762.31 | 525.39 | 6.42 |
+| BANXICO | M2 Mexico | 2026-08-01 | 16,846.83 | 16,994.32 | 981.88 | 6.19 |
+| BANXICO | M3 Mexico | 2026-08-01 | 20,319.00 | 20,489.10 | 1,245.59 | 6.53 |
+| BANXICO | M4 Mexico | 2026-08-01 | 22,195.42 | 22,357.93 | 1,238.69 | 5.91 |
+| BANXICO | M1 Mexico: billetes y monedas en poder del publico | 2026-08-01 | 3,267.56 | 3,297.21 | 227.68 | 7.49 |
+| BANXICO | M1 Mexico: cuentas de cheques en moneda nacional | 2026-08-01 | 2,860.33 | 2,815.79 | 190.83 | 7.15 |
+| BANXICO | M1 Mexico: cuentas de cheques en moneda extranjera | 2026-08-01 | 599.51 | 598.56 | -44.27 | -6.88 |
+| BANXICO | M1 Mexico: cuenta corriente en moneda nacional | 2026-08-01 | 1,862.09 | 1,849.51 | 191.49 | 11.46 |
+| BANXICO | M1 Mexico: cuenta corriente en moneda extranjera | 2026-08-01 | 72.37 | 67.11 | 30.36 | 72.29 |
+| BANXICO | M2 Mexico: captacion a plazo en bancos en moneda nacional | 2026-08-01 | 2,725.31 | 2,700.16 | 166.84 | 6.52 |
+| BANXICO | M2 Mexico: captacion a plazo en bancos en moneda extranjera | 2026-08-01 | 183.39 | 177.73 | -19.52 | -9.62 |
+| BANXICO | M1 Mexico: depositos a la vista en entidades de ahorro y credito popular | 2026-08-01 | 54.11 | 134.12 | -70.70 | -56.65 |
+| BANXICO | M2 Mexico: captacion a plazo en uniones de credito en moneda extranjera | 2026-08-01 | 2.63 | 2.63 | -0.11 | -3.96 |
+| BANXICO | M2 Mexico: reportos de residentes en moneda extranjera | 2026-08-01 | 20.20 | 17.45 | -11.24 | -35.76 |
+| BANXICO | M3 Mexico: valores publicos en poder de residentes | 2026-08-01 | 3,472.17 | 3,494.79 | 263.70 | 8.22 |
+| BANXICO | M4 Mexico: instrumentos monetarios en poder de no residentes | 2026-08-01 | 1,876.43 | 1,868.82 | -6.90 | -0.37 |
+| BANXICO | M4 Mexico: depositos a la vista de no residentes en moneda extranjera | 2026-08-01 | 1.11 | 1.06 | -0.30 | -21.64 |
+| BANXICO | M4 Mexico: captacion a plazo de no residentes en moneda extranjera | 2026-08-01 | 37.81 | 38.19 | -19.11 | -33.57 |
+| CALC | M1 Mexico en moneda extranjera | 2026-08-01 | 671.88 | 665.67 | -13.90 | -2.03 |
+| CALC | M1 Mexico en moneda nacional | 2026-08-01 | 8,044.09 | 8,096.64 | 539.29 | 7.19 |
+| CALC | M2 Mexico en moneda extranjera | 2026-08-01 | 878.09 | 863.49 | -44.77 | -4.85 |
+| CALC | M2 Mexico en moneda nacional | 2026-08-01 | 15,968.74 | 16,130.83 | 1,026.65 | 6.87 |
+| CALC | M3 Mexico en moneda extranjera | 2026-08-01 | 878.09 | 863.49 | -44.77 | -4.85 |
+| CALC | M3 Mexico en moneda nacional | 2026-08-01 | 19,440.91 | 19,625.61 | 1,290.35 | 7.11 |
+| CALC | M4 Mexico en moneda extranjera | 2026-08-01 | 917.01 | 902.74 | -64.18 | -6.54 |
+| CALC | M4 Mexico en moneda nacional | 2026-08-01 | 21,278.42 | 21,455.19 | 1,302.87 | 6.52 |
+| FRED | Oferta monetaria M1 (desde may-2020 incluye depositos de ahorro) | 2026-08-01 | 19,991.10 | 19,886.50 | 1,150.30 | 6.11 |
 | FRED | Oferta monetaria M2 | 2026-08-01 | 23,342.80 | 23,217.90 | 1,250.20 | 5.66 |
-| BANXICO | Tipo de cambio FIX | 2026-10-09 | 18.42 | 18.11 | 0.03 | 0.18 |
+| BANXICO | Tipo de cambio FIX | 2026-10-12 | 18.25 | 18.42 | -0.30 | -1.63 |
 | FRED | Indice dolar amplio | 2026-10-02 | 121.39 | 121.79 | 0.95 | 0.79 |
 | FRED | Pesos por dolar (FRED) | 2026-10-02 | 18.19 | 18.40 | -0.29 | -1.57 |
 | FRED | Tasa de desempleo | 2026-09-01 | 4.20 | 4.10 | -0.20 |  |
@@ -24,15 +51,15 @@ Generado: 2026-10-13 02:47 (UTC)
 | FRED | CPI subyacente | 2026-08-01 | 337.76 | 336.79 | 8.06 | 2.45 |
 | FRED | PCE subyacente | 2026-08-01 | 130.46 | 130.13 | 3.81 | 3.01 |
 | FRED | Petroleo WTI | 2026-10-06 | 96.24 | 96.13 | 33.75 | 54.01 |
-| FRED | S&P 500 (FRED) | 2026-10-09 | 7,811.54 | 7,765.36 | 1,076.43 | 15.98 |
-| BANXICO | Tasa objetivo Banxico | 2026-10-10 | 6.50 | 6.50 | -1.00 |  |
-| FRED | Fed funds target (limite superior) | 2026-10-09 | 4.00 | 4.00 | -0.25 |  |
+| FRED | S&P 500 (FRED) | 2026-10-12 | 7,807.24 | 7,811.54 | 1,254.73 | 19.15 |
+| BANXICO | Tasa objetivo Banxico | 2026-10-13 | 6.50 | 6.50 | -1.00 |  |
+| FRED | Fed funds target (limite superior) | 2026-10-12 | 4.00 | 4.00 | -0.25 |  |
 | FRED | Fed funds efectiva | 2026-10-08 | 3.88 | 3.88 | -0.22 |  |
 | FRED | Balance de la Fed (activos totales) | 2026-10-07 | 6,747,560.00 | 6,743,031.00 | 160,441.00 | 2.44 |
-| FRED | VIX | 2026-10-08 | 15.41 | 15.08 | -0.89 | -5.46 |
+| FRED | VIX | 2026-10-09 | 14.84 | 15.41 | -1.59 | -9.68 |
 | FRED | Spread high yield | 2026-10-08 | 3.15 | 3.09 | 0.31 |  |
 | FRED | Indice de condiciones financieras (Chicago Fed) | 2026-10-02 | -0.49 | -0.51 | 0.03 |  |
-| BANXICO | TIIE 28 dias | 2026-10-09 | 6.76 | 6.76 | -1.03 |  |
+| BANXICO | TIIE 28 dias | 2026-10-13 | 6.77 | 6.77 | -1.02 |  |
 | BANXICO | CETES 28 dias | 2026-10-08 | 6.09 | 6.01 | -1.10 |  |
 | FRED | Treasury 3 meses | 2026-10-08 | 4.23 | 4.22 | 0.22 |  |
 | FRED | Treasury 2 anios | 2026-10-08 | 4.75 | 4.77 | 1.17 |  |

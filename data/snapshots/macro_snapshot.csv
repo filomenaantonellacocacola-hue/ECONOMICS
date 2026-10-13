@@ -1,7 +1,8 @@
 source,series_id,name,category,units,frequency,date,value,prev_value,chg_1y,pct_1y
-FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,2026-10-09,4.0,4.0,-0.25,
+FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,2026-10-12,4.0,4.0,-0.25,
 FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D,2026-10-08,3.88,3.88,-0.22,
 FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W,2026-10-07,6747560.0,6743031.0,160441.0,2.436
+FRED,M1SL,Oferta monetaria M1 (desde may-2020 incluye depositos de ahorro),agregados_monetarios,miles_millones_usd,M,2026-08-01,19991.1,19886.5,1150.3,6.105
 FRED,M2SL,Oferta monetaria M2,agregados_monetarios,miles_millones_usd,M,2026-08-01,23342.8,23217.9,1250.2,5.659
 FRED,DGS3MO,Treasury 3 meses,tasas,pct,D,2026-10-08,4.23,4.22,0.22,
 FRED,DGS2,Treasury 2 anios,tasas,pct,D,2026-10-08,4.75,4.77,1.17,
@@ -22,15 +23,41 @@ FRED,INDPRO,Produccion industrial,actividad,indice,M,2026-08-01,103.068,103.045,
 FRED,RSAFS,Ventas minoristas,actividad,millones_usd,M,2026-08-01,737763.0,729538.0,37545.0,5.362
 FRED,HOUST,Inicios de vivienda,actividad,miles,M,2026-08-01,1275.0,1309.0,-16.0,-1.239
 FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),actividad,indice,M,2026-08-01,51.7,55.2,-6.5,-11.168
-FRED,VIXCLS,VIX,riesgo,indice,D,2026-10-08,15.41,15.08,-0.89,-5.46
+FRED,VIXCLS,VIX,riesgo,indice,D,2026-10-09,14.84,15.41,-1.59,-9.677
 FRED,BAMLH0A0HYM2,Spread high yield,riesgo,pct,D,2026-10-08,3.15,3.09,0.31,
 FRED,NFCI,Indice de condiciones financieras (Chicago Fed),riesgo,desv_std,W,2026-10-02,-0.494,-0.51,0.03,
 FRED,DTWEXBGS,Indice dolar amplio,divisas,indice,D,2026-10-02,121.385,121.788,0.955,0.793
 FRED,DEXMXUS,Pesos por dolar (FRED),divisas,mxn_por_usd,D,2026-10-02,18.192,18.4,-0.291,-1.574
 FRED,DCOILWTICO,Petroleo WTI,materias_primas,usd_barril,D,2026-10-06,96.24,96.13,33.75,54.009
-FRED,SP500,S&P 500 (FRED),mercado,indice,D,2026-10-09,7811.54,7765.36,1076.43,15.982
-BANXICO,SF61745,Tasa objetivo Banxico,politica_monetaria,pct,D,2026-10-10,6.5,6.5,-1.0,
-BANXICO,SF43783,TIIE 28 dias,tasas,pct,D,2026-10-09,6.756,6.756,-1.035,
+FRED,SP500,S&P 500 (FRED),mercado,indice,D,2026-10-12,7807.24,7811.54,1254.73,19.149
+BANXICO,SF61745,Tasa objetivo Banxico,politica_monetaria,pct,D,2026-10-13,6.5,6.5,-1.0,
+BANXICO,SF43783,TIIE 28 dias,tasas,pct,D,2026-10-13,6.766,6.766,-1.025,
 BANXICO,SF43936,CETES 28 dias,tasas,pct,W,2026-10-08,6.09,6.01,-1.1,
-BANXICO,SF43718,Tipo de cambio FIX,divisas,mxn_por_usd,D,2026-10-09,18.416,18.113,0.033,0.181
+BANXICO,SF43718,Tipo de cambio FIX,divisas,mxn_por_usd,D,2026-10-12,18.254,18.416,-0.302,-1.63
 BANXICO,SP1,INPC (indice general),inflacion,indice,M,2026-09-01,146.075,145.462,4.878,3.455
+BANXICO,SF311408,M1 Mexico,agregados_monetarios,miles_millones_mxn,M,2026-08-01,8715.96,8762.311,525.394,6.415
+BANXICO,SF311418,M2 Mexico,agregados_monetarios,miles_millones_mxn,M,2026-08-01,16846.832,16994.318,981.881,6.189
+BANXICO,SF311433,M3 Mexico,agregados_monetarios,miles_millones_mxn,M,2026-08-01,20318.999,20489.104,1245.585,6.53
+BANXICO,SF311438,M4 Mexico,agregados_monetarios,miles_millones_mxn,M,2026-08-01,22195.425,22357.928,1238.689,5.911
+BANXICO,SF311409,M1 Mexico: billetes y monedas en poder del publico,agregados_monetarios,miles_millones_mxn,M,2026-08-01,3267.561,3297.208,227.68,7.49
+BANXICO,SF311412,M1 Mexico: cuentas de cheques en moneda nacional,agregados_monetarios,miles_millones_mxn,M,2026-08-01,2860.327,2815.794,190.834,7.149
+BANXICO,SF311413,M1 Mexico: cuentas de cheques en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,599.506,598.562,-44.265,-6.876
+BANXICO,SF311415,M1 Mexico: cuenta corriente en moneda nacional,agregados_monetarios,miles_millones_mxn,M,2026-08-01,1862.089,1849.51,191.485,11.462
+BANXICO,SF311416,M1 Mexico: cuenta corriente en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,72.369,67.112,30.364,72.286
+BANXICO,SF311422,M2 Mexico: captacion a plazo en bancos en moneda nacional,agregados_monetarios,miles_millones_mxn,M,2026-08-01,2725.309,2700.161,166.835,6.521
+BANXICO,SF311423,M2 Mexico: captacion a plazo en bancos en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,183.389,177.731,-19.515,-9.618
+BANXICO,SF311417,M1 Mexico: depositos a la vista en entidades de ahorro y credito popular,agregados_monetarios,miles_millones_mxn,M,2026-08-01,54.109,134.124,-70.704,-56.648
+BANXICO,SF311427,M2 Mexico: captacion a plazo en uniones de credito en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,2.629,2.629,-0.108,-3.958
+BANXICO,SF311432,M2 Mexico: reportos de residentes en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,20.196,17.455,-11.242,-35.76
+BANXICO,SF311434,M3 Mexico: valores publicos en poder de residentes,agregados_monetarios,miles_millones_mxn,M,2026-08-01,3472.167,3494.786,263.704,8.219
+BANXICO,SF311439,M4 Mexico: instrumentos monetarios en poder de no residentes,agregados_monetarios,miles_millones_mxn,M,2026-08-01,1876.426,1868.824,-6.896,-0.366
+BANXICO,SF311442,M4 Mexico: depositos a la vista de no residentes en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,1.106,1.064,-0.305,-21.645
+BANXICO,SF311445,M4 Mexico: captacion a plazo de no residentes en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,37.815,38.185,-19.112,-33.573
+CALC,MX_M1_ME,M1 Mexico en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,671.875,665.675,-13.901,-2.027
+CALC,MX_M1_MN,M1 Mexico en moneda nacional,agregados_monetarios,miles_millones_mxn,M,2026-08-01,8044.085,8096.637,539.295,7.186
+CALC,MX_M2_ME,M2 Mexico en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,878.088,863.49,-44.767,-4.851
+CALC,MX_M2_MN,M2 Mexico en moneda nacional,agregados_monetarios,miles_millones_mxn,M,2026-08-01,15968.744,16130.828,1026.647,6.871
+CALC,MX_M3_ME,M3 Mexico en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,878.088,863.49,-44.767,-4.851
+CALC,MX_M3_MN,M3 Mexico en moneda nacional,agregados_monetarios,miles_millones_mxn,M,2026-08-01,19440.91,19625.614,1290.352,7.109
+CALC,MX_M4_ME,M4 Mexico en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,2026-08-01,917.009,902.739,-64.184,-6.541
+CALC,MX_M4_MN,M4 Mexico en moneda nacional,agregados_monetarios,miles_millones_mxn,M,2026-08-01,21278.416,21455.19,1302.874,6.522
