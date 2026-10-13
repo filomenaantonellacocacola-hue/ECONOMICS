@@ -180,6 +180,12 @@ def test_pipeline_daily_end_to_end(tmp_path, monkeypatch):
     monkeypatch.setattr(fred, "fetch_many", lambda ids, start: (pd.DataFrame(), ids))
     assert pipeline.main(["daily"]) == 1
     assert (data / "snapshots" / "briefing.md").exists()
+    run = json.loads((data / "snapshots" / "last_run.json").read_text())
+    assert run["task"] == "daily" and run["exit_code"] == 1
+    steps = {st["name"]: st for st in run["steps"]}
+    assert steps["prices"]["status"] == "ok" and steps["snapshots"]["status"] == "ok"
+    assert steps["macro"]["status"] == "error" and "No se obtuvo ninguna serie macro" in steps["macro"]["error"]
+    assert any("Series FRED sin datos" in w["message"] for w in run["warnings"])
 
 
 def _macro_fixture(tmp_path):

@@ -142,6 +142,7 @@ python -m econ.macro series SF61745,DFEDTARU --freq M --period ytd
 Periodos: `today`, `yesterday`, `wtd`, `last-week`, `mtd`, `last-month`, `qtd`, `last-quarter`, `ytd`, `last-year`, `1w`/`1m`/`3m`/`6m`/`1y`, `2026`, `2026-03`, `2026-Q1`, `2026-S1`, `2026-W38`, `2026-03-17` o `2026-01-15:2026-02-15`.
 
 | `presentador` | Gráficas, tableros y reportes visuales como artifacts interactivos, siempre con el mismo estilo (terminal Bloomberg) | `/presenta tablero de tasas Banxico vs Fed con la curva de Treasuries` |
+| `forge` | Ingeniero del repositorio: hace cualquier cambio al proyecto (agregar datos, emisoras, series o fuentes; ajustar pipeline, workflows, presentador o agentes) y diagnostica fallas, con los pasos exactos que te tocan a ti | `/forge agrega la serie de desempleo de México` |
 
 Al iniciar cada sesión en la web, `.claude/hooks/session-start.sh` instala las dependencias de Python.
 

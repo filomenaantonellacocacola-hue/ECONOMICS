@@ -17,7 +17,8 @@ import argparse
 import json
 import logging
 import re
-from datetime import date, timedelta
+import time
+from datetime import date, datetime, timedelta, timezone
 
 import pandas as pd
 
@@ -25,6 +26,31 @@ from econ import config, resolve, snapshots, storage
 from econ.sources import banxico, fred, yahoo
 
 log = logging.getLogger("econ.pipeline")
+
+# Tareas del CLI. Deben coincidir con las opciones del workflow (lo verifica tests/test_forge.py).
+TASKS = ("daily", "backfill", "prices", "macro", "fundamentals", "snapshots", "resolve", "banxico-search")
+
+
+class _WarningCollector(logging.Handler):
+    """Guarda advertencias y errores de la corrida para data/snapshots/last_run.json."""
+
+    def __init__(self, limit: int = 100) -> None:
+        super().__init__(level=logging.WARNING)
+        self.limit = limit
+        self.records: list[dict] = []
+
+    def emit(self, record: logging.LogRecord) -> None:
+        if len(self.records) < self.limit:
+            self.records.append({"level": record.levelname, "logger": record.name,
+                                 "message": record.getMessage()[:500]})
+
+
+def _write_run_log(payload: dict) -> None:
+    try:
+        config.SNAPSHOTS_DIR.mkdir(parents=True, exist_ok=True)
+        (config.SNAPSHOTS_DIR / "last_run.json").write_text(json.dumps(payload, indent=2, ensure_ascii=False))
+    except OSError as exc:
+        log.warning("No se pudo escribir last_run.json: %s", exc)
 
 
 def update_prices(start: str, tickers: list[str] | None = None) -> int:
@@ -182,10 +208,7 @@ def update_fundamentals() -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Pipeline de datos ECONOMICS")
-    parser.add_argument(
-        "task",
-        choices=["daily", "backfill", "prices", "macro", "fundamentals", "snapshots", "resolve", "banxico-search"],
-    )
+    parser.add_argument("task", choices=TASKS)
     parser.add_argument("--start", help="Fecha inicial YYYY-MM-DD (precios)")
     parser.add_argument("--days", type=int, default=10, help="Dias hacia atras para 'prices'/'daily'")
     parser.add_argument("--tickers", help="Lista separada por comas (por defecto, todo el universo)")
@@ -216,22 +239,45 @@ def main(argv: list[str] | None = None) -> int:
         queries = [q.strip() for q in args.query.split(";") if q.strip()]
         steps.append(("banxico-search", lambda: banxico_search(queries)))
 
-    # Un paso que falla no impide guardar lo que los demas si obtuvieron.
-    failed = []
-    for name, step in steps:
+    collector = _WarningCollector()
+    logging.getLogger().addHandler(collector)
+    started = datetime.now(timezone.utc)
+    results = []
+
+    def run_step(name, step) -> bool:
+        t0 = time.monotonic()
         try:
             step()
-        except Exception:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001
             log.exception("Fallo el paso %s", name)
-            failed.append(name)
+            results.append({"name": name, "status": "error", "seconds": round(time.monotonic() - t0, 1),
+                            "error": f"{type(exc).__name__}: {exc}"[:500]})
+            return False
+        results.append({"name": name, "status": "ok", "seconds": round(time.monotonic() - t0, 1)})
+        return True
 
+    # Un paso que falla no impide guardar lo que los demas si obtuvieron.
+    ok = [run_step(name, step) for name, step in steps]
     # Los snapshots se regeneran siempre para que reflejen lo que acaba de cambiar.
-    manifest = snapshots.build()
-    log.info("Snapshots listos: %s", manifest["health"])
-    if failed:
-        log.error("Pasos con error: %s", failed)
-        return 1
-    return 0
+    manifest: dict = {}
+    ok.append(run_step("snapshots", lambda: manifest.update(snapshots.build())))
+    if manifest:
+        log.info("Snapshots listos: %s", manifest["health"])
+    exit_code = 0 if all(ok) else 1
+    if exit_code:
+        log.error("Pasos con error: %s", [r["name"] for r in results if r["status"] == "error"])
+    logging.getLogger().removeHandler(collector)
+    _write_run_log({
+        "task": args.task,
+        "args": {"start": args.start, "days": args.days, "tickers": args.tickers,
+                 "query": args.query if args.task == "banxico-search" else None},
+        "started_utc": started.strftime("%Y-%m-%d %H:%M:%S"),
+        "finished_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+        "exit_code": exit_code,
+        "steps": results,
+        "warnings": collector.records,
+    })
+    return exit_code
 
 
 if __name__ == "__main__":
