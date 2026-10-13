@@ -1,4 +1,4 @@
-"""Presentador: artifacts HTML interactivos con estilo fijo (TradingView oscuro / terminal Bloomberg)."""
+"""Presentador: artifacts HTML interactivos con estilo fijo (terminal Bloomberg)."""
 from econ.present.build import SpecError, build, render
 
 __all__ = ["SpecError", "build", "render"]

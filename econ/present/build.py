@@ -22,11 +22,11 @@ import pandas as pd
 from econ import config, macro, query
 
 ASSETS = Path(__file__).parent / "assets"
-THEME_VERSION = "1"
+THEME_VERSION = "2"
 LW_URL = "https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"
 ECHARTS_URL = "https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"
 FONTS_URL = ("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600"
-             "&family=IBM+Plex+Sans:wght@400;500;600&display=swap")
+             "&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap")
 
 TIME_KINDS = {"line", "area", "candles", "histogram", "baseline"}
 CAT_KINDS = {"bar", "hbar", "curve"}
@@ -492,6 +492,12 @@ class Builder:
         self.summary: list[str] = []
         self.needs_time = False
         self.needs_cat = False
+        self.fn = 0
+
+    def h2(self, title: str) -> str:
+        """Titulo de panel con numero de funcion, como en la terminal: "1) Tasas objetivo"."""
+        self.fn += 1
+        return f'<h2><span class="fn">{self.fn})</span>{esc(title)}</h2>'
 
     # -- KPIs
     def kpis(self, blk: dict, where: str) -> str:
@@ -590,7 +596,7 @@ class Builder:
         style = f' style="height:{cfg["height"]}px"' if cfg.get("height") else ""
         note = f'<p class="note">{esc(blk["note"])}</p>' if blk.get("note") else ""
         return (f'<section class="card {self.span(blk, where)}" id="{cid}" aria-label="{esc(title)}">'
-                f'<div class="card-h"><h2>{esc(title)}</h2><div class="tools">{"".join(tools)}</div></div>'
+                f'<div class="card-h">{self.h2(title)}<div class="tools">{"".join(tools)}</div></div>'
                 f'<p class="card-sub">{esc(sub)}</p><div class="chart"{style}></div>'
                 f'<div class="tableview" hidden></div>{note}</section>')
 
@@ -856,7 +862,7 @@ class Builder:
         note = f'<p class="note">{esc(" ".join(notes))}</p>' if notes else ""
         self.summary.append(f"table({len(df)} filas)")
         return (f'<section class="card {self.span(blk, where)}" aria-label="{esc(title)}">'
-                f'<div class="card-h"><h2>{esc(title)}</h2></div>{sub}'
+                f'<div class="card-h">{self.h2(title)}</div>{sub}'
                 f'<div class="tablewrap"><table class="data" data-sortable><thead><tr>{head}</tr></thead>'
                 f'<tbody>{"".join(body)}</tbody></table></div>{note}</section>')
 
@@ -888,7 +894,7 @@ class Builder:
         title = blk.get("title", "Lectura")
         self.summary.append("text")
         return (f'<section class="card {self.span(blk, where)}" aria-label="{esc(title)}">'
-                f'<div class="card-h"><h2>{esc(title)}</h2></div><div class="prose">{_md(blk["body"])}</div></section>')
+                f'<div class="card-h">{self.h2(title)}</div><div class="prose">{_md(blk["body"])}</div></section>')
 
     @staticmethod
     def span(blk: dict, where: str) -> str:
@@ -941,8 +947,9 @@ def render(spec: dict, resolver: Resolver) -> tuple[str, dict]:
     if sources:
         meta.append(esc(" · ".join(sources)))
     subtitle = f'<p class="subtitle">{esc(spec["subtitle"])}</p>' if spec.get("subtitle") else ""
-    header = (f'<header class="topbar"><div class="topbar-row"><span class="brand">ECONOMICS</span>'
-              f'<span class="meta">{" · ".join(meta)}</span></div><h1>{esc(title)}</h1>{subtitle}</header>')
+    header = (f'<header class="topbar"><div class="topbar-row"><h1>{esc(title)}</h1>'
+              f'<div class="meta"><span class="brand">ECONOMICS</span><span>{" · ".join(meta)}</span></div></div>'
+              f'{subtitle}</header>')
     libs = []
     if b.needs_time:
         libs.append("TradingView Lightweight Charts")
