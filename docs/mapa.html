@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Generado por python -m econ.mapa; no lo edites a mano (edita econ/mapa/spec.py). -->
+<title>Mapa ECONOMICS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Lienzo de flujo (estilo editor de nodos): barra superior, lienzo con retícula de puntos, panel de detalle lateral. Tema oscuro único, deliberado. */
+:root {
+  color-scheme: dark;
+  --bg: #0e1116;
+  --dot: #252b36;
+  --panel: #151a22;
+  --node: #1a2029;
+  --node-hi: #212834;
+  --line: #2b3240;
+  --fg: #e7ebf2;
+  --muted: #98a2b3;
+  --faint: #5f6a7c;
+  --edge: #4a5568;
+  --c-trigger: #f2994a;
+  --c-config: #94a3b8;
+  --c-orch: #a78bfa;
+  --c-source: #4ea8ff;
+  --c-storage: #2ec4a6;
+  --c-process: #ff8a65;
+  --c-snap: #ffd166;
+  --c-tool: #56d4e8;
+  --c-user: #f8fafc;
+  --c-head: #ff6b6b;
+  --c-macro: #7c9cff;
+  --c-fin: #5ee08f;
+  --c-staff: #f472b6;
+  --c-out: #cbd5e1;
+  --f-ui: "Sora", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-ui); overflow: hidden; }
+* { box-sizing: border-box; }
+
+.app { display: grid; grid-template-rows: auto 1fr; height: 100%; }
+
+/* barra superior */
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding-block: 10px; padding-inline: 16px;
+  border-bottom: 1px solid var(--line); background: var(--panel); position: relative; z-index: 5; }
+.brand { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.brand h1 { font-size: 15px; font-weight: 700; letter-spacing: .02em; margin: 0; }
+.brand span { font-size: 12px; color: var(--muted); }
+.flows { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.flows .lbl { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: .08em; margin-right: 2px; }
+.chip { font: 500 12px var(--f-ui); color: var(--fg); background: var(--node); border: 1px solid var(--line);
+  border-radius: 999px; padding: 5px 11px; cursor: pointer; }
+.chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip:focus-visible, .zbtn:focus-visible, .node:focus-visible, .close:focus-visible { outline: 2px solid var(--c-tool); outline-offset: 2px; }
+
+/* lienzo */
+.stage { position: relative; overflow: hidden; cursor: grab; touch-action: none;
+  background-color: var(--bg); }
+/* reticula en su propia capa: al mover solo se traslada, no se repinta */
+.dots { position: absolute; inset: -64px; pointer-events: none; will-change: transform;
+  background-image: radial-gradient(var(--dot) 1.2px, transparent 1.3px); background-size: 22px 22px; }
+.stage.dragging { cursor: grabbing; }
+.world { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.stage.moving .world { will-change: transform; }
+.stage.moving .node { transition: none; }
+svg.edges { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+
+.group { position: absolute; border: 1px dashed #323a48; border-radius: 14px; background: rgba(255,255,255,.012); }
+.group > b { position: absolute; top: -11px; left: 14px; padding: 2px 8px; font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); background: var(--bg); border-radius: 6px; }
+.group > b em { font-style: normal; color: var(--faint); margin-right: 6px; font-family: var(--f-mono); }
+
+.node { position: absolute; width: 210px; min-height: 64px; display: flex; gap: 10px; align-items: center; padding: 10px 12px 10px 10px;
+  background: var(--node); border: 1px solid var(--line); border-radius: 12px; cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,.28); transition: opacity .18s, border-color .18s, background .18s; }
+.node:hover { background: var(--node-hi); border-color: var(--k); }
+.node.sel { border-color: var(--k); box-shadow: 0 0 0 2px color-mix(in srgb, var(--k) 45%, transparent); }
+.node.big { width: 230px; min-height: 76px; }
+.node .ic { flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--k) 16%, var(--node)); color: var(--k); border: 1px solid color-mix(in srgb, var(--k) 40%, transparent); }
+.node .ic svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.node .tx { min-width: 0; display: grid; gap: 3px; }
+.node .tx b { font-size: 13px; font-weight: 600; line-height: 1.2; }
+.node .tx span { font-size: 11px; line-height: 1.3; color: var(--muted); }
+.node .tag { position: absolute; top: -9px; right: 10px; font: 500 10px var(--f-mono); color: var(--bg); background: var(--k);
+  padding: 1px 6px; border-radius: 5px; }
+.port { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--k); }
+.port.l { left: -6px; top: calc(50% - 5px); } .port.r { right: -6px; top: calc(50% - 5px); }
+
+.dim .node:not(.on) { opacity: .22; }
+.dim .group { opacity: .5; }
+
+path.e { fill: none; stroke: var(--edge); stroke-width: 1.8; }
+path.e.dash { stroke-dasharray: 5 5; }
+path.e.on { stroke: var(--hc, var(--fg)); stroke-width: 2.4; }
+.dim path.e:not(.on) { opacity: .12; }
+path.flow { fill: none; stroke: var(--hc, var(--fg)); stroke-width: 2.4; stroke-dasharray: 2 14; stroke-linecap: round; display: none; }
+/* solo se animan las conexiones del recorrido activo, y se pausan mientras mueves el lienzo */
+path.flow.on { display: inline; opacity: .95; animation: run 1s linear infinite; }
+.stage.moving path.flow.on { animation-play-state: paused; }
+@keyframes run { to { stroke-dashoffset: -16; } }
+.elabel { font: 500 10px var(--f-mono); fill: var(--muted); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; }
+.dim .elabel:not(.on) { opacity: .15; }
+
+/* zoom */
+.zoom { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 6px; z-index: 4; }
+.zbtn { width: 36px; height: 36px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); color: var(--fg);
+  font: 600 16px var(--f-ui); cursor: pointer; display: grid; place-items: center; }
+.zbtn.wide { width: auto; padding: 0 12px; font-size: 12px; }
+.hint { position: absolute; right: 16px; bottom: 18px; font-size: 11px; color: var(--faint); z-index: 4; }
+
+/* leyenda */
+.legend { position: absolute; left: 16px; top: 14px; z-index: 4; display: flex; flex-wrap: wrap; gap: 6px 12px; max-width: calc(100% - 32px);
+  font-size: 11px; color: var(--muted); background: color-mix(in srgb, var(--panel) 88%, transparent); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px 12px; }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 3px; background: var(--k); margin-right: 6px; }
+
+/* panel */
+.drawer { position: absolute; top: 0; right: 0; bottom: 0; width: min(380px, 100%); background: var(--panel); border-left: 1px solid var(--line);
+  z-index: 6; padding-block: 20px; padding-inline: 20px; overflow-y: auto; transform: translateX(102%); transition: transform .25s ease; }
+.drawer.open { transform: none; }
+.drawer .k { display: flex; align-items: center; gap: 10px; }
+.drawer .k .ic { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--k) 16%, var(--node)); color: var(--k); border: 1px solid color-mix(in srgb, var(--k) 40%, transparent); }
+.drawer .k .ic svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.drawer .cat { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--k); }
+.drawer h2 { font-size: 18px; margin: 2px 0 0; text-wrap: balance; }
+.drawer p { font-size: 13px; line-height: 1.6; color: #c9d0dc; max-width: 62ch; }
+.drawer h3 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin: 18px 0 8px; }
+.drawer ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; line-height: 1.5; color: #c9d0dc; }
+.drawer ol { margin: 0; padding-left: 20px; display: grid; gap: 7px; font-size: 13px; line-height: 1.5; color: #c9d0dc; }
+.drawer code { font-family: var(--f-mono); font-size: 12px; color: var(--c-tool); background: #0f141b; border: 1px solid var(--line);
+  padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+.drawer .links { display: flex; flex-wrap: wrap; gap: 6px; }
+.drawer .links button { font: 500 12px var(--f-ui); color: var(--fg); background: var(--node); border: 1px solid var(--line); border-radius: 8px; padding: 4px 9px; cursor: pointer; }
+.close { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--node); color: var(--fg); cursor: pointer; font-size: 16px; }
+
+@media (max-width: 640px) {
+  .brand span { display: none; }
+  .legend { display: none; }
+  .hint { display: none; }
+  .drawer { top: auto; height: 62%; width: 100%; border-left: 0; border-top: 1px solid var(--line); border-radius: 16px 16px 0 0;
+    transform: translateY(104%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  path.flow { animation: none; stroke-dasharray: none; }
+  .drawer, .node { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="bar">
+    <div class="brand"><h1>ECONOMICS</h1><span>Mapa del proyecto · datos, pipeline y equipo de agentes</span></div>
+    <div class="flows" id="flows"><span class="lbl">Recorridos</span></div>
+  </header>
+  <main class="stage" id="stage">
+    <div class="dots" id="dots"></div>
+    <div class="world" id="world">
+      <svg class="edges" id="edges" aria-hidden="true"></svg>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="zoom">
+      <button class="zbtn" id="zin" aria-label="Acercar">+</button>
+      <button class="zbtn" id="zout" aria-label="Alejar">−</button>
+      <button class="zbtn wide" id="zfit">Ajustar</button>
+    </div>
+    <div class="hint">Arrastra para moverte · rueda para zoom · clic en un nodo para ver detalle</div>
+    <aside class="drawer" id="drawer" aria-live="polite">
+      <button class="close" id="close" aria-label="Cerrar panel">×</button>
+      <div id="dbody"></div>
+    </aside>
+  </main>
+</div>
+
+<script type="application/json" id="mapa-data">{"groups":[{"n":"1","t":"Disparadores","x":20,"y":40,"w":250,"h":560},{"n":"2","t":"Configuración y orquestación","x":300,"y":40,"w":250,"h":560},{"n":"3","t":"Fuentes","x":590,"y":40,"w":250,"h":560},{"n":"4","t":"Almacenamiento · Parquet en git","x":880,"y":40,"w":250,"h":560},{"n":"5","t":"Procesamiento","x":1170,"y":40,"w":250,"h":560},{"n":"6","t":"Resúmenes · data/snapshots","x":1460,"y":40,"w":250,"h":560},{"n":"7","t":"Equipo de agentes · por chat","x":20,"y":650,"w":1300,"h":700},{"n":"8","t":"Herramientas","x":1340,"y":650,"w":250,"h":600},{"n":"9","t":"Entregables","x":1620,"y":650,"w":260,"h":700}],"nodes":[{"id":"trigger-daily","c":"trigger","ic":"clock","tag":"cron","t":"Cron · daily","s":"L–V 23:30 UTC","d":"Baja precios de los últimos 10 días, el histórico completo de tickers nuevos y toda la macro; regenera los resúmenes.","l":["Programación: <code>30 23 * * 1-5<\/code> (lun-vie 23:30 UTC (17:30 CDMX), despues del cierre de BMV y NYSE)","Solo corre desde <code>main<\/code>; GitHub suele arrancarlo con retraso"],"x":40,"y":90},{"id":"trigger-fundamentals","c":"trigger","ic":"clock","tag":"cron","t":"Cron · fundamentals","s":"Sáb 12:00 UTC","d":"Corte semanal de fundamentales: múltiplos, rentabilidad, deuda, perfil, precio objetivo y consenso. Para el SIC usa el ticker de origen.","l":["Programación: <code>0 12 * * 6<\/code> (sabados: corte semanal de fundamentales)","Solo corre desde <code>main<\/code>; GitHub suele arrancarlo con retraso"],"x":40,"y":191},{"id":"trigger-company","c":"trigger","ic":"clock","tag":"cron","t":"Cron · company","s":"L–S 11:15 UTC","d":"Estados financieros, fechas de reporte y recomendaciones de un lote de unas 60 emisoras, empezando por las que nunca se han bajado y luego las más viejas. Si Yahoo limita consultas, sigue en la siguiente corrida.","l":["Programación: <code>15 11 * * 1-6<\/code> (lun-sab 11:15 UTC: reportes de un lote de emisoras (las mas viejas primero))","Solo corre desde <code>main<\/code>; GitHub suele arrancarlo con retraso"],"x":40,"y":292},{"id":"trigger-manual","c":"trigger","ic":"play","tag":"manual","t":"Run workflow","s":"Manual desde Actions","d":"Tú eliges la tarea en Actions → Actualizar datos.","l":["<code>daily<\/code>: Baja precios de los últimos 10 días, el histórico completo de tickers nuevos y toda la macro; regenera los resúmenes.","<code>backfill<\/code>: Histórico de precios desde 2015 con dividendos y splits, macro completa y limpieza de tickers fuera del universo.","<code>prices<\/code>: Solo precios (por días, fecha inicial o lista de tickers).","<code>macro<\/code>: Todas las series macro, con escala y series calculadas.","<code>fundamentals<\/code>: Corte semanal de fundamentales: múltiplos, rentabilidad, deuda, perfil, precio objetivo y consenso. Para el SIC usa el ticker de origen.","<code>company<\/code>: Estados financieros, fechas de reporte y recomendaciones de un lote de unas 60 emisoras, empezando por las que nunca se han bajado y luego las más viejas. Si Yahoo limita consultas, sigue en la siguiente corrida.","<code>snapshots<\/code>: Solo regenera los resúmenes de data/snapshots.","<code>resolve<\/code>: Reintenta tickers sin datos y corrige claves del SIC.","<code>banxico-search<\/code>: Busca claves en el catálogo de Banxico."],"x":40,"y":394},{"id":"trigger-push","c":"trigger","ic":"branch","tag":"git","t":"Push o PR","s":"Cambios al código","d":"Cada push o pull request corre las pruebas. Los cambios llegan a main cuando fusionas el PR.","l":["<code>.github/workflows/tests.yml<\/code>"],"x":40,"y":495},{"id":"universe","c":"config","ic":"file","x":320,"y":75,"t":"universe.csv","s":"368 tickers: BMV, SIC, índices, FX","d":"Catálogo de emisoras (64 de la BMV, 297 del SIC, más índices y tipos de cambio). Aquí se agregan o quitan tickers; la corrida diaria baja sola el histórico de los nuevos.","l":["Columnas: <code>ticker, market, asset_type, name, ref_ticker<\/code>","SIC: réplica en pesos <code>.MX<\/code> con <code>ref_ticker<\/code> de origen"]},{"id":"series","c":"config","ic":"file","x":320,"y":165,"t":"macro_series.csv","s":"62 series (8 calculadas)","d":"Catálogo macro de FRED y Banxico con unidad, frecuencia, regla de agregación (avg o last), escala y fórmulas de las series calculadas (M1–M4 por moneda).","l":["Columnas: <code>source, series_id, name, category, units, frequency, agg, scale, formula<\/code>"]},{"id":"gha","c":"orch","ic":"gear","x":320,"y":280,"t":"GitHub Actions","big":true,"s":"Actualizar datos · elige la tarea","d":"Corre el pipeline en la nube (con red hacia Yahoo, FRED y Banxico), guarda lo descargado aunque un paso falle y hace commit de data/ a main.","l":["<code>.github/workflows/update-data.yml<\/code>","Secretos: <code>FRED_API_KEY<\/code>, <code>BANXICO_TOKEN<\/code>","Commit automático: <code>data: &lt;tarea&gt; &lt;fecha&gt;<\/code>"]},{"id":"pipeline","c":"orch","ic":"switch","x":320,"y":385,"t":"econ.pipeline","big":true,"s":"9 tareas · bitácora last_run.json","d":"El CLI que ejecuta cada tarea: descarga, aplica escalas, calcula series derivadas, escribe Parquet con upsert y siempre regenera los resúmenes al final.","l":["Tareas: <code>daily<\/code>, <code>backfill<\/code>, <code>prices<\/code>, <code>macro<\/code>, <code>fundamentals<\/code>, <code>company<\/code>, <code>snapshots<\/code>, <code>resolve<\/code>, <code>banxico-search<\/code>","<code>econ/pipeline.py<\/code>, <code>econ/config.py<\/code>","Registro de pasos, errores y advertencias en <code>data/snapshots/last_run.json<\/code>"]},{"id":"tests","c":"orch","ic":"check","x":320,"y":500,"t":"Pruebas","s":"pytest en cada push y PR","d":"Validan datos, fuentes simuladas, estadística, CLI, presentador y este mapa. test_forge exige que la documentación, el mapa de Forge y el protocolo del equipo estén al día.","l":["<code>.github/workflows/tests.yml<\/code>","<code>test_company.py<\/code>, <code>test_equity.py<\/code>, <code>test_forge.py<\/code>, <code>test_macro.py<\/code>, <code>test_mapa.py<\/code>, <code>test_pipeline.py<\/code>, <code>test_present.py<\/code>"]},{"id":"yahoo","c":"source","ic":"cloud","x":610,"y":95,"t":"Yahoo Finance","s":"Precios, dividendos, splits, fundamentales, reportes","d":"Vía yfinance: precios diarios OHLCV con eventos corporativos, corte de fundamentales y, por emisora, estados financieros anuales y trimestrales, fechas de reporte con sorpresas de UPA y recomendaciones.","l":["<code>econ/sources/yahoo.py<\/code>","Se detiene limpio ante límites de consulta (<code>RateLimited<\/code>)"]},{"id":"fred","c":"source","ic":"bank","x":610,"y":245,"t":"FRED","s":"Fed, Treasuries, inflación, empleo","d":"Series de la Reserva Federal de St. Louis: tasa de la Fed, curva de Treasuries, CPI y PCE, empleo, PIB, VIX, spread high yield, dólar, petróleo, M1 y M2.","l":["<code>econ/sources/fred.py<\/code> (API con llave o CSV público)"]},{"id":"banxico","c":"source","ic":"bank","x":610,"y":345,"t":"Banxico SIE","s":"Tasas, INPC, peso, agregados M1–M4","d":"Tasa objetivo, TIIE, CETES, tipo de cambio FIX, INPC y agregados monetarios (cuadro CF807) con sus componentes por moneda.","l":["<code>econ/sources/banxico.py<\/code>: lotes de 20 claves y búsqueda en el catálogo"]},{"id":"resolve","c":"process","ic":"lens","x":610,"y":470,"t":"resolve.py","s":"Corrige claves .MX del SIC","d":"Prueba variantes de clave (sufijos N, C…) y acepta solo la que tenga precio consistente con origen × USD/MXN; corrige universe.csv y baja el histórico.","l":["<code>econ/resolve.py<\/code>","Reporte en <code>data/snapshots/symbol_resolution.json<\/code>"]},{"id":"prices","c":"storage","ic":"db","x":900,"y":75,"t":"prices","s":"Diario desde 2015 · un Parquet por mes","d":"Precios OHLCV, precio ajustado, volumen, dividendo y split por día. Solo se reescribe el mes que cambia.","l":["<code>data/prices/AAAA-MM/data.parquet<\/code>","<code>econ/storage.py<\/code>: upsert por partición","La tabla es cruda: los splits no ajustados se corrigen en los resúmenes"]},{"id":"macro","c":"storage","ic":"db","x":900,"y":170,"t":"macro","s":"Series desde 2000 · un Parquet por año","d":"Observaciones en formato largo (source, series_id, date, value), ya con escala aplicada y series calculadas.","l":["<code>data/macro/AAAA/data.parquet<\/code>"]},{"id":"fund","c":"storage","ic":"db","x":900,"y":265,"t":"fundamentals","s":"Cortes semanales por emisora","d":"Cada corte guarda más de 80 campos de Yahoo con sus escalas crudas (dividendYield en %, razones en fracción, debtToEquity ×100). Para análisis se usa equity_snapshot.","l":["<code>data/fundamentals/AAAA-MM/<\/code>"]},{"id":"financials","c":"storage","ic":"db","x":900,"y":360,"t":"financials","s":"Estados financieros · uno por emisora","d":"Resultados, balance y flujo de efectivo, anuales y trimestrales, con todas las partidas que publica Yahoo, en la moneda de reporte.","l":["<code>data/financials/&lt;ticker&gt;/<\/code>: solo se reescribe la emisora que cambia","Columnas: <code>ticker, statement, freq, period_end, item, value<\/code>"]},{"id":"reports","c":"storage","ic":"db","x":900,"y":465,"t":"earnings · recomendaciones","s":"Reportes, consenso y bitácora","d":"Fechas de reporte pasadas y próximas con UPA estimada, reportada y sorpresa; conteo mensual de recomendaciones; bitácora de descargas por emisora.","l":["<code>data/earnings/<\/code>, <code>data/recommendations/<\/code>, <code>data/company_log/<\/code>"]},{"id":"snapshots","c":"process","ic":"cpu","x":1190,"y":145,"t":"snapshots.py","big":true,"s":"Resúmenes, briefing y salud","d":"Construye los resúmenes compactos para que un agente se ponga al día leyendo pocos KB: rendimientos y técnicos por ticker, último dato macro, tablas mensual a anual y el briefing.","l":["<code>econ/snapshots.py<\/code>","Revisa la salud: tickers o series sin datos, cobertura de reportes"]},{"id":"equity","c":"process","ic":"sigma","x":1190,"y":345,"t":"equity.py","big":true,"s":"Riesgo, normalización y puntajes","d":"Todo lo de cada emisora: corrige splits que Yahoo no ajustó en las .MX, calcula riesgo (volatilidad, caídas, beta semanal de 2 años, VaR, Sharpe y Sortino contra CETES), fuerza relativa, liquidez y dividendos, normaliza fundamentales y asigna puntajes de valor, calidad, momentum y riesgo.","l":["<code>econ/equity.py<\/code>","Benchmark: IPC para BMV, SPY.MX para SIC","Alertas en <code>data_flags<\/code>: splits corregidos, saltos raros, poca operación"]},{"id":"briefing","c":"snap","ic":"doc","x":1480,"y":70,"t":"briefing.md","s":"Una página: macro, índices, movers","d":"El punto de entrada más barato: macro, índices y divisas, mayores alzas y bajas, y reportes trimestrales de las próximas 2 semanas.","l":[]},{"id":"market","c":"snap","ic":"doc","x":1480,"y":160,"t":"market_snapshot.csv","s":"Una fila por ticker","d":"Rendimientos de 1 día a 1 año y YTD, distancia a máximos y mínimos, volatilidad, medias móviles y RSI.","l":[]},{"id":"macrosnap","c":"snap","ic":"doc","x":1480,"y":250,"t":"macro_snapshot.csv","s":"+ tablas mensual a anual","d":"Último dato de cada serie con su cambio a 12 meses, y tablas anchas de 24 meses, 12 trimestres, 8 semestres y 10 años con variación anual.","l":["<code>macro_monthly.csv<\/code>, <code>macro_quarterly.csv<\/code>, <code>macro_semiannual.csv<\/code>, <code>macro_annual.csv<\/code>"]},{"id":"eqsnap","c":"snap","ic":"doc","x":1480,"y":350,"t":"equity_snapshot.csv","s":"84 métricas por emisora","d":"Una fila por acción, FIBRA o ETF con todo normalizado: precio, riesgo, liquidez, dividendos, valuación, rentabilidad, analistas, próximo reporte, puntajes y alertas.","l":["Diccionario: <code>python -m econ.equity columnas<\/code>"]},{"id":"manifest","c":"snap","ic":"doc","x":1480,"y":450,"t":"manifest.json","s":"Inventario y salud del pipeline","d":"Qué datos hay, sus fechas y archivos, y la salud: tickers faltantes o viejos, series sin datos, cobertura de estados financieros.","l":["Con <code>last_run.json<\/code>: la última corrida paso a paso","Según la tarea: <code>symbol_resolution.json<\/code>, <code>banxico_search.json<\/code>"]},{"id":"user","c":"user","ic":"user","x":40,"y":900,"t":"Tú","s":"Preguntas por chat","d":"Hablas con el equipo desde cualquier sesión de Claude Code conectada al repo. Eres el único que puede pedir cambios.","l":["Atajos: <code>/anchor-set<\/code>, <code>/finanzas<\/code>, <code>/forge<\/code>, <code>/head<\/code>, <code>/macro<\/code>, <code>/mapa<\/code>, <code>/presenta<\/code>"]},{"id":"hook","c":"head","ic":"anchor","x":300,"y":900,"t":"Anchor set","s":"Hook + menú de 2 pasos","d":"Escribe “Anchor set”: un hook detecta la frase y el Head abre el menú (Head, mesa macro, mesa financiera, presentador o Forge). El elegido queda como interlocutor activo.","l":["<code>.claude/hooks/anchor_set.py<\/code>","<code>.claude/skills/anchor-set<\/code>"]},{"id":"head","c":"head","ic":"crown","x":560,"y":892,"t":"Head","big":true,"tag":"jefe","s":"Plan, comité y veredicto final","d":"La sesión principal: decide la ruta más ligera que dé una respuesta completa, reparte encargos en paralelo, lleva los memos de cada analista a su lead, verifica cifras y fechas e integra en formato piramidal.","l":["Manual: <code>.claude/team/head.md<\/code>","Protocolo común: <code>.claude/team/protocolo.md<\/code>","Nadie le pide cambios al Head: solo tú"]},{"id":"lead-macro","c":"macro","ic":"globe","x":840,"y":735,"t":"lead-macro","s":"Vista macro integrada","d":"Valida e integra los memos de sus analistas: régimen, escenario base y alternos, diferencial Banxico–Fed, peso, e implicaciones para tasas, índices y sectores.","l":["<code>.claude/agents/lead-macro.md<\/code>"]},{"id":"macro-mexico","c":"macro","ic":"flag","x":1090,"y":690,"t":"macro-mexico","s":"Banxico, INPC, peso, M1–M4","d":"Tasa objetivo, TIIE, CETES, inflación, tipo de cambio, agregados monetarios por moneda e IPC; tasa real y postura de Banxico.","l":["<code>.claude/agents/macro-mexico.md<\/code>"]},{"id":"macro-global","c":"macro","ic":"globe","x":1090,"y":790,"t":"macro-global","s":"Fed, Treasuries, EE.UU., riesgo","d":"Fed y balance, curva de Treasuries, inflación y empleo de EE.UU., actividad, VIX, high yield, condiciones financieras, dólar y petróleo.","l":["<code>.claude/agents/macro-global.md<\/code>"]},{"id":"lead-financiero","c":"fin","ic":"chartUp","x":840,"y":1000,"t":"lead-financiero","s":"Tesis y veredicto preliminar","d":"Integra el análisis fundamental y cuantitativo (y el contexto macro) en una tesis por emisora con pilares calificados de −2 a +2, convicción, catalizadores y riesgos.","l":["<code>.claude/agents/lead-financiero.md<\/code>"]},{"id":"analista-fundamental","c":"fin","ic":"doc","x":1090,"y":955,"t":"analista-fundamental","s":"Reportes, valuación, dividendos","d":"Estados financieros con TTM, márgenes, deuda, flujo libre, dividendos, múltiplos contra pares y contra tasas, consenso y sorpresas.","l":["<code>.claude/agents/analista-fundamental.md<\/code>"]},{"id":"analista-cuantitativo","c":"fin","ic":"pulse","x":1090,"y":1055,"t":"analista-cuantitativo","s":"Precio, riesgo, liquidez","d":"Rendimientos por periodo contra su benchmark, tendencia, momentum, volatilidad, caídas máximas, beta, VaR, Sharpe, liquidez y correlaciones.","l":["<code>.claude/agents/analista-cuantitativo.md<\/code>"]},{"id":"presentador","c":"staff","ic":"brush","x":840,"y":1170,"t":"presentador","s":"Uno para todo el equipo","d":"Convierte datos y análisis en artifacts interactivos con el estilo fijo de terminal Bloomberg. Escribe una especificación JSON; nunca HTML a mano.","l":["<code>.claude/agents/presentador.md<\/code>"]},{"id":"forge","c":"staff","ic":"wrench","x":840,"y":1270,"t":"forge","s":"Cambios al repo · solo si tú lo pides","d":"El ingeniero del repositorio: agrega datos, emisoras o series, ajusta pipeline, workflows, presentador, equipo o este mapa, y diagnostica fallas. Ignora sugerencias que no vengan de ti.","l":["<code>.claude/agents/forge.md<\/code>"]},{"id":"resp","c":"out","ic":"bubble","x":300,"y":1080,"t":"Respuesta en pirámide","s":"Cifra o conclusión primero","d":"1) La respuesta con su fecha. 2) Tabla corta y evidencia. 3) Opciones para profundizar. Si pides “más a fondo”, llega el detalle completo.","l":[]},{"id":"verd","c":"out","ic":"gavel","x":560,"y":1190,"t":"Veredicto de inversión","s":"Compra · Acumular · Mantener · Reducir · Venta","d":"Para “¿compro o vendo?”: 5 pilares (valuación, calidad y crecimiento, balance y dividendos, tendencia y riesgo, macro) de −2 a +2, con convicción, horizonte, catalizadores y qué cambiaría la vista.","l":[]},{"id":"tmacro","c":"tool","ic":"terminal","x":1360,"y":700,"t":"econ.macro","s":"panel · change · series","d":"Consultas macro por periodo: hoy, ayer, semanas, meses, trimestres, semestres, YTD, fechas exactas o rangos.","l":["<code>econ/macro.py<\/code>","<code>python -m econ.macro change --period ytd --category tasas<\/code>"]},{"id":"tquery","c":"tool","ic":"db","x":1360,"y":820,"t":"econ.query","s":"DuckDB · 21 tablas y vistas","d":"SQL sobre todos los datos: precios, macro agregada, fundamentales, estados financieros, reportes, dividendos y los resúmenes como tablas.","l":["<code>econ/query.py<\/code>","<code>python -m econ.query --tables<\/code>"]},{"id":"tequity","c":"tool","ic":"terminal","x":1360,"y":940,"t":"econ.equity","s":"ficha · estados · screen · periodo","d":"Todo de una emisora y comparaciones: ficha completa, estados con TTM, screener, comparables, rendimiento por periodo y dividendos. Resuelve WALMEX → WALMEX.MX o “banorte” → GFNORTEO.MX.","l":["Comandos: <code>ficha<\/code>, <code>estados<\/code>, <code>screen<\/code>, <code>compare<\/code>, <code>peers<\/code>, <code>dividendos<\/code>, <code>periodo<\/code>, <code>buscar<\/code>, <code>columnas<\/code>","<code>python -m econ.equity ficha WALMEX<\/code>"]},{"id":"tpresent","c":"tool","ic":"image","x":1360,"y":1150,"t":"econ.present","s":"Especificación JSON → HTML","d":"Lightweight Charts y ECharts con un solo tema (terminal Bloomberg) que no se puede alterar desde la especificación.","l":["<code>econ/present/build.py<\/code>","<code>econ/present/assets/theme.css<\/code>"]},{"id":"artifact","c":"out","ic":"image","x":1640,"y":1150,"t":"Artifact interactivo","s":"Gráficas, tableros, tablas","d":"Página privada en claude.ai que puedes compartir; republicar actualiza el mismo enlace. Este mapa también se publica así con /mapa.","l":["Mapa: <code>docs/mapa.html<\/code>, generado por <code>python -m econ.mapa<\/code> desde <code>econ/mapa/spec.py<\/code>"]},{"id":"pr","c":"out","ic":"pr","x":1640,"y":1270,"t":"Pull request","s":"Tú lo fusionas en main","d":"Los cambios de Forge llegan como PR. Al fusionarlo, los nuevos tickers, series o tareas entran al flujo de datos.","l":[]}],"edges":[["trigger-daily","gha","r","l"],["trigger-fundamentals","gha","r","l"],["trigger-company","gha","r","l"],["trigger-manual","gha","r","l"],["trigger-push","tests","r","l"],["gha","pipeline","b","t"],["universe","yahoo","r","l","tickers"],["series","fred","r","l"],["series","banxico","r","l","claves"],["pipeline","yahoo","r","l"],["pipeline","fred","r","l"],["pipeline","banxico","r","l"],["pipeline","resolve","r","l"],["resolve","prices","r","l","histórico nuevo",true],["yahoo","prices","r","l"],["yahoo","fund","r","l"],["yahoo","financials","r","l"],["yahoo","reports","r","l"],["fred","macro","r","l"],["banxico","macro","r","l","escala + CALC"],["prices","snapshots","r","l"],["macro","snapshots","r","l"],["prices","equity","r","l"],["fund","equity","r","l"],["financials","equity","r","l"],["reports","equity","r","l"],["macro","equity","r","l","CETES"],["snapshots","briefing","r","l"],["snapshots","market","r","l"],["snapshots","macrosnap","r","l"],["snapshots","manifest","r","l"],["equity","eqsnap","r","l"],["macrosnap","tmacro","r","t"],["eqsnap","tquery","r","t"],["eqsnap","tequity","r","t"],["user","hook","r","l"],["hook","head","r","l"],["head","lead-macro","r","l"],["head","lead-financiero","r","l"],["head","presentador","b","l"],["head","forge","b","l","solo si tú lo pides",true],["lead-macro","macro-mexico","r","l"],["lead-macro","macro-global","r","l"],["lead-financiero","analista-fundamental","r","l"],["lead-financiero","analista-cuantitativo","r","l"],["macro-mexico","tmacro","r","l"],["macro-global","tmacro","r","l"],["analista-fundamental","tequity","r","l"],["analista-cuantitativo","tequity","r","l"],["analista-fundamental","tquery","r","l"],["analista-cuantitativo","tquery","r","l"],["presentador","tpresent","r","l"],["tpresent","artifact","r","l"],["forge","pr","r","l"],["head","resp","b","t"],["head","verd","b","t"]],"flows":[{"k":"diario","t":"Actualización diaria","c":"--c-trigger","n":["trigger-daily","gha","pipeline","universe","series","yahoo","fred","banxico","prices","macro","snapshots","equity","briefing","market","macrosnap","eqsnap","manifest"],"steps":["El cron arranca el workflow después del cierre","El pipeline baja precios recientes de Yahoo y toda la macro de FRED y Banxico","Se guardan en Parquet (solo cambian las particiones nuevas)","snapshots.py y equity.py regeneran los resúmenes","GitHub Actions hace commit a main"]},{"k":"reportes","t":"Reportes de emisoras","c":"--c-storage","n":["trigger-company","gha","pipeline","universe","yahoo","financials","reports","equity","eqsnap","tequity","tquery"],"steps":["El cron de reportes elige unas 60 emisoras con los datos más viejos","Yahoo entrega estados financieros, fechas de reporte y recomendaciones","Se guardan por emisora","equity.py actualiza próximo reporte, sorpresas y consenso","Quedan listos para econ.equity y SQL"]},{"k":"macro","t":"Pregunta macro","c":"--c-macro","n":["user","hook","head","lead-macro","macro-mexico","macro-global","tmacro","macrosnap","resp"],"steps":["Preguntas (o eliges la mesa macro en Anchor set)","El Head encarga en paralelo a macro-mexico y macro-global","Cada uno consulta econ.macro y entrega un memo","lead-macro valida e integra","Recibes la respuesta en pirámide"]},{"k":"comite","t":"¿Compro o vendo?","c":"--c-head","n":["user","hook","head","lead-macro","lead-financiero","macro-mexico","macro-global","analista-fundamental","analista-cuantitativo","tmacro","tequity","tquery","eqsnap","verd"],"steps":["Ronda 1 en paralelo: fundamental, cuantitativo y la mesa macro","Ronda 2 en paralelo: lead-financiero (con contexto macro) y lead-macro","El Head califica 5 pilares de −2 a +2 y resuelve desacuerdos","Veredicto con convicción, horizonte, catalizadores y riesgos"]},{"k":"grafica","t":"Gráfica","c":"--c-staff","n":["user","hook","head","presentador","tpresent","artifact"],"steps":["Si pides análisis, primero lo hace la mesa que corresponda","El presentador escribe la especificación JSON","econ.present arma el HTML con el estilo fijo","El Head lo publica como artifact"]},{"k":"cambio","t":"Cambio al repo","c":"--c-staff","n":["user","hook","head","forge","pr","trigger-push","tests"],"steps":["Pides un cambio (solo tú puedes)","El Head se lo pasa a Forge marcado como petición tuya","Forge cambia, prueba, regenera este mapa si cambió el flujo y deja un PR","Corren las pruebas; tú fusionas en main"]}]}</script>
+<script>
+// Mapa del proyecto: lee el modelo de #mapa-data (lo genera econ/mapa/build.py) y dibuja el lienzo.
+(() => {
+  "use strict";
+  const DATA = JSON.parse(document.getElementById("mapa-data").textContent);
+  const { groups: GROUPS, nodes: N, edges: E, flows: FLOWS } = DATA;
+
+  const ICONS = {
+    clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+    play: '<circle cx="12" cy="12" r="8.5"/><path d="M10 8.8v6.4l5.2-3.2z"/>',
+    branch: '<circle cx="6" cy="6" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="9" r="2.2"/><path d="M6 8.2v7.6M18 11.2c0 4-6 3-11 5"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>',
+    switch: '<path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="14" cy="17" r="2"/>',
+    check: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12.5l2.6 2.5L16 9.5"/>',
+    file: '<path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10A.5.5 0 0 1 7 20z"/><path d="M14 3.5V8h4M9.5 12h6M9.5 15.5h6"/>',
+    cloud: '<path d="M7 18h10a4 4 0 0 0 .6-7.95A5.5 5.5 0 0 0 7 10.5 3.75 3.75 0 0 0 7 18z"/>',
+    bank: '<path d="M4 9.5L12 5l8 4.5M5.5 10v7M10 10v7M14 10v7M18.5 10v7M4 19h16"/>',
+    chartUp: '<path d="M4 19h16M6 15l4-4 3 3 5-6"/><path d="M15 8h3v3"/>',
+    wrench: '<path d="M14.5 6.5a4 4 0 0 0-5 5L4 17l3 3 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z"/>',
+    db: '<ellipse cx="12" cy="6" rx="7" ry="2.6"/><path d="M5 6v12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6M5 12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6"/>',
+    cpu: '<rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3.5V7M14 3.5V7M10 17v3.5M14 17v3.5M3.5 10H7M3.5 14H7M17 10h3.5M17 14h3.5"/>',
+    sigma: '<path d="M17 5H7l5 7-5 7h10"/>',
+    doc: '<path d="M6 4h12v16H6z"/><path d="M9 8h6M9 11.5h6M9 15h4"/>',
+    terminal: '<rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M7 10l3 2.5L7 15M12.5 15H17"/>',
+    user: '<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/>',
+    anchor: '<circle cx="12" cy="5.5" r="2"/><path d="M12 7.5V20M8 10.5h8M5 13.5c0 3.8 3.1 6.5 7 6.5s7-2.7 7-6.5"/>',
+    crown: '<path d="M4 17l1.5-9 4.5 4 2-6 2 6 4.5-4L20 17z"/><path d="M4.5 20h15"/>',
+    globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.4 3.5 8.5S14.5 17.9 12 20.5M12 3.5C9.5 6.1 8.5 8.9 8.5 12s1 5.9 3.5 8.5"/>',
+    flag: '<path d="M6 21V4M6 5h11l-2 3.5L17 12H6"/>',
+    lens: '<circle cx="10.5" cy="10.5" r="5.5"/><path d="M15 15l5 5M8 10.5h5"/>',
+    pulse: '<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>',
+    brush: '<path d="M14 4l6 6-8 8-6-6z"/><path d="M6 12l-2.5 6.5L10 16"/>',
+    bubble: '<path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4V16H6.5A2.5 2.5 0 0 1 4 13.5z"/><path d="M8 8.5h8M8 12h5"/>',
+    gavel: '<path d="M13 5l6 6M10 8l6 6M11.5 6.5l-3.5 3.5 6 6 3.5-3.5M8 13l-4.5 4.5 2 2L10 15M4 21h8"/>',
+    pr: '<circle cx="6" cy="6" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M6 8.2v7.6M18 15.8V10a3 3 0 0 0-3-3h-4M12.5 5 10.5 7l2 2"/>',
+    image: '<rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M7 15l3.5-4 3 3 2-2 2.5 3"/>',
+  };
+  const CATS = {
+    trigger: ["Disparador", "--c-trigger"], config: ["Configuración", "--c-config"], orch: ["Orquestación", "--c-orch"],
+    source: ["Fuente externa", "--c-source"], storage: ["Almacenamiento", "--c-storage"], process: ["Procesamiento", "--c-process"],
+    snap: ["Resumen para agentes", "--c-snap"], tool: ["Herramienta", "--c-tool"], user: ["Usuario", "--c-user"],
+    head: ["Head", "--c-head"], macro: ["Mesa macro", "--c-macro"], fin: ["Mesa financiera", "--c-fin"],
+    staff: ["Staff", "--c-staff"], out: ["Entregable", "--c-out"],
+  };
+
+  const $ = (s) => document.querySelector(s);
+  const world = $("#world"), svg = $("#edges"), stage = $("#stage"), dots = $("#dots");
+  const drawer = $("#drawer"), dbody = $("#dbody");
+  const svgNS = "http://www.w3.org/2000/svg";
+  const byId = Object.fromEntries(N.map((n) => [n.id, n]));
+  const icon = (k) => `<svg viewBox="0 0 24 24">${ICONS[k] || ICONS.gear}</svg>`;
+  const nodeEl = {};
+  const geo = {};  // posicion y tamano de cada nodo en el lienzo (se mide una vez)
+  const adj = {};  // vecinos y conexiones por nodo
+  const W = Math.max(...GROUPS.map((g) => g.x + g.w), ...N.map((n) => n.x + 230)) + 20;
+  const H = Math.max(...GROUPS.map((g) => g.y + g.h), ...N.map((n) => n.y + 80)) + 20;
+  world.style.width = W + "px"; world.style.height = H + "px";
+  svg.style.width = W + "px"; svg.style.height = H + "px";
+
+  // ---------------------------------------------------------------- construccion (una sola vez)
+  const frag = document.createDocumentFragment();
+  for (const g of GROUPS) {
+    const el = document.createElement("div");
+    el.className = "group";
+    el.style.cssText = `left:${g.x}px;top:${g.y}px;width:${g.w}px;height:${g.h}px`;
+    el.innerHTML = `<b><em>${g.n}</em>${g.t}</b>`;
+    frag.appendChild(el);
+  }
+  for (const n of N) {
+    const el = document.createElement("div");
+    el.className = "node" + (n.big ? " big" : "");
+    el.tabIndex = 0;
+    el.dataset.id = n.id;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-label", `${n.t}: ${n.s}`);
+    el.style.cssText = `left:${n.x}px;top:${n.y}px;--k:var(${CATS[n.c][1]})`;
+    el.innerHTML = `${n.tag ? `<span class="tag">${n.tag}</span>` : ""}<div class="ic">${icon(n.ic)}</div>` +
+      `<div class="tx"><b>${n.t}</b><span>${n.s}</span></div><i class="port l"></i><i class="port r"></i>`;
+    frag.appendChild(el);
+    nodeEl[n.id] = el;
+    adj[n.id] = { nb: new Set(), edges: [] };
+  }
+  world.appendChild(frag);
+
+  const legend = $("#legend");
+  for (const [k, [label, v]] of Object.entries(CATS)) {
+    if (k === "user" || k === "out") continue;
+    const s = document.createElement("span");
+    s.style.setProperty("--k", `var(${v})`);
+    s.innerHTML = `<i></i>${label}`;
+    legend.appendChild(s);
+  }
+
+  const DIR = { r: [1, 0], l: [-1, 0], t: [0, -1], b: [0, 1] };
+  function port(id, side) {
+    const { x, y, w, h } = geo[id];
+    return { r: [x + w, y + h / 2], l: [x, y + h / 2], t: [x + w / 2, y], b: [x + w / 2, y + h] }[side];
+  }
+  const bez = (p, t) => { const u = 1 - t;
+    return [0, 1].map((i) => u * u * u * p[0][i] + 3 * u * u * t * p[1][i] + 3 * u * t * t * p[2][i] + t * t * t * p[3][i]); };
+
+  const edgeEls = [];
+  function drawEdges() {
+    clearHi();
+    for (const n of N) { const el = nodeEl[n.id]; geo[n.id] = { x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight }; }
+    edgeEls.length = 0;
+    for (const id in adj) { adj[id].nb.clear(); adj[id].edges.length = 0; }
+    let base = "", flows = "", labels = "";
+    E.forEach(([a, b, sa, sb, label, dash], i) => {
+      if (!geo[a] || !geo[b]) return;
+      const [x1, y1] = port(a, sa), [x2, y2] = port(b, sb);
+      const k = Math.max(60, Math.min(220, Math.hypot(x2 - x1, y2 - y1) * 0.45));
+      const c1 = [x1 + DIR[sa][0] * k, y1 + DIR[sa][1] * k], c2 = [x2 + DIR[sb][0] * k, y2 + DIR[sb][1] * k];
+      const d = `M${x1},${y1} C${c1} ${c2} ${x2},${y2}`;
+      base += `<path class="e${dash ? " dash" : ""}" data-i="${i}" d="${d}" marker-end="url(#arr)"/>`;
+      flows += `<path class="flow" data-i="${i}" d="${d}"/>`;
+      if (label) {
+        const [mx, my] = bez([[x1, y1], c1, c2, [x2, y2]], 0.5);
+        labels += `<text class="elabel" data-i="${i}" x="${mx.toFixed(1)}" y="${(my - 6).toFixed(1)}" text-anchor="middle">${label}</text>`;
+      }
+    });
+    svg.innerHTML = `<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">` +
+      `<path d="M0,1 L9,5 L0,9 z" fill="#4a5568"/></marker></defs>${base}<g>${flows}</g>${labels}`;
+    E.forEach(([a, b], i) => {
+      if (!geo[a] || !geo[b]) return;
+      const e = { a, b, path: svg.querySelector(`path.e[data-i="${i}"]`), flow: svg.querySelector(`path.flow[data-i="${i}"]`),
+        text: svg.querySelector(`text[data-i="${i}"]`) };
+      edgeEls.push(e);
+      adj[a].nb.add(b); adj[b].nb.add(a); adj[a].edges.push(e); adj[b].edges.push(e);
+    });
+  }
+
+  // ---------------------------------------------------------------- resaltado (solo toca lo que cambia)
+  const state = { flow: null, sel: null, lit: new Set(), litEdges: new Set() };
+  function clearHi() {
+    world.classList.remove("dim");
+    for (const id of state.lit) nodeEl[id].classList.remove("on", "sel");
+    for (const e of state.litEdges) { e.path.classList.remove("on"); e.flow.classList.remove("on"); if (e.text) e.text.classList.remove("on"); }
+    state.lit.clear(); state.litEdges.clear();
+  }
+  function highlight(ids, color, focus) {
+    clearHi();
+    world.classList.add("dim");
+    for (const id of ids) { nodeEl[id].classList.add("on"); state.lit.add(id); }
+    const list = focus ? adj[focus].edges : edgeEls.filter((e) => ids.has(e.a) && ids.has(e.b));
+    const c = color || `var(${CATS[byId[focus].c][1]})`;
+    for (const e of list) {
+      e.path.classList.add("on"); e.path.style.setProperty("--hc", c);
+      if (color) { e.flow.classList.add("on"); e.flow.style.setProperty("--hc", c); }
+      if (e.text) e.text.classList.add("on");
+      state.litEdges.add(e);
+    }
+  }
+
+  // ---------------------------------------------------------------- panel de detalle
+  const links = (ids) => `<div class="links">${ids.map((i) => `<button data-go="${i}">${byId[i].t}</button>`).join("")}</div>`;
+  function openNode(id, center) {
+    const n = byId[id];
+    setFlow(null, true);
+    state.sel = id;
+    highlight(new Set([id, ...adj[id].nb]), null, id);
+    nodeEl[id].classList.add("sel");
+    const [cat, v] = CATS[n.c];
+    const ins = E.filter((e) => e[1] === id).map((e) => e[0]);
+    const outs = E.filter((e) => e[0] === id).map((e) => e[1]);
+    dbody.innerHTML = `<div class="k" style="--k: var(${v})"><div class="ic">${icon(n.ic)}</div>` +
+      `<div><div class="cat">${cat}</div><h2>${n.t}</h2></div></div><p>${n.d}</p>` +
+      (n.l && n.l.length ? `<h3>Detalle</h3><ul>${n.l.map((x) => `<li>${x}</li>`).join("")}</ul>` : "") +
+      (ins.length ? `<h3>Recibe de</h3>${links(ins)}` : "") + (outs.length ? `<h3>Envía a</h3>${links(outs)}` : "");
+    drawer.classList.add("open");
+    if (center) focusOn(id);
+  }
+  function openFlow(f) {
+    dbody.innerHTML = `<div class="k" style="--k: var(${f.c})"><div class="ic">${icon("play")}</div>` +
+      `<div><div class="cat">Recorrido</div><h2>${f.t}</h2></div></div>` +
+      `<h3>Paso a paso</h3><ol>${f.steps.map((s) => `<li>${s}</li>`).join("")}</ol>` +
+      `<h3>Nodos que participan</h3>${links(f.n.filter((i) => byId[i]))}`;
+    drawer.classList.add("open");
+  }
+  dbody.addEventListener("click", (e) => { const b = e.target.closest("[data-go]"); if (b) openNode(b.dataset.go, true); });
+  function closeDrawer() { drawer.classList.remove("open"); state.sel = null; setFlow(null); clearHi(); }
+  $("#close").addEventListener("click", closeDrawer);
+
+  const chipEls = {};
+  const flowsBar = $("#flows");
+  for (const f of FLOWS) {
+    const b = document.createElement("button");
+    b.className = "chip"; b.textContent = f.t; b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", () => setFlow(state.flow === f.k ? null : f.k));
+    flowsBar.appendChild(b);
+    chipEls[f.k] = b;
+  }
+  function setFlow(k, keepDrawer) {
+    state.flow = k;
+    for (const [key, b] of Object.entries(chipEls)) b.setAttribute("aria-pressed", String(key === k));
+    if (!k) { if (!keepDrawer) { clearHi(); drawer.classList.remove("open"); } return; }
+    state.sel = null;
+    const f = FLOWS.find((x) => x.k === k);
+    highlight(new Set(f.n.filter((i) => byId[i])), `var(${f.c})`);
+    openFlow(f);
+  }
+
+  // Delegacion: un solo listener para todos los nodos.
+  world.addEventListener("click", (e) => { const el = e.target.closest(".node"); if (el && moved < 4) { e.stopPropagation(); openNode(el.dataset.id); } });
+  world.addEventListener("keydown", (e) => {
+    const el = e.target.closest(".node");
+    if (el && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openNode(el.dataset.id); }
+  });
+  world.addEventListener("pointerover", (e) => {
+    const el = e.target.closest(".node");
+    if (!el || dragging || state.flow || state.sel || el === hovered) return;
+    hovered = el; highlight(new Set([el.dataset.id, ...adj[el.dataset.id].nb]), null, el.dataset.id);
+  });
+  world.addEventListener("pointerout", (e) => {
+    const el = e.target.closest(".node");
+    if (!el || el.contains(e.relatedTarget) || dragging || state.flow || state.sel) return;
+    hovered = null; clearHi();
+  });
+  let hovered = null;
+
+  // ---------------------------------------------------------------- paneo y zoom (un repintado por cuadro)
+  const view = { x: 0, y: 0, s: 1 };
+  let raf = 0, idle = 0;
+  function render() {
+    raf = 0;
+    world.style.transform = `translate3d(${view.x}px,${view.y}px,0) scale(${view.s})`;
+    let cell = 22 * view.s;
+    while (cell < 11) cell *= 2;
+    const ox = ((view.x % cell) + cell) % cell, oy = ((view.y % cell) + cell) % cell;
+    dots.style.backgroundSize = `${cell}px ${cell}px`;
+    dots.style.transform = `translate3d(${ox - cell}px,${oy - cell}px,0)`;
+  }
+  function apply(interactive) {
+    if (interactive) {
+      stage.classList.add("moving");
+      clearTimeout(idle);
+      idle = setTimeout(() => stage.classList.remove("moving"), 160);  // al soltar, se vuelve a dibujar nitido
+    }
+    if (!raf) raf = requestAnimationFrame(render);
+  }
+  function zoomAt(f, cx, cy) {
+    const s = Math.min(2.2, Math.max(0.15, view.s * f));
+    view.x = cx - (cx - view.x) * (s / view.s);
+    view.y = cy - (cy - view.y) * (s / view.s);
+    view.s = s; apply(true);
+  }
+  const wide = () => stage.clientWidth > 640;
+  function fit() {
+    const w = stage.clientWidth, h = stage.clientHeight, top = wide() ? 60 : 8, pad = 20;
+    view.s = Math.max(0.15, Math.min((w - pad * 2) / W, (h - top - pad) / H));
+    view.x = (w - W * view.s) / 2;
+    view.y = top + (h - top - H * view.s) / 2;
+    apply();
+  }
+  function start() {
+    if (wide()) return fit();
+    view.s = 0.62; view.x = -4; view.y = 0; apply();  // en telefono empieza legible en los disparadores
+  }
+  function focusOn(id) {
+    const g = geo[id], w = stage.clientWidth, h = stage.clientHeight;
+    view.s = Math.max(view.s, 0.8);
+    view.x = (w - (wide() ? 380 : 0)) / 2 - (g.x + g.w / 2) * view.s;
+    view.y = (wide() ? h / 2 : h * 0.22) - (g.y + g.h / 2) * view.s;
+    apply();
+  }
+  $("#zin").addEventListener("click", () => zoomAt(1.2, stage.clientWidth / 2, stage.clientHeight / 2));
+  $("#zout").addEventListener("click", () => zoomAt(1 / 1.2, stage.clientWidth / 2, stage.clientHeight / 2));
+  $("#zfit").addEventListener("click", fit);
+
+  let rect = stage.getBoundingClientRect();
+  stage.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    if (e.ctrlKey || Math.abs(e.deltaX) < 1 || e.deltaMode) {
+      zoomAt(Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0015)), e.clientX - rect.left, e.clientY - rect.top);
+    } else {  // panel tactil de laptop: dos dedos mueven el lienzo
+      view.x -= e.deltaX; view.y -= e.deltaY; apply(true);
+    }
+  }, { passive: false });
+
+  const pts = new Map();
+  let last = null, moved = 0, pinch = null, dragging = false;
+  stage.addEventListener("pointerdown", (e) => {
+    if (e.target.closest(".drawer, .zoom, .legend")) return;
+    rect = stage.getBoundingClientRect();
+    pts.set(e.pointerId, [e.clientX, e.clientY]);
+    if (pts.size === 1) { last = [e.clientX, e.clientY]; moved = 0; }
+    if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = Math.hypot(a[0] - b[0], a[1] - b[1]); }
+  });
+  stage.addEventListener("pointermove", (e) => {
+    if (!pts.has(e.pointerId)) return;
+    pts.set(e.pointerId, [e.clientX, e.clientY]);
+    if (pts.size === 2 && pinch) {
+      const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      zoomAt(d / pinch, (a[0] + b[0]) / 2 - rect.left, (a[1] + b[1]) / 2 - rect.top);
+      pinch = d; return;
+    }
+    if (!last) return;
+    const dx = e.clientX - last[0], dy = e.clientY - last[1];
+    moved += Math.abs(dx) + Math.abs(dy);
+    if (!dragging && moved > 4) {
+      dragging = true; stage.classList.add("dragging");
+      try { stage.setPointerCapture(e.pointerId); } catch (_) { /* sin captura */ }
+    }
+    if (dragging) { view.x += dx; view.y += dy; last = [e.clientX, e.clientY]; apply(true); }
+  });
+  const up = (e) => {
+    pts.delete(e.pointerId);
+    if (pts.size < 2) pinch = null;
+    if (pts.size) return;
+    const wasClick = moved < 4;
+    dragging = false; stage.classList.remove("dragging"); last = null;
+    if (wasClick && !e.target.closest(".node, .drawer, .zoom, .legend")) closeDrawer();
+  };
+  stage.addEventListener("pointerup", up);
+  stage.addEventListener("pointercancel", up);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeDrawer(); });
+
+  let ready = false;
+  function init() { drawEdges(); if (!ready) { ready = true; start(); } }
+  init();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawEdges);  // re-mide con la fuente final
+  let rz = 0;
+  window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { rect = stage.getBoundingClientRect(); start(); }, 120); });
+})();
+</script>
+</body>
+</html>

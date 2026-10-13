@@ -1,0 +1,23 @@
+<div class="app">
+  <header class="bar">
+    <div class="brand"><h1>ECONOMICS</h1><span>Mapa del proyecto · datos, pipeline y equipo de agentes</span></div>
+    <div class="flows" id="flows"><span class="lbl">Recorridos</span></div>
+  </header>
+  <main class="stage" id="stage">
+    <div class="dots" id="dots"></div>
+    <div class="world" id="world">
+      <svg class="edges" id="edges" aria-hidden="true"></svg>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="zoom">
+      <button class="zbtn" id="zin" aria-label="Acercar">+</button>
+      <button class="zbtn" id="zout" aria-label="Alejar">−</button>
+      <button class="zbtn wide" id="zfit">Ajustar</button>
+    </div>
+    <div class="hint">Arrastra para moverte · rueda para zoom · clic en un nodo para ver detalle</div>
+    <aside class="drawer" id="drawer" aria-live="polite">
+      <button class="close" id="close" aria-label="Cerrar panel">×</button>
+      <div id="dbody"></div>
+    </aside>
+  </main>
+</div>
