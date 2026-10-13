@@ -1,37 +1,50 @@
-source,series_id,name,category,units,frequency,agg
-FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,last
-FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D,avg
-FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W,last
-FRED,M1SL,Oferta monetaria M1 (desde may-2020 incluye depositos de ahorro),politica_monetaria,miles_millones_usd,M,last
-FRED,M2SL,Oferta monetaria M2,politica_monetaria,miles_millones_usd,M,last
-FRED,DGS3MO,Treasury 3 meses,tasas,pct,D,avg
-FRED,DGS2,Treasury 2 anios,tasas,pct,D,avg
-FRED,DGS10,Treasury 10 anios,tasas,pct,D,avg
-FRED,DGS30,Treasury 30 anios,tasas,pct,D,avg
-FRED,T10Y2Y,Spread 10a-2a,tasas,pct,D,avg
-FRED,T10Y3M,Spread 10a-3m,tasas,pct,D,avg
-FRED,T5YIE,Inflacion implicita 5a (breakeven),inflacion,pct,D,avg
-FRED,MORTGAGE30US,Hipoteca 30 anios,tasas,pct,W,avg
-FRED,CPIAUCSL,CPI general,inflacion,indice,M,avg
-FRED,CPILFESL,CPI subyacente,inflacion,indice,M,avg
-FRED,PCEPILFE,PCE subyacente,inflacion,indice,M,avg
-FRED,UNRATE,Tasa de desempleo,empleo,pct,M,avg
-FRED,PAYEMS,Nomina no agricola,empleo,miles,M,avg
-FRED,ICSA,Solicitudes iniciales de desempleo,empleo,personas,W,avg
-FRED,GDPC1,PIB real,actividad,miles_millones_usd,Q,avg
-FRED,INDPRO,Produccion industrial,actividad,indice,M,avg
-FRED,RSAFS,Ventas minoristas,actividad,millones_usd,M,avg
-FRED,HOUST,Inicios de vivienda,actividad,miles,M,avg
-FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),actividad,indice,M,avg
-FRED,VIXCLS,VIX,riesgo,indice,D,avg
-FRED,BAMLH0A0HYM2,Spread high yield,riesgo,pct,D,avg
-FRED,NFCI,Indice de condiciones financieras (Chicago Fed),riesgo,desv_std,W,avg
-FRED,DTWEXBGS,Indice dolar amplio,divisas,indice,D,avg
-FRED,DEXMXUS,Pesos por dolar (FRED),divisas,mxn_por_usd,D,avg
-FRED,DCOILWTICO,Petroleo WTI,materias_primas,usd_barril,D,avg
-FRED,SP500,S&P 500 (FRED),mercado,indice,D,last
-BANXICO,SF61745,Tasa objetivo Banxico,politica_monetaria,pct,D,last
-BANXICO,SF43783,TIIE 28 dias,tasas,pct,D,avg
-BANXICO,SF43936,CETES 28 dias,tasas,pct,W,avg
-BANXICO,SF43718,Tipo de cambio FIX,divisas,mxn_por_usd,D,avg
-BANXICO,SP1,INPC (indice general),inflacion,indice,M,avg
+source,series_id,name,category,units,frequency,agg,scale,formula
+FRED,DFEDTARU,Fed funds target (limite superior),politica_monetaria,pct,D,last,1,
+FRED,DFF,Fed funds efectiva,politica_monetaria,pct,D,avg,1,
+FRED,WALCL,Balance de la Fed (activos totales),politica_monetaria,millones_usd,W,last,1,
+FRED,M1SL,Oferta monetaria M1 (desde may-2020 incluye depositos de ahorro),agregados_monetarios,miles_millones_usd,M,last,1,
+FRED,M2SL,Oferta monetaria M2,agregados_monetarios,miles_millones_usd,M,last,1,
+FRED,DGS3MO,Treasury 3 meses,tasas,pct,D,avg,1,
+FRED,DGS2,Treasury 2 anios,tasas,pct,D,avg,1,
+FRED,DGS10,Treasury 10 anios,tasas,pct,D,avg,1,
+FRED,DGS30,Treasury 30 anios,tasas,pct,D,avg,1,
+FRED,T10Y2Y,Spread 10a-2a,tasas,pct,D,avg,1,
+FRED,T10Y3M,Spread 10a-3m,tasas,pct,D,avg,1,
+FRED,T5YIE,Inflacion implicita 5a (breakeven),inflacion,pct,D,avg,1,
+FRED,MORTGAGE30US,Hipoteca 30 anios,tasas,pct,W,avg,1,
+FRED,CPIAUCSL,CPI general,inflacion,indice,M,avg,1,
+FRED,CPILFESL,CPI subyacente,inflacion,indice,M,avg,1,
+FRED,PCEPILFE,PCE subyacente,inflacion,indice,M,avg,1,
+FRED,UNRATE,Tasa de desempleo,empleo,pct,M,avg,1,
+FRED,PAYEMS,Nomina no agricola,empleo,miles,M,avg,1,
+FRED,ICSA,Solicitudes iniciales de desempleo,empleo,personas,W,avg,1,
+FRED,GDPC1,PIB real,actividad,miles_millones_usd,Q,avg,1,
+FRED,INDPRO,Produccion industrial,actividad,indice,M,avg,1,
+FRED,RSAFS,Ventas minoristas,actividad,millones_usd,M,avg,1,
+FRED,HOUST,Inicios de vivienda,actividad,miles,M,avg,1,
+FRED,UMCSENT,Sentimiento del consumidor (U. Michigan),actividad,indice,M,avg,1,
+FRED,VIXCLS,VIX,riesgo,indice,D,avg,1,
+FRED,BAMLH0A0HYM2,Spread high yield,riesgo,pct,D,avg,1,
+FRED,NFCI,Indice de condiciones financieras (Chicago Fed),riesgo,desv_std,W,avg,1,
+FRED,DTWEXBGS,Indice dolar amplio,divisas,indice,D,avg,1,
+FRED,DEXMXUS,Pesos por dolar (FRED),divisas,mxn_por_usd,D,avg,1,
+FRED,DCOILWTICO,Petroleo WTI,materias_primas,usd_barril,D,avg,1,
+FRED,SP500,S&P 500 (FRED),mercado,indice,D,last,1,
+BANXICO,SF61745,Tasa objetivo Banxico,politica_monetaria,pct,D,last,1,
+BANXICO,SF43783,TIIE 28 dias,tasas,pct,D,avg,1,
+BANXICO,SF43936,CETES 28 dias,tasas,pct,W,avg,1,
+BANXICO,SF43718,Tipo de cambio FIX,divisas,mxn_por_usd,D,avg,1,
+BANXICO,SP1,INPC (indice general),inflacion,indice,M,avg,1,
+BANXICO,SF311408,M1 Mexico,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311418,M2 Mexico,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311433,M3 Mexico,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311438,M4 Mexico,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311409,M1 Mexico: billetes y monedas en poder del publico,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311412,M1 Mexico: cuentas de cheques en moneda nacional,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311413,M1 Mexico: cuentas de cheques en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311415,M1 Mexico: cuenta corriente en moneda nacional,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311416,M1 Mexico: cuenta corriente en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311422,M2 Mexico: captacion a plazo en bancos en moneda nacional,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+BANXICO,SF311423,M2 Mexico: captacion a plazo en bancos en moneda extranjera,agregados_monetarios,miles_millones_mxn,M,last,0.000001,
+CALC,MX_M1_ME,M1 Mexico en moneda extranjera (cheques + cuenta corriente),agregados_monetarios,miles_millones_mxn,M,last,1,SF311413 + SF311416
+CALC,MX_M1_MN,M1 Mexico en moneda nacional (M1 - moneda extranjera),agregados_monetarios,miles_millones_mxn,M,last,1,SF311408 - SF311413 - SF311416

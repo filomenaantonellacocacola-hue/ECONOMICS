@@ -17,6 +17,7 @@ log = logging.getLogger(__name__)
 API_URL = "https://www.banxico.org.mx/SieAPIRest/service/v1"
 BASE_URL = API_URL + "/series/{ids}/datos/{start}/{end}"
 TIMEOUT = 60
+MAX_IDS = 20
 
 
 def parse_response(payload: dict) -> pd.DataFrame:
@@ -40,14 +41,20 @@ def fetch_many(series_ids: list[str], start: str) -> tuple[pd.DataFrame, list[st
     if not token:
         log.info("BANXICO_TOKEN no definido; se omiten series de Banxico")
         return pd.DataFrame(), list(series_ids)
-    url = BASE_URL.format(ids=",".join(series_ids), start=start, end=date.today().isoformat())
-    try:
-        resp = requests.get(url, headers={"Bmx-Token": token, "Accept": "application/json"}, timeout=TIMEOUT)
-        resp.raise_for_status()
-        data = parse_response(resp.json())
-    except Exception as exc:  # noqa: BLE001
-        log.warning("Banxico fallo: %s", exc)
+    frames = []
+    # La API acepta hasta 20 series por consulta.
+    for i in range(0, len(series_ids), MAX_IDS):
+        chunk = series_ids[i : i + MAX_IDS]
+        url = BASE_URL.format(ids=",".join(chunk), start=start, end=date.today().isoformat())
+        try:
+            resp = requests.get(url, headers={"Bmx-Token": token, "Accept": "application/json"}, timeout=TIMEOUT)
+            resp.raise_for_status()
+            frames.append(parse_response(resp.json()))
+        except Exception as exc:  # noqa: BLE001
+            log.warning("Banxico fallo para %s: %s", chunk, exc)
+    if not frames:
         return pd.DataFrame(), list(series_ids)
+    data = pd.concat(frames, ignore_index=True)
     failed = sorted(set(series_ids) - set(data["series_id"].unique()))
     return data, failed
 
@@ -85,7 +92,10 @@ def search_catalog(queries: list[str], max_info: int = 150) -> dict:
     infos = 0
     with requests.Session() as http:
         for q in queries:
-            hits = search(q, http)
+            if q.lower().startswith("ids:"):
+                hits = [{"id": sid, "descripcion": ""} for sid in expand_ids(q[4:])]
+            else:
+                hits = search(q, http)
             for hit in hits:
                 if infos >= max_info:
                     break
@@ -96,3 +106,20 @@ def search_catalog(queries: list[str], max_info: int = 150) -> dict:
                 infos += 1
             result[q] = hits
     return result
+
+
+def expand_ids(spec: str) -> list[str]:
+    """'SF311408-SF311412,SF43718' -> ['SF311408', ..., 'SF311412', 'SF43718'] (maximo 200)."""
+    import re
+
+    out: list[str] = []
+    for part in spec.split(","):
+        part = part.strip().upper()
+        if m := re.fullmatch(r"([A-Z]+)(\d+)-(?:[A-Z]+)?(\d+)", part):
+            prefix, a, b = m[1], int(m[2]), int(m[3])
+            out += [f"{prefix}{n}" for n in range(a, b + 1)]
+        elif part:
+            out.append(part)
+    if len(out) > 200:
+        raise ValueError("Maximo 200 claves por consulta")
+    return out
