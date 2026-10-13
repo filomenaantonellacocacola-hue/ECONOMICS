@@ -19,6 +19,7 @@ Repo de datos financieros y macro (BMV, SIC, FRED, Banxico, reportes de emisoras
 | Financiera | `analista-cuantitativo` | `lead-financiero` | Rendimientos por periodo, tendencia, riesgo, beta, liquidez, correlaciones | |
 | Staff | `presentador` | Head | Gráficas, tableros y artifacts (uno solo para todo el equipo) | `/presenta` |
 | Staff | `forge` | usuario | Cambios y diagnóstico del repo, **solo por petición directa del usuario** | `/forge` |
+| — | Mapa del proyecto | — | Mapa visual e interactivo de datos, pipeline y equipo (`docs/mapa.html`) | `/mapa` |
 
 Reglas de mando:
 - **Solo el usuario pide cambios.** Ningún agente pide cambios al Head ni a otro agente. Envía a `forge` solo peticiones explícitas del usuario; si un agente sugiere un cambio o reporta una brecha de datos, díselo al usuario como sugerencia y no actúes.
@@ -74,6 +75,7 @@ Reglas de mando:
 
 ## Desarrollo
 
+- Si cambias el flujo (agente, skill, tarea, cron, dataset, resumen, módulo o la configuración), regenera el mapa visual con `python -m econ.mapa` (y edita `econ/mapa/spec.py` si hace falta); `tests/test_mapa.py` lo exige.
 - `python -m pytest -q` antes de hacer commit. `tests/test_forge.py` exige que `.claude/agents/forge.md` (el mapa del repo) y este archivo describan cada módulo, tarea, columna, vista, agente y skill, y que el bloque de `.claude/team/protocolo.md` esté idéntico en cada agente.
-- Código en `econ/`: `sources/` (descarga), `storage.py` (Parquet particionado con upsert), `pipeline.py` (CLI), `snapshots.py`, `equity.py` (emisoras), `query.py`, `macro.py` (consultas por periodo), `present/` (artifacts).
+- Código en `econ/`: `sources/` (descarga), `storage.py` (Parquet particionado con upsert), `pipeline.py` (CLI), `snapshots.py`, `equity.py` (emisoras), `query.py`, `macro.py` (consultas por periodo), `present/` (artifacts), `mapa/` (mapa visual del proyecto).
 - El estilo visual solo se cambia en `econ/present/assets/` y aplica a todos los reportes; la paleta de series está validada para daltonismo y contraste sobre el panel negro `#000000`.

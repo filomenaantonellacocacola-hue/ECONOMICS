@@ -47,6 +47,7 @@ Si piden "más a fondo", entrega el nivel 3 completo: tablas, cálculos, supuest
 - **Nunca edites `data/` a mano** (lo genera el pipeline) ni versiones `out/` (reportes locales).
 - **Valida siempre**: `python -m pytest -q` debe pasar. Agrega o ajusta tests para cada cambio de código; los tests no usan red (simula HTTP con `monkeypatch`, como `_FakeSession` en `tests/test_pipeline.py`).
 - **Mantén el conocimiento al día en el mismo cambio**: si agregas o cambias un módulo, tarea, columna de configuración, vista SQL, agente, skill o regla, actualiza este archivo, `CLAUDE.md` y `README.md`. `tests/test_forge.py` falla si este mapa queda desfasado.
+- **Mantén el mapa visual al día**: si cambia el flujo (agente, skill, tarea, cron, dataset, resumen, módulo o conteos de la configuración), actualiza `econ/mapa/spec.py` si hace falta y corre `python -m econ.mapa` para regenerar `docs/mapa.html`. `tests/test_mapa.py` falla si el mapa no cubre el proyecto o el HTML no está regenerado.
 - **Git**: deja los cambios en el árbol de trabajo y repórtalos; el orquestador hace commit, push y PR según las reglas de la sesión. No dispares workflows por tu cuenta: los pones como pasos para el usuario.
 
 ## Entorno
@@ -82,9 +83,13 @@ Si piden "más a fondo", entrega el nivel 3 completo: tablas, cálculos, supuest
 | `econ/present/__main__.py` | CLI `python -m econ.present <spec.json>` |
 | `econ/present/assets/theme.css` | Único tema visual (terminal Bloomberg): tokens de color, tipografía y componentes |
 | `econ/present/assets/app.js` | Renderer: Lightweight Charts 4.2.3 (series de tiempo) y ECharts 5.6.0 (categorías); lee los colores de los tokens del CSS |
+| `econ/mapa/spec.py` | Contenido del mapa visual: grupos, nodos con posición y textos (`$variables` que se llenan con datos del repo), conexiones (`EDGES`), recorridos (`FLOWS`) y textos de tareas (`TASK_TEXT`) |
+| `econ/mapa/build.py` | Arma el mapa: `facts` (conteos, tareas, skills, comandos), `workflow_triggers` (crons y ejecución manual leídos de los workflows), `model`, `render`; CLI en `econ/mapa/__main__.py` (`python -m econ.mapa`, `--fragment`, `--check`) |
+| `econ/mapa/assets/mapa.css`, `econ/mapa/assets/mapa.js`, `econ/mapa/assets/mapa.body.html` | Estilo, lienzo interactivo (paneo y zoom con `requestAnimationFrame`, capas aceleradas) y estructura de la página del mapa |
+| `docs/mapa.html` | Mapa visual generado (no se edita a mano) |
 | `econ/present/examples/tablero-tasas.json` | Ejemplo completo de especificación (lo construye un test) |
 | `sql/` | Consultas de ejemplo para `python -m econ.query -f` |
-| `tests/` | `test_pipeline.py` (datos, fuentes, pipeline), `test_company.py` (reportes de emisoras), `test_equity.py` (estadística, normalización y CLI de emisoras), `test_macro.py`, `test_present.py`, `test_forge.py` (este mapa, el equipo y el protocolo al día) |
+| `tests/` | `test_pipeline.py` (datos, fuentes, pipeline), `test_company.py` (reportes de emisoras), `test_equity.py` (estadística, normalización y CLI de emisoras), `test_macro.py`, `test_present.py`, `test_forge.py` (este mapa, el equipo y el protocolo al día), `test_mapa.py` (mapa visual completo y regenerado); `conftest.py` redirige las rutas de datos a una carpeta temporal para que ninguna prueba toque `data/` |
 | `.github/workflows/update-data.yml` | Workflow **Actualizar datos**: diario lun-vie 23:30 UTC (`daily`), sábados 12:00 UTC (`fundamentals`), lun-sáb 11:15 UTC (`company`, un lote de emisoras) y manual con `task`, `start` y `query`; hace commit de `data` y `config/universe.csv` |
 | `.github/workflows/tests.yml` | Corre `pytest` en cada push y PR |
 | `.claude/team/head.md` | Manual del Head (la sesión principal): rutas, interlocutor activo, cómo delegar en paralelo, comité de inversión, marco de decisión y formato piramidal |
@@ -92,7 +97,7 @@ Si piden "más a fondo", entrega el nivel 3 completo: tablas, cálculos, supuest
 | `.claude/agents/lead-macro.md`, `.claude/agents/macro-mexico.md`, `.claude/agents/macro-global.md` | Mesa macro: lead y analistas de México y de EE.UU./global |
 | `.claude/agents/lead-financiero.md`, `.claude/agents/analista-fundamental.md`, `.claude/agents/analista-cuantitativo.md` | Mesa financiera: lead y analistas fundamental y cuantitativo |
 | `.claude/agents/presentador.md`, `.claude/agents/forge.md` | Staff: presentador único y Forge |
-| `.claude/skills/anchor-set`, `.claude/skills/head`, `.claude/skills/macro`, `.claude/skills/finanzas`, `.claude/skills/presenta`, `.claude/skills/forge` | Menú "Anchor set" y atajos `/anchor-set`, `/head`, `/macro`, `/finanzas`, `/presenta`, `/forge` |
+| `.claude/skills/anchor-set`, `.claude/skills/head`, `.claude/skills/macro`, `.claude/skills/finanzas`, `.claude/skills/presenta`, `.claude/skills/forge`, `.claude/skills/mapa` | Menú "Anchor set" y atajos `/anchor-set`, `/head`, `/macro`, `/finanzas`, `/presenta`, `/forge`, `/mapa` (publica el mapa visual como artifact) |
 | `.claude/settings.json`, `.claude/hooks/session-start.sh`, `.claude/hooks/anchor_set.py` | Permisos de comandos de solo lectura; hook que instala dependencias en sesiones web; hook `UserPromptSubmit` que detecta "Anchor set" y pide abrir el menú |
 | `CLAUDE.md`, `README.md` | Guía para agentes (datos, tablas, equipo) y guía para personas |
 
@@ -166,9 +171,14 @@ Vista en `DERIVED_VIEWS` (`econ/query.py`), consulta en `sql/`, y documéntala e
 - **Revisión visual** (sin CDN aquí): `npm pack lightweight-charts@4.2.3 echarts@5.6.0` en el scratchpad; Playwright (`/opt/node22/lib/node_modules/playwright`, Chromium en `/opt/pw-browsers`) redirige las URLs de la CDN a esos archivos. Toma capturas a 1280 y 390 px, sin errores de consola ni scroll horizontal.
 - Las versiones de librerías están fijas (`LW_URL`, `ECHARTS_URL`); Lightweight Charts 5 cambia la API.
 
+### Mapa visual del proyecto
+- Se genera desde el código: `python -m econ.mapa` (escribe `docs/mapa.html`); `--fragment out/mapa.html` da la versión para artifact y `--check` dice si está al día.
+- Los disparadores salen solos de los workflows (crons de `update-data.yml`, ejecución manual y `tests.yml`); conteos, tareas, skills, archivos de prueba y comandos de `econ.equity` también se leen del repo.
+- Nodo nuevo (agente, dataset, herramienta…): agrégalo en `NODES` de `econ/mapa/spec.py` con posición libre dentro de su grupo (`GROUPS`), conéctalo en `EDGES` y, si participa en un recorrido, en `FLOWS`. Revisa el resultado con una captura (receta de revisión visual del presentador).
+
 ### Equipo, agentes, skills y permisos
 - Agente: `.claude/agents/<nombre>.md` con frontmatter `name`, `description` (cuándo usarlo; menciona su mesa y a quién reporta) y `tools`, y el bloque del protocolo copiado tal cual de `.claude/team/protocolo.md`. Skill: `.claude/skills/<nombre>/SKILL.md` con `name`, `description` y cuerpo con `$ARGUMENTS`.
-- Regístralo en la tabla "Equipo" de `CLAUDE.md`, en la sección 1 de `.claude/team/head.md`, en el menú de `.claude/skills/anchor-set/SKILL.md` y en `README.md`. Los subagentes no llaman a otros subagentes: la jerarquía la ejecuta el Head (sesión principal).
+- Regístralo en la tabla "Equipo" de `CLAUDE.md`, en la sección 1 de `.claude/team/head.md`, en el menú de `.claude/skills/anchor-set/SKILL.md`, en `README.md` y como nodo en `econ/mapa/spec.py` (regenera con `python -m econ.mapa`). Los subagentes no llaman a otros subagentes: la jerarquía la ejecuta el Head (sesión principal).
 - Cambiar el protocolo: edita el bloque en `.claude/team/protocolo.md` y cópialo idéntico a todos los agentes (`test_team_protocol_is_identical_everywhere`).
 - "Anchor set": el hook `.claude/hooks/anchor_set.py` (evento `UserPromptSubmit` en `.claude/settings.json`) detecta la frase y le pide al Head abrir el menú de la skill `anchor-set`; `CLAUDE.md` repite la regla por si el hook no corre.
 - Permisos de comandos de solo lectura: `.claude/settings.json`. Dependencias en sesiones web: `.claude/hooks/session-start.sh`.
@@ -183,7 +193,7 @@ Vista en `DERIVED_VIEWS` (`econ/query.py`), consulta en `sql/`, y documéntala e
 | Métricas raras en una `.MX` | `data_flags` en `equity_snapshot.csv` | Split no registrado (se corrige solo si es un cociente común) o error de escala de Yahoo; "poco operada" = precios viejos |
 | Serie macro sin datos | `health.macro_missing`, advertencias "Series FRED/Banxico sin datos" | Clave mal escrita o descontinuada, o falta de token |
 | Datos viejos | `manifest.json` → `generated_at_utc`, último commit `data:` en `main` | El cron solo corre desde `main`; revisar que el workflow siga activo en Actions |
-| Fallan los tests | `python -m pytest -q` | Revisa el primer fallo; si es `test_forge.py`, falta documentar algo en este mapa |
+| Fallan los tests | `python -m pytest -q` | Revisa el primer fallo; si es `test_forge.py`, falta documentar algo en este mapa; si es `test_mapa.py`, actualiza `econ/mapa/spec.py` y corre `python -m econ.mapa` |
 
 ## Convenciones
 

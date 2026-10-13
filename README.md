@@ -172,6 +172,7 @@ Usuario
 | `/finanzas` | Mesa financiera | `/finanzas compara los bancos de la BMV` |
 | `/presenta` | Gráficas y artifacts | `/presenta tablero de tasas Banxico vs Fed con la curva de Treasuries` |
 | `/forge` | Cambios o diagnóstico del repositorio | `/forge agrega la serie de desempleo de México` |
+| `/mapa` | Mapa visual e interactivo del proyecto | `/mapa` |
 
 Manual del Head: `.claude/team/head.md`. Protocolo común: `.claude/team/protocolo.md`. El hook `.claude/hooks/anchor_set.py` detecta "Anchor set" y `.claude/hooks/session-start.sh` instala las dependencias de Python al iniciar cada sesión en la web.
 
@@ -198,6 +199,12 @@ El presentador no escribe HTML. Arma una especificación JSON (qué datos mostra
 ```bash
 python -m econ.present econ/present/examples/tablero-tasas.json   # genera out/ejemplo-tablero-tasas.html
 ```
+
+## Mapa del proyecto
+
+[`docs/mapa.html`](docs/mapa.html) es un mapa interactivo de todo el proyecto, estilo editor de nodos: disparadores, fuentes, almacenamiento, resúmenes, equipo de agentes, herramientas y entregables. Ábrelo en el navegador (o pide `/mapa` en el chat): arrastra para moverte, usa la rueda para el zoom, haz clic en un nodo para ver su detalle y elige un recorrido ("Actualización diaria", "¿Compro o vendo?"…) para ver el flujo paso a paso.
+
+Se genera desde el código con `python -m econ.mapa`: los crons salen del workflow y los conteos, tareas, skills y comandos salen del repo. Si el flujo cambia y el mapa no se regenera, las pruebas fallan, así que siempre está al día.
 
 ## Hoja de ruta
 
