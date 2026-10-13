@@ -1,35 +1,25 @@
 {
-  "task": "backfill",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-13 04:33:01",
-  "finished_utc": "2026-10-13 04:34:17",
+  "started_utc": "2026-10-13 04:35:44",
+  "finished_utc": "2026-10-13 04:40:52",
   "exit_code": 0,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 56.9
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 8.9
-    },
-    {
-      "name": "prune",
-      "status": "ok",
-      "seconds": 0.5
+      "seconds": 293.3
     },
     {
       "name": "snapshots",
       "status": "ok",
-      "seconds": 9.0
+      "seconds": 14.1
     }
   ],
   "warnings": []
