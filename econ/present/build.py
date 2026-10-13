@@ -19,7 +19,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from econ import config, macro, query
+from econ import config, equity, macro, query
 
 ASSETS = Path(__file__).parent / "assets"
 THEME_VERSION = "2"
@@ -273,6 +273,12 @@ class Resolver:
                 "SELECT CAST(date AS DATE) AS date, open, high, low, close, adj_close, volume "
                 "FROM prices WHERE ticker = ? ORDER BY date", [ticker]).df()
             df["date"] = pd.to_datetime(df["date"])
+            if ticker.endswith(".MX") and len(df) > 1:
+                # Mismo criterio que los snapshots: corrige splits que Yahoo no ajusto en las .MX.
+                raw = df.set_index("date")["adj_close"].fillna(df.set_index("date")["close"])
+                factor = (equity.clean_prices(raw)[0] / raw).reindex(df["date"]).to_numpy()
+                df = df.assign(**{c: df[c] * factor for c in ("open", "high", "low", "close", "adj_close")})
+                df = df.assign(volume=df["volume"] / factor).dropna(subset=["close"]).reset_index(drop=True)
             self._px[ticker] = df
         return self._px[ticker]
 
@@ -726,7 +732,10 @@ class Builder:
             df = self.r.sql(blk["sql"], where)
             if df.shape[1] < 2:
                 raise SpecError(f"{where}: el SQL debe devolver (categoría, valor[, valor...])")
-            categories = [str(c) for c in df.iloc[:, 0]]
+            first = df.iloc[:, 0]
+            if pd.api.types.is_datetime64_any_dtype(first):
+                first = first.dt.strftime("%Y-%m-%d")  # fechas como categoria, sin hora
+            categories = [str(c) for c in first]
             series = [{"label": str(c), "values": [_num(v) for v in df[c]]} for c in df.columns[1:]]
             raw_units = set()
         elif "points" in blk:

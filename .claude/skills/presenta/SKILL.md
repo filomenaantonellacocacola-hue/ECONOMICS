@@ -3,7 +3,7 @@ name: presenta
 description: Genera una gráfica, tablero o artifact interactivo con el estilo fijo de la casa (terminal Bloomberg) a partir de los datos del repo. Uso - /presenta <qué quieres ver>.
 ---
 
-1. Si la petición también pide análisis o explicación ("explícame y grafica..."), pide primero ese análisis al agente que corresponda (p.ej. `analista-macro`).
+1. Si la petición también pide análisis o explicación ("explícame y grafica..."), consíguelo primero por la ruta que corresponda según `.claude/team/head.md` (una mesa, un analista o el comité).
 2. Delega en el subagente `presentador` (herramienta Agent, `subagent_type: "presentador"`). Pásale:
    - la petición: $ARGUMENTS
    - el análisis del paso 1, si lo hay, para su bloque de texto;

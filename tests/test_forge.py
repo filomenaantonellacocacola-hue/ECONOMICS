@@ -3,7 +3,10 @@
 Si agregas un modulo, tarea, columna, vista, agente o skill y este test falla,
 documentalo en .claude/agents/forge.md (y en CLAUDE.md cuando aplique).
 """
+import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -15,6 +18,9 @@ ROOT = Path(__file__).resolve().parent.parent
 FORGE = (ROOT / ".claude" / "agents" / "forge.md").read_text()
 CLAUDE = (ROOT / "CLAUDE.md").read_text()
 PRESENTADOR = (ROOT / ".claude" / "agents" / "presentador.md").read_text()
+TEAM_DIR = ROOT / ".claude" / "team"
+TEAM = ["lead-macro", "macro-mexico", "macro-global", "lead-financiero", "analista-fundamental",
+        "analista-cuantitativo", "presentador", "forge"]
 
 
 def _missing(names, text):
@@ -44,7 +50,7 @@ def test_pipeline_tasks_match_workflow_and_docs():
 def test_agents_skills_and_workflows_are_registered():
     agents = [p.stem for p in (ROOT / ".claude" / "agents").glob("*.md")]
     skills = [p.name for p in (ROOT / ".claude" / "skills").iterdir() if (p / "SKILL.md").exists()]
-    assert {"analista-macro", "presentador", "forge"} <= set(agents)
+    assert set(agents) == set(TEAM)
     assert _missing([f".claude/agents/{a}.md" for a in agents], FORGE) == []
     assert _missing([f"`{a}`" for a in agents], CLAUDE) == []  # tabla "Equipo de agentes"
     assert _missing([f".claude/skills/{s}" for s in skills], FORGE) == []
@@ -63,3 +69,47 @@ def test_snapshot_outputs_are_documented():
 def test_sql_views_and_chart_kinds_are_documented():
     assert _missing([f"`{v}" for v in query.DERIVED_VIEWS], CLAUDE) == []
     assert _missing([f"`{k}`" for k in TIME_KINDS | CAT_KINDS], PRESENTADOR) == []
+
+
+def _protocol_block(text):
+    start, end = "<!-- protocolo:inicio -->", "<!-- protocolo:fin -->"
+    assert text.count(start) == 1 and text.count(end) == 1
+    return text[text.index(start):text.index(end) + len(end)]
+
+
+def test_team_protocol_is_identical_everywhere():
+    block = _protocol_block((TEAM_DIR / "protocolo.md").read_text())
+    for agent in TEAM:
+        text = (ROOT / ".claude" / "agents" / f"{agent}.md").read_text()
+        assert _protocol_block(text) == block, f"{agent}: copia el bloque de .claude/team/protocolo.md"
+    for name in TEAM[:6]:
+        assert f"`{name}`" in block  # la jerarquia nombra a cada lead y analista
+
+
+def test_team_is_registered_in_head_manual_and_menu():
+    head = (TEAM_DIR / "head.md").read_text()
+    menu = (ROOT / ".claude" / "skills" / "anchor-set" / "SKILL.md").read_text()
+    assert _missing([f"`{a}`" for a in TEAM], head) == []
+    assert _missing([f"`{a}`" for a in TEAM], menu) == []
+    for doc in ("head.md", "protocolo.md"):
+        assert f".claude/team/{doc}" in FORGE and f".claude/team/{doc}" in CLAUDE
+    for agent in TEAM:
+        meta = (ROOT / ".claude" / "agents" / f"{agent}.md").read_text().split("---")[1]
+        assert f"name: {agent}" in meta and "description:" in meta and "tools:" in meta
+
+
+def test_anchor_set_hook():
+    settings = json.loads((ROOT / ".claude" / "settings.json").read_text())
+    commands = [h["command"] for g in settings["hooks"]["UserPromptSubmit"] for h in g["hooks"]]
+    assert any("anchor_set.py" in c for c in commands)
+    assert ".claude/hooks/anchor_set.py" in FORGE
+    hook = ROOT / ".claude" / "hooks" / "anchor_set.py"
+
+    def run(prompt):
+        out = subprocess.run([sys.executable, str(hook)], input=json.dumps({"prompt": prompt}),
+                             capture_output=True, text=True, check=True).stdout
+        return json.loads(out)["hookSpecificOutput"]["additionalContext"] if out.strip() else ""
+
+    assert "anchor-set" in run("Anchor set")
+    assert "compro WALMEX" in run("anchor-set: ¿compro WALMEX?")
+    assert run("hola, ponme al dia") == ""

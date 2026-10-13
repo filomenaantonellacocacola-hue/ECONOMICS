@@ -4,12 +4,13 @@ on:
   schedule:
     - cron: "30 23 * * 1-5" # lun-vie 23:30 UTC (17:30 CDMX), despues del cierre de BMV y NYSE
     - cron: "0 12 * * 6"    # sabados: corte semanal de fundamentales
+    - cron: "15 11 * * 1-6" # lun-sab 11:15 UTC: reportes de un lote de emisoras (las mas viejas primero)
   workflow_dispatch:
     inputs:
       task:
-        description: Tarea a ejecutar (backfill = historico + macro + limpieza; resolve = corrige claves del SIC sin datos; banxico-search = busca claves en el catalogo de Banxico)
+        description: Tarea a ejecutar (backfill = historico + macro + limpieza; resolve = corrige claves del SIC sin datos; banxico-search = busca claves en el catalogo de Banxico; company = estados financieros, reportes y analistas)
         type: choice
-        options: [daily, backfill, prices, macro, fundamentals, snapshots, resolve, banxico-search]
+        options: [daily, backfill, prices, macro, fundamentals, company, snapshots, resolve, banxico-search]
         default: daily
       start:
         description: Fecha inicial YYYY-MM-DD (solo backfill/prices; vacio = por defecto)
@@ -50,6 +51,7 @@ jobs:
         run: |
           if [ "$EVENT" = "workflow_dispatch" ]; then TASK="$INPUT_TASK"
           elif [ "$SCHEDULE" = "0 12 * * 6" ]; then TASK="fundamentals"
+          elif [ "$SCHEDULE" = "15 11 * * 1-6" ]; then TASK="company"
           else TASK="daily"; fi
           echo "task=$TASK" >> "$GITHUB_OUTPUT"
 

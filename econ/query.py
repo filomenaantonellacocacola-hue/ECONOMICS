@@ -40,7 +40,23 @@ DERIVED_VIEWS = {
         SELECT * FROM fundamentals
         QUALIFY row_number() OVER (PARTITION BY ticker ORDER BY date DESC) = 1
     """),
+    "recommendations_latest": ("recommendations", """
+        SELECT * FROM recommendations
+        QUALIFY row_number() OVER (PARTITION BY ticker ORDER BY date DESC) = 1
+    """),
+    # Requiere precios bajados con eventos corporativos (columna dividend); si no, no se crea.
+    "dividends": ("prices", """
+        SELECT p.date, p.ticker, u.market, u.name, p.dividend, p.close,
+               round(100 * p.dividend / p.close, 3) AS yield_pct
+        FROM prices p LEFT JOIN universe u USING (ticker)
+        WHERE p.dividend > 0
+    """),
 }
+
+# Datasets Parquet de data/ que se exponen como tablas.
+DATASETS = ("prices", "macro", "fundamentals", "financials", "earnings", "recommendations", "company_log")
+# Resumenes de data/snapshots/ (CSV) que se exponen como tablas.
+SNAPSHOT_VIEWS = ("market_snapshot", "macro_snapshot", "equity_snapshot")
 
 # Unidades en las que un cambio % no tiene sentido (se reporta el cambio absoluto).
 NO_PCT_UNITS = ("pct", "desv_std")
@@ -130,21 +146,24 @@ def connect(data_dir: Path | None = None, config_dir: Path | None = None) -> duc
     )
 
     available = {"universe", "macro_series"}
-    for name in ("prices", "macro", "fundamentals"):
+    for name in DATASETS:
         pattern = data_dir / name / "*" / "data.parquet"
         if any((data_dir / name).glob("*/data.parquet")):
             con.execute(f"CREATE VIEW {name} AS SELECT * FROM read_parquet('{pattern}', union_by_name=true)")
             available.add(name)
 
     # Resumenes para agentes (una fila por ticker / serie), si ya se generaron.
-    for name in ("market_snapshot", "macro_snapshot"):
+    for name in SNAPSHOT_VIEWS:
         path = data_dir / "snapshots" / f"{name}.csv"
         if path.exists():
             con.execute(f"CREATE VIEW {name} AS SELECT * FROM read_csv('{path}', header=true)")
 
     for view, (base, sql) in DERIVED_VIEWS.items():
         if base in available:
-            con.execute(f"CREATE VIEW {view} AS {sql}")
+            try:
+                con.execute(f"CREATE VIEW {view} AS {sql}")
+            except duckdb.BinderException:  # falta una columna (p.ej. dividend antes del backfill)
+                pass
     return con
 
 

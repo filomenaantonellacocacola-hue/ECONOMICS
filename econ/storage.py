@@ -1,11 +1,13 @@
 """Almacenamiento en Parquet particionado por periodo.
 
-Cada dataset vive en ``<root>/<periodo>/data.parquet`` (p.ej. ``2026-09`` o ``2026``).
+Cada dataset vive en ``<root>/<periodo>/data.parquet`` (p.ej. ``2026-09`` o ``2026``), o en
+``<root>/<valor>/data.parquet`` si se particiona por una columna (p.ej. por ticker).
 Solo se reescriben las particiones cuyo contenido cambio, para que el historial de
 git crezca poco con cada actualizacion diaria.
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import pandas as pd
@@ -22,6 +24,10 @@ def _period_labels(dates: pd.Series, freq: str) -> pd.Series:
     raise ValueError(f"freq no soportada: {freq}")
 
 
+def _safe_label(value: object) -> str:
+    return re.sub(r"[^A-Za-z0-9._-]", "_", str(value))
+
+
 def _normalize(df: pd.DataFrame, keys: list[str]) -> pd.DataFrame:
     return df.sort_values(keys).reset_index(drop=True)
 
@@ -32,18 +38,21 @@ def write_partitioned(
     keys: list[str],
     date_col: str = "date",
     freq: str = "M",
+    by: str | None = None,
 ) -> list[Path]:
     """Hace upsert de ``df`` en las particiones de ``root``.
 
-    Las filas nuevas reemplazan a las existentes con las mismas ``keys``.
+    Las filas nuevas reemplazan a las existentes con las mismas ``keys``. Con ``by`` se
+    particiona por el valor de esa columna (p.ej. ``ticker``) en lugar de por periodo.
     Devuelve la lista de archivos que se escribieron.
     """
     if df.empty:
         return []
     df = df.copy()
     df[date_col] = pd.to_datetime(df[date_col]).dt.normalize()
+    labels = df[by].map(_safe_label) if by else _period_labels(df[date_col], freq)
     written = []
-    for label, chunk in df.groupby(_period_labels(df[date_col], freq), sort=True):
+    for label, chunk in df.groupby(labels, sort=True):
         path = Path(root) / label / FILE_NAME
         if path.exists():
             existing = pd.read_parquet(path)

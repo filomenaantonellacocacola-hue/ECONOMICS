@@ -28,7 +28,9 @@ from econ.sources import banxico, fred, yahoo
 log = logging.getLogger("econ.pipeline")
 
 # Tareas del CLI. Deben coincidir con las opciones del workflow (lo verifica tests/test_forge.py).
-TASKS = ("daily", "backfill", "prices", "macro", "fundamentals", "snapshots", "resolve", "banxico-search")
+TASKS = ("daily", "backfill", "prices", "macro", "fundamentals", "company", "snapshots", "resolve",
+         "banxico-search")
+DEFAULT_COMPANY_LIMIT = 60
 
 
 class _WarningCollector(logging.Handler):
@@ -94,11 +96,12 @@ def update_daily_prices(start: str) -> int:
 
 
 def prune_to_universe() -> None:
-    """Quita de precios y fundamentales los tickers que ya no estan en config/universe.csv."""
+    """Quita de precios, fundamentales y reportes los tickers que ya no estan en config/universe.csv."""
     keep = set(config.load_universe()["ticker"])
     if len(keep) < 10:
         raise RuntimeError(f"Universo sospechosamente chico ({len(keep)} tickers); no se limpia nada")
-    for root in (config.PRICES_DIR, config.FUNDAMENTALS_DIR):
+    for root in (config.PRICES_DIR, config.FUNDAMENTALS_DIR, config.FINANCIALS_DIR, config.EARNINGS_DIR,
+                 config.RECOMMENDATIONS_DIR, config.COMPANY_LOG_DIR):
         changed = storage.prune(root, "ticker", keep)
         log.info("Limpieza de %s: %d particiones modificadas", root.name, len(changed))
 
@@ -196,10 +199,44 @@ def update_macro(start: str = config.DEFAULT_MACRO_START) -> int:
     return len(df)
 
 
-def update_fundamentals() -> int:
+def stock_symbols() -> dict[str, str]:
+    """Acciones y FIBRAs del universo -> simbolo a consultar (el de origen para el SIC)."""
     universe = config.load_universe()
     stocks = universe[universe["asset_type"].isin(["stock", "fibra"])]
-    symbols = dict(zip(stocks["ticker"], stocks["ref_ticker"].where(stocks["ref_ticker"] != "", stocks["ticker"])))
+    return dict(zip(stocks["ticker"], stocks["ref_ticker"].where(stocks["ref_ticker"] != "", stocks["ticker"])))
+
+
+def company_targets(limit: int) -> dict[str, str]:
+    """Las ``limit`` emisoras con reportes mas viejos (las que nunca se han bajado van primero)."""
+    symbols = stock_symbols()
+    done = storage.read_dataset(config.COMPANY_LOG_DIR)
+    last = done.groupby("ticker")["date"].max() if not done.empty else pd.Series(dtype="datetime64[ns]")
+    order = sorted(symbols, key=lambda t: (t in last.index, last.get(t, pd.Timestamp.min), t))
+    return {t: symbols[t] for t in order[:limit]}
+
+
+def update_company(limit: int = DEFAULT_COMPANY_LIMIT) -> int:
+    """Estados financieros, fechas de reporte y recomendaciones de un lote de emisoras."""
+    targets = company_targets(limit)
+    out = yahoo.download_company(targets)
+    if out["log"].empty:
+        raise RuntimeError("Yahoo no devolvio reportes; posible limite de consultas, se reintenta en la siguiente corrida")
+    # Por emisora: cada corrida reescribe solo las emisoras cuyos estados cambiaron.
+    storage.write_partitioned(out["financials"], config.FINANCIALS_DIR,
+                              keys=["ticker", "statement", "freq", "period_end", "item"], date_col="period_end", by="ticker")
+    storage.write_partitioned(out["earnings"], config.EARNINGS_DIR, keys=["ticker", "date"], freq="Y")
+    storage.write_partitioned(out["recommendations"], config.RECOMMENDATIONS_DIR, keys=["ticker", "date"], freq="M")
+    storage.write_partitioned(out["log"], config.COMPANY_LOG_DIR, keys=["ticker", "date"], freq="M")
+    status = out["log"]["status"].value_counts().to_dict()
+    log.info("Reportes de emisoras: %d procesadas de %d pedidas %s", len(out["log"]), len(targets), status)
+    if len(out["log"]) < len(targets):
+        log.warning("Se detuvo antes de terminar el lote (%d de %d); siguen en la proxima corrida",
+                    len(out["log"]), len(targets))
+    return len(out["log"])
+
+
+def update_fundamentals() -> int:
+    symbols = stock_symbols()
     df = yahoo.download_fundamentals(symbols)
     written = storage.write_partitioned(df, config.FUNDAMENTALS_DIR, keys=["ticker", "date"], freq="M")
     log.info("Fundamentales: %d emisoras, %d particiones escritas", len(df), len(written))
@@ -212,6 +249,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--start", help="Fecha inicial YYYY-MM-DD (precios)")
     parser.add_argument("--days", type=int, default=10, help="Dias hacia atras para 'prices'/'daily'")
     parser.add_argument("--tickers", help="Lista separada por comas (por defecto, todo el universo)")
+    parser.add_argument("--limit", type=int, default=DEFAULT_COMPANY_LIMIT,
+                        help="company: cuantas emisoras procesar en esta corrida")
     parser.add_argument("--query", default="agregado monetario",
                         help="banxico-search: texto a buscar; varias consultas separadas por ';'")
     args = parser.parse_args(argv)
@@ -233,6 +272,8 @@ def main(argv: list[str] | None = None) -> int:
         steps.append(("prune", prune_to_universe))
     if args.task == "fundamentals":
         steps.append(("fundamentals", update_fundamentals))
+    if args.task == "company":
+        steps.append(("company", lambda: update_company(args.limit)))
     if args.task == "resolve":
         steps.append(("resolve", resolve_symbols))
     if args.task == "banxico-search":
@@ -270,6 +311,7 @@ def main(argv: list[str] | None = None) -> int:
     _write_run_log({
         "task": args.task,
         "args": {"start": args.start, "days": args.days, "tickers": args.tickers,
+                 "limit": args.limit if args.task == "company" else None,
                  "query": args.query if args.task == "banxico-search" else None},
         "started_utc": started.strftime("%Y-%m-%d %H:%M:%S"),
         "finished_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
