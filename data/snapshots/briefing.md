@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-10-14 02:06 (UTC)
+Generado: 2026-10-14 15:54 (UTC)
 
 ## Macro
 
@@ -137,11 +137,11 @@ Generado: 2026-10-14 02:06 (UTC)
 
 | ticker | name | next_earnings | chg_ytd | pe | last_surprise_pct |
 |---|---|---|---|---|---|
-| BAC.MX | Bank of America | 2026-10-14 | 0.50 | 12.54 | 7.74 |
+| BAC.MX | Bank of America | 2026-10-14 | 0.50 | 12.54 | -17.93 |
 | PGR.MX | Progressive | 2026-10-14 | 0.02 | 10.90 | 0.33 |
-| BLK.MX | BlackRock | 2026-10-14 | 1.67 | 25.91 | 9.62 |
+| BLK.MX | BlackRock | 2026-10-14 | 1.67 | 25.91 | 11.39 |
 | MS.MX | Morgan Stanley | 2026-10-14 | 7.63 | 15.14 | 17.94 |
-| ASMLN.MX | ASML | 2026-10-14 | 62.11 | 57.45 | 9.09 |
+| ASMLN.MX | ASML | 2026-10-14 | 62.11 | 57.45 | 9.86 |
 | USB.MX | U.S. Bancorp | 2026-10-15 | 8.99 | 11.39 | 5.45 |
 | TSMN.MX | Taiwan Semiconductor | 2026-10-15 | 48.66 | 32.94 | 10.89 |
 | PLD.MX | Prologis | 2026-10-15 | 6.97 | 28.78 | 48.33 |

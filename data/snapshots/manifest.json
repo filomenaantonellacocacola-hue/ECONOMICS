@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-14 02:06",
+  "generated_at_utc": "2026-10-14 15:54",
   "datasets": {
     "prices": {
       "rows": 923088,
@@ -63,7 +63,7 @@
       "files_glob": "data/financials/*/data.parquet"
     },
     "earnings": {
-      "rows": 6977,
+      "rows": 6979,
       "ids": 289,
       "min_date": "2001-10-26",
       "max_date": "2027-02-18",
@@ -98,19 +98,19 @@
       ]
     },
     "recommendations": {
-      "rows": 287,
+      "rows": 347,
       "ids": 287,
       "min_date": "2026-10-13",
-      "max_date": "2026-10-13",
+      "max_date": "2026-10-14",
       "files": [
         "data/recommendations/2026-10/data.parquet"
       ]
     },
     "company_log": {
-      "rows": 292,
+      "rows": 352,
       "ids": 292,
       "min_date": "2026-10-13",
-      "max_date": "2026-10-13",
+      "max_date": "2026-10-14",
       "files": [
         "data/company_log/2026-10/data.parquet"
       ]
