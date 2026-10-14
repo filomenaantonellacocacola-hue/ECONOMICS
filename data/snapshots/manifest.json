@@ -1,19 +1,19 @@
 {
-  "generated_at_utc": "2026-10-13 18:19",
+  "generated_at_utc": "2026-10-14 02:06",
   "datasets": {
     "prices": {
-      "rows": 922696,
+      "rows": 923088,
       "ids": 368,
       "min_date": "2015-01-01",
-      "max_date": "2026-10-13",
+      "max_date": "2026-10-14",
       "n_files": 142,
       "files_glob": "data/prices/*/data.parquet"
     },
     "macro": {
-      "rows": 128684,
+      "rows": 128713,
       "ids": 62,
       "min_date": "2000-01-01",
-      "max_date": "2026-10-13",
+      "max_date": "2026-10-14",
       "files": [
         "data/macro/2000/data.parquet",
         "data/macro/2001/data.parquet",
