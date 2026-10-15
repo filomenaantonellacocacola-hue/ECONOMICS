@@ -1,31 +1,32 @@
 {
-  "task": "daily",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-15 01:42:53",
-  "finished_utc": "2026-10-15 01:44:03",
+  "started_utc": "2026-10-15 15:35:06",
+  "finished_utc": "2026-10-15 15:40:30",
   "exit_code": 0,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 47.5
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 9.5
+      "seconds": 308.9
     },
     {
       "name": "snapshots",
       "status": "ok",
-      "seconds": 12.9
+      "seconds": 14.4
     }
   ],
-  "warnings": []
+  "warnings": [
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "FNOVA17.MX: No earnings dates found, symbol may be delisted"
+    }
+  ]
 }

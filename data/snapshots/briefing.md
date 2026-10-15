@@ -1,6 +1,6 @@
 # Briefing de mercado
 
-Generado: 2026-10-15 01:43 (UTC)
+Generado: 2026-10-15 15:40 (UTC)
 
 ## Macro
 
