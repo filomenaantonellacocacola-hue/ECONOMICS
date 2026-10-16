@@ -1,32 +1,43 @@
 {
-  "task": "company",
+  "task": "daily",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": 60,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-10-15 15:35:06",
-  "finished_utc": "2026-10-15 15:40:30",
-  "exit_code": 0,
+  "started_utc": "2026-10-16 01:35:53",
+  "finished_utc": "2026-10-16 01:36:43",
+  "exit_code": 1,
   "steps": [
     {
-      "name": "company",
+      "name": "prices",
       "status": "ok",
-      "seconds": 308.9
+      "seconds": 34.5
+    },
+    {
+      "name": "macro",
+      "status": "ok",
+      "seconds": 10.5
     },
     {
       "name": "snapshots",
-      "status": "ok",
-      "seconds": 14.4
+      "status": "error",
+      "seconds": 4.6,
+      "error": "ZeroDivisionError: float division by zero"
     }
   ],
   "warnings": [
     {
       "level": "ERROR",
-      "logger": "yfinance",
-      "message": "FNOVA17.MX: No earnings dates found, symbol may be delisted"
+      "logger": "econ.pipeline",
+      "message": "Fallo el paso snapshots"
+    },
+    {
+      "level": "ERROR",
+      "logger": "econ.pipeline",
+      "message": "Pasos con error: ['snapshots']"
     }
   ]
 }
