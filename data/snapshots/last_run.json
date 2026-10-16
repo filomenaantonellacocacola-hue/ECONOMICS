@@ -1,30 +1,25 @@
 {
-  "task": "daily",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-16 01:35:53",
-  "finished_utc": "2026-10-16 01:36:43",
+  "started_utc": "2026-10-16 15:21:48",
+  "finished_utc": "2026-10-16 15:27:05",
   "exit_code": 1,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 34.5
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 10.5
+      "seconds": 314.9
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 4.6,
+      "seconds": 2.2,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
