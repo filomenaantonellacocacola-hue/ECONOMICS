@@ -1,254 +1,29 @@
 {
-  "task": "company",
+  "task": "fundamentals",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": 60,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-10-17 14:11:23",
-  "finished_utc": "2026-10-17 14:16:24",
+  "started_utc": "2026-10-17 14:36:52",
+  "finished_utc": "2026-10-17 14:40:13",
   "exit_code": 1,
   "steps": [
     {
-      "name": "company",
+      "name": "fundamentals",
       "status": "ok",
-      "seconds": 296.1
+      "seconds": 196.1
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 4.6,
+      "seconds": 4.7,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
   "warnings": [
-    {
-      "level": "WARNING",
-      "logger": "yfinance",
-      "message": "Crumb fetch rate-limited (HTTP 429), continuing without crumb"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "PE&OLES.MX: No earnings dates found, symbol may be delisted"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "POSADASA.MX: No earnings dates found, symbol may be delisted"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "HTTP Error 401: {\"finance\":{\"result\":null,\"error\":{\"code\":\"Unauthorized\",\"description\":\"Invalid Crumb\"}}}"
-    },
     {
       "level": "ERROR",
       "logger": "econ.pipeline",
