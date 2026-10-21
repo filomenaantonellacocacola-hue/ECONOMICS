@@ -1,30 +1,25 @@
 {
-  "task": "daily",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-21 01:52:55",
-  "finished_utc": "2026-10-21 01:53:48",
+  "started_utc": "2026-10-21 15:56:35",
+  "finished_utc": "2026-10-21 16:02:16",
   "exit_code": 1,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 37.8
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 10.0
+      "seconds": 337.7
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 4.9,
+      "seconds": 3.1,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
@@ -32,32 +27,7 @@
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-10-11 -> 2026-10-20)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-10-11 -> 2026-10-20)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "$BNY.MX: possibly delisted; no price data found  (1d 2026-10-11 -> 2026-10-20)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['BNY.MX']: possibly delisted; no price data found  (1d 2026-10-11 -> 2026-10-20)"
+      "message": "FNOVA17.MX: No earnings dates found, symbol may be delisted"
     },
     {
       "level": "ERROR",
