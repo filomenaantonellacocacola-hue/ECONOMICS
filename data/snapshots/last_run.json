@@ -1,209 +1,29 @@
 {
-  "task": "daily",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-22 01:43:02",
-  "finished_utc": "2026-10-22 01:43:55",
+  "started_utc": "2026-10-22 15:52:33",
+  "finished_utc": "2026-10-22 15:57:29",
   "exit_code": 1,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 45.6
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 5.6
+      "seconds": 292.3
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 2.1,
+      "seconds": 4.2,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
   "warnings": [
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-10-12 -> 2026-10-21)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-10-12 -> 2026-10-21)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DFEDTARU fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DFF fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED WALCL fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED M1SL fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED M2SL fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DGS3MO fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DGS2 fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DGS10 fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DGS30 fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED T10Y2Y fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED T10Y3M fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED T5YIE fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED MORTGAGE30US fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED CPIAUCSL fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED CPILFESL fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED PCEPILFE fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED UNRATE fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED PAYEMS fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED ICSA fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED GDPC1 fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED INDPRO fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED RSAFS fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED HOUST fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED UMCSENT fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED VIXCLS fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED BAMLH0A0HYM2 fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED NFCI fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DTWEXBGS fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DEXMXUS fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED DCOILWTICO fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.sources.fred",
-      "message": "FRED SP500 fallo: Expecting value: line 1 column 1 (char 0)"
-    },
-    {
-      "level": "WARNING",
-      "logger": "econ.pipeline",
-      "message": "Series FRED sin datos: ['DFEDTARU', 'DFF', 'WALCL', 'M1SL', 'M2SL', 'DGS3MO', 'DGS2', 'DGS10', 'DGS30', 'T10Y2Y', 'T10Y3M', 'T5YIE', 'MORTGAGE30US', 'CPIAUCSL', 'CPILFESL', 'PCEPILFE', 'UNRATE', 'PAYEMS', 'ICSA', 'GDPC1', 'INDPRO', 'RSAFS', 'HOUST', 'UMCSENT', 'VIXCLS', 'BAMLH0A0HYM2', 'NFCI', 'DTWEXBGS', 'DEXMXUS', 'DCOILWTICO', 'SP500']"
-    },
     {
       "level": "ERROR",
       "logger": "econ.pipeline",
