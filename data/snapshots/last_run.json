@@ -1,25 +1,30 @@
 {
-  "task": "company",
+  "task": "daily",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": 60,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-10-23 15:43:58",
-  "finished_utc": "2026-10-23 15:49:29",
+  "started_utc": "2026-10-24 01:52:36",
+  "finished_utc": "2026-10-24 01:53:24",
   "exit_code": 1,
   "steps": [
     {
-      "name": "company",
+      "name": "prices",
       "status": "ok",
-      "seconds": 326.8
+      "seconds": 34.7
+    },
+    {
+      "name": "macro",
+      "status": "ok",
+      "seconds": 9.3
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 3.9,
+      "seconds": 4.1,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
@@ -27,17 +32,17 @@
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "PE&OLES.MX: No earnings dates found, symbol may be delisted"
+      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-10-14 -> 2026-10-23)"
     },
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "HTTP Error 404: {\"quoteSummary\":{\"result\":null,\"error\":{\"code\":\"Not Found\",\"description\":\"No fundamentals data found for symbol: POCHTECB.MX\"}}}"
+      "message": "\n1 Failed download:"
     },
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "POSADASA.MX: No earnings dates found, symbol may be delisted"
+      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-10-14 -> 2026-10-23)"
     },
     {
       "level": "ERROR",
