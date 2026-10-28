@@ -1,25 +1,30 @@
 {
-  "task": "company",
+  "task": "daily",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": 60,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-10-27 16:34:54",
-  "finished_utc": "2026-10-27 16:39:58",
+  "started_utc": "2026-10-28 02:31:36",
+  "finished_utc": "2026-10-28 02:32:35",
   "exit_code": 1,
   "steps": [
     {
-      "name": "company",
+      "name": "prices",
       "status": "ok",
-      "seconds": 299.1
+      "seconds": 49.6
+    },
+    {
+      "name": "macro",
+      "status": "ok",
+      "seconds": 7.5
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 4.1,
+      "seconds": 2.1,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
@@ -27,12 +32,27 @@
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "EL: No earnings dates found, symbol may be delisted"
+      "message": "\n1 Failed download:"
     },
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "FNOVA17.MX: No earnings dates found, symbol may be delisted"
+      "message": "['MFRISCOA-1.MX']: OperationalError('database is locked')"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-10-18 -> 2026-10-27)"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "\n1 Failed download:"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-10-18 -> 2026-10-27)"
     },
     {
       "level": "ERROR",
