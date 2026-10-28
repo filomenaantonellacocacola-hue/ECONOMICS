@@ -1,59 +1,29 @@
 {
-  "task": "daily",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-10-28 02:31:36",
-  "finished_utc": "2026-10-28 02:32:35",
+  "started_utc": "2026-10-28 17:09:14",
+  "finished_utc": "2026-10-28 17:14:08",
   "exit_code": 1,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 49.6
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 7.5
+      "seconds": 291.0
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 2.1,
+      "seconds": 2.8,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
   "warnings": [
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['MFRISCOA-1.MX']: OperationalError('database is locked')"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-10-18 -> 2026-10-27)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-10-18 -> 2026-10-27)"
-    },
     {
       "level": "ERROR",
       "logger": "econ.pipeline",
