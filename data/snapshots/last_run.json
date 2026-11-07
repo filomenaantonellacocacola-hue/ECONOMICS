@@ -1,34 +1,29 @@
 {
-  "task": "company",
+  "task": "fundamentals",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": 60,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-11-07 16:50:16",
-  "finished_utc": "2026-11-07 16:55:29",
+  "started_utc": "2026-11-07 17:08:39",
+  "finished_utc": "2026-11-07 17:12:17",
   "exit_code": 1,
   "steps": [
     {
-      "name": "company",
+      "name": "fundamentals",
       "status": "ok",
-      "seconds": 309.3
+      "seconds": 215.7
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 4.2,
+      "seconds": 2.0,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
   "warnings": [
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "FNOVA17.MX: No earnings dates found, symbol may be delisted"
-    },
     {
       "level": "ERROR",
       "logger": "econ.pipeline",
