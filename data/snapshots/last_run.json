@@ -1,49 +1,29 @@
 {
-  "task": "daily",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-11-12 04:02:36",
-  "finished_utc": "2026-11-12 04:03:23",
+  "started_utc": "2026-11-12 18:53:17",
+  "finished_utc": "2026-11-12 18:57:50",
   "exit_code": 1,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 34.1
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 9.0
+      "seconds": 269.7
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 3.5,
+      "seconds": 2.8,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
   "warnings": [
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-11-02 -> 2026-11-11)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-11-02 -> 2026-11-11)"
-    },
     {
       "level": "ERROR",
       "logger": "econ.pipeline",
