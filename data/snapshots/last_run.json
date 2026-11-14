@@ -1,25 +1,25 @@
 {
-  "task": "company",
+  "task": "fundamentals",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": 60,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-11-14 17:01:57",
-  "finished_utc": "2026-11-14 17:06:51",
+  "started_utc": "2026-11-14 17:27:14",
+  "finished_utc": "2026-11-14 17:30:39",
   "exit_code": 1,
   "steps": [
     {
-      "name": "company",
+      "name": "fundamentals",
       "status": "ok",
-      "seconds": 292.2
+      "seconds": 201.6
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 2.0,
+      "seconds": 2.6,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
