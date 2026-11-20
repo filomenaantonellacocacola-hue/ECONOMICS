@@ -1,25 +1,30 @@
 {
-  "task": "company",
+  "task": "daily",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": 60,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-11-19 19:28:21",
-  "finished_utc": "2026-11-19 19:33:18",
+  "started_utc": "2026-11-20 04:12:06",
+  "finished_utc": "2026-11-20 04:12:50",
   "exit_code": 1,
   "steps": [
     {
-      "name": "company",
+      "name": "prices",
       "status": "ok",
-      "seconds": 294.0
+      "seconds": 30.9
+    },
+    {
+      "name": "macro",
+      "status": "ok",
+      "seconds": 9.0
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 2.8,
+      "seconds": 4.1,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
@@ -27,7 +32,42 @@
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "FNOVA17.MX: No earnings dates found, symbol may be delisted"
+      "message": "\n1 Failed download:"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "['CEMEXCPO.MX']: OperationalError('database is locked')"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-11-10 -> 2026-11-19)"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "\n1 Failed download:"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-11-10 -> 2026-11-19)"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "$ROKU.MX: possibly delisted; no price data found  (1d 2026-11-10 -> 2026-11-19)"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "\n1 Failed download:"
+    },
+    {
+      "level": "ERROR",
+      "logger": "yfinance",
+      "message": "['ROKU.MX']: possibly delisted; no price data found  (1d 2026-11-10 -> 2026-11-19)"
     },
     {
       "level": "ERROR",
