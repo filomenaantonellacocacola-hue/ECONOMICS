@@ -1,39 +1,29 @@
 {
-  "task": "company",
+  "task": "fundamentals",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": 60,
+    "limit": null,
     "query": null
   },
-  "started_utc": "2026-11-21 17:57:06",
-  "finished_utc": "2026-11-21 18:01:59",
+  "started_utc": "2026-11-21 18:26:35",
+  "finished_utc": "2026-11-21 18:29:55",
   "exit_code": 1,
   "steps": [
     {
-      "name": "company",
+      "name": "fundamentals",
       "status": "ok",
-      "seconds": 288.6
+      "seconds": 195.7
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 4.5,
+      "seconds": 4.1,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
   "warnings": [
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "PE&OLES.MX: No earnings dates found, symbol may be delisted"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "POSADASA.MX: No earnings dates found, symbol may be delisted"
-    },
     {
       "level": "ERROR",
       "logger": "econ.pipeline",
