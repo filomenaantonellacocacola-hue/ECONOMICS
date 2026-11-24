@@ -1,64 +1,29 @@
 {
-  "task": "daily",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-11-24 07:02:15",
-  "finished_utc": "2026-11-24 07:03:00",
+  "started_utc": "2026-11-24 21:08:25",
+  "finished_utc": "2026-11-24 21:13:27",
   "exit_code": 1,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 30.2
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 10.7
+      "seconds": 298.3
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 4.0,
+      "seconds": 4.2,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
   "warnings": [
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-11-14 -> 2026-11-24)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-11-14 -> 2026-11-24)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "$ROKU.MX: possibly delisted; no price data found  (1d 2026-11-14 -> 2026-11-24)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['ROKU.MX']: possibly delisted; no price data found  (1d 2026-11-14 -> 2026-11-24)"
-    },
     {
       "level": "ERROR",
       "logger": "econ.pipeline",
