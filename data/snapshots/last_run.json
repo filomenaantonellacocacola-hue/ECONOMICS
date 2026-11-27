@@ -1,30 +1,25 @@
 {
-  "task": "daily",
+  "task": "company",
   "args": {
     "start": null,
     "days": 10,
     "tickers": null,
-    "limit": null,
+    "limit": 60,
     "query": null
   },
-  "started_utc": "2026-11-27 05:16:20",
-  "finished_utc": "2026-11-27 05:17:11",
+  "started_utc": "2026-11-27 19:55:02",
+  "finished_utc": "2026-11-27 20:00:17",
   "exit_code": 1,
   "steps": [
     {
-      "name": "prices",
+      "name": "company",
       "status": "ok",
-      "seconds": 37.1
-    },
-    {
-      "name": "macro",
-      "status": "ok",
-      "seconds": 9.3
+      "seconds": 313.1
     },
     {
       "name": "snapshots",
       "status": "error",
-      "seconds": 4.0,
+      "seconds": 1.9,
       "error": "ZeroDivisionError: float division by zero"
     }
   ],
@@ -32,42 +27,17 @@
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "\n1 Failed download:"
+      "message": "PE&OLES.MX: No earnings dates found, symbol may be delisted"
     },
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "['CUERVO.MX']: OperationalError('database is locked')"
+      "message": "HTTP Error 404: {\"quoteSummary\":{\"result\":null,\"error\":{\"code\":\"Not Found\",\"description\":\"No fundamentals data found for symbol: POCHTECB.MX\"}}}"
     },
     {
       "level": "ERROR",
       "logger": "yfinance",
-      "message": "$WBD.MX: possibly delisted; no price data found  (1d 2026-11-17 -> 2026-11-26)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['WBD.MX']: possibly delisted; no price data found  (1d 2026-11-17 -> 2026-11-26)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "$ROKU.MX: possibly delisted; no price data found  (1d 2026-11-17 -> 2026-11-26)"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "\n1 Failed download:"
-    },
-    {
-      "level": "ERROR",
-      "logger": "yfinance",
-      "message": "['ROKU.MX']: possibly delisted; no price data found  (1d 2026-11-17 -> 2026-11-26)"
+      "message": "POSADASA.MX: No earnings dates found, symbol may be delisted"
     },
     {
       "level": "ERROR",
